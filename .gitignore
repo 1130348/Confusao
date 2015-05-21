@@ -1,0 +1,15 @@
+/tmp-build/
+/tmp-build-tests/
+/csheets.xml
+/doc/api/
+/res/
+/nbproject/private/
+/manifest.mf
+/build/
+/nbdist/
+/nbproject/genfiles.properties
+/scripts/csheets.xml
+/scripts/c.lst
+/dist/*
+/src/**/*.png
+
