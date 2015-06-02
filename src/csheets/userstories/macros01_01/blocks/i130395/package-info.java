@@ -1,38 +1,35 @@
 /**
- * Technical documentation regarding the user story core02_01: comments on
- * cells.
+ * Technical documentation regarding the user story macros01.01: Instruction
+ * Blocks.
  * <br/>
  * <br/>
  *
  * <h2>1. Requirement</h2>
- * Setup extension for comments on cells. The user should be able to activate
- * and deactivate comments on cells. When activated, a sidebar for the comments
- * should appear. The sidebar should be composed of a simple textbox to display
- * and edit a comment. At the moment it is not required to save comments to
- * disk.
+ * Support cleansheets formulas. The user should be able to use instruction
+ * blocks. The system identifies the blocks limits with the characters ‘{‘ and
+ * ‘}’. Inside each block the instructions are separated by ‘;’. The
+ * instructions are executed sequentially from the left to the right being the
+ * result the value of the last instruction. It also supports the attribution
+ * operation applying the operator ':=' . The result is calculated at the right
+ * side of the operator and it is saved to the left of the operator. Finally it
+ * applies the for operator to an instruction block where the first instruction
+ * sets the first value of the cycle, the second defines the end value while the
+ * others are executed repeatedly until the cycle ends.
+ *
  * <br/>
  * <br/>
- * <b>Use Case "Enter Comment on Cell":</b> The user selects the cell where
- * he/she wants to enter a comment. The system displays the current comment of
- * that cell. The user enter the text of the comment (or alters the existing
- * one). The system saves the comment of the cell.<br/>
+ * <b>Use Case "Instruction Blocks":</b> The user writes the instructions inside
+ * ‘{‘ and ‘}’. The multiple instructions inside the same block must be
+ * separated by ‘;’. When enter is pressed the result of the instructions block
+ * is saved in the cell which executed the block.<br/>
  * <br/>
  *
  * <h2>2. Analysis</h2>
- * Since comments on cells will be supported in a new extension to cleansheets
- * we need to study how extensions are loaded by cleansheets and how they
- * work.<br/>
+ * To have full support to the instructions blocks we will need to study how the
+ * ANTLR works in this project. The nature of the instructions must be well
+ * defined not only between the ones in the same block but in full use of
+ * operators like the attribution and the for cycle.<br/>
  * The first sequence diagram in the section
- * <a href="../../../../overview-summary.html#arranque_da_aplicacao">Application
- * Startup</a> tells us that extensions must be subclasses of the Extension
- * abstract class and need to be registered in special files.<br/>
- * The Extension class has a method called getUIExtension that should be
- * implemented and return an instance of a class that is a subclass of
- * UIExtension.<br/>
- * In this subclass of UIExtension there is a method (getSideBar) that returns
- * the sidebar for the extension. A sidebar is a JPanel.
- * <br/>
- * <br/>
  * <h3>First "analysis" sequence diagram</h3>
  * The following diagram depicts a proposal for the realization of the
  * previously described use case. We call this diagram an "analysis" use case
@@ -46,8 +43,7 @@
  * <img src="doc-files/comments_extension_uc_realization1.png">
  * <br/>
  * <br/>
- * From the previous diagram we see that we need to add a new "attribute" to a
- * cell: "comment".<br/>
+ * From the previous diagram we see that we need to add new operators.<br/>
  * Therefore, at this point, we need to study how to add this new attribute to
  * the class/interface "cell". This is the core technical problem regarding this
  * issue.<br/>
@@ -62,70 +58,47 @@
  * <code>public interface Cell extends Comparable &lt;Cell&gt;, Extensible&lt;Cell&gt;, Serializable</code>.
  * Because of the <code>Extensible</code> it seams that a cell can be
  * extended.<br/>
- * If we further investigate the hierarchy of {@link csheets.core.Cell} we see
- * that it has a subclass {@link csheets.ext.CellExtension} which has a subclass
- * {@link csheets.ext.style.StylableCell}.
- * {@link csheets.ext.style.StylableCell} seems to be an example of how to
- * extend cells.<br/>
- * Therefore, we will assume that it is possible to extend cells and start to
- * implement tests for this use case. <br/>
- * <br/>
- * The <a href="http://en.wikipedia.org/wiki/Delegation_pattern">delegation
- * design pattern</a> is used in the cell extension mechanism of cleansheets.
- * The following class diagram depicts the relations between classes in the
- * "Cell" hierarchy.<br/>
- * <img src="doc-files/core02_01_analysis_cell_delegate.png">
- * <br/>
+ * If we further investigate we can see the Cell has support for Formulas. *
+ * public void setContent(String content) throws FormulaCompilationException; *
+ * The class FormulaCompiler will attempt to create a formula from a string. The
+ * setContent method will validate the formula throwing an exception if it
+ * detects an error. The formula class implements the expression interface which
+ * is responsible for parsing the expression and as such validating it. The
+ * Expressions in the present moment are represented as abstract syntax trees
+ * and can hold literals, references, operations (unary and binary and function
+ * calls.
  *
- * One important aspect is how extensions are dynamically created and returned.
- * The <code>Extensible</code> interface has only one method,
- * <code>getExtension</code>. Any class, to be extensible, must return a
- * specific extension by its name. The default (and base) implementation for the
- * <code>Cell</code> interface, the class <code>CellImpl</code>, implements the
- * method in the following manner:<br/>
- * <pre>
- * {@code
- * 	public Cell getExtension(String name) {
- *		// Looks for an existing cell extension
- *		CellExtension extension = extensions.get(name);
- *		if (extension == null) {
- *			// Creates a new cell extension
- *			Extension x = ExtensionManager.getInstance().getExtension(name);
- *			if (x != null) {
- *				extension = x.extend(this);
- *				if (extension != null)
- *					extensions.put(name, extension);
- *			}
- *		}
- *		return extension;
- *	}
- * }
- * </pre> As we can see from the code, if we are requesting a extension that is
- * not already present in the cell, it is applied at the moment and then
- * returned. The extension class (that implements the <code>Extension</code>
- * interface) what will do is to create a new instance of its cell extension
- * class (this will be the <b>delegator</b> in the pattern). The constructor
- * receives the instance of the cell to extend (the <b>delegate</b> in the
- * pattern). For instance, <code>StylableCell</code> (the delegator) will
- * delegate to <code>CellImpl</code> all the method invocations regarding
- * methods of the <code>Cell</code> interface. Obviously, methods specific to
- * <code>StylableCell</code> must be implemented by it.<br/>
- * Therefore, to implement a cell that can have a associated comment we need to
- * implement a class similar to <code>StylableCell</code>.<br/>
+ * public Object accept(ExpressionVisitor visitor);
+ *
+ * Like the do cycle, the for cycle must be an implementation of the function
+ * interface. As such, the class will define its behavior in the applyTo Method.
+ *
+ * The attribution operator will work similarly like the already implemented
+ * operators. In this case it must give prioriy to possible operations that
+ * occur in its right side and only then assimilate the final value to the
+ * variable in the left side of the ':=' operator.
+ *
+ * The File Formula has the data used to parse the expressions and validate
+ * them. To add the support for the instruction blocks and operators we need to
+ * edit with AntlWorks this file and add their behavior.
+ *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able to add an attribute to cells to
- * be used to store a comment/text. We need to be able to set and get its
- * value.<br/>
- * Following this approach we can start by coding a unit test that uses a
- * subclass of <code>CellExtension</code> with a new attribute for user comments
- * with the corresponding method accessors (set and get). A simple test can be
- * to set this attribute with a simple string and to verify if the get method
- * returns the same string.<br/>
- * As usual, in a test driven development approach tests normally fail in the
- * beginning. The idea is that the tests will pass in the end.<br>
- * <br/>
- * see: <code>csheets.ext.comments.CommentableCellTest</code><br/>
+ * functionality of this use case is to enable the use of instructions blocks
+ * and of the operator attribution and for cycle. We need to be able in case of
+ * having many instructions, applying them sequentially and store the proper
+ * result. If it uses the attribution operator we must save the correct result
+ * on the right, in the variable to the left of the operator. In case it is a
+ * for cycle we must detect correctly the beginning of the cycle and its ending
+ * condition. The instructions inside the cycle must be repeated not only
+ * correctly but the correct number of times. Following this approach we can
+ * start by coding a unit test that tests the creation of an instruction block
+ * inside a cell. Another test must be made to validate the result of the
+ * instruction block. As usual, in a test driven development approach tests
+ * normally fail in the beginning. The idea is that the tests will pass in the
+ * end.
+ *
+ * see: <code>csheets.ext.comments.InstructionsBlockTest</code><br/>
  *
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
@@ -151,7 +124,7 @@
  * The idea is that when this happens the extension must display in the sidebar
  * the comment of that cell (if it exists).<br/>
  * <br/>
- * <img src="doc-files/core02_01_design2.png">
+ *
  * <br/>
  * <h3>User Updates the Comment of a Cell</h3>
  * The following diagram illustrates what happens when the user updates the text
@@ -159,7 +132,7 @@
  * depict the actual selection of a cell (that is illustrated in the previous
  * diagram).<br/>
  * <br/>
- * <img src="doc-files/core02_01_design3.png">
+ *
  *
  * <h2>5. Coding</h2>
  * see:<br/>
