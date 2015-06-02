@@ -6,15 +6,15 @@
  *
  * <h2>1. Requirement</h2>
  * Support cleansheets formulas. The user should be able to use instruction
- * blocks. The system identifies the blocks limits with the characters ‘{‘ and
- * ‘}’. Inside each block the instructions are separated by ‘;’. The
- * instructions are executed sequentially from the left to the right being the
- * result the value of the last instruction. It also supports the attribution
- * operation applying the operator ':=' . The result is calculated at the right
- * side of the operator and it is saved to the left of the operator. Finally it
- * applies the for operator to an instruction block where the first instruction
- * sets the first value of the cycle, the second defines the end value while the
- * others are executed repeatedly until the cycle ends.
+ * blocks. The system identifies the blocks limits with the characters { and }.
+ * Inside each block the instructions are separated by ;. The instructions are
+ * executed sequentially from the left to the right being the result the value
+ * of the last instruction. It also supports the attribution operation applying
+ * the operator ':=' . The result is calculated at the right side of the
+ * operator and it is saved to the left of the operator. Finally it applies the
+ * for operator to an instruction block where the first instruction sets the
+ * first value of the cycle, the second defines the end value while the others
+ * are executed repeatedly until the cycle ends.
  *
  * <br/>
  * <br/>
@@ -26,9 +26,9 @@
  *
  * <h2>2. Analysis</h2>
  * To have full support to the instructions blocks we will need to study how the
- * ANTLR works in this project. The nature of the instructions must be well
- * defined not only between the ones in the same block but in full use of
- * operators like the attribution and the for cycle.<br/>
+ * ANTLR works as well as the lexer and parser. The nature of the instructions
+ * must be well defined not only between the ones in the same block but in full
+ * use of operators like the attribution and the for cycle.<br/>
  * The first sequence diagram in the section
  * <h3>First "analysis" sequence diagram</h3>
  * The following diagram depicts a proposal for the realization of the
@@ -40,7 +40,7 @@
  * exists as such in the code of the application (at least at the moment that
  * this diagram was created).<br/>
  * <br/>
- * <img src="doc-files/comments_extension_uc_realization1.png">
+ * <img src="doc-files/draft_macros_01_01.png"/>
  * <br/>
  * <br/>
  * From the previous diagram we see that we need to add new operators.<br/>
