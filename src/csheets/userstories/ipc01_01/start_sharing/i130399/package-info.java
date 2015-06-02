@@ -40,11 +40,10 @@
  * <img src="doc-files/start_sharing_ipc_01_01.png">
  * <br/>
  * <br/>
- * From the previous diagram we see that we need to add a new "attribute" to a
- * cell: "comment".<br/>
- * Therefore, at this point, we need to study how to add this new attribute to
- * the class/interface "cell". This is the core technical problem regarding this
- * issue.<br/>
+ * Through the earlier draft we can see that was needed to create a new class.
+ * This class will be responsible for the connection between users as well as
+ * the transmission of the cells, so it is defined as a class of service.
+ * <br/>
  * <h3>Analysis of Core Technical Problem</h3>
  * We can see a class diagram of the domain model of the application
  * <a href="../../../../overview-summary.html#modelo_de_dominio">here</a><br/>
