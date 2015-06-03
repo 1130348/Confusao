@@ -9,7 +9,7 @@ call xcopy ..\src-resources ..\tmp-build /S /Q /Y > nul
 echo Creating archive...
 rmdir /S /Q  ..\dist 
 mkdir ..\dist
-call jar cfm ../dist/csheets.jar makejar.mf -C ../tmp-build/ csheets
+call jar cfm ../dist/csheets.jar makejar.mf -C ../tmp-build/ .
 
 echo Copiar as dependencias
 call copy /Y ..\lib\antlr-3.5.2-complete.jar ..\dist 
