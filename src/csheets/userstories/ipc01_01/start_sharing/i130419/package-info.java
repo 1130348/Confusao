@@ -71,7 +71,7 @@
  * 
  */
 
-package csheets.userstories.ipc01_01.iniciar_partilha.i130419;
+package csheets.userstories.ipc01_01.start_sharing.i130419;
 
 /**
  *
