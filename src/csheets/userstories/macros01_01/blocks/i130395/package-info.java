@@ -10,26 +10,27 @@
  * Inside each block the instructions are separated by ;. The instructions are
  * executed sequentially from the left to the right being the result the value
  * of the last instruction. It also supports the attribution operation applying
- * the operator ':=' . The result is calculated at the right side of the
- * operator and it is saved to the left of the operator. Finally it applies the
- * for operator to an instruction block where the first instruction sets the
- * first value of the cycle, the second defines the end value while the others
- * are executed repeatedly until the cycle ends.
+ * the operator :=. The result is calculated at the right side of the operator
+ * and it is saved to the left of the operator. Finally it applies the for
+ * operator to an instruction block where the first instruction sets the first
+ * value of the cycle, the second defines the end value while the others are
+ * executed repeatedly until the cycle ends.
  *
  * <br/>
  * <br/>
  * <b>Use Case "Instruction Blocks":</b> The user writes the instructions inside
- * ‘{‘ and ‘}’. The multiple instructions inside the same block must be
- * separated by ‘;’. When enter is pressed the result of the instructions block
- * is saved in the cell which executed the block.<br/>
+ * { and }. The multiple instructions inside the same block must be separated by
+ * ;. When enter is pressed the result of the instructions block is saved in the
+ * cell which executed the block.<br/>
  * <br/>
  *
  * <h2>2. Analysis</h2>
  * To have full support to the instructions blocks we will need to study how the
  * ANTLR works as well as the lexer and parser. The nature of the instructions
  * must be well defined not only between the ones in the same block but in full
- * use of operators like the attribution and the for cycle.<br/>
- * The first sequence diagram in the section
+ * use of operators like the attribution and the for cycle.
+ * <br/>
+ * <br/>
  * <h3>First "analysis" sequence diagram</h3>
  * The following diagram depicts a proposal for the realization of the
  * previously described use case. We call this diagram an "analysis" use case
@@ -45,8 +46,8 @@
  * <br/>
  * From the previous diagram we see that we need to add new operators.<br/>
  * Therefore, at this point, we need to study how to add this new attribute to
- * the class/interface "cell". This is the core technical problem regarding this
- * issue.<br/>
+ * the formula file and to the parser/lexer. This is the core technical problem
+ * regarding this issue.<br/>
  * <h3>Analysis of Core Technical Problem</h3>
  * We can see a class diagram of the domain model of the application
  * <a href="../../../../overview-summary.html#modelo_de_dominio">here</a><br/>
@@ -55,11 +56,15 @@
  * implement the Cell interface.<br/>
  * If we open the {@link csheets.core.Cell} code we see that the interface is
  * defined as:
+ * <br/>
  * <code>public interface Cell extends Comparable &lt;Cell&gt;, Extensible&lt;Cell&gt;, Serializable</code>.
+ * <br/>
  * Because of the <code>Extensible</code> it seams that a cell can be
  * extended.<br/>
- * If we further investigate we can see the Cell has support for Formulas. *
- * public void setContent(String content) throws FormulaCompilationException; *
+ * If we further investigate we can see the Cell has support for Formulas.
+ * *<br/>
+ * <code> public void setContent(String content) throws FormulaCompilationException;</code>
+ * <br/>
  * The class FormulaCompiler will attempt to create a formula from a string. The
  * setContent method will validate the formula throwing an exception if it
  * detects an error. The formula class implements the expression interface which
@@ -67,9 +72,11 @@
  * Expressions in the present moment are represented as abstract syntax trees
  * and can hold literals, references, operations (unary and binary and function
  * calls.
- *
- * public Object accept(ExpressionVisitor visitor);
- *
+ * <br/>
+ * <br/>
+ * <code>public Object accept(ExpressionVisitor visitor);</code>
+ * <br/>
+ * <br/>
  * Like the do cycle, the for cycle must be an implementation of the function
  * interface. As such, the class will define its behavior in the applyTo Method.
  *
@@ -97,7 +104,8 @@
  * instruction block. As usual, in a test driven development approach tests
  * normally fail in the beginning. The idea is that the tests will pass in the
  * end.
- *
+ * <br/>
+ * <br/>
  * see: <code>csheets.ext.comments.InstructionsBlockTest</code><br/>
  *
  * <h2>4. Design</h2>
