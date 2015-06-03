@@ -1,0 +1,16 @@
+@startuml doc-files/core01_01_enable_disable_ext_design_analysis.png
+ actor User
+ participant "<<analysis>>\nMenuBar" as MB
+ participant "<<analysis>>\nSideBar" as SB
+ participant "<<analysis>>\nUIController" as UICtrl
+ participant "<<analysis>>\nUIExtension" as UIExt
+
+
+ User -> MB : choose "View -> Sidebars -> Extensions"
+ User -> SB : selectExt(this)
+ SB -> UICtrl : changeStatus(this)
+UICtrl -> UIExt : changeStatus(boolean)
+
+
+
+ @enduml
