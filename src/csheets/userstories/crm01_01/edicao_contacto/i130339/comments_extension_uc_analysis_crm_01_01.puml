@@ -1,4 +1,4 @@
- @startuml doc-files/comments_extension_uc_analysis_crm_01_01.png
+@startuml doc-files/comments_extension_uc_analysis_crm_01_01.png
 
   actor User
   participant "<<analysis>>\nUIExtensionContacts" as UI
@@ -7,17 +7,7 @@
   participant "<<analysis>>\nEvent" as event
   participant "<<analysis>>\nDataBase" as db
 
-UI -> User : Ask if the user want to login or register
 
-alt Option == "Login"
-    User -> UI : Inserts the information (username, password)
-    UI -> ctrl : loginInformation(username, password)
-    ctrl -> db : validate(username,password)
-else Option == "Register"
-    User -> UI : Inserts the information (username, password)
-    UI -> ctrl : registerLoginInformation (username,password)
-    ctrl -> db : validateRegister(username,password)
-end
 
 alt Option = "Contact"
 alt Option == "Create"
