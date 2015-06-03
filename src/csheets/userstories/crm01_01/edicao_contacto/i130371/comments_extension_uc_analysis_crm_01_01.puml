@@ -1,0 +1,85 @@
+ @startuml doc-files/comments_extension_uc_analysis_crm_01_01.png
+
+  actor User
+  participant "<<analysis>>\nUIExtensionContacts" as UI
+  participant "<<analysis>>\nContactsController" as ctrl
+  participant "<<analysis>>\nContact" as contact
+  participant "<<analysis>>\nEvent" as event
+  participant "<<analysis>>\nDataBase" as db
+
+UI -> User : Ask if the user want to login or register
+
+alt Option == "Login"
+    User -> UI : Inserts the information (username, password)
+    UI -> ctrl : loginInformation(username, password)
+    ctrl -> db : validate(username,password)
+else Option == "Register"
+    User -> UI : Inserts the information (username, password)
+    UI -> ctrl : registerLoginInformation (username,password)
+    ctrl -> db : validateRegister(username,password)
+end
+
+alt Option = "Contact"
+alt Option == "Create"
+
+    UI -> User: Ask about all the information
+	User -> UI: First and last name and image
+	UI ->ctrl: ContactInformation(first, last, image)
+	ctrl -> contact: newContact(first, last, image)
+	ctrl -> db: addContact(user,contact)
+	UI -> User: sucess
+
+else Option == "Edit"
+
+    UI -> ctrl: getAllContacts(user)
+	ctrl -> db: getAllContacts(user)
+	UI -> User: show all Contacts
+	User -> UI: choose one to edit
+        User -> UI: Enter new Information
+	UI -> ctrl: updateContact(contact)
+        ctrl -> db: updateContact(user,contact)
+
+else Option == "Remove"
+
+        UI -> ctrl: getAllContacts(user)
+	ctrl -> db: getAllContacts(user)
+	UI -> User: show all Contacts
+	User -> UI: choose one to remove
+	UI -> ctrl: removeContact(contact)
+        ctrl -> db: removeContact(user,contact)
+end
+
+else Option = "Calendar"
+
+alt Option = "Create a new Event"
+        UI -> ctrl: getAllEvents(user)
+	ctrl -> db: getAllContacts(user)
+	UI -> User: Ask about all the information
+	User -> UI: Inserts the information about the new Event
+	UI -> ctrl: createEvent(timestamp, descriptive_text)
+        create event
+	ctrl -> event: create(timestamp, descriptive_text)
+        ctrl -> db: addEvent(user,event)
+        UI -> User: Sucess
+else Option = "Edit an Event"
+        UI -> ctrl: getAllEvents(user)
+	ctrl -> db: getAllEvents(user)
+        UI -> User: Ask about all the information
+	User -> UI: Inserts the new information about the Event
+	UI -> ctrl: updateEvent(event)
+        ctrl -> db: update(user,event)
+        UI -> User: Sucess
+
+else Option = "Remove an Event"
+        UI -> ctrl: getAllEvents(user)
+	ctrl -> db: getAllEvents(user)
+        UI -> User: Ask about all the information
+	User -> UI: Inserts the event to remove
+	UI -> ctrl: removeEvent(event)
+        ctrl -> db: removeEvent(user,event)
+        UI -> User: Sucess
+end
+
+end
+
+@enduml

@@ -10,7 +10,7 @@
  * be possible to define a port for connections. It should be possible to find
  * other cleansheets instances on the same local address. Instances must appear in a 
  * window and used to make the connection. At this stage it is only necessary to
- * transmit content cells.
+ * transmit cells content.
  * <br/>
  * <br/>
  * <b>Use Case "Start Sharing":</b>
@@ -38,7 +38,7 @@
  * not exists as such in the code of the application (at least at the moment 
  * that this diagram was created).<br/> 
  * <br/>
- * <img src="doc-files/draft_ipc_01_01.png">
+ * <img src="doc-files/draft_ipc_01_01.png"/>
  * <br/>
  * Through the earlier draft we can see that a new class was created. This class
  * will address only the data transmission between clients so it will be placed
@@ -56,9 +56,22 @@
  * class was generic as later in the project, they can be sent and received 
  * other objects in addition to the cells.
  * <br/>
+ * <h2>3. Tests</h2>
+ * Basically, from requirements and also analysis, we see that the core 
+ * functionality of this use case is to be able communicate with other instances
+ * of "CleanSheets" and send them a selected amount of cells.<br/>
+ * Following this approach we can start by coding a unit test that uses the
+ * class <code>Connect</code> and tests its attribute port. Furthermore we also have
+ * to perform functional tests to see if the client is properly receiving the 
+ * information.<br/>
+ * As usual, in a test driven development approach tests normally fail in the 
+ * beginning. The idea is that the tests will pass in the end.<br> 
+ * <br/>
+ * see: <code>csheets.ext.start_sharing.StartSharingTest</code><br/>
+ * 
  */
 
-package csheets.userstories.ipc01_01.iniciar_partilha.i130419;
+package csheets.userstories.ipc01_01.start_sharing.i130419;
 
 /**
  *
