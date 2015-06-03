@@ -1,0 +1,16 @@
+  @startuml doc-files/comments_uc_ssd1_crm_01_01.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Contact: Create
+    s -> User: First name?
+	User -> s: Inserts first name
+	s -> User: Last name?
+	User -> s: Inserts last name
+	s -> User: URL image?
+	User -> s: Selects image
+	s -> User: Asks about confirmation
+	User -> s: Confirm
+	s -> User: Success of the option create
+
+  @enduml
