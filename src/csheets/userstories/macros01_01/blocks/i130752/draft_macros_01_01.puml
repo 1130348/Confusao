@@ -1,0 +1,45 @@
+@startuml doc-files/draft_macros_01_01.png
+ actor User
+ participant "<<analysis>>\nCellUI" as UI
+ participant "<<analysis>>\nCellCtrl" as ctrl
+ participant "<<analysis>>\nCell" as cell
+ participant "<<analysis>>\nFormula" as formula
+ participant "<<analysis>>\nFormulaCompiler" as formulaCompiler
+ participant "<<analysis>>\nExpressionCompiler" as expressionCompiler
+ participant "<<analysis>>\nExpression" as expression
+User -> UI : string
+activate UI
+UI -> ctrl : setContnet(string)
+activate ctrl
+deactivate UI
+ctrl -> cell : setContent(string)
+activate cell
+deactivate ctrl
+cell -> formula : create()
+cell -> formulaCompiler : compile(cell,string)
+deactivate cell
+activate formulaCompiler
+deactivate formulaCompiler
+formulaCompiler -> expressionCompiler : compile(cell,string)
+deactivate formulaCompiler
+activate expressionCompiler
+expressionCompiler -> expression : create()
+deactivate expressionCompiler
+activate expression
+expressionCompiler <-- expression : expr
+deactivate expression
+activate expressionCompiler
+formulaCompiler <-- expressionCompiler : expr
+deactivate expressionCompiler
+activate formulaCompiler
+formulaCompiler -> formulaCompiler : updateDependencies()
+formulaCompiler -> formulaCompiler : fireContentChanged()
+formulaCompiler -> formulaCompiler : reevaluate()
+deactivate formulaCompiler
+cell <-- formulaCompiler : formula
+activate cell
+deactivate cell
+
+
+
+@enduml
