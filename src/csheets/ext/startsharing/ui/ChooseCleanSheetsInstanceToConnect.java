@@ -54,6 +54,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         setTitle("Connect");
         setIconImages(null);
         setModal(true);
+        setResizable(false);
 
         connectDisconnectToggleButton.setText("Connect");
         connectDisconnectToggleButton.addActionListener(new java.awt.event.ActionListener() {
