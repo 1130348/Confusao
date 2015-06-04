@@ -10,12 +10,17 @@ package csheets.persistence;
  * @author rddm
  */
 public final class Persistence {
-    
-    private final String PERSISTENCE_UNIT_NAME="cleansheetsPU";
-
+   
+    /**
+     * Constructor
+     */
     private Persistence() {
     }
 
+    /**
+     * Return the Repository Factory
+     * @return Repository Factory
+     */
     public static RepositoryFactory getRepositoryFactory() {
             return new RepositoryFactory();
     }

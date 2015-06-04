@@ -10,7 +10,10 @@ package csheets.persistence;
  * @author rddm
  */
 class PersistenceSettings {
-
-	public static final String PERSISTENCE_UNIT_NAME = "cleensheetsPU";
+    
+   /**
+    * The persistence unit name
+    */
+   public static final String PERSISTENCE_UNIT_NAME = "cleensheetsPU";
 
 }

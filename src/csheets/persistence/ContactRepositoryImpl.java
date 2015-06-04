@@ -11,7 +11,7 @@ import javax.persistence.RollbackException;
  * and open the template in the editor.
  */
 /**
- *
+ * This class implements the interface ContactRepository and the template class JpaRepository
  * @author rddm
  */
 public class ContactRepositoryImpl extends JpaRepository<Contact, String> implements ContactRepository {

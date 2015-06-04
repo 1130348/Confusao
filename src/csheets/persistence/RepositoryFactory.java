@@ -6,14 +6,21 @@
 package csheets.persistence;
 
 /**
- * 
+ * This class is a Factory that returns all Repositories existents
  * @author rddm
  */
 public class RepositoryFactory {
 
+    /**
+     * Constructor
+     */
     public RepositoryFactory() {
     }
     
+    /**
+     * Method to get Contact Repository
+     * @return Contact Repository
+     */
     public ContactRepository getContactRepository(){
         return new ContactRepositoryImpl();
     }
