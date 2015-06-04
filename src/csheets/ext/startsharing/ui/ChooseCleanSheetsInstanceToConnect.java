@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 
+    private static ChooseCleanSheetsInstanceToConnect instance;
     private boolean startStopSharingToggleButtonStatus = false;
     private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
     private final ArrayList<Boolean> connectDisconnectToggleButtonClick = new ArrayList<Boolean>();
@@ -26,13 +27,22 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * @param modal The modality of this JDialog. Currently set to false by
      * default.
      */
-    public ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
+    private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         retrieveAvailableCleanSheetsInstances();
         initComponents();
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
         availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
+    }
+    
+    public ChooseCleanSheetsInstanceToConnect(){}
+
+    public static synchronized ChooseCleanSheetsInstanceToConnect getInstance(java.awt.Frame parent, boolean modal) {
+        if (instance == null) {
+            instance = new ChooseCleanSheetsInstanceToConnect(parent, modal);
+        }
+        return instance;
     }
 
     /**
@@ -229,7 +239,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void startStopSharingToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopSharingToggleButtonActionPerformed
-        if (startStopSharingToggleButtonStatus) {  
+        if (startStopSharingToggleButtonStatus) {
             startStopSharingToggleButtonStatus = false;
             refreshButton.setEnabled(false);
             connectDisconnectToggleButton.setEnabled(false);
