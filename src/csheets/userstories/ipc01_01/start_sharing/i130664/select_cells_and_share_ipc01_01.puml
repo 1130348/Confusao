@@ -1,0 +1,27 @@
+@startuml doc-files/select_cells_and_share_ipc01_01.png
+ actor User
+ participant "StartSharingAction" as ssa 
+ participant "ClientChooser" as cc
+ participant "StartSharingController" as ssc
+ participant "<<Service>>\nNetwork" as net
+ User -> User : select cells
+ User -> ssa : actionPerformed()
+ ssa -> cc : showDialog(lc);
+ cc -> ssc : lc=searchClients();
+ ssc -> net : retrieveClientInstance();
+ alt
+ User -> cc : changePort();
+ cc -> ssc : changePort(port);
+ ssc -> net : changePort(port);
+ end
+ User -> cc : selectClient(address);
+ cc -> ssc : establishConnection(address);
+ ssc -> net : establishConnection(addres);
+ User -> cc : send();
+ ssa -> ssa : getSelectedCells();
+ loop
+    ssa -> ssc : sendCell(Cell);
+    ssc -> net : sendData(T);
+ end
+
+@enduml

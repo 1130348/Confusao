@@ -15,7 +15,9 @@ import javax.swing.JOptionPane;
  */
 public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 
-    private ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
+    private static ChooseCleanSheetsInstanceToConnect instance;
+    private boolean startStopSharingToggleButtonStatus = false;
+    private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
     private final ArrayList<Boolean> connectDisconnectToggleButtonClick = new ArrayList<Boolean>();
     private StartSharingController controller;
     /**
@@ -26,17 +28,22 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * @param modal The modality of this JDialog. Currently set to false by
      * default.
      */
-    /*public ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
+    private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         retrieveAvailableCleanSheetsInstances();
         initComponents();
-    }*/
+        availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
+        availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
+        availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
+    }
+    
+    public ChooseCleanSheetsInstanceToConnect(){}
 
-    ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal, StartSharingController startSharingController) {
-        super(parent, modal);
-        controller = startSharingController;
-        retrieveAvailableCleanSheetsInstances();
-        initComponents();    
+    public static synchronized ChooseCleanSheetsInstanceToConnect getInstance(java.awt.Frame parent, boolean modal) {
+        if (instance == null) {
+            instance = new ChooseCleanSheetsInstanceToConnect(parent, modal);
+        }
+        return instance;
     }
 
     /**
@@ -54,24 +61,25 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         connectionPortSpinner = new javax.swing.JSpinner();
         availableCleanSheetsInstancesScrollPane = new javax.swing.JScrollPane();
         availableCleanSheetsInstancesList = new javax.swing.JList();
-        cancelButton = new javax.swing.JButton();
         availableCleanSheetsInstancesOnLANLabel = new javax.swing.JLabel();
         refreshButton = new javax.swing.JButton();
+        startStopSharingToggleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Connect");
+        setTitle("Start Sharing");
         setIconImages(null);
         setModal(true);
         setResizable(false);
 
         connectDisconnectToggleButton.setText("Connect");
+        connectDisconnectToggleButton.setEnabled(false);
         connectDisconnectToggleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connectDisconnectToggleButtonActionPerformed(evt);
             }
         });
 
-        changeConnectionPortLabel.setText("Change connection port (max. 65535):");
+        changeConnectionPortLabel.setText("Select new connection port (max. 65535):");
 
         connectionPortSpinner.setModel(new javax.swing.SpinnerNumberModel(1024, 1024, 65535, 1));
 
@@ -80,6 +88,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        availableCleanSheetsInstancesList.setEnabled(false);
         availableCleanSheetsInstancesList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 availableCleanSheetsInstancesListMouseClicked(evt);
@@ -87,19 +96,20 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         });
         availableCleanSheetsInstancesScrollPane.setViewportView(availableCleanSheetsInstancesList);
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-
         availableCleanSheetsInstancesOnLANLabel.setText("Available CleanSheets instances on LAN:");
 
         refreshButton.setText("Refresh List");
+        refreshButton.setEnabled(false);
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
+            }
+        });
+
+        startStopSharingToggleButton.setText("Start Sharing");
+        startStopSharingToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startStopSharingToggleButtonActionPerformed(evt);
             }
         });
 
@@ -110,40 +120,41 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(availableCleanSheetsInstancesScrollPane)
+                    .addComponent(availableCleanSheetsInstancesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(chooseCleanSheetsInstanceToConnectSeparator)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(availableCleanSheetsInstancesOnLANLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(changeConnectionPortLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(connectDisconnectToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(connectDisconnectToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(startStopSharingToggleButton))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(availableCleanSheetsInstancesOnLANLabel)
+                                .addComponent(changeConnectionPortLabel))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(changeConnectionPortLabel)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(changeConnectionPortLabel)
-                    .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startStopSharingToggleButton))
+                .addGap(18, 18, 18)
                 .addComponent(chooseCleanSheetsInstanceToConnectSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(availableCleanSheetsInstancesOnLANLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(availableCleanSheetsInstancesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(availableCleanSheetsInstancesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
                     .addComponent(connectDisconnectToggleButton)
                     .addComponent(refreshButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -173,13 +184,6 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             connectDisconnectToggleButtonClick.add(true);
         }
     }
-
-    /**
-     * This method disposes the window when the cancel button is pressed.
-     */
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        dispose();
-    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * This method alters the connect/disconnect toggle button's text with the
@@ -236,15 +240,45 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 //        );
     }//GEN-LAST:event_refreshButtonActionPerformed
 
+    private void startStopSharingToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopSharingToggleButtonActionPerformed
+        if (startStopSharingToggleButtonStatus) {
+            startStopSharingToggleButtonStatus = false;
+            refreshButton.setEnabled(false);
+            connectDisconnectToggleButton.setEnabled(false);
+            availableCleanSheetsInstancesList.setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
+            startStopSharingToggleButton.setText("Start Sharing");
+        } else {
+            int port = (Integer) connectionPortSpinner.getValue();
+            JOptionPane.showMessageDialog(
+                    rootPane,
+                    "You are now connected with the port " + port + "!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            startStopSharingToggleButtonStatus = true;
+            refreshButton.setEnabled(true);
+            connectDisconnectToggleButton.setEnabled(true);
+            availableCleanSheetsInstancesList.setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getHorizontalScrollBar().setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(true);
+            startStopSharingToggleButton.setText("Stop Sharing");
+        }
+    }//GEN-LAST:event_startStopSharingToggleButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList availableCleanSheetsInstancesList;
     private javax.swing.JLabel availableCleanSheetsInstancesOnLANLabel;
     private javax.swing.JScrollPane availableCleanSheetsInstancesScrollPane;
-    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel changeConnectionPortLabel;
     private javax.swing.JSeparator chooseCleanSheetsInstanceToConnectSeparator;
     private javax.swing.JToggleButton connectDisconnectToggleButton;
     private javax.swing.JSpinner connectionPortSpinner;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JToggleButton startStopSharingToggleButton;
     // End of variables declaration//GEN-END:variables
 }
