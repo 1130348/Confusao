@@ -20,6 +20,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
     private final ArrayList<Boolean> connectDisconnectToggleButtonClick = new ArrayList<Boolean>();
     private StartSharingController controller;
+
     /**
      * This JDialog gives the user the option to define its connection port and
      * to connect to another instance of CleanSheets.
@@ -28,20 +29,22 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * @param modal The modality of this JDialog. Currently set to false by
      * default.
      */
-    private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
+    private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal, StartSharingController controller) {
         super(parent, modal);
+        this.controller = controller;
         retrieveAvailableCleanSheetsInstances();
         initComponents();
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
         availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
     }
-    
-    public ChooseCleanSheetsInstanceToConnect(){}
 
-    public static synchronized ChooseCleanSheetsInstanceToConnect getInstance(java.awt.Frame parent, boolean modal) {
+    public ChooseCleanSheetsInstanceToConnect() {
+    }
+
+    public static synchronized ChooseCleanSheetsInstanceToConnect getInstance(java.awt.Frame parent, boolean modal, StartSharingController controller) {
         if (instance == null) {
-            instance = new ChooseCleanSheetsInstanceToConnect(parent, modal);
+            instance = new ChooseCleanSheetsInstanceToConnect(parent, modal, controller);
         }
         return instance;
     }
@@ -171,7 +174,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     private void retrieveAvailableCleanSheetsInstances() {
         //O código seguinte serve como bootsrapper para testar a interface. Será
         //posteriormente substituído pela pesquisa broadcast em UDP.
-        
+
         listOfAvailableCleanSheetsInstances.add("Carlos Silva");
         listOfAvailableCleanSheetsInstances.add("João Monteiro");
         listOfAvailableCleanSheetsInstances.add("João Paiva");
@@ -215,15 +218,20 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * the CleanSheets instance selected.
      */
     private void availableCleanSheetsInstancesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_availableCleanSheetsInstancesListMouseClicked
-        availableCleanSheetsInstancesList.updateUI();
-        int index = availableCleanSheetsInstancesList.getSelectedIndex();
-        if ("Disconnect".equals(connectDisconnectToggleButton.getText()) && connectDisconnectToggleButtonClick.get(index)) {
-            connectDisconnectToggleButton.setSelected(false);
-            connectDisconnectToggleButton.setText("Connect");
-        } else if ("Connect".equals(connectDisconnectToggleButton.getText()) && !connectDisconnectToggleButtonClick.get(index)) {
-            connectDisconnectToggleButton.setSelected(true);
-            connectDisconnectToggleButton.setText("Disconnect");
+        try {
+            availableCleanSheetsInstancesList.updateUI();
+            int index = availableCleanSheetsInstancesList.getSelectedIndex();
+            if ("Disconnect".equals(connectDisconnectToggleButton.getText()) && connectDisconnectToggleButtonClick.get(index)) {
+                connectDisconnectToggleButton.setSelected(false);
+                connectDisconnectToggleButton.setText("Connect");
+            } else if ("Connect".equals(connectDisconnectToggleButton.getText()) && !connectDisconnectToggleButtonClick.get(index)) {
+                connectDisconnectToggleButton.setSelected(true);
+                connectDisconnectToggleButton.setText("Disconnect");
+            }
+        }catch(ArrayIndexOutOfBoundsException ex){
+            //Just to not give error before click button start sharing
         }
+
     }//GEN-LAST:event_availableCleanSheetsInstancesListMouseClicked
 
     /**

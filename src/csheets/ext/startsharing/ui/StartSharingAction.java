@@ -44,7 +44,7 @@ public class StartSharingAction extends FocusOwnerAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ChooseCleanSheetsInstanceToConnect dialog = new ChooseCleanSheetsInstanceToConnect(null, true, startSharingController);
+        ChooseCleanSheetsInstanceToConnect dialog = ChooseCleanSheetsInstanceToConnect.getInstance(null, enabled, startSharingController);
         dialog.setVisible(true);
         
         Cell[][] selectCells = focusOwner.getSelectedCells();
