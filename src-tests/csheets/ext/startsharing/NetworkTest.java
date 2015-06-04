@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author tiagobelmiropereira
+ * @author Paulo Pereira
  */
 public class NetworkTest {
     
@@ -46,8 +46,6 @@ public class NetworkTest {
         int expResult = 0;
         int result = Network.getPort();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,10 +54,9 @@ public class NetworkTest {
     @Test
     public void testSetPort() {
         System.out.println("setPort");
-        int newPort = 0;
+        int newPort = 9009;
         Network.setPort(newPort);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(9009, Network.getPort());
     }
 
     /**
