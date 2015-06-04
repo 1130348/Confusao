@@ -5,6 +5,12 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -15,6 +21,10 @@ public class Network {
     private static final int DEFAULT_PORT = 0;
 
     private static int port = DEFAULT_PORT;
+
+    public static ArrayList<String> searchClient(){
+        return null;
+    }
 
     /*
      * To make sure that this class is a service class

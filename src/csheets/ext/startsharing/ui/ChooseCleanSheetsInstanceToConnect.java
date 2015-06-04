@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing.ui;
 
+import csheets.ext.startsharing.StartSharingController;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -14,9 +15,9 @@ import javax.swing.JOptionPane;
  */
 public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 
-    private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
+    private ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
     private final ArrayList<Boolean> connectDisconnectToggleButtonClick = new ArrayList<Boolean>();
-
+    private StartSharingController controller;
     /**
      * This JDialog gives the user the option to define its connection port and
      * to connect to another instance of CleanSheets.
@@ -25,10 +26,17 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * @param modal The modality of this JDialog. Currently set to false by
      * default.
      */
-    public ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
+    /*public ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         retrieveAvailableCleanSheetsInstances();
         initComponents();
+    }*/
+
+    ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal, StartSharingController startSharingController) {
+        super(parent, modal);
+        controller = startSharingController;
+        retrieveAvailableCleanSheetsInstances();
+        initComponents();    
     }
 
     /**
@@ -152,13 +160,14 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     private void retrieveAvailableCleanSheetsInstances() {
         //O código seguinte serve como bootsrapper para testar a interface. Será
         //posteriormente substituído pela pesquisa broadcast em UDP.
+        
         listOfAvailableCleanSheetsInstances.add("Carlos Silva");
         listOfAvailableCleanSheetsInstances.add("João Monteiro");
         listOfAvailableCleanSheetsInstances.add("João Paiva");
         listOfAvailableCleanSheetsInstances.add("Paulo Pereira");
         listOfAvailableCleanSheetsInstances.add("Sérgio Gomes");
-        //Código para substituição termina aqui.
 
+        //Código para substituição termina aqui.
         int i;
         for (i = 0; i < listOfAvailableCleanSheetsInstances.size(); i++) {
             connectDisconnectToggleButtonClick.add(true);

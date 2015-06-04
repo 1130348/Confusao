@@ -5,6 +5,8 @@
  */
 package csheets.ext.startsharing.ui;
 
+import csheets.core.Cell;
+import csheets.ext.startsharing.StartSharingController;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,11 @@ public class StartSharingAction extends FocusOwnerAction {
      * The user interface controller
      */
     private UIController uiController;
+    
+    /**
+     * The network controller
+     */
+    private StartSharingController startSharingController;
 
     /**
      * Creates a new start sharing action.
@@ -27,6 +34,7 @@ public class StartSharingAction extends FocusOwnerAction {
      */
     public StartSharingAction(UIController uiController) {
         this.uiController = uiController;
+        this.startSharingController = new StartSharingController();
     }
 
     @Override
@@ -36,8 +44,15 @@ public class StartSharingAction extends FocusOwnerAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ChooseCleanSheetsInstanceToConnect dialog = new ChooseCleanSheetsInstanceToConnect(null, true);
+        ChooseCleanSheetsInstanceToConnect dialog = new ChooseCleanSheetsInstanceToConnect(null, true, startSharingController);
         dialog.setVisible(true);
+        
+        Cell[][] selectCells = focusOwner.getSelectedCells();
+        for (Cell[] row : selectCells){
+            for (Cell cell : row) {
+                startSharingController.sendObject(cell);
+            }
+        }
     }
  
 }
