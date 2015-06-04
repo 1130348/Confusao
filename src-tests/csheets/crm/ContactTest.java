@@ -1,9 +1,9 @@
 package csheets.crm;
 
-import static org.junit.Assert.*;
-
+import csheets.ext.contact.Contact;
+import java.awt.image.BufferedImage;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
 
 /**
  * A Unit Test class to test Contact.
@@ -13,51 +13,60 @@ import org.junit.Test;
  */
 public class ContactTest {
 
-    /**
-     * A method that tests if the First Name is valid.
-     */
-   /* @Test
-    public void testValidaFirstName() {
+	/**
+	 * A method that tests if the First Name is valid.
+	 */
+	@Test
+	public void testValidaFirstName() {
 
-        Contact contact = new Contact();
-        String fName="Test";
-        
-        boolean expResult = true;
-        boolean result = contact.setFirstName(fName);
+		Contact contact = new Contact();
+		String fName = "Test";
+		contact.setFirst_Name(fName);
 
-        assertEquals(expResult, result);
-        
-    }*/
-    
-    /**
-     * A method that tests if the Last Name is valid.
-     */
-   /* @Test
-    public void testValidaLastName() {
+		boolean expResult = true;
+		boolean result = false;
+		if (contact.getFirst_Name().equals(fName)) {
+			result = true;
+		}
+		assertEquals(expResult, result);
+	}
 
-        Contact contact = new Contact();
-        String lName="Test";
+	/**
+	 * A method that tests if the Last Name is valid.
+	 */
+	@Test
+	public void testValidaLastName() {
 
-        boolean expResult = true;
-        boolean result = contact.setLastName(lName);
+		Contact contact = new Contact();
+		String fName = "Test";
+		contact.setLast_Name(fName);
 
-        assertEquals(expResult, result);
+		boolean expResult = true;
+		boolean result = false;
+		if (contact.getLast_Name().equals(fName)) {
+			result = true;
+		}
+		assertEquals(expResult, result);
+	}
 
-    }*/
+	/**
+	 * A method that tests if the image File is valid.
+	 */
+	@Test
+	public void testAddImage() {
+		Contact contact = new Contact();
+		BufferedImage image = new BufferedImage(2, 3, 4);
+		contact.setImage(image);
 
-    /**
-     * A method that tests if the image File is valid.
-     */
-   /* @Test
-    public void testAddImage() {
-        
-        Contact contact = new Contact(); 
-        
-        boolean expResult = true;
-        boolean result = contact.addImage("Test.jpeg");
+		boolean expResult = true;
+		boolean result = false;
 
-        assertEquals(expResult, result);
+		if (contact.getImage() == image) {
+			result = true;
+		}
 
-    }*/
+		assertEquals(expResult, result);
+
+	}
 
 }
