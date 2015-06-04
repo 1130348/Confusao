@@ -72,36 +72,25 @@
  *
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
- * will also need to create a subclass of UIExtension. For the sidebar we need
- * to implement a JPanel. In the code of the extension
- * <code>csheets.ext.style</code> we can find examples that illustrate how to
- * implement these technical requirements.<br/>
+ * will also need to create a subclass of UIExtension. In the code of the
+ * extension <code>csheets.ext.style</code> we can find examples that illustrate
+ * how to implement these technical requirements.<br/>
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.<br/>
  *
- * <h3>Start Sharing Diagram</h3>
- * The following diagram shows the search for other active instances in the same
- * network, and sends data to that instances .<br/><br/>
- * <img src="doc-files/ipc_start_sharing_sequence_diagram.png"/>
+ * <h3>Extension Setup</h3>
+ * The following diagram shows the setup of the "Start Sharing" extension when
+ * cleansheets is run.<br/><br/>
+ * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
  * <br/>
- *
- * <h3>User Selects a Cell</h3>
- * The following diagram illustrates what happens when the user selects a cell.
- * The idea is that when this happens the extension must display in the sidebar
- * the comment of that cell (if it exists).<br/>
+ * <h3>User Select Cells And Clicks Botton To Send</h3>
+ * The following diagram illustrates what happens when the user select cells.
+ * When the user selects the cells the object StartSharingAction has access to
+ * SpreedSheatTable who knows the user selected cells. After the user selected
+ * cells, he press the button to send and active actionPerformed() method of
+ * class StartSharingAction<br/>
  * <br/>
- * <img src="doc-files/core02_01_design2.png"/>
- * <br/>
- * <h3>User Updates the Comment of a Cell</h3>
- * The following diagram illustrates what happens when the user updates the text
- * of the comment of the current cell. To be noticed that this diagram does not
- * depict the actual selection of a cell (that is illustrated in the previous
- * diagram).<br/>
- * <br/>
- * <img src="doc-files/core02_01_design3.png">
- * ll has a comment. This "feature" is not documented in this page.<br/>
- * <br/>
- * <br/>
+ * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
  *
  */
 package csheets.userstories.ipc01_01.start_sharing.i130372;
