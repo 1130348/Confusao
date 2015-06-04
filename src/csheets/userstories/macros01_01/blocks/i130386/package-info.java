@@ -153,9 +153,9 @@
  * <br/>
  * <br/>
  *
- * @author i130395
+ * @author i130386
  */
-package csheets.userstories.macros01_01.blocks.i130395;
+package csheets.userstories.macros01_01.blocks.i130386;
 
 /**
  * This class is only here so that javadoc includes the documentation about this

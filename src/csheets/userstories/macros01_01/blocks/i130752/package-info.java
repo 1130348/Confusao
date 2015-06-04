@@ -132,7 +132,7 @@
  * The idea is that when this happens the extension must display in the sidebar
  * the comment of that cell (if it exists).<br/>
  * <br/>
- *
+ * <img src="doc-files/core02_01_design2.png">
  * <br/>
  * <h3>User Updates the Comment of a Cell</h3>
  * The following diagram illustrates what happens when the user updates the text
@@ -140,7 +140,7 @@
  * depict the actual selection of a cell (that is illustrated in the previous
  * diagram).<br/>
  * <br/>
- *
+ * <img src="doc-files/core02_01_design3.png">
  *
  * <h2>5. Coding</h2>
  * see:<br/>
@@ -153,15 +153,15 @@
  * <br/>
  * <br/>
  *
- * @author i130395
+ * @author i130752
  */
-package csheets.userstories.macros01_01.blocks.i130395;
+package csheets.userstories.macros01_01.blocks.i130752;
 
 /**
  * This class is only here so that javadoc includes the documentation about this
  * EMPTY package! Do not remove this class!
  *
- * @author alexandrebraganca
+ * @author i130752
  */
 class _InstructionBlock_ {
 }

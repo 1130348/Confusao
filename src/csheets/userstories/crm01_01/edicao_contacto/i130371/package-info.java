@@ -13,37 +13,34 @@
  * descriptive text.
  * <br/>
  * <br/>
- * <b>Use Case "Contact Edition":</b> First of all to enter the CRM Area the
- * user needs to login or register. When the The user selects one of the option:
- * Agenda or Contact. After that if the choosen option is Contact that will have
- * more three option: Create, Edit and Remove a contact. If the user choose
- * option create it will appear a window for the user to enter his first and
- * last name and to select an image or a photo for the contact. On the
- * otherhand, if the choosen option is edit the user has the possibility to
+ * <b>Use Case "Contact Edition":</b> When the The user selects one of the
+ * option: Agenda or Contact. After that if the choosen option is Contact that
+ * will have more four options: Create, Edit and Remove a contact. If the user
+ * choose option create he will need to select one contact and then it will
+ * appear a window for the user to enter his first and last name and to select
+ * an image or a photo for the contact. On the otherhand, if the choosen option
+ * is edit also selects one contact and then the user has the possibility to
  * change all the information associated with the contact. Otherwise if the user
  * opted for the removing option it will appear all contacts that the user can
- * remove in order to select. If the user wants to edit the agenda there is a
- * sidebar for that effect and the user needs to choose the option: Agenda.
- * After that the user can choose if wants to create an event, edit ou remove
- * for the agenda. If the option is Create the system will ask for all the
- * information and validates and ask the user for confirmation. On the other
- * side, if the choosen option is Edit or Remove the system show all the events
- * for the user to select one. The system will allow the user to edit or to
- * remove one. The system informs the sucess of the use case.<br/>
+ * remove in order to select. If the user wants to edit the agenda there will
+ * appear in the window of the contact all the events and the user can create
+ * one if choose that option. If he wants to edit just need to select with two
+ * clicks the event and then a new window will open. To remove just need to
+ * select one and then click on the remove button. The system informs the sucess
+ * of the use case.<br/>
  * <br/>
  * <h2>2. Analysis</h2>
  * Since editing a contact will be supported in a database that will be included
  * in the cleansheet projet will need to study how to make the connection.<br/>
- * The first sequence diagram in the section
- * <a href="POR AQUI">Application Startup</a> tell us about some of the classes
- * that will need to create in order to conclude this use case like Contact and
- * Event.<br/>
+ * The first sequence diagram in the section Application Startup</a> tell us
+ * about some of the classes that will need to create in order to conclude this
+ * use case like Contact and Event.<br/>
  * The DataBase will need to save all the information about a contact: the list
  * of contacts, personal informations and the agenda with all of the
  * events.<br/>
  * The possibily from right now is to create one side bar with two options:
  * Contact and Agenda. <br/>
- * CONTACT: Create, Edit or Remove <br/>
+ * CONTACT: Create, Edit, or Remove <br/>
  * AGENDA: Create, Edit or Remove an Event <br/>
  * <br/>
  * Below it's a prototype for the summary of a SSD if the user choose the option
@@ -69,15 +66,23 @@
  * <br/>
  * <br/>
  * From the previous diagram we see that we need to create a class Contact with
- * 3 attributes: first_name, last_name and associated_image. It is also
- * necessary to create a class Event and Agenda. An event has two attributes:
- * timestamp and a descriptive_text.  <br/>
- * Therefore, at this point, we need to study how to create, edit and remove a
- * contact and his agenda (create, edit and remove an event). It's very
+ * 4 attributes: first_name, last_name machine_name and associated_image. It is
+ * also necessary to create a class Event and Agenda. An event has two
+ * attributes: timestamp and a descriptive_text.  <br/>
+ * Therefore, at this point, we need to study how to create, edit, select and
+ * remove a contact and his agenda (create, edit and remove an event). It's very
  * important too the form that will be create the connection with the database
  * and how will be integrated in cleansheets projet. One more study target is
  * the notification to the user when the date of an event aproaches.<br/>
  * <br/>
+ * From right now the ideia is to creat this classes: Contact, Agenda, Event and
+ * ContactsController. Below there is the first prototype of the classes diagram
+ * of this projet cleansheets. Besides all that classes already said there are a
+ * ContactsRepository, a Factory called RepositoryFactory and the persistence
+ * that allows the connection with the database.<br/> <br/>
+ * <img src="doc-files/crm_01_01_analise_classes.png">
+ * <br/><br/>
+ *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the crm
  * functionality of this use case is to be able to edit a contact, edit a agenda
@@ -88,38 +93,55 @@
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
- * see: <code>CLASSE DE TESTES</code><br/>
+ * see: <code>csheets.crm.AgendaTest</code><br/>
+ * see: <code>csheets.crm.ContactControllerTest</code><br/>
+ * see: <code>csheets.crm.ContactTest</code><br/>
  *
  * <h2>4. Design</h2>
- * This part of the documentation of this use case (CRM: Contact Edition)has 3
- * parts: <br/>
- * - Sequence Diagram </br>
- * - Class Diagram </br>
- * - Explanation about some classes <br/>
- *
- * <h5>4.1. Sequence Diagram </h5>
+ * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It
- * depicts the objects and classes involved in the scenaria and the sequence of
+ * depicts the objects and classes involved in the scenario and the sequence of
  * messages exchanged betwween the objets needed to carry out the functionality
  * of the scenario.<br/>
  * The sequence diagram had to be dividided into several parts because it is an
  * extensive sequence diagram. <br/>
- *
- * <br/>POR AQUI OS DIAGRAMAS DE SEQUÊNCIA DIVIDIDOS<br/>
+ * Let's start with the contacts. A contact has the first and the last name and
+ * a photo/image associated. Also have a machine_name that will be created
+ * automaticatly and an agenda with one or more events. If the user wants to
+ * create a contact will need to write all that information and select the
+ * image. After that all the information about the new contact will be saved on
+ * the local database.<br/><br/>
+ * <br/><img src="doc-files/crm_01_01_addContact.png" <br/> <br/> <br/>The user
+ * can also edit all the parameters of one contact. Will just need to select the
+ * contact with two clicks that wants to make an edition and then the system
+ * allows to change the first and last name and the photo.<br/> <br/>
+ * <br/><img src="doc-files/crm_01_01_updateContact.png" <br/> <br/> <br/>Let's
+ * now see the sequence diagram for the option Remove Contact. The user just
+ * need to choose one contact and will be deleted. When a contact is deleted all
+ * the information is deleted too (first name, last name, image and
+ * agenda).<br/>
  * <br/>
- *
- * <h5>4.2. Class Diagram </h5>
- * A class diagram is a representation of the structure and the relationships
- * between all the classes that serve as model for objets. It is very useful for
- * the development of modeling systems because defines all the classes the
- * system needs to possess and is the basis for the construction of
- * communication diagrams and sequence.<br/>
- * <br/>POR AQUI O DIAGRAMA DE CLASSES<br/>
- * <br/>
- *
- * <h5>4.3. Explanation about some classes</h5>
+ * <br/><img src="doc-files/crm_01_01_removeContact.png" <br/> <br/>
  *
  * <br/>
+ * Now we can see all the diagrams of sequence for the agenda option: Create an
+ * Event, Remove or Edit. An Event has two attributes: timestamp and the
+ * descriptive text. If the user opted for the creation of one more event to the
+ * agenda he will need to write all the information that one event needs and
+ * select Create. After that he will be informed about the sucess of the event
+ * creation.<br/> <br/>
+ * <br/><img src="doc-files/crm_01_01_addEvent.png" <br/> <br/> <br/> On the
+ * other hand, if the user of cleansheets pick out option Edit Event it means
+ * that had already selects one event with two clicks. Then he is allowed to
+ * switch the timestamp and the descriptive text. That changed information will
+ * be updated and saved on the database.<br/>
+ * <br/>
+ * <br/><img src="doc-files/crm_01_01_updateEvent.png" <br/> <br/> <br/>The user
+ * can also remove one event of the agenda. For that effect, needs to select one
+ * event and then choose the option Remove. The system will ask confirmation and
+ * will delete that event from the database.<br/> <br/>
+ * <br/><br/><img src="doc-files/crm_01_01_removeEvent.png" <br/> <br/>
+ * <br/><br/> <br/>
  *
  * <h2>5. Coding</h2>
  * <br/>
@@ -130,8 +152,8 @@
  * Customer Relationship Management (CRM) area will need this connection to the
  * database in order to save information. It can be treated like a complex use
  * case because there are lots of aspects that will need to be done like
- * connection with the database, register and login, create, edit and remove a
- * contact or an event and notify the user that is login about the next
+ * connection with the database, create, edit, select and remove a contact or an
+ * event and notify the user that is using the cleansheet about the next
  * events.<br/>
  * <br/>
  * <br/>

@@ -1,0 +1,50 @@
+@startuml doc-files/crm_01_01_analise_classes.png
+
+    class "<<analysis>> Persistence" as Persistence{
+        +getRepositoryFactory()
+    }
+
+    interface "<<analysis>> RepositoryFactory" as RepositoryFactory{
+        +newInstance()
+    }
+
+    class "<<analysis>> ContactsRepository" as ContactsRepository{
+        +add(contact)
+        +update(contact)
+        +remove(contact)
+    }
+
+    class "<<analysis>> Agenda" as Agenda{
+        -List<Event> eventList
+    }
+    class "<<analysis>> Event" as Event{
+        -String descritiveText
+        -Date timestamp
+    }
+
+    class "<<analysis>> Contact" as Contact{
+        -String firstName
+        -String lastName
+        -Image img
+        -Agenda agenda
+    }
+
+    class "<<analysis>> ContactsController" as ContactsController{
+        +newContact(String firstName, String lastName, Image img)
+        +updateContact(Contact c, String firstName, String lastName, Image img)
+        +removeContact(Contact c)
+        +newEvent(Date timestamp, String text, Contact c)
+        +updateEvent(Event e, Contact c)
+        +removeEvent(Event e, Contact c)
+    }
+
+
+    Agenda <|-- Contact
+    Event <|-- Agenda
+    RepositoryFactory <|-- Persistence
+    ContactsRepository <|-- RepositoryFactory
+    ContactsRepository <|-- ContactsController
+    Contact <|-- ContactsController
+
+@enduml
+

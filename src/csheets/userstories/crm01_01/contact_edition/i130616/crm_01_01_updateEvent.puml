@@ -1,0 +1,33 @@
+@startuml doc-files/crm_01_01_updateEvent.png
+
+    participant "ContactsPanel : JPanel" as cp
+    participant "ContactsController" as ctrl
+    participant "contactFrame: JFrame" as jframe
+    participant "eventFrame: JFrame" as eventFrame
+    participant "Persistence" as pers
+    participant "RepositoryFactory" as repFactory
+    participant "ContactsRepository" as contactsRep
+
+
+    create jframe
+    cp -> jframe : new()
+
+    note right of jframe
+        Selects the
+        option Update Event
+    end note
+
+    create eventFrame
+    jframe -> eventFrame : new()
+
+
+
+    eventFrame -> ctrl : updateEvent(event)
+
+    ctrl -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrl -> repFactory : getContactsRepository()
+
+    ctrl -> contactsRep : update(contact)
+
+@enduml
