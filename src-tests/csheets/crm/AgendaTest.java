@@ -1,53 +1,61 @@
 package csheets.crm;
 
-import java.util.List;
-import static org.junit.Assert.*;
-
+import csheets.ext.contact.Agenda;
+import csheets.ext.contact.Event;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
 
 /**
  * A Unit Test class to test Agenda.
  *
  * @see Agenda
- * @author Egidio Santos
+ * @author Cristina Lopes e Egídio Santos
  */
 public class AgendaTest {
 
-    /**
-     * A method that tests if the Event is added to the EventList.
-     */
-  /*  @Test
-    public void testAddEvent() {
+	/**
+	 * /**
+	 * A method that tests if the Event is added to the EventList.
+	 */
+	@Test
+	public void testAdd() {
 
-        Agenda agenda = new Agenda();
-        Event event = new Event();
-        
-        boolean expResult = true;
-        boolean result = agenda.addEvent(event);
+		Agenda agenda = new Agenda();
+		Event event = new Event();
+		boolean expResult = true;
+		boolean result = agenda.add(event);
+		assertEquals(expResult, result);
+	}
 
-        assertEquals(expResult, result);
-        
-    }*/
-    
-    /**
-     * A method that tests set/get of the EventList.
-     */
-   /* @Test
-    public void testEventList() {
+	/**
+	 * A method that tests if the Event is removed of the EventList.
+	 */
+	@Test
+	public void testRmv() {
 
-        Agenda agenda = new Agenda();
-        
-        List<Event> fEvent = new List<Event>();
-        Event event = new Event();
-        fEvent.add(event);
-        
-        agenda.setEventList(fEvent);
-        
-        List<Event> lEvent = agenda.getEventList();
+		Agenda agenda = new Agenda();
+		Event event = new Event();
+		agenda.add(event);
+		boolean expResult = true;
+		boolean result = agenda.rmv(event);
+		assertEquals(expResult, result);
+	}
 
-        assertEquals(fEvent,lEvent);
-        
-    }  */
+	/**
+	 * A method that tests if the Event is edited of the EventList.
+	 */
+	@Test
+	public void testEdit() {
+
+		Agenda agenda = new Agenda();
+		Event event = new Event();
+		agenda.add(event);
+		boolean expResult = true;
+		boolean result
+			= agenda.edit(event);
+
+		assertEquals(expResult, result);
+
+	}
 
 }
