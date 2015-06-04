@@ -1,0 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package csheets.ext.startsharing.ui;
+
+import csheets.ui.ctrl.UIController;
+import javax.swing.JMenu;
+
+/**
+ *
+ * @author Paulo Pereira
+ */
+public class StartSharingMenu extends JMenu{
+
+   public StartSharingMenu(UIController uiController) {
+		super("Network");
+		//setMnemonic(KeyEvent.);
+
+		// Adds send action
+		add(new StartSharingAction(uiController));
+	}
+    
+}
