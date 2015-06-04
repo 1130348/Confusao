@@ -152,7 +152,7 @@ public class InstructionBlockTest {
 	@Test
 	public void testIdentifyBlockTokens() throws RecognitionException {
 		String line = "={2+3;3-4}";
-		String exp_result = "(+ 2 3);(- 3 4)";
+		String exp_result = "(+ 2 3) ; (- 3 4)";
 		String result;
 
 		ANTLRStringStream input = new ANTLRStringStream(line);

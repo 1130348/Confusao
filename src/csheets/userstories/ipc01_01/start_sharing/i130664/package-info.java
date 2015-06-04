@@ -1,4 +1,4 @@
-/**
+/** 
  * Technical documentation regarding the user story ipc01_01: start sharing. 
  * <br/>
  * <br/>
@@ -10,7 +10,7 @@
  * be possible to define a port for connections. It should be possible to find
  * other cleansheets instances on the same local address. Instances must appear in a 
  * window and used to make the connection. At this stage it is only necessary to
- * transmit content cells.
+ * transmit cells content.
  * <br/>
  * <br/>
  * <b>Use Case "Start Sharing":</b>
@@ -68,6 +68,27 @@
  * beginning. The idea is that the tests will pass in the end.<br> 
  * <br/>
  * see: <code>csheets.ext.start_sharing.StartSharingTest</code><br/>
+ * <h2>4. Design</h2>
+ * To realize this user story we will need to create a subclass of Extension. 
+ * We will also need to create a subclass of UIExtension. In the code of the extension 
+ * <code>csheets.ext.style</code> we can find examples that illustrate how to 
+ * implement these technical requirements.<br/>
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.<br/>
+ * 
+ * <h3>Extension Setup</h3>
+ * The following diagram shows the setup of the "Start Sharing" extension when 
+ * cleansheets is run.<br/><br/>
+ * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * <br/>
+ * <h3>User Select Cells And Clicks Botton To Send</h3>
+ * The following diagram illustrates what happens when the user select cells.
+ * When the user selects the cells the object StartSharingAction has access to 
+ * SpreedSheatTable who knows the user selected cells. After the user selected 
+ * cells, he press the button to send  and active actionPerformed() method of class
+ * StartSharingAction<br/>
+ * <br/>
+ * <img src="doc-files/select_cells_and_share_ipc01_01.png"/>
  * 
  */
 
@@ -77,5 +98,5 @@ package csheets.userstories.ipc01_01.start_sharing.i130664;
  *
  * @author Carlos Silva (1130664)
  */
-class _Dummy_ {
-}
+class _Dummy_ {}
+
