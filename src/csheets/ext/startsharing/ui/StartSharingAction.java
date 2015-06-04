@@ -31,7 +31,7 @@ public class StartSharingAction extends FocusOwnerAction {
 
     @Override
     protected String getName() {
-        return "Start Sharing";
+        return "Start Sharing...";
     }
 
     @Override
