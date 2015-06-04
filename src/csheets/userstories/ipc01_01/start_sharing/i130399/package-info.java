@@ -53,6 +53,18 @@
  * objects, as evolved in the project.
  * <br/>
  * <br/>
+ * <h2>3. Tests</h2>
+ * Basically, from the requirements and analysis we revealed that the main
+ * feature of this use case is to be able to share information of a given range
+ * of cells, you must set the port value where it will connect. Following this
+ * approach, we can start by coding a unit test that uses a new attribute to the
+ * port with the corresponding accessor methods (set and get). A simple test to
+ * set this attribute with one point to see if the get method returns this same
+ * port. In another approach we can functionally test whether another instance
+ * of the "CleanSheets" after connecting receives information transmitted by the
+ * other instance.
+ * <br/>
+ * <br/>
  */
 package csheets.userstories.ipc01_01.start_sharing.i130399;
 

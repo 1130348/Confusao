@@ -1,0 +1,29 @@
+@startuml doc-files/crm_01_01_addContact.png
+    participant "ContactsPanel : JPanel" as cp
+    participant "ContactsController" as ctrl
+    participant "contactFrame: JFrame" as jframe
+    participant "Contact" as contact
+    participant "Persistence" as pers
+    participant "RepositoryFactory" as repFactory
+    participant "ContactsRepository" as contactsRep
+
+
+
+    note right of cp
+        Selects the
+        option create
+    end note
+
+    create jframe
+    cp -> jframe : new ()
+
+
+    jframe -> ctrl : addContact(contact)
+
+    ctrl -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrl -> repFactory : getContactsRepository()
+
+    ctrl -> contactsRep : add(contact)
+
+@enduml
