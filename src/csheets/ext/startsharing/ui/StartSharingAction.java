@@ -31,12 +31,13 @@ public class StartSharingAction extends FocusOwnerAction {
 
     @Override
     protected String getName() {
-        return "Start Sharing";
+        return "Start Sharing...";
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ChooseCleanSheetsInstanceToConnect dialog = new ChooseCleanSheetsInstanceToConnect(null, true);
+        dialog.setVisible(true);
     }
  
 }
