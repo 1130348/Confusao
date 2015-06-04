@@ -1,6 +1,14 @@
 package csheets.ext.contact;
 
 import java.awt.image.BufferedImage;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  * import javax.persistence.GeneratedValue; import
@@ -11,14 +19,14 @@ import java.awt.image.BufferedImage;
  *
  * @author Cristina
  */
+@Entity
 public class Contact {
 
 	/**
 	 * Id of contact (database)
 	 */
-	/**
-	 * @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	/**
@@ -39,12 +47,14 @@ public class Contact {
 	/**
 	 * The image of the contact
 	 */
+	@Transient
 	private BufferedImage image;
 
 	/**
 	 * Agenda of contact
 	 */
-	//@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "OWNER_ID")
 	private Agenda agenda;
 
 	/**

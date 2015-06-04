@@ -1,25 +1,23 @@
 package csheets.ext.contact;
 
-import java.sql.Timestamp;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- * import javax.persistence.GeneratedValue; import
- * javax.persistence.GenerationType; import javax.persistence.Id; import
- * javax.persistence.Temporal; import javax.persistence.TemporalType;
- */
 /**
  *
  * @author Cristina
  */
+@Entity
 public class Event {
 
-	/**
-	 * id of the event (database)
-	 */
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
 	/**
 	 * Description of the event
 	 */
@@ -28,8 +26,8 @@ public class Event {
 	/**
 	 * Timestamp of the event
 	 */
-	//@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp timestamp;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date timestamp;
 
 	/**
 	 * Constructor without parameters
@@ -43,7 +41,7 @@ public class Event {
 	 * @param description
 	 * @param time
 	 */
-	public Event(String description, Timestamp time) {
+	public Event(String description, Date time) {
 		this.description = description;
 		this.timestamp = time;
 	}
@@ -62,7 +60,7 @@ public class Event {
 	 *
 	 * @return timestamp
 	 */
-	public Timestamp getTimestamp() {
+	public Date getTimestamp() {
 		return this.timestamp;
 	}
 
@@ -80,7 +78,7 @@ public class Event {
 	 *
 	 * @param t timestamp
 	 */
-	public void setTimestamp(Timestamp t) {
+	public void setTimestamp(Date t) {
 		this.timestamp = t;
 	}
 }
