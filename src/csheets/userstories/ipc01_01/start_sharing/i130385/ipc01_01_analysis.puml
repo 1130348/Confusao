@@ -1,0 +1,34 @@
+@startuml doc-files/ipc01_01_analysis.png
+ actor User 
+ participant "<<analysis>>\nStartSharingUI" as UI
+ participant "<<analysis>>\nStartSharingCtrl" as ctrl
+ participant "<<analysis>>\nSpreadsheet" as sheet
+ participant "<<analysis>>\nCell" as cell
+ participant "<<analysis>>\nConnect" as connect
+User -> UI : selectCells()
+activate UI
+UI -> ctrl : getCells()
+activate ctrl
+deactivate UI
+ctrl -> sheet : getCell()
+activate sheet
+deactivate ctrl
+sheet -> cell : getValue()
+activate cell
+sheet -> cell : getAddres()
+deactivate cell
+deactivate sheet
+User -> UI : getClients()
+activate UI
+UI -> ctrl : getClients()
+activate ctrl
+ctrl -> connect : getClients()
+activate connect
+User -> UI : selectClient()
+UI -> ctrl : connectTo()
+ctrl -> connect : connectTo()
+User -> UI : send()
+UI -> ctrl : sendInfo()
+ctrl -> connect : sendInfo() 
+
+@enduml

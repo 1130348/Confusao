@@ -36,7 +36,8 @@ public class StartSharingAction extends FocusOwnerAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ChooseCleanSheetsInstanceToConnect dialog = new ChooseCleanSheetsInstanceToConnect(null, true);
+        dialog.setVisible(true);
     }
  
 }
