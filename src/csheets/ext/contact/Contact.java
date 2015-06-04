@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.crm;
+package csheets.ext.contact;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

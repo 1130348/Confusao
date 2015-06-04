@@ -5,7 +5,7 @@
  */
 package csheets.persistence;
 
-import csheets.crm.Contact;
+import csheets.ext.contact.Contact;
 import java.util.List;
 
 /**
@@ -15,21 +15,24 @@ import java.util.List;
 public interface ContactRepository {
     /**
      * Add contact to repository
+     * @param contact contact to be added
      * @return True if is successful, False if isn't
      */
-    boolean add();
+    boolean add(Contact contact);
     
      /**
      * Remove contact from repository
+     * @param contact contact to be removed
      * @return True if is successful, False if isn't
      */
-    boolean remove();
+    boolean remove(Contact contact);
     
      /**
      * Edit contact in repository
+     * @param contact contact to be edited
      * @return True if is successful, False if isn't
      */
-    boolean edit();
+    boolean edit(Contact contact);
     
     /**
      * Return all contacts in repository
