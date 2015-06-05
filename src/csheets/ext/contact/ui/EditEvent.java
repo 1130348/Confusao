@@ -43,7 +43,7 @@ public class EditEvent extends javax.swing.JFrame {
 	/**
 	 * Creates new form AddContact
 	 */
-	public EditEvent(ContactController ctrl, Contact c) {
+	public EditEvent(ContactController ctrl, Contact c, final EditContact ec) {
 		this.controller = ctrl;
 		this.contact = c;
 		initComponents();
@@ -76,7 +76,11 @@ public class EditEvent extends javax.swing.JFrame {
 				try {
 					d = format.parse(jFormattedTextField1.getText());
 					event.setTimestamp(d);
+					contact.addEvent(event);
 					controller.updateContact(contact);
+					controller.update();
+					ec.updateEvent();
+					dispose();
 				} catch (ParseException ex) {
 					Logger.getLogger(EditEvent.class.getName()).
 						log(Level.SEVERE, null, ex);
@@ -84,6 +88,7 @@ public class EditEvent extends javax.swing.JFrame {
 			}
 		}
 		);
+
 	}
 
 	/**

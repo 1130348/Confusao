@@ -20,32 +20,39 @@
  */
 package csheets.ui.ext;
 
+import csheets.ext.Extension;
+import csheets.ui.ctrl.FocusOwnerAction;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
 
-import csheets.ui.ctrl.FocusOwnerAction;
-
 /**
  * An action for showing and hiding UI extension side bars.
+ *
  * @author Einar Pehrson
  */
 @SuppressWarnings("serial")
 public class SideBarAction extends FocusOwnerAction {
 
-	/** The extension to control*/
+	/**
+	 * The extension to control
+	 */
 	private UIExtension extension;
 
-	/** The component to control */
+	/**
+	 * The component to control
+	 */
 	private JComponent component;
 
-	/** The side bar pane */
-	private JTabbedPane sideBar;
+	/**
+	 * The side bar pane
+	 */
+	private static JTabbedPane sideBar;
 
 	/**
 	 * Creates a new side bar action.
+	 *
 	 * @param extension the extension to control
 	 * @param component the component to control
 	 */
@@ -56,10 +63,9 @@ public class SideBarAction extends FocusOwnerAction {
 
 		// Fetches parent, and removes component if appropriate
 		Container parent = component.getParent();
-		if (parent instanceof JTabbedPane)
-			sideBar = (JTabbedPane)parent;
-		if (!component.isEnabled())
-			sideBar.remove(component);
+		if (parent instanceof JTabbedPane) {
+			sideBar = (JTabbedPane) parent;
+		}
 
 		// Configures action
 		String name = extension.getExtension().getName();
@@ -75,24 +81,42 @@ public class SideBarAction extends FocusOwnerAction {
 
 	/**
 	 * Toggles the visiblity of the component.
+	 *
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
 		if (sideBar != null) {
 			// Toggles component
-			if (component.isEnabled())
-				sideBar.remove(component);
-			else {
+			if (component.isEnabled()) {
+				if (sideBar.indexOfComponent(component) != -1) {
+					sideBar.remove(sideBar.indexOfComponent(component));
+				}
+
+			} else {
 				int i = 0;
 				for (; i < sideBar.getTabCount()
 					&& component.getName().compareTo(sideBar.getTitleAt(i)) < 0; i++);
 				sideBar.insertTab(extension.getExtension().getName(),
-					extension.getIcon(), component, null, i);
+								  extension.getIcon(), component, null, i);
 			}
-
 			// Toggles properties
 			component.setEnabled(!component.isEnabled());
 			extension.setEnabledProperty("sidebar", component.isEnabled());
+		}
+
+	}
+
+	public static void fix(Extension ext) {
+
+		int i = sideBar.indexOfTab(ext.getName());
+
+		if (i != -1) {
+
+			if (ext.Status()) {
+				sideBar.setEnabledAt(i, true);
+			} else {
+				sideBar.setEnabledAt(i, false);
+			}
 		}
 	}
 }

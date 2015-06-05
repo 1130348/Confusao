@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import javax.swing.ImageIcon;
 
 /**
  * import javax.persistence.GeneratedValue; import
@@ -63,6 +62,9 @@ public class Contact {
 	 */
 	public Contact() {
 		agenda = new Agenda();
+		first_name = "";
+		last_name = "";
+		machine_name = "";
 	}
 
 	/**
@@ -189,10 +191,10 @@ public class Contact {
 	public void editEvent(Event e) {
 		agenda.edit(e);
 	}
-        
-        @Override
-        public String toString(){
-            return getFirst_Name()+" "+getLast_Name();
-        }
+
+	@Override
+	public String toString() {
+		return getFirst_Name() + " " + getLast_Name();
+	}
 
 }
