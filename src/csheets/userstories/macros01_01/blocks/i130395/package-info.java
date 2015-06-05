@@ -106,7 +106,7 @@
  * end.
  * <br/>
  * <br/>
- * see: <code>csheets.ext.comments.InstructionsBlockTest</code><br/>
+ * see: <code>csheets.userstories.macros01_01.blocks</code><br/>
  *
  * <h2>4. Design</h2>
  *
@@ -123,35 +123,14 @@
  * solution for this use case.<br/>
  * <img src="doc-files/design_macros_01_01.png"/>
  * </br>
- * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "comments" extension when
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/core02_01_design.png"/>
- * <br/>
- *
- * <h3>User Selects a Cell</h3>
- * The following diagram illustrates what happens when the user selects a cell.
- * The idea is that when this happens the extension must display in the sidebar
- * the comment of that cell (if it exists).<br/>
- * <br/>
- * <img src="doc-files/core02_01_design2.png"/>
- * <br/>
- * <h3>User Updates the Comment of a Cell</h3>
- * The following diagram illustrates what happens when the user updates the text
- * of the comment of the current cell. To be noticed that this diagram does not
- * depict the actual selection of a cell (that is illustrated in the previous
- * diagram).<br/>
- * <br/>
- * <img src="doc-files/core02_01_design3.png"/>
  *
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.comments</a><br/>
- * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.comments.ui</a><br/>
+ * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
- * As an extra this use case also implements a small cell visual decorator if
- * the cell has a comment. This "feature" is not documented in this page.<br/>
+ * As an extra this use case to apply the new functions and operators needs them
+ * to be written in the language.props file (n the src-resources package)<br/>
  * <br/>
  * <br/>
  *
