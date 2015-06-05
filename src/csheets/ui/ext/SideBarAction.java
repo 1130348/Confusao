@@ -66,9 +66,6 @@ public class SideBarAction extends FocusOwnerAction {
 		if (parent instanceof JTabbedPane) {
 			sideBar = (JTabbedPane) parent;
 		}
-		if (!component.isEnabled()) {
-			sideBar.remove(component);
-		}
 
 		// Configures action
 		String name = extension.getExtension().getName();
@@ -91,7 +88,10 @@ public class SideBarAction extends FocusOwnerAction {
 		if (sideBar != null) {
 			// Toggles component
 			if (component.isEnabled()) {
-				sideBar.remove(component);
+				if (sideBar.indexOfComponent(component) != -1) {
+					sideBar.remove(sideBar.indexOfComponent(component));
+				}
+
 			} else {
 				int i = 0;
 				for (; i < sideBar.getTabCount()
@@ -99,11 +99,11 @@ public class SideBarAction extends FocusOwnerAction {
 				sideBar.insertTab(extension.getExtension().getName(),
 								  extension.getIcon(), component, null, i);
 			}
-
 			// Toggles properties
 			component.setEnabled(!component.isEnabled());
 			extension.setEnabledProperty("sidebar", component.isEnabled());
 		}
+
 	}
 
 	public static void fix(Extension ext) {
