@@ -44,7 +44,7 @@ public class StartSharingController {
     }
 
     public void setSendPort(int port) {
-        Network.setSendPort(port);
+        Network.setPort(port);
     }
 
     public void interruptConnection() {

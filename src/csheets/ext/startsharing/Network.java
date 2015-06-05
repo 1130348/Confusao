@@ -52,12 +52,7 @@ public class Network {
 
     public static void setPort(int newPort) {
         portTCP = newPort;
-    }
-
-    public static void setSendPort(int port) {
-        sendPort = port;
-    }
-    
+    }  
     
     public static boolean sendData(Object object) throws IOException {
         //ObjectOutputStream out = new ObjectOutputStream(
