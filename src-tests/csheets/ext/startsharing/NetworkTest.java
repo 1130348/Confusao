@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -63,7 +64,7 @@ public class NetworkTest {
      * Test of sendData method, of class Network.
      */
     @Test
-    public void testSendData() {
+    public void testSendData() throws IOException {
         System.out.println("sendData");
         Object object = null;
         boolean expResult = false;

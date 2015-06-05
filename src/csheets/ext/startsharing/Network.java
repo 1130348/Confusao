@@ -5,9 +5,11 @@
  */
 package csheets.ext.startsharing;
 
+import com.sun.corba.se.impl.io.IIOPOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.BindException;
 import java.net.DatagramPacket;
@@ -52,8 +54,16 @@ public class Network {
         portTCP = newPort;
     }
 
-    public static boolean sendData(Object object) {
-        return false;
+    public static void setSendPort(int port) {
+        sendPort = port;
+    }
+    
+    
+    public static boolean sendData(Object object) throws IOException {
+        //ObjectOutputStream out = new ObjectOutputStream(
+        //        clientConnections.get(0).getOutputStream());
+        //out.writeObject(object);
+        return true;
     }
 
     public static void isVisibleToOthers(boolean cond) {
@@ -200,7 +210,7 @@ public class Network {
             System.out.println("O cliente se conectou ao servidor!");
             Scanner teclado = new Scanner(System.in);
             PrintStream saida = new PrintStream(cliente.getOutputStream());
-            while (teclado.hasNextLine()) {
+            while (teclado.nextLine().equalsIgnoreCase("Sair")) {
 
                 saida.println(teclado.nextLine());
 

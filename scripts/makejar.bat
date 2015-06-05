@@ -9,7 +9,11 @@ call xcopy ..\src-resources ..\tmp-build /S /Q /Y > nul
 echo Creating archive...
 rmdir /S /Q  ..\dist 
 mkdir ..\dist
+
 call jar cfm ../dist/csheets.jar makejar.mf -C ../tmp-build/ .
+call jar cvmf makejar.mf ../dist/csheets.jar -C ../src/ META-INF/persistence.xml
+
+
 
 echo Copiar as dependencias
 call copy /Y ..\lib\antlr-3.5.2-complete.jar ..\dist 

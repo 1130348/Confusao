@@ -203,11 +203,12 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         } else {
             int index = availableCleanSheetsInstancesList.getSelectedIndex();
             if (connectDisconnectToggleButtonClick.get(index)) {
-                controller.establishConnection((String)availableCleanSheetsInstancesList.getSelectedValue());
+                controller.establishConnection((String) availableCleanSheetsInstancesList.getSelectedValue());
                 connectDisconnectToggleButtonClick.set(index, false);
                 connectDisconnectToggleButton.setText("Disconnect");
             } else {
-                connectDisconnectToggleButtonClick.set(index, true); 
+                controller.interruptConnection();
+                connectDisconnectToggleButtonClick.set(index, true);
                 connectDisconnectToggleButton.setText("Connect");
             }
         }
@@ -287,7 +288,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             controller.changePort(port);
             controller.setVisibleToOthers(true);
             retrieveAvailableCleanSheetsInstances();
-            //controller.waitConnection();
+            controller.waitConnection();
         }
     }//GEN-LAST:event_startStopSharingToggleButtonActionPerformed
 

@@ -22,16 +22,6 @@
  */
 package csheets.core.formula.compiler;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.antlr.runtime.ANTLRStringStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.Tree;
-
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.formula.BinaryOperation;
@@ -47,6 +37,14 @@ import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.RangeReference;
 import csheets.core.formula.lang.ReferenceOperation;
 import csheets.core.formula.lang.UnknownElementException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
 
 /**
  * A compiler that generates Excel-style formulas from strings.
@@ -85,6 +83,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 		try {
 			// Attempts to match an expression
 			tree = (CommonTree) parser.expression().getTree();
+			//System.out.println(tree.toStringTree());
 		} /* catch (MismatchedTokenException e){
 		 //not production-quality code, just forming a useful message
 		 String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
@@ -129,7 +128,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
 					case FormulaLexer.CELL_REF:
 						return new CellReference(cell.getSpreadsheet(), node.
-							getText());
+												 getText());
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
 					 getRange(node.getText()) (Reference)*/

@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class StartSharingController {
         return Network.establishConnection(address);
     }
 
-    public boolean sendObject(Object obj) {
+    public boolean sendObject(Object obj) throws IOException {
         return Network.sendData(obj);
     }
 
@@ -40,5 +41,13 @@ public class StartSharingController {
 
     public void waitConnection() {
         Network.waitForConnection();
+    }
+
+    public void setSendPort(int port) {
+        Network.setSendPort(port);
+    }
+
+    public void interruptConnection() {
+        Network.interruptConnection();
     }
 }

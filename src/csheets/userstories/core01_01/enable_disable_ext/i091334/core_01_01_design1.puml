@@ -1,0 +1,23 @@
+@startuml doc-files/core01_01_enable_disable_ext_design1.png
+ actor User
+ participant "UI" as UI
+ participant "EnableDisablePanel" as EDP2
+ participant "EnableDisableController" as EDC
+ participant "SideBar" as SB
+ participant "MenuBar" as MB
+ participant "EnableDisablePanel" as EDP
+ participant "Extension" as Ext
+
+ User -> UI : choose View -> SibeBar -> Enable/Disable
+ UI --> EDP2 :
+ EDP2 -> EDC : newInstance(EnableDisableController)
+ EDP -> EDP : CreateCheck(panel)
+ EDP --> SB :
+ User -> SB : choose sidebarTab Enable/Disable
+ User -> SB : chooseExtension
+ SB -> EDP : actionPerformed(event)
+ EDP -> Ext : defineStatus(boolean)
+ EDP -> MB : run()
+ EDP -> SB : fix()
+
+@enduml
