@@ -73,7 +73,6 @@
  * <br/>
  *
  * @author 1120836
- *
  */
 package csheets.userstories.core01_01.enable_disable_ext.i120836;
 
