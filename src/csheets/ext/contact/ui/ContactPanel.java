@@ -84,10 +84,10 @@ public class ContactPanel extends JPanel {
         controller = new ContactController(uiController, this);
         contactList = new ArrayList<String>();
         Event e = new Event("Teste: ola adeus.", new Date());
-        ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
-        Contact c = new Contact("Egidio", "Santos", "PC-Egidio",saveImage(image));
-        c.addEvent(e);
-        contactList.add(c);
+        //ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
+        //Contact c = new Contact("Egidio", "Santos", "PC-Egidio",saveImage(image));
+        //c.addEvent(e);
+        //contactList.add(c);
 
         startList();
 
