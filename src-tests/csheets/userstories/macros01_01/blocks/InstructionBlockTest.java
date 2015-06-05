@@ -53,7 +53,7 @@ public class InstructionBlockTest {
 	@Test
 	public void testSimpleTwoInstructionsBlock() {
 		String line = "={2+3;3+4}";
-		Value exp_result = new Value(7);
+		Value exp_result = new Value(7.0);
 		Value result = new Value();
 		ANTLRStringStream input = new ANTLRStringStream(line);
 
@@ -91,7 +91,7 @@ public class InstructionBlockTest {
 	@Test
 	public void testAtributionInstructionBlock() {
 		String line = "={A1:=5+5;A1-2}";
-		Value exp_result = new Value(8);
+		Value exp_result = new Value(8.0);
 		Value result = new Value();
 		ANTLRStringStream input = new ANTLRStringStream(line);
 
@@ -152,7 +152,7 @@ public class InstructionBlockTest {
 	@Test
 	public void testIdentifyBlockTokens() throws RecognitionException {
 		String line = "={2+3;3-4}";
-		String exp_result = "(+ 2 3) ; (- 3 4)";
+		String exp_result = "(; (+ 2 3) (- 3 4))";
 		String result;
 
 		ANTLRStringStream input = new ANTLRStringStream(line);
@@ -175,7 +175,7 @@ public class InstructionBlockTest {
 	@Test
 	public void testIdentifyAtributionTokens() throws RecognitionException {
 		String line = "={A1:=2+3;A1-2}";
-		String exp_result = "(:= (+ 2 3) A1);(- A1 2)";
+		String exp_result = "(; (:= A1 (+ 2 3)) (- A1 2))";
 		String result;
 
 		ANTLRStringStream input = new ANTLRStringStream(line);

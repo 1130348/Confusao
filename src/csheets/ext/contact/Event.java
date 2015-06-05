@@ -81,4 +81,9 @@ public class Event {
 	public void setTimestamp(Date t) {
 		this.timestamp = t;
 	}
+        
+        @Override
+        public String toString(){
+            return getDescription()+" Time : "+getTimestamp();
+        }
 }

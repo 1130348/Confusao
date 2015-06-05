@@ -3,49 +3,59 @@ grammar Formula;
 options {
 	language=Java;
 	output=AST;
-}	
-    
-   
+}
+
+
 @parser::header {
 package csheets.core.formula.compiler;
 }
- 
+
 @lexer::header {
 package csheets.core.formula.compiler;
 }
 
-// Alter code generation so catch-clauses get replace with 
+// Alter code generation so catch-clauses get replace with
 // this action.
 @rulecatch {
 	catch (RecognitionException e) {
 		reportError(e);
-		throw e; 
+		throw e;
 	}
 }
 
 @members {
 	protected void mismatch(IntStream input, int ttype, BitSet follow)
-		throws RecognitionException 
+		throws RecognitionException
 	{
     	throw new MismatchedTokenException(ttype, input);
 	}
 
 	public Object recoverFromMismatchedSet(IntStream input, RecognitionException e, BitSet follow)
-		throws RecognitionException 
+		throws RecognitionException
 	{
-		throw e; 
+		throw e;
 	}
-	
+
 	@Override
   	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) throws RecognitionException {
     	throw new MismatchedTokenException(ttype, input);
  	}
 }
-	         
+
 expression
-	: EQ! comparison EOF! 
+	: EQ! FOR^ LCHA! attribution SEMI! operation (SEMI! operation)+ RCHA! EOF!
+	| EQ! LCHA! operation ( SEMI^ operation )* RCHA! EOF!
+	| EQ! operation EOF!
 	;
-	
+
+operation
+	: attribution | comparison
+	;
+
+attribution
+	: CELL_REF ATT^ comparison
+	;
+
 comparison
 	: concatenation
 		( ( EQ^ | NEQ^ | GT^ | LT^ | LTEQ^ | GTEQ^ ) concatenation )?
@@ -87,7 +97,7 @@ atom
 	;
 
 function_call
-	:	FUNCTION^ LPAR! 
+	:	FUNCTION^ LPAR!
 		( comparison ( SEMI! comparison )* )?
 		RPAR!
 	;
@@ -101,15 +111,17 @@ literal
 	:	NUMBER
 	|	STRING
 	;
-	
+
+/* FOR operators */
+FOR		: 'F' 'O' 'R' ;
 
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
-  
-FUNCTION : 
-	  ( LETTER )+ 
-	;	
-	 
- 
+
+FUNCTION :
+	  ( LETTER )+
+	;
+
+
 CELL_REF
 	:
 		( ABS )? LETTER ( LETTER )?
@@ -118,19 +130,22 @@ CELL_REF
 
 /* String literals, i.e. anything inside the delimiters */
 
-STRING	:	QUOT 
+STRING	:	QUOT
 		(options {greedy=false;}:.)*
 		QUOT  { setText(getText().substring(1, getText().length()-1)); }
-	;  	
+	;
 
-QUOT: '"' 
+QUOT: '"'
 	;
 
 /* Numeric literals */
 NUMBER: ( DIGIT )+ ( COMMA ( DIGIT )+ )? ;
 
-fragment 
+fragment
 DIGIT : '0'..'9' ;
+
+/* Atribution operators */
+ATT		: ':=' ;
 
 /* Comparison operators */
 EQ		: '=' ;
@@ -155,12 +170,14 @@ PERCENT : '%' ;
 fragment ABS : '$' ;
 fragment EXCL:  '!'  ;
 COLON	: ':' ;
- 
+
 /* Miscellaneous operators */
 COMMA	: ',' ;
 SEMI	: ';' ;
 LPAR	: '(' ;
-RPAR	: ')' ; 
+RPAR	: ')' ;
+LCHA	: '{' ;
+RCHA	: '}' ;
 
 /* White-space (ignored) */
 WS: ( ' '
@@ -169,6 +186,5 @@ WS: ( ' '
 	| '\t'
 	) {$channel=HIDDEN;}
 	;
-	
-	
- 
+
+

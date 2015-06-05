@@ -8,9 +8,11 @@ package csheets.ext.contact.ui;
 import csheets.CleanSheets;
 import csheets.ext.contact.Contact;
 import csheets.ext.contact.Event;
+import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,19 +30,58 @@ public class EditContact extends javax.swing.JFrame {
 
     private List eventList;
 
+    private ContactController controller;
+
+    private Contact contact;
+
+    private ImageIcon img;
+
     /**
      * Creates new form AddContact
+     *
+     * @param c
      */
-    public EditContact() {
+    public EditContact(ContactController c) {
+        controller = c;
         initComponents();
         eventList = new ArrayList<Event>();
 
-        setTitle("Contact");
+        setTitle("Add Contact");
+        initFrame();
+        actionButtons(0);
+
+    }
+
+    public EditContact(ContactController c, Contact contact) {
+        controller = c;
+        initComponents();
+        this.contact = contact;
+        eventList = contact.getAgenda().toList();
+
+        setTitle("Edit Contact");
+        initFrame();
+        actionButtons(2);
+
+        jList2.setListData(eventList.toArray());
+        if (contact.getImage() != null) {
+            jLabel6.setIcon(new ImageIcon(contact.getImage()));
+        }
+
+        jTextField3.setText(contact.getFirst_Name());
+        jTextField4.setText(contact.getLast_Name());
+
+    }
+
+    private void initFrame() {
         setResizable(false);
         setLocationByPlatform(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage(
                 CleanSheets.class.getResource("res/img/sheet.gif")));
+    }
+
+    private void actionButtons(final int n) {
+
         jButton1.setBorderPainted(false);
         jButton1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().
                 getImage("src-resources\\csheets\\res\\img\\reload.png")));
@@ -59,11 +100,14 @@ public class EditContact extends javax.swing.JFrame {
                 if (fileChooser.showDialog(EditContact.this, "Import") == JFileChooser.APPROVE_OPTION) {
                     System.out.println(fileChooser.getSelectedFile().getPath());
                     String fich = fileChooser.getSelectedFile().getPath();
-                    if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.contains(".gif") || fich.contains(".png")) {
+                    if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.
+                            contains(".gif") || fich.contains(".png")) {
 
                         jLabel6.setText("");
-                        ImageIcon img = new ImageIcon(fileChooser.getSelectedFile().getPath());
-                        img.setImage(img.getImage().getScaledInstance(77, 68, 100));
+                        img = new ImageIcon(fileChooser.
+                                getSelectedFile().getPath());
+                        img.setImage(img.getImage().
+                                getScaledInstance(77, 68, 100));
                         jLabel6.setIcon(img);
                         jLabel6.updateUI();
 
@@ -78,21 +122,30 @@ public class EditContact extends javax.swing.JFrame {
         }
         );
 
-        if (eventList.isEmpty()) {
-            eventList.add("Empty");
-            jList2.setEnabled(false);
-        }
         jList2.setListData(eventList.toArray());
 
         jButton2.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
 
-                confirmButton();
+            public void actionPerformed(ActionEvent e) {
+                if (n == 2) {
+                    contact.setFirst_Name(jTextField3.getText());
+                    contact.setLast_Name(jTextField4.getText());
+                    controller.updateContact(contact);
+                } else {
+                    controller.
+                            addContact(new Contact(jTextField3.getText(), jTextField4.
+                                            getText(), System.
+                                            getProperty("user.name"), saveImage(img)));
+                }
+                controller.update();
+
+                dispose();
 
             }
-        });
+        }
+        );
 
         jButton3.addActionListener(new ActionListener() {
 
@@ -101,11 +154,24 @@ public class EditContact extends javax.swing.JFrame {
 
                 EditEvent eventFrame = new EditEvent();
                 eventFrame.setVisible(true);
-                
-                
+
             }
         });
+    }
 
+    private BufferedImage saveImage(ImageIcon icon) {
+        if (icon != null) {
+            BufferedImage bi = new BufferedImage(
+                    icon.getIconWidth(),
+                    icon.getIconHeight(),
+                    BufferedImage.TYPE_INT_RGB);
+            Graphics g = bi.createGraphics();
+            // paint the Icon to the BufferedImage.
+            icon.paintIcon(null, g, 0, 0);
+            g.dispose();
+            return bi;
+        }
+        return new BufferedImage(1, 1, 4);
     }
 
     public FileFilter filter(final String type) {
@@ -125,13 +191,6 @@ public class EditContact extends javax.swing.JFrame {
                 return type;
             }
         };
-
-    }
-
-    public void confirmButton() {
-
-        //faz os sets 
-        dispose();
 
     }
 
@@ -251,7 +310,6 @@ public class EditContact extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

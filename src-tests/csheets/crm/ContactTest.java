@@ -2,6 +2,7 @@ package csheets.crm;
 
 import csheets.ext.contact.Contact;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
