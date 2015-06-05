@@ -5,10 +5,38 @@
  */
 package csheets.ext.Enable_Disable.ui;
 
+import csheets.ext.Extension;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
+import javax.swing.JComponent;
+
 /**
  *
  * @author DMMCA
  */
-public class UIExtensionsEnableDisable {
+public class UIExtensionsEnableDisable extends UIExtension {
 
+	/**
+	 * A side bar that provides editing of comments
+	 */
+	private JComponent sideBar;
+
+	public UIExtensionsEnableDisable(Extension extension,
+									 UIController uiController) {
+		super(extension, uiController);
+	}
+
+	/**
+	 * Returns a side bar that provides editing of comments.
+	 *
+	 * @return a side bar
+	 */
+	public JComponent getSideBar() {
+
+		if (sideBar == null) {
+			//sideBar = new EnableDisablePanel(uiController);
+		}
+		return sideBar;
+
+	}
 }
