@@ -125,7 +125,7 @@ public class ContactPanel extends JPanel {
 
 		// Adds borders
 		TitledBorder border = BorderFactory.
-			createTitledBorder("Lista De Contactos");
+			createTitledBorder("Contacts List");
 
 		border.setTitleJustification(TitledBorder.CENTER);
 
