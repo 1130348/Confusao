@@ -175,6 +175,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     private void retrieveAvailableCleanSheetsInstances() {
         String s_port = JOptionPane.showInputDialog("What port do you want to send to?");
         int port = Integer.parseInt(s_port);
+        controller.setSendPort(port);
         List<InetAddress> activeInstances = controller.searchInstances(port);
         for (InetAddress activeInstance : activeInstances) {
             listOfAvailableCleanSheetsInstances.add(activeInstance.
@@ -210,6 +211,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
                 connectDisconnectToggleButtonClick.set(index, false);
                 connectDisconnectToggleButton.setText("Disconnect");
             } else {
+                controller.interruptConnection();
                 connectDisconnectToggleButtonClick.set(index, true);
                 connectDisconnectToggleButton.setText("Connect");
             }

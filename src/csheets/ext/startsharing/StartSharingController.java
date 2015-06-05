@@ -43,4 +43,12 @@ public class StartSharingController {
     public void waitConnection() {
         Network.waitForConnection();
     }
+
+    public void setSendPort(int port) {
+        Network.setSendPort(port);
+    }
+
+    public void interruptConnection() {
+        Network.interruptConnection();
+    }
 }

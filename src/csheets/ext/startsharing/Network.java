@@ -37,6 +37,8 @@ public class Network {
     private static Thread serverThread;
     private static ArrayList<Socket> clientConnections;
     private static int port = DEFAULT_PORT;
+    private static int sendPort;
+
 
     /*
      * To make sure that this class is a service class
@@ -52,10 +54,14 @@ public class Network {
         port = newPort;
     }
 
+    public static void setSendPort(int port) {
+        sendPort = port;
+    }
+    
     public static boolean sendData(Object object) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(
-                clientConnections.get(0).getOutputStream());
-        out.writeObject(object);
+        //ObjectOutputStream out = new ObjectOutputStream(
+        //        clientConnections.get(0).getOutputStream());
+        //out.writeObject(object);
         return true;
     }
 
@@ -201,7 +207,7 @@ public class Network {
 
     public static boolean establishConnection(String address) {
         try {
-            Socket cliente = new Socket(InetAddress.getByName(address), port);
+            Socket cliente = new Socket(InetAddress.getByName(address), sendPort);
             System.out.println("O cliente se conectou ao servidor!");
             Scanner teclado = new Scanner(System.in);
             PrintStream saida = new PrintStream(cliente.getOutputStream());
