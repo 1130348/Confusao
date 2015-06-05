@@ -100,14 +100,10 @@ public class Network {
         Map<Integer, InetAddress> activeInstances = new HashMap<Integer, InetAddress>();
         try {
 
-            String localHost = localHostAddress().getHostAddress();
-
-            InetAddress destinationIP;
-
             DatagramSocket socket = new DatagramSocket();
             socket.setBroadcast(true);
             socket.setSoTimeout(100 * TIMEOUT);
-            destinationIP = InetAddress.getByName("255.255.255.255");
+            InetAddress destinationIP = InetAddress.getByName("255.255.255.255");
 
             byte[] data = new byte[300];
             String message = "testing connection";
@@ -128,7 +124,7 @@ public class Network {
                     time = 0;
                     reply = new DatagramPacket(data, data.length);
                     socket.receive(reply);
-
+                    System.out.println("ADDRESS: " + reply.getPort());
                     message = new String(reply.getData(), 0, reply.getLength());
                     System.out.println(message);
                     activeInstances.put(Integer.parseInt(message), reply.getAddress());
@@ -256,7 +252,12 @@ class respond_to_request implements Runnable {
             Logger.getLogger(respond_to_request.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-
+        String localAddress = "";
+        try {
+            localAddress = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(respond_to_request.class.getName()).log(Level.SEVERE, null, ex);
+        }
         while (true) {
             try {
 
@@ -271,8 +272,14 @@ class respond_to_request implements Runnable {
                 }
                 clientIP = request.getAddress();
                 clientPort = request.getPort();
-                System.out.println("PORTO: " + portUDP);
-                System.out.println("IP: " + clientIP);
+                System.out.println("Client: " + clientPort);
+                String port = String.format("%d", portTCP);
+                data = port.getBytes();
+                if (!(clientIP.getHostAddress()).equals(localAddress)) {
+                    DatagramPacket resposta = new DatagramPacket(data, port.
+                            length(), clientIP, portUDP);
+                    sock.send(resposta);
+                }
 
                 if (InetAddress.getLocalHost().getHostName().equals(clientIP)) {
                     String port = String.format("%d", portTCP);
