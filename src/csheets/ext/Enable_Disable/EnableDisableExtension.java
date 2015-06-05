@@ -34,5 +34,6 @@ public class EnableDisableExtension extends Extension {
 	@Override
 	public UIExtension getUIExtension(UIController uiController) {
 		return new UIExtensionsEnableDisable(this, uiController);
+
 	}
 }
