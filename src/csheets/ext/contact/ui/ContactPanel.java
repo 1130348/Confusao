@@ -38,6 +38,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -82,12 +83,12 @@ public class ContactPanel extends JPanel {
 
         // Creates controller
         controller = new ContactController(uiController, this);
-        contactList = new ArrayList<String>();
+        contactList = new ArrayList<Contact>();
         Event e = new Event("Teste: ola adeus.", new Date());
-        //ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
-        //Contact c = new Contact("Egidio", "Santos", "PC-Egidio",saveImage(image));
-        //c.addEvent(e);
-        //contactList.add(c);
+        ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
+        Contact c = new Contact("Egidio", "Santos", "PC-Egidio",saveImage(image));
+        c.addEvent(e);
+        contactList.add(c);
 
         startList();
 
@@ -99,9 +100,10 @@ public class ContactPanel extends JPanel {
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
-                    EditContact editContactFrame = new EditContact(controller,(Contact) contactList.get(index));
+                    
+                    EditContact editContactFrame = new EditContact(controller, (Contact) contactList.get(index));
                     editContactFrame.setVisible(true);
-                    System.out.println("Double-Click!");
+                 
                 }
             }
         });
@@ -171,10 +173,11 @@ public class ContactPanel extends JPanel {
     }
 
     public void startList() {
-
-        contactList = new ArrayList<String>();
+        
+        contactList.clear();
+        contactField.setEnabled(true);
         for (Contact c : controller.getContacts()) {
-            contactList.add(c.getMachine_Name());
+            contactList.add(c);
         }
 
         if (contactList.isEmpty()) {
@@ -200,10 +203,9 @@ public class ContactPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+             Contact tmp = (Contact) contactList.get(contactField.getSelectedIndex());
             for (Contact c : controller.getContacts()) {
-                if (c.getMachine_Name().equals(contactList.get(contactField.
-                        getSelectedIndex()))) {
+                if (c.getMachine_Name().equals(tmp.getMachine_Name())) {
                     controller.removeContact(c);
                 }
             }
