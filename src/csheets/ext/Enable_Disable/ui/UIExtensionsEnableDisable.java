@@ -34,7 +34,7 @@ public class UIExtensionsEnableDisable extends UIExtension {
 	public JComponent getSideBar() {
 
 		if (sideBar == null) {
-			//sideBar = new EnableDisablePanel(uiController);
+			sideBar = new EnableDisablePanel(uiController);
 		}
 		return sideBar;
 

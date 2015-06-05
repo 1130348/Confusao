@@ -7,8 +7,10 @@ package csheets.ext.Enable_Disable.ui;
 
 import csheets.ext.Extension;
 import csheets.ext.ExtensionManager;
+import csheets.ext.comments.CommentsExtension;
 import csheets.ui.MenuBar;
 import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.SideBarAction;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -35,7 +37,7 @@ public class EnableDisablePanel extends JPanel {
 	 * The assertion controller
 	 */
 	private static JPanel jp;
-	//private EnableDisableController controller;
+	private EnableDisableController controller;
 	/**
 	 * The text field in which the comment of the cell is displayed.
 	 */
@@ -43,11 +45,12 @@ public class EnableDisablePanel extends JPanel {
 
 	public EnableDisablePanel(UIController uiController) {
 		super(new BorderLayout());
-		//setName(CommentsExtension.NAME);
+		setName(CommentsExtension.NAME);
 //		System.out.println(uiController.getExtensions().length);
 		// Creates controller
 
-		//controller = new EnableDisableController(uiController, this);
+		controller = new EnableDisableController(uiController, this);
+
 		//uiController.addSelectionListener(this);
 		// Creates comment components
 		EnableDisablePanel.ApplyAction applyAction = new EnableDisablePanel.ApplyAction();
@@ -108,21 +111,18 @@ public class EnableDisablePanel extends JPanel {
 					if (check.isSelected()) {
 						ext.defineStatus(true);
 						MenuBar.run();
-						//SideBarAction.fix(ext);
+						SideBarAction.fix(ext);
 					}
 					if (!check.isSelected()) {
 						ext.defineStatus(false);
 						MenuBar.run();
-						//SideBarAction.fix(ext);
+						SideBarAction.fix(ext);
 					}
 				}
 			});
 			if (ext.getName().equalsIgnoreCase("Enable/disable")) {
 				check.setEnabled(false);
 			}
-
 		}
-
 	}
-
 }
