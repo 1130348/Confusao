@@ -58,6 +58,7 @@ public class Network {
         sendPort = port;
     }
     
+    
     public static boolean sendData(Object object) throws IOException {
         //ObjectOutputStream out = new ObjectOutputStream(
         //        clientConnections.get(0).getOutputStream());
