@@ -25,7 +25,7 @@ public class Attribution implements BinaryOperator {
 	/**
 	 * The unique version identifier used for serialization
 	 */
-	private static final long serialVersionUID = 4364553607579868067L;
+	private static final long serialVersionUID = 4364553607579868087L;
 
 	/**
 	 * Creates a new attribution
