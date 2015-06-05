@@ -20,6 +20,8 @@ GreaterThanOrEqual
 # Miscellaneous binary operators
 Concatenator
 RangeReference
+InstructionBlock
+Attribution
 
 # Logic functions
 True
@@ -37,6 +39,7 @@ Factorial
 # Pseudo-statements
 If
 Do
+For
 
 # # # Numeric functions reflected from java.lang.Math
 #
