@@ -10,6 +10,9 @@ import csheets.ext.startsharing.StartSharingController;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,7 +53,11 @@ public class StartSharingAction extends FocusOwnerAction {
         Cell[][] selectCells = focusOwner.getSelectedCells();
         for (Cell[] row : selectCells){
             for (Cell cell : row) {
-                startSharingController.sendObject(cell);
+                try {
+                    startSharingController.sendObject(cell);
+                } catch (IOException ex) {
+                    Logger.getLogger(StartSharingAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

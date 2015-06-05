@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class StartSharingController {
         return Network.establishConnection(address);
     }
 
-    public boolean sendObject(Object obj) {
+    public boolean sendObject(Object obj) throws IOException {
         return Network.sendData(obj);
     }
 
@@ -35,8 +36,8 @@ public class StartSharingController {
         Network.isVisibleToOthers(b);
     }
 
-    public List<InetAddress> searchInstances() {
-        return Network.searchInstances();
+    public List<InetAddress> searchInstances(int port) {
+        return Network.searchInstances(port);
     }
 
     public void waitConnection() {

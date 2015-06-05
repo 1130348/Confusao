@@ -173,7 +173,9 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * on the same LAN.
      */
     private void retrieveAvailableCleanSheetsInstances() {
-        List<InetAddress> activeInstances = controller.searchInstances();
+        String s_port = JOptionPane.showInputDialog("What port do you want to send to?");
+        int port = Integer.parseInt(s_port);
+        List<InetAddress> activeInstances = controller.searchInstances(port);
         for (InetAddress activeInstance : activeInstances) {
             listOfAvailableCleanSheetsInstances.add(activeInstance.
                     getHostName());
@@ -204,11 +206,11 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         } else {
             int index = availableCleanSheetsInstancesList.getSelectedIndex();
             if (connectDisconnectToggleButtonClick.get(index)) {
-                controller.establishConnection((String)availableCleanSheetsInstancesList.getSelectedValue());
+                controller.establishConnection((String) availableCleanSheetsInstancesList.getSelectedValue());
                 connectDisconnectToggleButtonClick.set(index, false);
                 connectDisconnectToggleButton.setText("Disconnect");
             } else {
-                connectDisconnectToggleButtonClick.set(index, true); 
+                connectDisconnectToggleButtonClick.set(index, true);
                 connectDisconnectToggleButton.setText("Connect");
             }
         }
@@ -288,7 +290,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             controller.changePort(port);
             controller.setVisibleToOthers(true);
             retrieveAvailableCleanSheetsInstances();
-            //controller.waitConnection();
+            controller.waitConnection();
         }
     }//GEN-LAST:event_startStopSharingToggleButtonActionPerformed
 
