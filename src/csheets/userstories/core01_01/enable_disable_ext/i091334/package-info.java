@@ -84,5 +84,4 @@ package csheets.userstories.core01_01.enable_disable_ext.i091334;
  *
  */
 class _Dummy_ {
-
 }
