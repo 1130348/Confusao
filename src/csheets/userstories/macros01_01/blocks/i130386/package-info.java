@@ -142,6 +142,7 @@ package csheets.userstories.macros01_01.blocks.i130386;
  * This class is only here so that javadoc includes the documentation about this
  * EMPTY package! Do not remove this class!
  *
+ *
  * @author alexandrebraganca
  */
 class _InstructionBlock_ {
