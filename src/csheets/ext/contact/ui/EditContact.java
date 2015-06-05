@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -43,9 +45,9 @@ public class EditContact extends javax.swing.JFrame {
 	 */
 	public EditContact(ContactController c) {
 		controller = c;
+		contact = new Contact();
 		initComponents();
 		eventList = new ArrayList<Event>();
-
 		setTitle("Add Contact");
 		initFrame();
 		actionButtons(0);
@@ -134,10 +136,12 @@ public class EditContact extends javax.swing.JFrame {
 					contact.setLast_Name(jTextField4.getText());
 					controller.updateContact(contact);
 				} else {
+					contact.setFirst_Name(jTextField3.getText());
+					contact.setLast_Name(jTextField4.getText());
+					contact.setMachine_Name(System.getProperty("user.name"));
+					contact.setImage(saveImage(img));
 					controller.
-						addContact(new Contact(jTextField3.getText(), jTextField4.
-											   getText(), System.
-											   getProperty("user.name"), saveImage(img)));
+						addContact(contact);
 				}
 				controller.update();
 
@@ -151,9 +155,26 @@ public class EditContact extends javax.swing.JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (contact.getFirst_Name().isEmpty()) {
+					final JPanel panel = new JPanel();
+					JOptionPane.
+						showMessageDialog(panel, "You need to confirm the contact first!!", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					EditEvent eventFrame = new EditEvent(controller, contact, EditContact.this);
+					eventFrame.setVisible(true);
+				}
+			}
+		});
 
-				EditEvent eventFrame = new EditEvent(controller, contact);
-				eventFrame.setVisible(true);
+		jButton4.addActionListener(new ActionListener() {
+
+			@Override
+
+			public void actionPerformed(ActionEvent e) {
+				contact.getAgenda().rmv((Event) eventList.get(jList2.
+					getSelectedIndex()));
+
+				updateEvent();
 
 			}
 		});
@@ -192,6 +213,13 @@ public class EditContact extends javax.swing.JFrame {
 			}
 		};
 
+	}
+
+	public void updateEvent() {
+		eventList = contact.getAgenda().toList();
+
+		jList2.setListData(eventList.toArray());
+		jList2.updateUI();
 	}
 
 	/**

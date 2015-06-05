@@ -1,5 +1,8 @@
 package csheets.ext.contact;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -81,9 +84,13 @@ public class Event {
 	public void setTimestamp(Date t) {
 		this.timestamp = t;
 	}
-        
-        @Override
-        public String toString(){
-            return getDescription()+" Time : "+getTimestamp();
-        }
+
+	@Override
+	public String toString() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date today = Calendar.getInstance().getTime();
+
+		return "Description: " + getDescription() + " Time: " + df.format(today);
+	}
 }
