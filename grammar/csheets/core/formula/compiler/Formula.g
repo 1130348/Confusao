@@ -43,7 +43,7 @@ package csheets.core.formula.compiler;
 }
 
 expression
-	: EQ! FOR^ LCHA! attribution SEMI! operation (SEMI! operation)+ RCHA! EOF!
+	: EQ! FOR^ LCHA! attribution SEMI! comparison (SEMI! operation)+ RCHA! EOF!
 	| EQ! LCHA! operation ( SEMI^ operation )* RCHA! EOF!
 	| EQ! operation EOF!
 	;
@@ -113,7 +113,7 @@ literal
 	;
 
 /* FOR operators */
-FOR		: 'F' 'O' 'R' ;
+FOR		: 'FOR' ;
 
 fragment LETTER: ('a'..'z'|'A'..'Z') ;
 

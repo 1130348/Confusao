@@ -19,7 +19,7 @@ public class InstructionBlock implements BinaryOperator {
 	/**
 	 * The unique version identifier used for serialization
 	 */
-	private static final long serialVersionUID = -1880245696016234963L;
+	private static final long serialVersionUID = -1880245696016834963L;
 
 	/**
 	 * Creates a new InstructionBlock.
