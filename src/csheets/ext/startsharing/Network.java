@@ -5,11 +5,9 @@
  */
 package csheets.ext.startsharing;
 
-import com.sun.corba.se.impl.io.IIOPOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.BindException;
 import java.net.DatagramPacket;
@@ -22,7 +20,6 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -37,6 +34,7 @@ public class Network {
     private static final int TIMEOUT = 3;
     private static Thread serverThread;
     private static ArrayList<Socket> clientConnections;
+    private static Map<Integer, InetAddress> activeInstances;
     private static int portTCP;
     private static int portUDP = 9050;
 
@@ -97,7 +95,7 @@ public class Network {
     }
 
     public static Map<Integer, InetAddress> searchInstances() {
-        Map<Integer, InetAddress> activeInstances = new HashMap<Integer, InetAddress>();
+        activeInstances = new HashMap<Integer, InetAddress>();
         try {
 
             DatagramSocket socket = new DatagramSocket();
@@ -118,7 +116,7 @@ public class Network {
             long endTime = 0;
             long time = 0;
 
-            while (time < 15000) {
+            while (time < 30000) {
                 try {
                     startTime = System.currentTimeMillis();
                     time = 0;
@@ -197,20 +195,18 @@ public class Network {
 
     public static boolean establishConnection(String address) {
         try {
-            Socket cliente = new Socket(InetAddress.getByName(address), portTCP);
+            Socket cliente = new Socket(address, portTCP);
             System.out.println("O cliente se conectou ao servidor!");
             Scanner teclado = new Scanner(System.in);
             PrintStream saida = new PrintStream(cliente.getOutputStream());
-            while (teclado.nextLine().equalsIgnoreCase("Sair")) {
-
+            while (teclado.hasNextLine()) {
                 saida.println(teclado.nextLine());
-
             }
             saida.close();
             teclado.close();
             cliente.close();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
@@ -222,6 +218,7 @@ public class Network {
 
     public static void interruptConnection() {
         serverThread.interrupt();
+
     }
 }
 
@@ -275,19 +272,10 @@ class respond_to_request implements Runnable {
                 System.out.println("Client: " + clientPort);
                 String port = String.format("%d", portTCP);
                 data = port.getBytes();
-                if (!(clientIP.getHostAddress()).equals(localAddress)) {
-                    DatagramPacket resposta = new DatagramPacket(data, port.
-                            length(), clientIP, portUDP);
-                    sock.send(resposta);
-                }
-
-                if (InetAddress.getLocalHost().getHostName().equals(clientIP)) {
-                    String port = String.format("%d", portTCP);
-                    data = port.getBytes();
-                    DatagramPacket resposta = new DatagramPacket(data, port.
-                            length(), clientIP, clientPort);
-                    sock.send(resposta);
-                }
+                DatagramPacket resposta = new DatagramPacket(data, port.
+                        length(), clientIP, clientPort);
+                sock.send(resposta);
+                System.out.println("Mandou");
             } catch (IOException ex) {
                 Logger.getLogger(respond_to_request.class.getName()).
                         log(Level.SEVERE, null, ex);
