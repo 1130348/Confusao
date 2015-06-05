@@ -38,7 +38,7 @@ public class Network {
     private static Thread serverThread;
     private static ArrayList<Socket> clientConnections;
     private static int portTCP;
-    private static int portUDP = 1025;
+    private static int portUDP = 9050;
 
     /*
      * To make sure that this class is a service class
@@ -52,8 +52,8 @@ public class Network {
 
     public static void setPort(int newPort) {
         portTCP = newPort;
-    }  
-    
+    }
+
     public static boolean sendData(Object object) throws IOException {
         //ObjectOutputStream out = new ObjectOutputStream(
         //        clientConnections.get(0).getOutputStream());
@@ -237,7 +237,7 @@ class respond_to_request implements Runnable {
 
     public respond_to_request(int portUDP, int portTCP) {
         this.portUDP = portUDP;
-        this.portTCP = portUDP;
+        this.portTCP = portTCP;
     }
 
     @Override
@@ -269,15 +269,18 @@ class respond_to_request implements Runnable {
                     sock.close();
                     break;
                 }
-
                 clientIP = request.getAddress();
                 clientPort = request.getPort();
-                String port = String.format("%d", portTCP);
-                data = port.getBytes();
-                DatagramPacket resposta = new DatagramPacket(data, port.
-                        length(), clientIP, clientPort);
-                sock.send(resposta);
+                System.out.println("PORTO: " + portUDP);
+                System.out.println("IP: " + clientIP);
 
+                if (InetAddress.getLocalHost().getHostName().equals(clientIP)) {
+                    String port = String.format("%d", portTCP);
+                    data = port.getBytes();
+                    DatagramPacket resposta = new DatagramPacket(data, port.
+                            length(), clientIP, clientPort);
+                    sock.send(resposta);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(respond_to_request.class.getName()).
                         log(Level.SEVERE, null, ex);
