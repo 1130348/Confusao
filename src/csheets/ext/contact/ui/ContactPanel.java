@@ -22,7 +22,6 @@ package csheets.ext.contact.ui;
  * Boston, MA  02111-1307  USA
  */
 import csheets.ext.contact.Contact;
-import csheets.ext.contact.Event;
 import csheets.ext.contact.ExtensionContact;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
@@ -36,9 +35,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -56,162 +53,164 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class ContactPanel extends JPanel {
 
-    /**
-     * The assertion controller
-     */
-    private ContactController controller;
+	/**
+	 * The assertion controller
+	 */
+	private ContactController controller;
 
-    /**
-     * The text field in which the comment of the cell is displayed.
-     */
-    private JList contactField = new JList();
+	/**
+	 * The text field in which the comment of the cell is displayed.
+	 */
+	private JList contactField = new JList();
 
-    /**
-     * The text field in which the comment of the cell is displayed.
-     */
-    private List contactList;
+	/**
+	 * The text field in which the comment of the cell is displayed.
+	 */
+	private List contactList;
 
-    /**
-     * Creates a new comment panel.
-     *
-     * @param uiController the user interface controller
-     */
-    public ContactPanel(UIController uiController) {
-        // Configures panel
-        super(new BorderLayout());
-        setName(ExtensionContact.NAME);
+	/**
+	 * Creates a new comment panel.
+	 *
+	 * @param uiController the user interface controller
+	 */
+	public ContactPanel(UIController uiController) {
+		// Configures panel
+		super(new BorderLayout());
+		setName(ExtensionContact.NAME);
 
-        // Creates controller
-        controller = new ContactController(uiController, this);
-        contactList = new ArrayList<Contact>();
-        Event e = new Event("Teste: ola adeus.", new Date());
-        ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
-        Contact c = new Contact("Egidio", "Santos", "PC-Egidio",saveImage(image));
-        c.addEvent(e);
-        contactList.add(c);
+		// Creates controller
+		controller = new ContactController(uiController, this);
+		contactList = new ArrayList<Contact>();
+//		Event e = new Event("Teste: ola adeus.", new Date());
+		//ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
+//		Contact c = new Contact("Egidio", "Santos", "PC-Egidio", null);
+//		c.addEvent(e);
+//		contactList.add(c);
 
-        startList();
+		startList();
 
-        contactField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                JList list = (JList) evt.getSource();
-                if (evt.getClickCount() == 2) {
+		contactField.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (evt.getClickCount() == 2) {
 
-                    // Double-click detected
-                    int index = list.locationToIndex(evt.getPoint());
-                    
-                    EditContact editContactFrame = new EditContact(controller, (Contact) contactList.get(index));
-                    editContactFrame.setVisible(true);
-                 
-                }
-            }
-        });
+					// Double-click detected
+					int index = list.locationToIndex(evt.getPoint());
 
-        contactField.setPreferredSize(
-                new Dimension(120, 240));		// width, height
-        contactField.setMaximumSize(
-                new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
-        contactField.setAlignmentX(Component.CENTER_ALIGNMENT);
+					EditContact editContactFrame = new EditContact(controller, (Contact) contactList.
+																   get(index));
+					editContactFrame.setVisible(true);
 
-        // Lays out comment components
-        JPanel contactPanel = new JPanel();
+				}
+			}
+		});
 
-        contactPanel.setLayout(
-                new BoxLayout(contactPanel, BoxLayout.PAGE_AXIS));
-        contactPanel.setPreferredSize(
-                new Dimension(130, 336));
-        contactPanel.setMaximumSize(
-                new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
-        contactPanel.add(contactField);
+		contactField.setPreferredSize(
+			new Dimension(120, 240));		// width, height
+		contactField.setMaximumSize(
+			new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
+		contactField.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Adds borders
-        TitledBorder border = BorderFactory.
-                createTitledBorder("Lista De Contactos");
+		// Lays out comment components
+		JPanel contactPanel = new JPanel();
 
-        border.setTitleJustification(TitledBorder.CENTER);
+		contactPanel.setLayout(
+			new BoxLayout(contactPanel, BoxLayout.PAGE_AXIS));
+		contactPanel.setPreferredSize(
+			new Dimension(130, 336));
+		contactPanel.setMaximumSize(
+			new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
+		contactPanel.add(contactField);
 
-        contactPanel.setBorder(border);
+		// Adds borders
+		TitledBorder border = BorderFactory.
+			createTitledBorder("Lista De Contactos");
 
-        // Adds panels
-        JPanel northPanel = new JPanel(new BorderLayout());
+		border.setTitleJustification(TitledBorder.CENTER);
 
-        northPanel.add(contactPanel, BorderLayout.NORTH);
+		contactPanel.setBorder(border);
 
-        JPanel southPanel = new JPanel(new GridLayout(1, 2));
-        JButton adicionar = new JButton("Add");
+		// Adds panels
+		JPanel northPanel = new JPanel(new BorderLayout());
 
-        adicionar.addActionListener(addAction);
-        JButton remover = new JButton("Remove");
+		northPanel.add(contactPanel, BorderLayout.NORTH);
 
-        remover.addActionListener(removeAction);
+		JPanel southPanel = new JPanel(new GridLayout(1, 2));
+		JButton adicionar = new JButton("Add");
 
-        southPanel.add(adicionar);
+		adicionar.addActionListener(addAction);
+		JButton remover = new JButton("Remove");
 
-        southPanel.add(remover);
+		remover.addActionListener(removeAction);
 
-        northPanel.add(southPanel, BorderLayout.SOUTH);
+		southPanel.add(adicionar);
 
-        add(northPanel, BorderLayout.NORTH);
+		southPanel.add(remover);
 
-        setPreferredSize(
-                new Dimension(100, 100));
+		northPanel.add(southPanel, BorderLayout.SOUTH);
 
-    }
+		add(northPanel, BorderLayout.NORTH);
 
-    private BufferedImage saveImage(ImageIcon icon) {
+		setPreferredSize(
+			new Dimension(100, 100));
 
-        BufferedImage bi = new BufferedImage(
-                icon.getIconWidth(),
-                icon.getIconHeight(),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = bi.createGraphics();
-        // paint the Icon to the BufferedImage.
-        icon.paintIcon(null, g, 0, 0);
-        g.dispose();
-        return bi;
-    }
+	}
 
-    public void startList() {
-        
-        contactList.clear();
-        contactField.setEnabled(true);
-        for (Contact c : controller.getContacts()) {
-            contactList.add(c);
-        }
+	private BufferedImage saveImage(ImageIcon icon) {
 
-        if (contactList.isEmpty()) {
-            contactList.add("Empty");
-            contactField.setEnabled(false);
-        }
+		BufferedImage bi = new BufferedImage(
+			icon.getIconWidth(),
+			icon.getIconHeight(),
+			BufferedImage.TYPE_INT_RGB);
+		Graphics g = bi.createGraphics();
+		// paint the Icon to the BufferedImage.
+		icon.paintIcon(null, g, 0, 0);
+		g.dispose();
+		return bi;
+	}
 
-        contactField.setListData(contactList.toArray());
+	public void startList() {
 
-    }
+		contactList.clear();
+		contactField.setEnabled(true);
+		for (Contact c : controller.getContacts()) {
+			contactList.add(c);
+		}
 
-    ActionListener addAction = new ActionListener() {
+		if (contactList.isEmpty()) {
+			contactList.add("Empty");
+			contactField.setEnabled(false);
+		}
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
+		contactField.setListData(contactList.toArray());
 
-            EditContact editContactFrame = new EditContact(controller);
-            editContactFrame.setVisible(true);
-        }
-    };
+	}
 
-    ActionListener removeAction = new ActionListener() {
+	ActionListener addAction = new ActionListener() {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-             Contact tmp = (Contact) contactList.get(contactField.getSelectedIndex());
-            for (Contact c : controller.getContacts()) {
-                if (c.getMachine_Name().equals(tmp.getMachine_Name())) {
-                    controller.removeContact(c);
-                }
-            }
-            controller.update();
-        }
+		@Override
+		public void actionPerformed(ActionEvent e) {
 
-    };
+			EditContact editContactFrame = new EditContact(controller);
+			editContactFrame.setVisible(true);
+		}
+	};
+
+	ActionListener removeAction = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Contact tmp = (Contact) contactList.get(contactField.
+				getSelectedIndex());
+			for (Contact c : controller.getContacts()) {
+				if (c.getMachine_Name().equals(tmp.getMachine_Name())) {
+					controller.removeContact(c);
+				}
+			}
+			controller.update();
+		}
+
+	};
 
 }

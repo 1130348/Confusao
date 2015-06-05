@@ -26,180 +26,180 @@ import javax.swing.filechooser.FileFilter;
  */
 public class EditContact extends javax.swing.JFrame {
 
-    private JFileChooser fileChooser;
+	private JFileChooser fileChooser;
 
-    private List eventList;
+	private List eventList;
 
-    private ContactController controller;
+	private ContactController controller;
 
-    private Contact contact;
+	private Contact contact;
 
-    private ImageIcon img;
+	private ImageIcon img;
 
-    /**
-     * Creates new form AddContact
-     *
-     * @param c
-     */
-    public EditContact(ContactController c) {
-        controller = c;
-        initComponents();
-        eventList = new ArrayList<Event>();
+	/**
+	 * Creates new form AddContact
+	 *
+	 * @param c
+	 */
+	public EditContact(ContactController c) {
+		controller = c;
+		initComponents();
+		eventList = new ArrayList<Event>();
 
-        setTitle("Add Contact");
-        initFrame();
-        actionButtons(0);
+		setTitle("Add Contact");
+		initFrame();
+		actionButtons(0);
 
-    }
+	}
 
-    public EditContact(ContactController c, Contact contact) {
-        controller = c;
-        initComponents();
-        this.contact = contact;
-        eventList = contact.getAgenda().toList();
+	public EditContact(ContactController c, Contact contact) {
+		controller = c;
+		initComponents();
+		this.contact = contact;
+		eventList = contact.getAgenda().toList();
 
-        setTitle("Edit Contact");
-        initFrame();
-        actionButtons(2);
+		setTitle("Edit Contact");
+		initFrame();
+		actionButtons(2);
 
-        jList2.setListData(eventList.toArray());
-        if (contact.getImage() != null) {
-            jLabel6.setIcon(new ImageIcon(contact.getImage()));
-        }
+		jList2.setListData(eventList.toArray());
+		if (contact.getImage() != null) {
+			jLabel6.setIcon(new ImageIcon(contact.getImage()));
+		}
 
-        jTextField3.setText(contact.getFirst_Name());
-        jTextField4.setText(contact.getLast_Name());
+		jTextField3.setText(contact.getFirst_Name());
+		jTextField4.setText(contact.getLast_Name());
 
-    }
+	}
 
-    private void initFrame() {
-        setResizable(false);
-        setLocationByPlatform(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(
-                CleanSheets.class.getResource("res/img/sheet.gif")));
-    }
+	private void initFrame() {
+		setResizable(false);
+		setLocationByPlatform(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+			CleanSheets.class.getResource("res/img/sheet.gif")));
+	}
 
-    private void actionButtons(final int n) {
+	private void actionButtons(final int n) {
 
-        jButton1.setBorderPainted(false);
-        jButton1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().
-                getImage("src-resources\\csheets\\res\\img\\reload.png")));
+		jButton1.setBorderPainted(false);
+		jButton1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().
+			getImage("src-resources\\csheets\\res\\img\\reload.png")));
 
-        jButton1.addActionListener(new ActionListener() {
+		jButton1.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                fileChooser = new JFileChooser();
-                //fileChooser.setAcceptAllFileFilterUsed(false);
-                fileChooser.addChoosableFileFilter(filter(".jpeg"));
-                fileChooser.addChoosableFileFilter(filter(".gif"));
-                fileChooser.addChoosableFileFilter(filter(".png"));
+				fileChooser = new JFileChooser();
+				//fileChooser.setAcceptAllFileFilterUsed(false);
+				fileChooser.addChoosableFileFilter(filter(".jpeg"));
+				fileChooser.addChoosableFileFilter(filter(".gif"));
+				fileChooser.addChoosableFileFilter(filter(".png"));
 
-                if (fileChooser.showDialog(EditContact.this, "Import") == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(fileChooser.getSelectedFile().getPath());
-                    String fich = fileChooser.getSelectedFile().getPath();
-                    if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.
-                            contains(".gif") || fich.contains(".png")) {
+				if (fileChooser.showDialog(EditContact.this, "Import") == JFileChooser.APPROVE_OPTION) {
+					System.out.println(fileChooser.getSelectedFile().getPath());
+					String fich = fileChooser.getSelectedFile().getPath();
+					if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.
+						contains(".gif") || fich.contains(".png")) {
 
-                        jLabel6.setText("");
-                        img = new ImageIcon(fileChooser.
-                                getSelectedFile().getPath());
-                        img.setImage(img.getImage().
-                                getScaledInstance(77, 68, 100));
-                        jLabel6.setIcon(img);
-                        jLabel6.updateUI();
+						jLabel6.setText("");
+						img = new ImageIcon(fileChooser.
+							getSelectedFile().getPath());
+						img.setImage(img.getImage().
+							getScaledInstance(77, 68, 100));
+						jLabel6.setIcon(img);
+						jLabel6.updateUI();
 
-                    } else {
-                        jLabel6.setIcon(null);
-                        jLabel6.setText("Wrong Type!");
-                        jLabel6.updateUI();
-                    }
-                }
+					} else {
+						jLabel6.setIcon(null);
+						jLabel6.setText("Wrong Type!");
+						jLabel6.updateUI();
+					}
+				}
 
-            }
-        }
-        );
+			}
+		}
+		);
 
-        jList2.setListData(eventList.toArray());
+		jList2.setListData(eventList.toArray());
 
-        jButton2.addActionListener(new ActionListener() {
+		jButton2.addActionListener(new ActionListener() {
 
-            @Override
+			@Override
 
-            public void actionPerformed(ActionEvent e) {
-                if (n == 2) {
-                    contact.setFirst_Name(jTextField3.getText());
-                    contact.setLast_Name(jTextField4.getText());
-                    controller.updateContact(contact);
-                } else {
-                    controller.
-                            addContact(new Contact(jTextField3.getText(), jTextField4.
-                                            getText(), System.
-                                            getProperty("user.name"), saveImage(img)));
-                }
-                controller.update();
+			public void actionPerformed(ActionEvent e) {
+				if (n == 2) {
+					contact.setFirst_Name(jTextField3.getText());
+					contact.setLast_Name(jTextField4.getText());
+					controller.updateContact(contact);
+				} else {
+					controller.
+						addContact(new Contact(jTextField3.getText(), jTextField4.
+											   getText(), System.
+											   getProperty("user.name"), saveImage(img)));
+				}
+				controller.update();
 
-                dispose();
+				dispose();
 
-            }
-        }
-        );
+			}
+		}
+		);
 
-        jButton3.addActionListener(new ActionListener() {
+		jButton3.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-                EditEvent eventFrame = new EditEvent();
-                eventFrame.setVisible(true);
+				EditEvent eventFrame = new EditEvent(controller, contact);
+				eventFrame.setVisible(true);
 
-            }
-        });
-    }
+			}
+		});
+	}
 
-    private BufferedImage saveImage(ImageIcon icon) {
-        if (icon != null) {
-            BufferedImage bi = new BufferedImage(
-                    icon.getIconWidth(),
-                    icon.getIconHeight(),
-                    BufferedImage.TYPE_INT_RGB);
-            Graphics g = bi.createGraphics();
-            // paint the Icon to the BufferedImage.
-            icon.paintIcon(null, g, 0, 0);
-            g.dispose();
-            return bi;
-        }
-        return new BufferedImage(1, 1, 4);
-    }
+	private BufferedImage saveImage(ImageIcon icon) {
+		if (icon != null) {
+			BufferedImage bi = new BufferedImage(
+				icon.getIconWidth(),
+				icon.getIconHeight(),
+				BufferedImage.TYPE_INT_RGB);
+			Graphics g = bi.createGraphics();
+			// paint the Icon to the BufferedImage.
+			icon.paintIcon(null, g, 0, 0);
+			g.dispose();
+			return bi;
+		}
+		return new BufferedImage(1, 1, 4);
+	}
 
-    public FileFilter filter(final String type) {
+	public FileFilter filter(final String type) {
 
-        return new FileFilter() {
+		return new FileFilter() {
 
-            @Override
-            public boolean accept(File f) {
-                if (f.getName().contains(type)) {
-                    return true;
-                }
-                return false;
-            }
+			@Override
+			public boolean accept(File f) {
+				if (f.getName().contains(type)) {
+					return true;
+				}
+				return false;
+			}
 
-            @Override
-            public String getDescription() {
-                return type;
-            }
-        };
+			@Override
+			public String getDescription() {
+				return type;
+			}
+		};
 
-    }
+	}
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
