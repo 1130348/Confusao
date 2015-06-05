@@ -6,8 +6,7 @@
 package csheets.ext.startsharing;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -35,7 +34,7 @@ public class StartSharingController {
         Network.isVisibleToOthers(b);
     }
 
-    public List<InetAddress> searchInstances() {
+    public Map<Integer, InetAddress> searchInstances() {
         return Network.searchInstances();
     }
 

@@ -8,7 +8,7 @@ package csheets.ext.startsharing.ui;
 import csheets.ext.startsharing.StartSharingController;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -85,7 +85,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 
         changeConnectionPortLabel.setText("Select new connection port (max. 65535):");
 
-        connectionPortSpinner.setModel(new javax.swing.SpinnerNumberModel(1024, 1024, 65535, 1));
+        connectionPortSpinner.setModel(new javax.swing.SpinnerNumberModel(1026, 1026, 65535, 1));
 
         availableCleanSheetsInstancesList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = listOfAvailableCleanSheetsInstances.toArray(new String[listOfAvailableCleanSheetsInstances.size()]);
@@ -130,16 +130,15 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(connectDisconnectToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(startStopSharingToggleButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(availableCleanSheetsInstancesOnLANLabel)
-                                .addComponent(changeConnectionPortLabel))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(startStopSharingToggleButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(availableCleanSheetsInstancesOnLANLabel)
+                            .addComponent(changeConnectionPortLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,10 +172,10 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * on the same LAN.
      */
     private void retrieveAvailableCleanSheetsInstances() {
-        List<InetAddress> activeInstances = controller.searchInstances();
-        for (InetAddress activeInstance : activeInstances) {
-            listOfAvailableCleanSheetsInstances.add(activeInstance.
-                    getHostName());
+        listOfAvailableCleanSheetsInstances.clear();
+        Map<Integer, InetAddress> activeInstances = controller.searchInstances();
+        for (Map.Entry<Integer, InetAddress> activeInstance : activeInstances.entrySet()) {
+            listOfAvailableCleanSheetsInstances.add(activeInstance.getValue().getHostName());
         }
 
         availableCleanSheetsInstancesList.

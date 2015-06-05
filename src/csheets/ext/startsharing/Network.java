@@ -19,7 +19,9 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,11 +32,11 @@ import java.util.logging.Logger;
  */
 public class Network {
 
-    private static final int DEFAULT_PORT = 1025;
     private static final int TIMEOUT = 3;
     private static Thread serverThread;
     private static ArrayList<Socket> clientConnections;
-    private static int port = DEFAULT_PORT;
+    private static int portTCP;
+    private static int portUDP = 1025;
 
     /*
      * To make sure that this class is a service class
@@ -43,11 +45,11 @@ public class Network {
     }
 
     public static int getPort() {
-        return port;
+        return portTCP;
     }
 
     public static void setPort(int newPort) {
-        port = newPort;
+        portTCP = newPort;
     }
 
     public static boolean sendData(Object object) {
@@ -56,7 +58,7 @@ public class Network {
 
     public static void isVisibleToOthers(boolean cond) {
         if (cond) {
-            serverThread = new Thread(new respond_to_request(port));
+            serverThread = new Thread(new respond_to_request(portUDP, portTCP));
             serverThread.start();
         } else {
             try {
@@ -69,7 +71,7 @@ public class Network {
                 String message = "Exit";
                 data = message.getBytes();
                 DatagramPacket exitMessage = new DatagramPacket(data, message.
-                        length(), destinationIP, port);
+                        length(), destinationIP, portUDP);
 
                 socket.send(exitMessage);
                 serverThread.join();
@@ -89,15 +91,12 @@ public class Network {
         }
     }
 
-    public static List<InetAddress> searchInstances() {
-        List<InetAddress> activeInstances = new ArrayList<InetAddress>();
+    public static Map<Integer, InetAddress> searchInstances() {
+        Map<Integer, InetAddress> activeInstances = new HashMap<Integer, InetAddress>();
         try {
 
             String localHost = localHostAddress().getHostAddress();
 
-//			InetAddress broadcastAddress = NetworkInterface.
-//				getByInetAddress(localHostAddress()).getInterfaceAddresses().
-//				get(0).getBroadcast();
             InetAddress destinationIP;
 
             DatagramSocket socket = new DatagramSocket();
@@ -109,7 +108,7 @@ public class Network {
             String message = "testing connection";
             data = message.getBytes("ISO-8859-1");
             DatagramPacket request = new DatagramPacket(data, message.
-                    length(), destinationIP, port);
+                    length(), destinationIP, portUDP);
 
             socket.send(request);
             DatagramPacket reply;
@@ -124,9 +123,10 @@ public class Network {
                     time = 0;
                     reply = new DatagramPacket(data, data.length);
                     socket.receive(reply);
-                    activeInstances.add(reply.getAddress());
+
                     message = new String(reply.getData(), 0, reply.getLength());
                     System.out.println(message);
+                    activeInstances.put(Integer.parseInt(message), reply.getAddress());
                     endTime += System.currentTimeMillis();
                     time += endTime - startTime;
                     System.out.println(time);
@@ -172,7 +172,7 @@ public class Network {
             }
 
             try {
-                clientConnections.add(new Socket(destinationIPs[i], port));
+                clientConnections.add(new Socket(destinationIPs[i], portTCP));
 
             } catch (IOException ex) {
                 System.out.println("TCP connection failure!");
@@ -196,7 +196,7 @@ public class Network {
 
     public static boolean establishConnection(String address) {
         try {
-            Socket cliente = new Socket(InetAddress.getByName(address), port);
+            Socket cliente = new Socket(InetAddress.getByName(address), portTCP);
             System.out.println("O cliente se conectou ao servidor!");
             Scanner teclado = new Scanner(System.in);
             PrintStream saida = new PrintStream(cliente.getOutputStream());
@@ -215,10 +215,10 @@ public class Network {
     }
 
     public static void waitForConnection() {
-        serverThread = new Thread(new wait_for_message(port));
+        serverThread = new Thread(new wait_for_message(portTCP));
         serverThread.start();
     }
-    
+
     public static void interruptConnection() {
         serverThread.interrupt();
     }
@@ -227,10 +227,12 @@ public class Network {
 class respond_to_request implements Runnable {
 
     DatagramSocket sock;
-    int port;
+    int portUDP;
+    int portTCP;
 
-    public respond_to_request(int port) {
-        this.port = port;
+    public respond_to_request(int portUDP, int portTCP) {
+        this.portUDP = portUDP;
+        this.portTCP = portUDP;
     }
 
     @Override
@@ -241,7 +243,7 @@ class respond_to_request implements Runnable {
         int clientPort;
 
         try {
-            sock = new DatagramSocket(port);
+            sock = new DatagramSocket(portUDP);
         } catch (BindException ex) {
             System.out.println("O porto esta ocupado");
             System.exit(1);
@@ -259,16 +261,15 @@ class respond_to_request implements Runnable {
                 System.out.println("Mensagem" + message);
 
                 if (message.equals("Exit")) {
-                    System.out.println("EXITED!!!!");
                     sock.close();
                     break;
                 }
 
                 clientIP = request.getAddress();
                 clientPort = request.getPort();
-
-                data = "Active".getBytes();
-                DatagramPacket resposta = new DatagramPacket(data, "Active".
+                String port = String.format("%d", portTCP);
+                data = port.getBytes();
+                DatagramPacket resposta = new DatagramPacket(data, port.
                         length(), clientIP, clientPort);
                 sock.send(resposta);
 
