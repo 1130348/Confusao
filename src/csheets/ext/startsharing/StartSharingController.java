@@ -7,6 +7,7 @@ package csheets.ext.startsharing;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,22 +16,30 @@ import java.util.ArrayList;
 public class StartSharingController {
 
     public StartSharingController() {
-    
+
     }
-    
-    public ArrayList<String> searchClients(){
-        return Network.searchClient();
-    }
-    
-    public void changePort(int port){
+
+    public void changePort(int port) {
         Network.setPort(port);
     }
-    
-    public boolean establishConnection(InetAddress address){
-        return false;
+
+    public boolean establishConnection(String address) {
+        return Network.establishConnection(address);
     }
-    
-    public boolean sendObject(Object obj){
+
+    public boolean sendObject(Object obj) {
         return Network.sendData(obj);
+    }
+
+    public void setVisibleToOthers(boolean b) {
+        Network.isVisibleToOthers(b);
+    }
+
+    public List<InetAddress> searchInstances() {
+        return Network.searchInstances();
+    }
+
+    public void waitConnection() {
+        Network.waitForConnection();
     }
 }
