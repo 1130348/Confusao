@@ -77,4 +77,8 @@ public class Agenda {
 		}
 		return false;
 	}
+        
+        public List<Event> toList(){
+            return eventList;
+        }
 }

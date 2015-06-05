@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -25,134 +26,160 @@ import javax.swing.filechooser.FileFilter;
  */
 public class EditContact extends javax.swing.JFrame {
 
-	private JFileChooser fileChooser;
+    private JFileChooser fileChooser;
 
-	private List eventList;
+    private List eventList;
 
-	private ContactController controller;
+    private ContactController controller;
 
-	/**
-	 * Creates new form AddContact
-	 */
-	public EditContact(ContactController c) {
-		controller = c;
-		initComponents();
-		eventList = new ArrayList<Event>();
+    /**
+     * Creates new form AddContact
+     */
+    public EditContact(ContactController c) {
+        controller = c;
+        initComponents();
+        eventList = new ArrayList<Event>();
 
-		setTitle("Contact");
-		setResizable(false);
-		setLocationByPlatform(true);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-			CleanSheets.class.getResource("res/img/sheet.gif")));
-		jButton1.setBorderPainted(false);
-		jButton1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().
-			getImage("src-resources\\csheets\\res\\img\\reload.png")));
+        setTitle("Add Contact");
+        initFrame();
+        actionButtons();
+        
 
-		jButton1.addActionListener(new ActionListener() {
+    }
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+    public EditContact(ContactController c, Contact contact) {
+        initComponents();
+        eventList = contact.getAgenda().toList();
 
-				fileChooser = new JFileChooser();
-				//fileChooser.setAcceptAllFileFilterUsed(false);
-				fileChooser.addChoosableFileFilter(filter(".jpeg"));
-				fileChooser.addChoosableFileFilter(filter(".gif"));
-				fileChooser.addChoosableFileFilter(filter(".png"));
+        setTitle("Edit Contact");
+        initFrame();
+        actionButtons();
 
-				if (fileChooser.showDialog(EditContact.this, "Import") == JFileChooser.APPROVE_OPTION) {
-					System.out.println(fileChooser.getSelectedFile().getPath());
-					String fich = fileChooser.getSelectedFile().getPath();
-					if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.
-						contains(".gif") || fich.contains(".png")) {
+        jList2.setListData(eventList.toArray());
 
-						jLabel6.setText("");
-						ImageIcon img = new ImageIcon(fileChooser.
-							getSelectedFile().getPath());
-						img.setImage(img.getImage().
-							getScaledInstance(77, 68, 100));
-						jLabel6.setIcon(img);
-						jLabel6.updateUI();
+        jLabel6.setIcon((Icon) contact.getImage());
+        jTextField3.setText(contact.getFirst_Name());
+        jTextField4.setText(contact.getLast_Name());
 
-					} else {
-						jLabel6.setIcon(null);
-						jLabel6.setText("Wrong Type!");
-						jLabel6.updateUI();
-					}
-				}
+    }
 
-			}
-		}
-		);
+    private void initFrame() {
+        setResizable(false);
+        setLocationByPlatform(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(
+                CleanSheets.class.getResource("res/img/sheet.gif")));
+    }
 
-		if (eventList.isEmpty()) {
-			eventList.add("Empty");
-			jList2.setEnabled(false);
-		}
-		jList2.setListData(eventList.toArray());
+    private void actionButtons() {
 
-		jButton2.addActionListener(new ActionListener() {
+        jButton1.setBorderPainted(false);
+        jButton1.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().
+                getImage("src-resources\\csheets\\res\\img\\reload.png")));
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+        jButton1.addActionListener(new ActionListener() {
 
-				controller.
-					addContact(new Contact(jTextField3.getText(), jTextField4.
-										   getText(), System.
-										   getProperty("user.name"), new BufferedImage(1, 1, 1)));
-				controller.update();
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-				confirmButton();
+                fileChooser = new JFileChooser();
+                //fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.addChoosableFileFilter(filter(".jpeg"));
+                fileChooser.addChoosableFileFilter(filter(".gif"));
+                fileChooser.addChoosableFileFilter(filter(".png"));
 
-			}
-		});
+                if (fileChooser.showDialog(EditContact.this, "Import") == JFileChooser.APPROVE_OPTION) {
+                    System.out.println(fileChooser.getSelectedFile().getPath());
+                    String fich = fileChooser.getSelectedFile().getPath();
+                    if (fich.contains(".jpg") || fich.contains(".jpeg") || fich.
+                            contains(".gif") || fich.contains(".png")) {
 
-		jButton3.addActionListener(new ActionListener() {
+                        jLabel6.setText("");
+                        ImageIcon img = new ImageIcon(fileChooser.
+                                getSelectedFile().getPath());
+                        img.setImage(img.getImage().
+                                getScaledInstance(77, 68, 100));
+                        jLabel6.setIcon(img);
+                        jLabel6.updateUI();
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+                    } else {
+                        jLabel6.setIcon(null);
+                        jLabel6.setText("Wrong Type!");
+                        jLabel6.updateUI();
+                    }
+                }
 
-				EditEvent eventFrame = new EditEvent();
-				eventFrame.setVisible(true);
+            }
+        }
+        );
 
-			}
-		});
+        if (eventList.isEmpty()) {
+            eventList.add("Empty");
+            jList2.setEnabled(false);
+        }
+        jList2.setListData(eventList.toArray());
 
-	}
+        jButton2.addActionListener(new ActionListener() {
 
-	public FileFilter filter(final String type) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-		return new FileFilter() {
+                controller.
+                        addContact(new Contact(jTextField3.getText(), jTextField4.
+                                        getText(), System.
+                                        getProperty("user.name"), new BufferedImage(1, 1, 1)));
+                controller.update();
 
-			@Override
-			public boolean accept(File f) {
-				if (f.getName().contains(type)) {
-					return true;
-				}
-				return false;
-			}
+                confirmButton();
 
-			@Override
-			public String getDescription() {
-				return type;
-			}
-		};
+            }
+        });
 
-	}
+        jButton3.addActionListener(new ActionListener() {
 
-	public void confirmButton() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-		//faz os sets
-		dispose();
+                EditEvent eventFrame = new EditEvent();
+                eventFrame.setVisible(true);
 
-	}
+            }
+        });
+    }
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
+    public FileFilter filter(final String type) {
+
+        return new FileFilter() {
+
+            @Override
+            public boolean accept(File f) {
+                if (f.getName().contains(type)) {
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public String getDescription() {
+                return type;
+            }
+        };
+
+    }
+
+    public void confirmButton() {
+
+        //faz os sets
+        dispose();
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
