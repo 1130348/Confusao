@@ -211,7 +211,7 @@ public class Network {
             System.out.println("O cliente se conectou ao servidor!");
             Scanner teclado = new Scanner(System.in);
             PrintStream saida = new PrintStream(cliente.getOutputStream());
-            while (teclado.hasNextLine()) {
+            while (teclado.nextLine().equalsIgnoreCase("Sair")) {
 
                 saida.println(teclado.nextLine());
 
