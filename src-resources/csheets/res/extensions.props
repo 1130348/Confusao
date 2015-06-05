@@ -4,5 +4,5 @@ csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.startsharing.StartSharingExtension
 csheets.ext.contact.ExtensionContact
-
+csheets.ext.Enable_Disable.EnableDisableExtension
 

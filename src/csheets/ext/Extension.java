@@ -45,7 +45,7 @@ public abstract class Extension implements Comparable<Extension> {
 	/**
 	 * The Extension Status
 	 */
-	private boolean status;
+	private boolean status = true;
 
 	/**
 	 * Creates a new extension.
