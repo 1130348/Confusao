@@ -6,7 +6,9 @@
 package csheets.ext.startsharing.ui;
 
 import csheets.ext.startsharing.StartSharingController;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +34,6 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
     private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent, boolean modal, StartSharingController controller) {
         super(parent, modal);
         this.controller = controller;
-        retrieveAvailableCleanSheetsInstances();
         initComponents();
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
         availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
@@ -172,16 +173,15 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
      * on the same LAN.
      */
     private void retrieveAvailableCleanSheetsInstances() {
-        //O código seguinte serve como bootsrapper para testar a interface. Será
-        //posteriormente substituído pela pesquisa broadcast em UDP.
+        List<InetAddress> activeInstances = controller.searchInstances();
+        for (InetAddress activeInstance : activeInstances) {
+            listOfAvailableCleanSheetsInstances.add(activeInstance.
+                    getHostName());
+        }
 
-        listOfAvailableCleanSheetsInstances.add("Carlos Silva");
-        listOfAvailableCleanSheetsInstances.add("João Monteiro");
-        listOfAvailableCleanSheetsInstances.add("João Paiva");
-        listOfAvailableCleanSheetsInstances.add("Paulo Pereira");
-        listOfAvailableCleanSheetsInstances.add("Sérgio Gomes");
+        availableCleanSheetsInstancesList.
+                setListData(listOfAvailableCleanSheetsInstances.toArray());
 
-        //Código para substituição termina aqui.
         int i;
         for (i = 0; i < listOfAvailableCleanSheetsInstances.size(); i++) {
             connectDisconnectToggleButtonClick.add(true);
@@ -204,10 +204,11 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
         } else {
             int index = availableCleanSheetsInstancesList.getSelectedIndex();
             if (connectDisconnectToggleButtonClick.get(index)) {
+                controller.establishConnection((String)availableCleanSheetsInstancesList.getSelectedValue());
                 connectDisconnectToggleButtonClick.set(index, false);
                 connectDisconnectToggleButton.setText("Disconnect");
             } else {
-                connectDisconnectToggleButtonClick.set(index, true);
+                connectDisconnectToggleButtonClick.set(index, true); 
                 connectDisconnectToggleButton.setText("Connect");
             }
         }
@@ -228,7 +229,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
                 connectDisconnectToggleButton.setSelected(true);
                 connectDisconnectToggleButton.setText("Disconnect");
             }
-        }catch(ArrayIndexOutOfBoundsException ex){
+        } catch (ArrayIndexOutOfBoundsException ex) {
             //Just to not give error before click button start sharing
         }
 
@@ -254,10 +255,15 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             refreshButton.setEnabled(false);
             connectDisconnectToggleButton.setEnabled(false);
             availableCleanSheetsInstancesList.setEnabled(false);
-            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
-            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(false);
-            availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
+                    setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
+                    setEnabled(false);
+            availableCleanSheetsInstancesScrollPane.getViewport().
+                    setEnabled(false);
             startStopSharingToggleButton.setText("Start Sharing");
+            controller.setVisibleToOthers(false);
+            listOfAvailableCleanSheetsInstances.clear();
         } else {
             int port = (Integer) connectionPortSpinner.getValue();
             JOptionPane.showMessageDialog(
@@ -270,11 +276,19 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             refreshButton.setEnabled(true);
             connectDisconnectToggleButton.setEnabled(true);
             availableCleanSheetsInstancesList.setEnabled(true);
-            availableCleanSheetsInstancesScrollPane.getHorizontalScrollBar().setEnabled(true);
-            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(true);
-            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().setEnabled(true);
-            availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getHorizontalScrollBar().
+                    setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
+                    setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
+                    setEnabled(true);
+            availableCleanSheetsInstancesScrollPane.getViewport().
+                    setEnabled(true);
             startStopSharingToggleButton.setText("Stop Sharing");
+            controller.changePort(port);
+            controller.setVisibleToOthers(true);
+            retrieveAvailableCleanSheetsInstances();
+            //controller.waitConnection();
         }
     }//GEN-LAST:event_startStopSharingToggleButtonActionPerformed
 

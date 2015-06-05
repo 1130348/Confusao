@@ -89,6 +89,15 @@
  * StartSharingAction<br/>
  * <br/>
  * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
+ * <h2>5. Coding</h2>
+ * see:<br/>
+ * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.startsharing</a><br/>
+ * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.startsharing.ui</a><br/>
+ * <br/>
+ * <h2>6. Final Remarks</h2>
+ * We cant achieve the objectives because we have a problem with ports<br/>
+ * <br/>
+ * <br/>
  * 
  */
 
