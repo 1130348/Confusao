@@ -15,39 +15,39 @@ import java.util.Map;
  */
 public class StartSharingController {
 
-    public StartSharingController() {
+	public StartSharingController() {
 
-    }
+	}
 
-    public void changePort(int port) {
-        Network.setPort(port);
-    }
+	public void changePort(int port) {
+		Network.setPort(port);
+	}
 
-    public boolean establishConnection(String address) {
-        return Network.establishConnection(address);
-    }
+	public boolean establishConnection(String address) {
+		return Network.establishConnection(address);
+	}
 
-    public boolean sendObject(Object obj) throws IOException {
-        return Network.sendData(obj);
-    }
+	public boolean sendObject(Object obj) throws IOException {
+		return Network.sendSelectedCellRange(obj);
+	}
 
-    public void setVisibleToOthers(boolean b) {
-        Network.isVisibleToOthers(b);
-    }
+	public void setVisibleToOthers(boolean b) {
+		Network.isVisibleToOthers(b);
+	}
 
-    public Map<Integer, InetAddress> searchInstances() {
-        return Network.searchInstances();
-    }
+	public Map<InetAddress, Integer> searchInstances() {
+		return Network.searchInstances();
+	}
 
-    public void waitConnection() {
-        Network.waitForConnection();
-    }
+	public void waitConnection() {
+		Network.waitForConnection();
+	}
 
-    public void setSendPort(int port) {
-        Network.setPort(port);
-    }
+	public void setSendPort(int port) {
+		Network.setPort(port);
+	}
 
-    public void interruptConnection() {
-        Network.interruptConnection();
-    }
+	public void interruptConnection() {
+		Network.interruptConnection();
+	}
 }
