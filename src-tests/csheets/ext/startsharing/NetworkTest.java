@@ -68,7 +68,7 @@ public class NetworkTest {
         System.out.println("sendData");
         Object object = null;
         boolean expResult = false;
-        boolean result = Network.sendData(object);
+        boolean result = Network.sendSelectedCellRange(object);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
