@@ -1,0 +1,21 @@
+<<@startuml doc-files/crm_02_01_analysis_sequence.png
+
+  actor User
+  participant "<<analysis>>\nUIExtensionAddress" as UI
+  participant "<<analysis>>\nContactController" as ctrl
+  participant "<<analysis>>\nContact" as contact
+  participant "<<analysis>>\nAddress" as event
+  participant "<<analysis>>\nPersistence" as db
+
+    UI -> ctrl: getAllContacts(user)
+	ctrl -> db: getAllContacts(user)
+	UI -> User: show all Contacts
+	User -> UI: choose one to address edition
+    User -> UI: Enter the Information
+	UI -> User: Confirm?
+	User -> UI: Confirms
+	UI -> ctrl: updateContact(contact)
+    ctrl -> db: updateContact(user,contact)
+	UI -> User: success of the use case
+
+@enduml
