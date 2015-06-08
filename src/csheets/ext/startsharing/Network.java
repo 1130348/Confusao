@@ -8,7 +8,6 @@ package csheets.ext.startsharing;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.BindException;
 import java.net.DatagramPacket;
@@ -54,9 +53,9 @@ public class Network {
 	}
 
 	public static boolean sendSelectedCellRange(Object object) throws IOException {
-		ObjectOutputStream out = new ObjectOutputStream(
-			clientConnections.get(0).getOutputStream());
-		out.writeObject(object);
+//		ObjectOutputStream out = new ObjectOutputStream(
+//			clientConnections.get(0).getOutputStream());
+//		out.writeObject(object);
 		return true;
 	}
 
@@ -109,7 +108,7 @@ public class Network {
 			DatagramSocket socket = new DatagramSocket();
 			socket.setBroadcast(true);
 			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("192.168.1.255");
+			InetAddress destinationIP = InetAddress.getByName("172.18.135.255");
 
 			byte[] data = new byte[300];
 			String message = String.format("%d", portTCP);
@@ -217,7 +216,7 @@ public class Network {
 			System.out.println("O cliente se conectou ao servidor!");
 			Scanner teclado = new Scanner(System.in);
 			PrintStream saida = new PrintStream(cliente.getOutputStream());
-			while (teclado.nextLine().equalsIgnoreCase("Sair")) {
+			while (teclado.hasNextLine()) {
 
 				saida.println(teclado.nextLine());
 
@@ -270,7 +269,7 @@ class respond_to_request implements Runnable {
 		}
 		String localName = "";
 		try {
-			localName = InetAddress.getLocalHost().getHostName();
+			localName = InetAddress.getLocalHost().getCanonicalHostName();
 		} catch (UnknownHostException ex) {
 			Logger.getLogger(respond_to_request.class.getName()).
 				log(Level.SEVERE, null, ex);
@@ -283,9 +282,6 @@ class respond_to_request implements Runnable {
 				message = new String(request.getData(), 0, request.getLength());
 				System.out.println("Mensagem" + message);
 
-				Network.addClientToMap(Integer.parseInt(message), request.
-									   getAddress());
-
 				if (message.equals("Exit")) {
 					sock.close();
 					break;
@@ -297,7 +293,10 @@ class respond_to_request implements Runnable {
 				System.out.println("Client: " + clientPort);
 				String port = String.format("%d", portTCP);
 				data = port.getBytes();
-				if (!(clientIP.getHostName()).equals(localName)) {
+				if (!(clientIP.getCanonicalHostName()).equals(localName)) {
+					Network.addClientToMap(Integer.parseInt(message), request.
+										   getAddress());
+
 					DatagramPacket resposta = new DatagramPacket(data, port.
 																 length(), clientIP, clientPort);
 					sock.send(resposta);
