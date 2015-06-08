@@ -1,0 +1,14 @@
+  @startuml doc-files/find_workbooks_analysis_diagram.png
+  actor user 
+  participant "<<analysis>>\nFindWorkbooksUI" as ui
+  participant "<<analysis>>\nFindWorkbooksController" as controller
+  participant "<<analysis>>\nSearchWorkbookFiles" as searchWorkbookFiles
+  user  -> ui : wbl : startWorkbookFilesSearch()
+  activate ui
+  ui -> controller : wbl : startWorkbookFilesSearch()
+  activate controller
+  controller -> searchWorkbookFiles : wbl : startWorkbookFilesSearch()
+  user -> ui : openFoundWorkbook()
+  deactivate controller
+  deactivate ui
+  @enduml
