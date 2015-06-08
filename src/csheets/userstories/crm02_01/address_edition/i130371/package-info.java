@@ -74,6 +74,23 @@
  * <br/><br/>
  *
  * <h2>3. Tests</h2>
+ * Basically, from requirements and also analysis, we see that the crm
+ * functionality of this use case is to be able to edit the main and the
+ * secundary address. There are a lot of tests that will need to be done about
+ * the connection of the database, the contact class, the address class. After
+ * that also controller will need tests in order to validate all the implemented
+ * methods. <br/>
+ * The test classes "ContactControllerTest" and "ContactTest" already exist
+ * because of the use case "CRM01_01 Contact Edition" but were updated to fill
+ * all the requirements of this use case. Just the class "Address Test" was
+ * created now and has test like gets and sets to all the attributes of an
+ * Address.<br/>
+ * As usual, in a test driven development approach tests normally fail in the
+ * beginning. The idea is that the tests will pass in the end.<br>
+ * <br/>
+ * see: <code>csheets.crm.ContactControllerTest</code><br/>
+ * see: <code>csheets.crm.ContactTest</code><br/>
+ * see: <code>csheets.crm.AddressTest</code><br/>
  *
  * <h2>4. Design</h2>
  *

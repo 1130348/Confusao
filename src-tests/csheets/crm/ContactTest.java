@@ -2,7 +2,6 @@ package csheets.crm;
 
 import csheets.ext.contact.Contact;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -70,4 +69,39 @@ public class ContactTest {
 
 	}
 
+	/**
+	 * A method that tests if the main address is valid
+	 */
+//	@Test
+//	public void testValidaMainAddress() {
+//		Contact contact = new Contact();
+//		Address a = new Address();
+//		contact.setMainAddress(a);
+//
+//		boolean expResult = true;
+//		boolean result = false;
+//
+//		if (contact.getMainAddress().equals(a)) {
+//			result = true;
+//		}
+//
+//		assertEquals(expResult, result);
+//	}
+	/**
+	 * A method that tests if the secundary address is valid
+	 */
+//	@Test
+//	public void testValidaSecundaryAddress() {
+//		Contact contact = new Contact();
+//		Address a = new Address();
+//		contact.setSecundaryAddress(a);
+//
+//		boolean expResult = true;
+//		boolean result = false;
+//
+//		if (contact.getSecundaryAddress().equals(a)) {
+//			result = true;
+//		}
+//		assertEquals(expResult, result);
+//	}
 }
