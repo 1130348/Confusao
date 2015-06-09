@@ -1,0 +1,14 @@
+@startuml doc-files/draft_search_on_another_instances_receivers.png
+ actor UserReceiver as User 
+ participant "<<analysis>>\nSearchAnotherInstancesUI" as UI
+ participant "<<analysis>>\nSearchAnotherInstancesCtrl" as ctrl
+ participant "<<analysis>>\nNetwoork" as net
+ participant "<<analysis>>\nReport" as report
+User -> UI : acceptNotification()
+UI -> ctrl : acceptNotification()
+ctrl -> net : acceptNotification()
+net -> UI : AnotherInstanceWichToSearch()
+User -> UI : acceptSearch()
+UI -> ctrl : acceptSearch()
+ctrl -> report : makeReport()
+@enduml

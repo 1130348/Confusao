@@ -1,0 +1,44 @@
+@startuml doc-files/crm_04_01_class_diagram.png
+
+    class "<<analysis>> Persistence" as Persistence{
+        +getRepositoryFactory()
+    }
+
+    interface "<<analysis>> RepositoryFactory" as RepositoryFactory{
+        +newInstance()
+    }
+
+    class "<<analysis>> ContactsRepository" as ContactsRepository{
+        +update(contact)
+    }
+
+    class "<<analysis>> Notes" as Notes{
+        -List<Note> notes
+        +addNote(Note n)
+        +removeNote(Note n)
+    }
+
+    class "<<analysis>> Note" as Note{
+        -String title
+        -String text
+        -Date timestamp
+    }
+
+    class "<<analysis>> Contact" as Contact{
+	-Notes notes
+    }
+
+    class "<<analysis>> ContactController" as ContactController{
+        +addNote(Contact c, String title, String text)
+        +editNote(Note n, String title, String text)
+        +removeContact(Contact c, Note n)
+        +updateContact(Contact c)
+    }
+        Note <|-- Notes
+	Notes <|-- Contact
+    RepositoryFactory <|-- Persistence
+    ContactsRepository <|-- RepositoryFactory
+    ContactsRepository <|-- ContactController
+	Contact <|-- ContactController
+
+@enduml
