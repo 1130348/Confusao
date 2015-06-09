@@ -1,0 +1,20 @@
+  @startuml doc-files/ipc04_01_analysis_Export.png
+  actor User
+  participant "<<analysis>>\nImportExportUI" as UI
+  participant "<<analysis>>\nImportExportController" as ctrl
+  participant "<<analysis>>\nExport" as import
+  participant "<<analysis>>\nCell" as cell
+  User -> UI : startImportOrExport()
+  activate UI
+  UI -> ctrl : setChoice()
+  activate ctrl
+  UI -> ctrl : chooseSeparator()
+  UI -> ctrl : headerYesOrNo()
+  UI ->ctrl : export()
+  deactivate UI
+  ctrl -> import : export()
+  activate import
+  import -> cell : getContent()
+  deactivate import
+  deactivate ctrl
+  @enduml
