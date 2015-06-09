@@ -1,0 +1,13 @@
+  @startuml doc-files/crm_02_01_ssd.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Address edition
+    s -> User: Show all contacts
+	User -> s: Selects one contact
+	s -> User: Ask for all the information
+	User -> s: Inserts street, locality, postal code, city and country of one or two address
+	s -> User: Ask about confirmation
+	User -> s: Confirm
+	s -> User: Success of the use case
+  @enduml
