@@ -1,0 +1,52 @@
+@startuml doc-files/crm_04_01_sequence_diagram_design.png
+  actor User 
+  participant "UIExtensionContacts" as UII
+  participant "nContactsController" as ctrll
+  participant "Contact" as contact
+  participant "Notes" as notes
+  participant "Note" as note
+  participant "Persistence" as pers
+  participant "RepositoryFactory" as repFactory
+  participant "ContactsRepository" as contactsRep
+
+  User -> UII : Selects Contact
+
+  alt Option == "Create Note"
+
+    UII -> ctrll: addNote(contact, title, text)
+
+    create note
+    ctrll -> note: create(title, text)
+    
+    ctrll -> contact: addNote(note)
+    contact -> notes: addNote(note)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+
+  else Option == "Edit Note"
+    User -> UII: Selects Note
+    User -> UII: Enter the new information
+    
+    UII -> ctrll: addNote(contact, title, text)
+
+    create note
+    ctrll -> note: create(title, text)
+    
+    ctrll -> contact: addNote(note)
+    contact -> notes: addNote(note)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+  else Option == "Remove Note"
+    User -> UII: Selects Note
+    UII -> ctrll: removeNote(contact, note)
+    ctrll -> notes: remove(note)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+  end 
+  @enduml

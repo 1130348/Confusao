@@ -97,5 +97,5 @@ package csheets.userstories.core06_01.insert_image.i120836;
  * @author 1120836
  *
  */
-class _InsertImage_ {
+class _Dummy_ {
 }
