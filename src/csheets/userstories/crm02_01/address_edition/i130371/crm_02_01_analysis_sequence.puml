@@ -1,7 +1,7 @@
 <<@startuml doc-files/crm_02_01_analysis_sequence.png
 
   actor User
-  participant "<<analysis>>\nUIExtensionContact" as UI
+  participant "<<analysis>>\nUIExtensionAddress" as UI
   participant "<<analysis>>\nContactController" as ctrl
   participant "<<analysis>>\nContact" as contact
   participant "<<analysis>>\nAddress" as address
