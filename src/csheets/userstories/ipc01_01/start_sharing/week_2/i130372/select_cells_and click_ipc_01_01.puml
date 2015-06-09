@@ -42,9 +42,9 @@ alt client that wants to connect
 
 sca<-cc : setEnabled(true);
 
- User -> User : select cells
+User -> User : select cells
 User -> sca : actionPerformed();
-cc->scc : sendCells(selectedCells);
+sca->scc : sendCells(selectedCells);
 loop
 scc->netw : sendCells(cells);
 netw->netws : sendObject(cell);
