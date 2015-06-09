@@ -1,0 +1,33 @@
+@startuml doc-files/draft_macros_02_01.png
+ actor User
+ participant "<<analysis>>\nCellUI" as UI
+ participant "<<analysis>>\nCellCtrl" as ctrl
+ participant "<<analysis>>\nCell" as cell
+ participant "<<analysis>>\nWorkbook" as Workbook
+ participant "<<analysis>>\nVariable" as Variable
+
+User -> UI : string
+activate UI
+UI -> ctrl : setContent(string)
+activate ctrl
+deactivate UI
+ctrl -> cell : setContent(string)
+activate cell
+deactivate ctrl
+
+cell->Workbook : setContent(value)
+activate Workbook
+Workbook->Workbook : valida()
+alt se nao existir
+Workbook->Variable : create(value)
+   Workbook -> Workbook : add(value)
+else
+Workbook -> Variable : setContent(value)
+end
+deactivate Workbook
+
+deactivate cell
+
+
+
+@enduml
