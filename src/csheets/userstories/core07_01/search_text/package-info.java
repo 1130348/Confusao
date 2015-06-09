@@ -65,7 +65,6 @@
  * <br/>
  *
  * @author 1091334
- *
  */
 package csheets.userstories.core07_01.search_text;
 
