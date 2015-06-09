@@ -60,8 +60,6 @@
  *
  *
  *
- * <b>core05_01: Design </b><br/>
- *
  * @author 1120835
  */
 package csheets.userstories.core05_01.ConfigEmail.i120835;
