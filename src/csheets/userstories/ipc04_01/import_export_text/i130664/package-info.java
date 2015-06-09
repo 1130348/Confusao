@@ -47,6 +47,18 @@
  * <h4> Export analysis diagram</h4>
  * <img src="doc-files/ipc04_01_analysis_Export.png"/>
  * <br/>
+ * <h2>3. Tests</h2>
+ * Basically, from requirements and also analysis, we see that the core 
+ * functionality of this use case is to be able to import or export data from
+ * a text file.<br/>
+ * I have to perform functional tests to see if the file is being created when
+ * doing an exportation. I also need to test if the data from the text file is 
+ * being imported correctly. Furthermore I also have to test if the file created 
+ * by the exportation has the correct data.<br/>
+ * As usual, in a test driven development approach tests normally fail in the 
+ * beginning. The idea is that the tests will pass in the end.<br> 
+ * <br/>
+ * see: <code>csheets.ext.start_sharing.ImportExportText</code><br/>
  */
 
 package csheets.userstories.ipc04_01.import_export_text.i130664;
