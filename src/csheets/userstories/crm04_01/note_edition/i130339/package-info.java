@@ -67,7 +67,14 @@
  * <h2>3. Tests</h2>
  *
  * <h2>4. Design</h2>
- *
+ * <br/>
+ * A sequence diagram shows object interactions arranged in time sequence. It
+ * depicts the objects and classes involved in the scenario and the sequence of
+ * messages exchanged betwween the objets needed to carry out the functionality
+ * of the scenario.<br/>
+ * 
+ * <img src="doc-files/crm_04_01_sequence_diagram_design.png">
+ * <br/><br/>
  * <h2>5. Coding</h2>
  *
  * <h2>6. Final Remarks</h2>

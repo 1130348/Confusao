@@ -60,9 +60,7 @@
  *
  *
  *
- * <b>core05_01: Design </b><br/>
- *
- * @author 1120835
+ * @author 1120835 Paulo Brito
  */
 package csheets.userstories.core05_01.ConfigEmail.i120835;
 
