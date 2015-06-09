@@ -61,17 +61,18 @@
  * several games at once and the list of active games.
  * <br/>
  * <h2>3. Tests</h2>
- * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able communicate with other instances
- * of "CleanSheets" and send them a selected amount of cells.<br/>
- * Following this approach we can start by coding a unit test that uses the
- * class <code>Connect</code> and tests its attribute port. Furthermore we also
- * have to perform functional tests to see if the client is properly receiving
- * the information.<br/>
- * As usual, in a test driven development approach tests normally fail in the
- * beginning. The idea is that the tests will pass in the end.<br>
+ * Basically, from the requirements and analysis we revealed that the main
+ * feature of this use case is to be able to start the connection between two
+ * users in order to play a games, we can start by coding a unit test that uses
+ * a new attribute to the name and image with the corresponding accessor methods
+ * (set and get). A simple test to set this attribute with one point to see if
+ * the get method returns the same data. In another approach we can functionally
+ * test whether another instance of the "CleanSheets" after connecting receives
+ * the user information transmitted by the other instance, and another test to
+ * verify if the ative games are listed in sidebar.<br/>
  * <br/>
- * see: <code>csheets.ext.start_sharing.StartSharingTest</code><br/>
+ * see:
+ * <code>csheets.ext.select_game_and_partner.SelectGameAndPartnerTest</code><br/>
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
  * will also need to create a subclass of UIExtension. In the code of the
