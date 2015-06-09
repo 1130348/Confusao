@@ -1,4 +1,4 @@
-@startuml doc-files/comments_extension_uc_analysis_crm_04_01.png
+@startuml doc-files/crm_04_01_sequence_diagram_analysis.png
   actor User 
   participant "<<analysis>>\nUIExtensionContacts" as UII
   participant "<<analysis>>\nContactsController" as ctrll

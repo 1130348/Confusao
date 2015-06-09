@@ -93,6 +93,23 @@
  * see: <code>csheets.crm.AddressTest</code><br/>
  *
  * <h2>4. Design</h2>
+ ** A sequence diagram shows object interactions arranged in time sequence. It
+ * depicts the objects and classes involved in the scenario and the sequence of
+ * messages exchanged betwween the objets needed to carry out the functionality
+ * of the scenario.<br/>
+ * A new sidebar will be created in order to the use add, edit or remove the two
+ * address of a contact. On that sidebar the user selects with two clicks one
+ * contact and a window will be open in order to write or edit the address. Then
+ * the user just need to save and the contact will be updated.
+ *
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_extension.png" <br/> <br/> <br/>
+ * Let's start with the address. A contact has got two addresses. One that
+ * represents the main one and another that is the secundary. An address has the
+ * street, locality, city, postal code and the country.
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_sequence.png" <br/> <br/> <br/>
+ *
  *
  * <h2>5. Coding</h2>
  *

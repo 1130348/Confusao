@@ -52,4 +52,54 @@ public class ContactControllerTest {
 //        assertEquals(expResult, result);
 //
 //    }
+	/**
+	 * A method that tests if the contact to be removed isn't null.
+	 */
+//    @Test
+//    public void testUpdateAddress() {
+//
+//		Address a1 = new Address();
+//		Address a2 = new Address();
+//		Contact c = new Contact();
+//
+//		boolean expResult=false;
+//      boolean result = updateAddress(c, a1, a2);
+//
+//      assertEquals(expResult, result);
+//
+//    }
+    
+    
+//    @Test
+//    public void testaddNote()
+//    {
+//        ContactController ctrl = new ContactController(null, null);
+//        
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
+//        
+//        boolean expResult = true;
+//        boolean result = ctrl.addNote(c, title, text);
+//        
+//        assertEquals(expResult,result);
+//    }
+//    
+//    @Test
+//    public void testremoveNote()
+//    {
+//        ContactController ctrl = new ContactController(null, null);
+//        
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
+//        
+//        Note n = new Note("title", "text");
+//        
+//        c.addNote(n);
+//        
+//        
+//        boolean expResult = true;
+//        boolean result = ctrl.removeNote(c, n);
+//        
 }
