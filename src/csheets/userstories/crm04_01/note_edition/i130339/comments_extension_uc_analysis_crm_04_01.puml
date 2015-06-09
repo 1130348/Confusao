@@ -1,0 +1,39 @@
+@startuml doc-files/comments_extension_uc_analysis_crm_04_01.png
+  actor User 
+  participant "<<analysis>>\nUIExtensionContacts" as UII
+  participant "<<analysis>>\nContactsController" as ctrll
+  participant "<<analysis>>\nContact" as contact
+  participant "<<analysis>>\nNotes" as notes
+  participant "<<analysis>>\nNote" as note
+  participant "<<analysis>>\nDataBase" as db
+  
+
+  User -> UII : Selects Contact
+
+  alt Option == "Create Note"
+
+    UII -> ctrll: addNote(contact, title, text)
+
+    create note
+    ctrll -> note: create(title, text)
+    
+    ctrll -> contact: addNote(note)
+    contact -> notes: addNote(note)
+
+    ctrll -> db: updateContact(contact)
+
+  else Option == "Edit Note"
+    User -> UII: Selects Note
+    User -> UII: Enter the new information
+    
+    UII -> ctrll: editNote(note, title, text)
+
+    UII -> ctrll: updateContact(contact)
+    ctrll -> db: updateContact(contact)
+  else Option == "Remove Note"
+    User -> UII: Selects Note
+    UII -> ctrll: removeNote(contact, note)
+    ctrll -> notes: remove(note)
+    ctrll -> db: updateContact(contact)
+  end 
+  @enduml
