@@ -1,0 +1,15 @@
+@startuml doc-files/draft_search_on_another_instances_sender.png
+ actor UserSender as User
+ participant "<<analysis>>\nSearchAnotherInstancesUI" as UI
+ participant "<<analysis>>\nSearchAnotherInstancesCtrl" as ctrl
+ participant "<<analysis>>\nNetwoork" as net
+ participant "<<analysis>>\nCell" as cell
+ participant "<<analysis>>\nConnect" as connect
+User -> UI : searchInstances()
+UI -> ctrl : searchInstances()
+ctrl -> net : searchInstances()
+User -> UI : enterWoorkBookNameToSearch()
+User -> UI : selectInstance()
+UI -> ctrl : sendNotification()
+ctrl -> net : sendNotification()
+@enduml
