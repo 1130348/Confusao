@@ -21,6 +21,10 @@
  * to select the note and press Remove.<br/>
  * <br/>
  * <h2>2. Analysis</h2>
+ * In order to add notes to a contact, it will be necessary to create two important classes: Notes and Note.
+ * The first one is a attribute of Contact, where all the versions of notes associated with the contact will be stored,
+ * for this to happen the class has a list of Note. The Note is the most important class of this usecase 
+ * and will have 3 attributes: <br>Title, to represent what the note is about;</br> <br>Text, the description of the note;</br> <br>Timestamp, represents the time of creation;</br>
  * Since editing a contact is supported in a database that will be included in
  * the cleansheet projet, it will be necessary to investigate how the notes will be added to
  * the contact on the database.<br/>
@@ -56,7 +60,10 @@
  * 
  * <img src="doc-files/crm_04_01_analise_classes.png">
  * <br/><br/>
- *
+ * <h3>Analysis of Core Technical Problem</h3>
+ * The core technical problem is to see how both classes Notes and Note will interact with Contact
+ * on the DataBase.
+ * <br/>
  * <h2>3. Tests</h2>
  *
  * <h2>4. Design</h2>
