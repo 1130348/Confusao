@@ -102,6 +102,15 @@
  * contact and a window will be open in order to write or edit the address. Then
  * the user just need to save and the contact will be updated.
  *
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_extension.png" <br/> <br/> <br/>
+ * Let's start with the address. A contact has got two addresses. One that
+ * represents the main one and another that is the secundary. An address has the
+ * street, locality, city, postal code and the country.
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_sequence.png" <br/> <br/> <br/>
+ *
+ *
  * <h2>5. Coding</h2>
  *
  * <h2>6. Final Remarks</h2>

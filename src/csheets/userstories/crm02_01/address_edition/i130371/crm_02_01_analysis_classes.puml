@@ -25,7 +25,7 @@
 		-Address secundary_address
     }
 
-    class "<<analysis>> ContactController" as ContactController{
+    class "<<analysis>> AddressController" as ContactController{
         +updateContact(Contact c)
 		+getAllContacts()
     }
