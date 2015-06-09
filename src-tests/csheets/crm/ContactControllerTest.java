@@ -52,4 +52,20 @@ public class ContactControllerTest {
 //        assertEquals(expResult, result);
 //
 //    }
+	/**
+	 * A method that tests if the contact to be removed isn't null.
+	 */
+//    @Test
+//    public void testUpdateAddress() {
+//
+//		Address a1 = new Address();
+//		Address a2 = new Address();
+//		Contact c = new Contact();
+//
+//		boolean expResult=false;
+//      boolean result = updateAddress(c, a1, a2);
+//
+//      assertEquals(expResult, result);
+//
+//    }
 }
