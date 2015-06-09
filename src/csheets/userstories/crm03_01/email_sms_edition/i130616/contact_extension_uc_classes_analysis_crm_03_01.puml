@@ -1,0 +1,62 @@
+@startuml doc-files/contact_extension_uc_classes_analysis_crm_03_01.png
+
+    class "<<analysis>> Persistence" as Persistence{
+        +getRepositoryFactory()
+    }
+
+    interface "<<analysis>> RepositoryFactory" as RepositoryFactory{
+        +newInstance()
+    }
+
+    class "<<analysis>> ContactsRepository" as ContactsRepository{
+        +update(contact)
+    }
+
+    class "<<analysis>> List<Email>" as emails{
+    }
+
+    class "<<analysis>> PhoneNumber" as number{
+        -String text
+        +validate()
+    }
+
+    class "<<analysis>> Email" as email{
+        -String text
+        +validate()
+    }
+
+    class "<<analysis>> Contact" as Contact{
+	-PhoneNumber MobileNumber
+        -PhoneNumber WorkMobileNumber
+        -PhoneNumber WorkNumber
+        -PhoneNumber HomeNumber
+        -List<Email> EmailList
+        +newPhoneNumber(text)
+        +addMobileNumber(number)
+        +addWorkMobileNumber(number)
+        +addHomeNumber(number)
+        +addWorkNumber(number)
+        +addEmail(email)
+        +newEmail(text)
+        +setPrimaryEmail(email)
+    }
+
+    class "<<analysis>> ContactController" as ContactController{
+        +addMobileNumber(contact,newNumber)
+        +addWorkNumber(contact,newNumber)
+        +addHomeNumber(contact,newNumber)
+        +addWorkMobileNumber(contact,newNumber)
+        +newEmail(Contact,text)
+        +editEmail(Contact,email,text)
+        +removeEmail(contact,email)
+        +setPrimaryEMail(contact,email)
+    }
+        email <|-- emails
+	emails <|-- Contact
+        number <|-- Contact
+    RepositoryFactory <|-- Persistence
+    ContactsRepository <|-- RepositoryFactory
+    ContactsRepository <|-- ContactController
+	Contact <|-- ContactController
+
+@enduml
