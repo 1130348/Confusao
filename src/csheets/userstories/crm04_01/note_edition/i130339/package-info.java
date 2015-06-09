@@ -48,7 +48,7 @@
  * thinking and analyzed all the project and will updates to a sequence diagram.
  * <br/>
  * <br/>
- * <img src="doc-files/comments_extension_uc_analysis_crm_04_01.png">
+ * <img src="doc-files/crm_04_01_sequence_diagram_analysis.png">
  * <br/>
  * <br/>
  * From the previous diagram we see that we need to create a class Notes, an attribute of
@@ -58,7 +58,7 @@
  * that will be necessary in the database to support the notes<br/>
  * <br/>
  * 
- * <img src="doc-files/crm_04_01_analise_classes.png">
+ * <img src="doc-files/crm_04_01_class_diagram.png">
  * <br/><br/>
  * <h3>Analysis of Core Technical Problem</h3>
  * The core technical problem is to see how both classes Notes and Note will interact with Contact

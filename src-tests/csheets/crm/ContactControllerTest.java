@@ -68,4 +68,38 @@ public class ContactControllerTest {
 //      assertEquals(expResult, result);
 //
 //    }
+    
+    
+//    @Test
+//    public void testaddNote()
+//    {
+//        ContactController ctrl = new ContactController(null, null);
+//        
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
+//        
+//        boolean expResult = true;
+//        boolean result = ctrl.addNote(c, title, text);
+//        
+//        assertEquals(expResult,result);
+//    }
+//    
+//    @Test
+//    public void testremoveNote()
+//    {
+//        ContactController ctrl = new ContactController(null, null);
+//        
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
+//        
+//        Note n = new Note("title", "text");
+//        
+//        c.addNote(n);
+//        
+//        
+//        boolean expResult = true;
+//        boolean result = ctrl.removeNote(c, n);
+//        
 }
