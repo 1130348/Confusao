@@ -91,5 +91,5 @@ package csheets.userstories.core01_01.enable_disable_ext.i120836;
  * @author 1120836
  *
  */
-class _EnableDisable_ {
+class _Dummy_ {
 }
