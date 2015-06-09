@@ -1,0 +1,40 @@
+@startuml doc-files/draft_ipc_07_01.png
+ actor User
+ participant "<<analysis>>\nStartGameUI" as UI
+ participant "<<analysis>>\nStartGameCtrl" as ctrl
+ participant "<<analysis>>\nGame" as game
+ participant "<<analysis>>\nGameConnection" as connect
+activate UI
+User -> UI : getClients()
+UI -> ctrl : getClients()
+deactivate UI
+activate ctrl
+ctrl -> connect : getClients()
+deactivate ctrl
+activate connect
+User -> UI : selectClient()
+activate UI
+UI -> ctrl : connectToClient()
+deactivate UI
+activate ctrl
+ctrl -> connect : connectToClient()
+deactivate ctrl
+User -> UI : chooseGame()
+activate UI
+UI -> ctrl : newGame()
+deactivate UI
+create game
+activate ctrl
+ctrl -> game : create()
+deactivate ctrl
+User -> UI : chooseName()
+User -> UI : chooseImage()
+activate UI
+UI -> ctrl : sendUserInfo()
+deactivate UI
+activate ctrl
+ctrl -> connect : sendUserInfo()
+deactivate ctrl
+deactivate connect
+
+@enduml
