@@ -1,0 +1,67 @@
+@startuml doc-files/select_cells_and_click_ipc_01_01.png
+ actor User
+ participant "StartSharingAction" as ssa
+ participant "SendCellsAction" as sca
+ participant "ChooseCleanSheetsInstanceToConnect" as cc
+ participant "StartSharingController" as ssc
+ participant "SendCellsController" as scc
+ participant "<<Service>>\nNetworkServico" as netw
+ participant "<<Service>>\nNetworkSendService" as netws
+ participant "<<Service>>\nNetworkReceiveService" as netwr
+ participant "th:Thread" as th
+ participant "RespondToUDPRequest" as respond
+ participant "Server" as server
+ participant "ReceiveData" as rd
+
+
+ User -> ssa : actionPerformed()
+ ssa -> cc : showDialog(lc);
+
+ cc -> ssc : setVisibility(true);
+ssc->netw : isVisibleToOthers(true);
+netw->netwr : startReceivingUDPDatagrams());
+netwr->th : thUDPSearch = create(new RespondToUDPRequest());
+netwr->respond : run();
+
+ cc -> ssc : lc=searchInstances();
+ssc->netw : lc=serachIntances();
+netw -> netws : lc=searchActiveIntances();
+
+cc->ssc : startServer(sendCellsAction);
+ssc->netw : startServer(sendCellsAction);
+netw->netwr : startServer(sendCellsAction);
+netwr->th : thServer = create(new Server(sendCellsAction));
+netwr-> server : run();
+
+User <-- cc : show active clients
+
+alt client that wants to connect
+ User -> cc : chooseClient();
+ cc -> ssc : establishConnection(address);
+ ssc -> netw : establishConnection(address);
+
+sca<-cc : setEnabled(true);
+
+User -> User : select cells
+User -> sca : actionPerformed();
+sca->scc : sendCells(selectedCells);
+loop
+scc->netw : sendCells(cells);
+netw->netws : sendObject(cell);
+end loop
+end alt
+
+alt client that receives the connection
+loop for each connection received
+server->server : waitToReceiveMessage();
+server->netw : establishConnetction(address);
+server->th : thReceiveData = create(new ReceiveData(sendCellsAction));
+server->rd : run();
+end loop
+server->sca : setEnabled(true);
+loop for each message received
+rd->rd : waitForMessage();
+rd->netw : receiveCells(cells);
+end loop
+end alt
+@enduml

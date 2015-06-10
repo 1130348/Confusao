@@ -1,0 +1,15 @@
+@startuml doc-files/core05_01_emailSetting_design_analysis.png
+ actor User
+
+User -> UIEmail : settingEmail()
+UIEmail -> EmailSettingController : settingEmail()
+EmailSettingController --> EmailSettingPanel : getPanel()
+EmailSettingPanel --> EmailSettingController :
+EmailSettingController --> UIEmail :
+UIEmail --> UIEmail :
+User -> EmailSettingPanel : settingEmail(Email,pass,service)
+EmailSettingPanel -> EmailAction : actionPerformed()
+EmailAction -> Email : setEmailSettings(Email,pass,service)
+EmailAction-->UserEmail : sendEmailTest(Cell)
+
+@enduml

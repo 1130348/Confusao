@@ -1,0 +1,64 @@
+@startuml doc-files/crm_03_01_sequence_diagram_design.png
+  actor User 
+  participant "UIExtensionContacts" as UII
+  participant "nContactsController" as ctrll
+  participant "Contact" as contact
+  participant "List<Email>" as emails
+  participant "Email" as email
+  participant "Persistence" as pers
+  participant "RepositoryFactory" as repFactory
+  participant "ContactsRepository" as contactsRep
+
+  User -> UII : Selects Contact
+
+  alt Option == "Create Email"
+
+    UII -> ctrll: newEmail(contact, text)
+
+    ctrll->contact: newEmail(text)
+
+    create email
+    contact -> email: create(text)
+    email->email:validate()
+    
+    ctrll -> contact: addEmail(email)
+    contact -> emails: add(email)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+
+  else Option == "Edit Email"
+    User -> UII: Selects Email
+    User -> UII: Enter the new information
+    
+    UII -> ctrll: editEmail(contact,email,text)
+
+    ctrll -> email: edit(text)
+    email -> email: validate()
+
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+  else Option == "Remove Email"
+    User -> UII: Selects Email
+    UII -> ctrll: removeEmail(contact, email)
+    ctrll -> contact: removeEmail(email)
+    contact -> emails: remove(email)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+
+   else Option == "Edit Primary Email"
+   User -> UII: Selects Email
+    UII-> ctrll: setPrimaryEmail(contact,email)
+    ctrll->contact: setPrimaryEmail(email)
+    contact->emails: set(index,email)
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+  end 
+  @enduml

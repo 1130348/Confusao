@@ -1,0 +1,23 @@
+ @startuml doc-files/insert_image_extension_analysis.png
+  actor User
+  participant "<<analysis>>\nImageUI" as UI
+  participant "<<analysis>>\nImageCtrl" as ctrl
+  participant "<<analysis>>\nSpreadsheet" as sheet
+  participant "<<analysis>>\nCell" as cell
+  User -> UI : selectCell()
+  activate UI
+  UI -> ctrl : getCellImage()
+  activate ctrl
+  ctrl -> sheet : getCell()
+  ctrl -> cell : getImage()
+  deactivate ctrl
+  UI -> UI : displayImage()
+  deactivate UI
+  User -> UI : InsertImage()
+  activate UI
+  UI -> ctrl : setCellImage()
+  activate ctrl
+  ctrl -> cell : setImage()
+  deactivate ctrl
+  deactivate UI
+  @enduml

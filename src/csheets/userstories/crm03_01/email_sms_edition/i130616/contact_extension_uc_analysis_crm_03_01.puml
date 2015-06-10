@@ -1,0 +1,91 @@
+@startuml doc-files/contact_extension_uc_analysis_crm_03_01.png
+  actor User 
+  participant "<<analysis>>\nUIExtensionContacts" as UII
+  participant "<<analysis>>\nContactsController" as ctrll
+  participant "<<analysis>>\nContact" as contact
+  participant "<<analysis>>\nList<Email>" as emails
+  participant "<<analysis>>\nEmail" as email
+  participant "<<analysis>>\nPhoneNumber" as number
+  participant "<<analysis>>\nDataBase" as db
+  
+
+  User -> UII : Selects Contact
+
+  alt Option == "Add/Edit/Delete Number"
+    User -> UII: Enter new information
+    UII -> ctrll: addMobileNumber(contact,newNumber)
+    ctrll -> contact: newPhoneNumber(text)
+    create number
+    contact -> number: create(newNumber)
+    activate number
+    number -> number: validate()
+    deactivate number
+    ctrll -> contact: addMobileNumber(number)
+
+
+    UII -> ctrll: addWorkNumber(contact,newNumber)
+    ctrll -> contact: newPhoneNumber(text)
+    create number
+    contact -> number: create(newNumber)
+    activate number
+    number -> number: validate()
+    deactivate number
+    ctrll -> contact: addWorkNumber(number)
+
+
+    UII -> ctrll: addHomeNumber(contact,newNumber)
+    ctrll -> contact: newPhoneNumber(text)
+    create number
+    contact -> number: create(newNumber)
+    activate number
+    number -> number: validate()
+    deactivate number
+    ctrll -> contact: addHomeNumber(number)
+
+    UII -> ctrll: addWorkMobileNumber(contact,newNumber)
+    ctrll -> contact: newPhoneNumber(text)
+    create number
+    contact -> number: create(newNumber)
+    activate number
+    number -> number: validate()
+    deactivate number
+    ctrll -> contact: addWorkMobileNumber(number)
+
+
+    ctrll -> db: updateContact(contact)
+
+  else Option == "Add Email"
+    User -> UII: Enter the new information
+    
+    UII -> ctrll: newEmail(Contact, text)
+    ctrll -> contact: newEmail(text)
+    create email
+    contact -> email: create(text)
+    email -> email: validate()
+    ctrll -> contact: addEmail(email)
+    ctrll -> db: updateContact(contact)
+
+  else Option == "Edit Email"
+    User -> UII: Selects Email
+    User -> UII: Enter the new information
+    
+    UII -> ctrll: editEmail(Contact, email, text)
+    ctrll -> email: setEmail(text)
+    email -> email: validate()
+    ctrll -> db: updateContact(contact)
+
+  else Option == "Remove Email"
+    User -> UII: Selects Email
+    UII -> ctrll: removeEmail(contact, email)
+    ctrll -> emails: remove(email)
+    ctrll -> db: updateContact(contact)
+
+  else Option =="Set Primary Email"
+    User -> UII: Selects Email
+    UII -> ctrll: setPrimaryEMail(contact,email)
+    ctrll -> contact: setPrimaryEmail(email)
+    contact -> emails: putInFront(email);
+    ctrll -> db: updateContact(contact)
+  end 
+  @enduml
+@enduml

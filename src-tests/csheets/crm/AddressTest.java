@@ -59,4 +59,38 @@ public class AddressTest {
 //		}
 //		assertEquals(expResult, result);
 //	}
+	/**
+	 * A method that tests if the Country is valid.
+	 */
+//	@Test
+//	public void testValidaCountry() {
+//
+//		Address a = new Address();
+//		String tmp_Country = "Test";
+//		a.setCountry(tmp_Country);
+//
+//		boolean expResult = true;
+//		boolean result = false;
+//		if (a.getCoutry().equals(tmp_Country)) {
+//			result = true;
+//		}
+//		assertEquals(expResult, result);
+//	}
+	/**
+	 * A method that tests if the Postal Code is valid.
+	 */
+//	@Test
+//	public void testValidaPostalCode() {
+//
+//		Address a = new Address();
+//		String tmp_Postalcode = "Test";
+//		a.setPostalcode(tmp_Postalcode);
+//
+//		boolean expResult = true;
+//		boolean result = false;
+//		if (a.getPostalCode().equals(tmp_PostalCode)) {
+//			result = true;
+//		}
+//		assertEquals(expResult, result);
+//	}
 }
