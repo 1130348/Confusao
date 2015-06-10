@@ -1,0 +1,23 @@
+@startuml doc-files/Extension_setup_ipc_07_01.png
+ actor User
+ participant "Frame" as fra
+ participant "uic : UIController" as uic
+ participant "ExtensionManager" as em
+ participant "extension : SelectGameExtension" as sse
+ participant "mB : MenuBar" as mB
+ participant "uiExtension : UIExtensionSelectGame" as uiess
+ participant "SelectGameMenu" as ssm
+ participant "action : SelectGameAction" as ssa
+ User -> fra : create();
+ fra -> uic : create();
+ uic -> em : extensions=getExtensions();
+ uic -> sse : uiExtension=getUIExtension(this);
+ sse -> uiess : create(extension, uic);
+ uic -> uic : uiExtensions.add(uiExtension);
+ fra -> fra : setJMenuBar(mB);
+ fra -> mB : create();
+ mB -> uiess : getMenu();
+ uiess -> ssm : create(uic);
+ ssm -> ssm : add(action);
+ ssm -> ssa : create();
+@enduml
