@@ -5,8 +5,7 @@
  */
 package csheets.ext.searchOnAnotherInstance;
 
-import csheets.core.SpreadsheetImpl;
-import java.util.ArrayList;
+import csheets.core.Workbook;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,8 +20,8 @@ public class ReportWatch extends Observable implements Observer{
     
     @Override
     public void update(Observable o, Object arg) {
-        SpreadsheetImpl[] spreadSheetList = ((ReportEvent)arg).getSpreadSheetList();
-        String resume = ReportCreater.createResume(spreadSheetList);
+        Workbook workbook = ((ReportEvent)arg).getWorkbook();
+        String resume = ReportCreater.createResume(workbook);
         setChanged();
         notifyObservers(resume);
     }
