@@ -5,7 +5,7 @@
  */
 package csheets.ext.searchOnAnotherInstance;
 
-import csheets.core.SpreadsheetImpl;
+import csheets.core.Workbook;
 
 /**
  *
@@ -13,14 +13,15 @@ import csheets.core.SpreadsheetImpl;
  */
 public class ReportEvent {
     
-    private SpreadsheetImpl[] spreadSheetList;
+    private Workbook workbook;
 
-    public ReportEvent(SpreadsheetImpl[] spreadSheetList) {
-        this.spreadSheetList = spreadSheetList;
+    public ReportEvent(Workbook workbook) {
+        this.workbook = workbook;
     }
 
-    public SpreadsheetImpl[] getSpreadSheetList() {
-        return spreadSheetList;
+    public Workbook getWorkbook() {
+        return workbook;
     }
+
     
 }

@@ -206,6 +206,7 @@ public class ContactPanel extends JPanel {
 			for (Contact c : controller.getContacts()) {
 				if (c.getMachine_Name().equals(tmp.getMachine_Name())) {
 					controller.removeContact(c);
+                                        break;
 				}
 			}
 			controller.update();
