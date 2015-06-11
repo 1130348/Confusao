@@ -7,18 +7,32 @@ package csheets.ext.contact;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author rddm
  */
+@Entity
 public class PhoneNumber {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     /**
      * Text with phone number
      */
     private String text;
 
+    protected PhoneNumber() {
+    }
+
+    
+    
     /**
      * Constructor
      *

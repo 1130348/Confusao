@@ -347,6 +347,11 @@ public class Contact {
     /**
      * Changes the value of the secundary address
      *
+     * @param tmp_street
+     * @param tmp_locality
+     * @param tmp_postal_code
+     * @param tmp_city
+     * @param tmp_country
      */
     public void setSecundaryAddress(String tmp_street, String tmp_locality,
             String tmp_postal_code, String tmp_city,
