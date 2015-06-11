@@ -20,15 +20,15 @@
  */
 package csheets.core.formula.lang;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import csheets.core.Cell;
 import csheets.core.Value;
+import csheets.core.Variable;
 import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.Reference;
 import csheets.core.formula.util.ExpressionVisitor;
 import csheets.core.formula.util.ExpressionVisitorException;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * A binary reference operation in a formula.
@@ -41,6 +41,9 @@ public class ReferenceOperation extends BinaryOperation implements Reference {
 
 	/** The cells that constitute the range */
 	private SortedSet<Cell> cells;
+        
+        	/** The cells that constitute the range */
+	private SortedSet<Variable> vars;
 
 	/**
 	 * Creates a new reference operation.
@@ -84,6 +87,8 @@ public class ReferenceOperation extends BinaryOperation implements Reference {
 	}
 
 	public int compareTo(Reference reference) {
+            if(reference instanceof CellReference)
+            {
 		Cell otherCell = reference.getCells().first();
 		int firstDiff = getCells().first().compareTo(otherCell);
 		if (firstDiff != 0)
@@ -93,5 +98,24 @@ public class ReferenceOperation extends BinaryOperation implements Reference {
 				return 1;
 			else
 				return getCells().last().compareTo(reference.getCells().last());
+            } else if(reference instanceof VariableReference )
+            {
+                 Variable otherVar = reference.getVariables().first();
+		int firstDiff = getVariables().first().compareTo(otherVar);
+		if (firstDiff != 0)
+			return firstDiff;
+		else
+			if (reference instanceof Reference)
+				return 1;
+			else
+				return getVariables().last().compareTo(reference.getVariables().last());
+            }
+            return 0;
 	}
+
+
+    @Override
+    public SortedSet<Variable> getVariables() {
+        return vars.first().getWorkbook().getVariables();
+    }
 }

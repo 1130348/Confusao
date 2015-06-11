@@ -6,6 +6,8 @@
 package csheets.ext.startsharing;
 
 import csheets.core.Cell;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +19,12 @@ public class SendCellsController {
 	}
 
 	public void sendCells(Cell[][] selectedCells) {
-
+		List<Cell> cells = new ArrayList<Cell>();
+		for (int i = 0; i < selectedCells.length; i++) {
+			for (int j = 0; j < selectedCells[i].length; j++) {
+				cells.add(selectedCells[i][j]);
+			}
+		}
+		NetworkService.sendCellsContent(cells);
 	}
 }

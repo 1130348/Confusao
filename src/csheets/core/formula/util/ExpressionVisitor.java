@@ -59,6 +59,7 @@ public interface ExpressionVisitor {
 	 * @return an arbitrary object
 	 */
 	public Object visitReference(Reference reference);
+        
 
 	/**
 	 * Visits the given function call.
