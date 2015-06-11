@@ -58,6 +58,24 @@
  * <br/>
  * <br/>
  *
+ * <b>core05_01: Design</b><br/>
+ * The following diagram shows how the process to set the Email settings works
+ * from the user point of view.<br/><br/>
+ * <img src="../../../csheets/userstories/us016/doc-files/us016_design.png">
+ * <br/>
+ * <br/>
+ * <br/>
+ * <b>core05_01: Coding</b><br/>
+ * see:<br/>
+ * <a
+ * href="../../../csheets/ext/Email/package-frame.html">csheets.ext.Email</a><br/>
+ * <a
+ * href="../../../csheets/ext/Email/UI/package-frame.html">csheets.ext.Email.UI</a><br/>
+ * <br/>
+ * <br/>
+ *
+ *
+ *
  *
  *
  * @author 1120835 Paulo Brito
