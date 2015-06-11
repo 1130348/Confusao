@@ -1,0 +1,34 @@
+@startuml doc-files/insert_image_extension_design2.png
+    participant "uic: UIController" as uic
+    participant "uiExtension : UIExtensionInsertImage" as UIExt
+    participant "InsertImagePanel : JPanel" as cp
+    participant "InsertImageController" as ctrl
+    participant "event: SelectionEvent" as event
+    participant "cell: Cell" as cell
+    participant "activeCell: ImageCell" as activeCell
+    
+    create cp
+    UIExt -> cp :  new(uic) 
+    
+    create ctrl
+    cp -> ctrl : new(uic) 
+    cp -> uic : addSelectionListener(this)
+
+    note right of uic
+        The user selects a cell.
+        Then the user selects the Image using the file chooser
+    end note
+
+    uic -> cp : selectionChanged(SelectionEvent event)
+    cp -> event : getCell()
+    cp -> cell : activeCell=getExtension(InsertImageExtension.NAME)
+
+    cp -> ctrl : cellSelected();
+    ctrl -> activeCell : getInsertImage()
+    ctrl -> cp : setInsertImage()
+
+    note right of cp
+        ... the InsertImagePanel displays the Image of the current cell.
+    end note
+
+@enduml

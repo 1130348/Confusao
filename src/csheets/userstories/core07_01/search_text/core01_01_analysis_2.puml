@@ -1,0 +1,17 @@
+@startuml doc-files/core07_01_search_text_2.png
+actor user
+ participant "UIController" as UI
+ participant "SearchAction" as sa
+ participant search
+ participant "SpreadsheetTable" as st
+
+user -> UI: choose "Edit -> Search and Replace"
+UI -> sa: actionListener()
+sa-> search: create()
+sa-> search: expressionToSearch
+search-> search: search()
+search-> sa: cellFinded
+search->st:changeSelection(result)
+ @enduml
+ *
+ */

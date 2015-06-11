@@ -71,26 +71,28 @@
  * <br/>
  * see: <code>csheets.ext.search_on_another_instances</code><br/>
  * <h2>4. Design</h2>
- * To realize this user story we will need to create a subclass of Extension. 
- * We will also need to create a subclass of UIExtension. In the code of the extension 
- * <code>csheets.ext.style</code> we can find examples that illustrate how to 
+ * To realize this user story we used Observer pattern for alert UI that Server 
+ * receive a request for search one woorkbook or receive one reponse to that 
+ * request.
+ * <code>csheets.ext.search_on_another_instance</code> we can find examples that illustrate how to 
  * implement these technical requirements.<br/>
  * The following diagrams illustrate core aspects of the design of the solution 
  * for this use case.<br/>
  * 
- * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Start Sharing" extension when 
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * <h3>Start Server</h3>
+ * The following diagram shows the setup of the Server after start this use case
  * <br/>
- * <h3>User Select Cells And Clicks Botton To Send</h3>
- * The following diagram illustrates what happens when the user select cells.
- * When the user selects the cells the object StartSharingAction has access to 
- * SpreedSheatTable who knows the user selected cells. After the user selected 
- * cells, he press the button to send  and active actionPerformed() method of class
- * StartSharingAction<br/>
  * <br/>
- * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
+ * <img src="doc-files/start_server_sequence_diagram.png"/>
+ * <br/>
+ * <h3>User Send Search Request</h3>
+ * The following diagram shows when user send a search request<br/>
+ * <br/>
+ * <img src="doc-files/sequence_diagram.png">
+ * <h3>User Receive Search Request</h3>
+ * The following diagram shows when user receive one search request<br/>
+ * <br/>
+ * <img src="doc-files/sequence_diagram_receiver.png">
  * <h2>5. Coding</h2>
  * see:<br/>
  * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.startsharing</a><br/>

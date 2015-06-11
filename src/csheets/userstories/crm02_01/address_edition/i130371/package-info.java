@@ -80,11 +80,10 @@
  * the connection of the database, the contact class, the address class. After
  * that also controller will need tests in order to validate all the implemented
  * methods. <br/>
- * The test classes "ContactControllerTest" and "ContactTest" already exist
- * because of the use case "CRM01_01 Contact Edition" but were updated to fill
- * all the requirements of this use case. Just the class "Address Test" was
- * created now and has test like gets and sets to all the attributes of an
- * Address.<br/>
+ * The test class "ContactTest" already exist because of the use case "CRM01_01
+ * Contact Edition" but were updated to fill all the requirements of this use
+ * case. Just the class "Address Test" was created now and has test like gets
+ * and sets to all the attributes of an Address.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
@@ -102,7 +101,34 @@
  * contact and a window will be open in order to write or edit the address. Then
  * the user just need to save and the contact will be updated.
  *
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_extension.png" <br/> <br/> <br/>
+ * Let's start with the address. A contact has got two addresses. One that
+ * represents the main one and another that is the secundary. An address has the
+ * street, locality, city, postal code and the country.
+ * <br/><br/>
+ * <br/><img src="doc-files/crm_02_01_design_sequence.png" <br/> <br/> <br/>
+ *
  * <h2>5. Coding</h2>
+ * Creating a new extension implies adding the extension to the file and
+ * creating classes like ExtensionAddress and UIExtensionAddress. After that was
+ * necessary to create an interface with classes AddressMenuItem,
+ * AddressMenuItem, AddressPanel and EditAddress. In order to validate the
+ * postal code choosen for the user there is a file .txt with some postal codes
+ * and the classe AddressController has a method to read the file and validate.
+ * see: <code>csheets.ext.address.ExtensionAddress</code><br/>
+ * see: <code>csheets.ext.address.ui.AddressController</code><br/>
+ * see: <code>csheets.ext.address.ui.AddressMenuItem</code><br/>
+ * see: <code>csheets.ext.address.ui.AddressPanel</code><br/>
+ * see: <code>csheets.ext.address.ui.EditAddress</code><br/>
+ * see: <code>csheets.ext.address.ui.UIExtensionAddress</code><br/>
+ * <br/>
+ * It was necessary to create the class Address that has got 5 attributes:
+ * street, city, country, postal code and locality. The class Contact has been
+ * update with two new attributes: the main address and the secundary address
+ * (both type Address).<br/>
+ * see: <code>csheets.ext.address.Contact</code><br/>
+ * see: <code>csheets.ext.address.Address</code><br/>
  *
  * <h2>6. Final Remarks</h2>
  * This use case is the first of a series which will require connection with the

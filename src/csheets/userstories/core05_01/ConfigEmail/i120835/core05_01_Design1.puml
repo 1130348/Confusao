@@ -1,0 +1,26 @@
+@startuml doc-files/core05_01_emailSetting_design1.png
+
+  participant UIController as UICtrl
+  participant ExtensionManager as ExtM
+  participant "extension : EmailSettingExtension" as ESext
+  participant "uiExtension : UIExtensionEmailSetting" as UIExt
+  participant "EmailSettingPanel : JPanel" as EmailPanel
+  UICtrl -> ExtM : extensions=getExtensions();
+  loop for Extension ext : extensions
+  	UICtrl -> ESext : uiExtension=getUIExtension(this);
+  	activate ESext
+  	create UIExt
+  	ESext -> UIExt : new(extension, UICtrl)
+  	deactivate ESext
+  	UIExt -> UIExt : getSideBar();
+  	activate UIExt
+  	create EmailPanel
+  	UIExt -> EmailPanel :  new (uic)
+  	deactivate UIExt
+  	UICtrl -> UICtrl : uiExtensions.add(uiExtension);
+  end
+  @enduml
+
+
+
+@enduml

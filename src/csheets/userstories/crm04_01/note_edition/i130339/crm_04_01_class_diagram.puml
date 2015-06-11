@@ -1,4 +1,4 @@
-@startuml doc-files/crm_04_01_analise_classes.png
+@startuml doc-files/crm_04_01_class_diagram.png
 
     class "<<analysis>> Persistence" as Persistence{
         +getRepositoryFactory()

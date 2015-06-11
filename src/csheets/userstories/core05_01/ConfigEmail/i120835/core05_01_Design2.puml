@@ -1,0 +1,22 @@
+@startuml doc-files/core05_01_emailSetting_design2.png
+
+actor User
+
+participant UIController as UICtrl
+participant UIExtensions as UIExt
+participant UIEmailSetting as UIEmail
+participant EmailSettingPanel as EPanel
+
+User -> UICtrl : settingEmail()
+UICtrl -> UIExt : getUIExtension()
+UIExt -> UIEmail : getSideBar()
+UIEmail -> EPanel : getPanel()
+EPanel -->UICtrl :
+User -> UICtrl : ConfigEmail(User,Pass, service)
+UICtrl ->EmailAction : actionPerformedConfigEmail()
+EmailAction -> Email : Email(User,Pass,service)
+User -> UICtrl : senTestEmail(Cell)
+UICtrl ->EmailAction : actionPerformedSendEmail()
+EmailAction --> UICtrl : Message : "Email Sent"
+
+@enduml

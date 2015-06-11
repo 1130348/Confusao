@@ -20,6 +20,9 @@
     class "<<analysis>> Event" as Event{
         -String descritiveText
         -Date timestamp
+        -Boolean flagNotified
+        +setNotified()
+        +getNotified()
     }
 
     class "<<analysis>> Contact" as Contact{

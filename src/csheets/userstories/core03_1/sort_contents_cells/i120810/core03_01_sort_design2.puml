@@ -1,0 +1,35 @@
+@startuml doc-files/core03_01_design2.png
+
+participant "user: User" as user
+participant "frame: Frame" as frame
+participant "sort: SortCtrl" as sortctrl
+participant "sort: Sort" as sort
+participant "uic: UIController" as uic
+participant "Address : Address" as add
+participant "Cell : Cell" as cell
+participant "Spreadsheet" as spd
+user --> frame : select cell
+user --> frame : choose: "Extensions"->"Sort"->"Ascending/Descending"
+frame -> sortctrl : sort(ActiveCell, typeOfSort)
+sortctrl -> uic : activecell.getAddress.getColumn()
+uic -> add: getAddress()
+add -> cell : getColumn() 
+loop for
+    alt if !cell_value.isEmpty
+        sortctrl -> uic : getActiveSpreadSheet()
+        uic -> spd : getCell()
+        spd -> cell : getValue()
+        sortctrl -> sortctrl :arraylist.add()
+    end
+end
+sortctrl -> sort : sort(ArrayList, typeOfSort)
+
+loop for
+    sortctrl -> uic : getActiveSpreadSheet()
+    sortctrl -> uic : getCell()
+    spd -> cell : clear()
+spd -> cell : setContent(arraylist.get(i).toString()
+
+end
+
+@enduml

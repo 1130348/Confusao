@@ -12,14 +12,17 @@ import javax.swing.JMenu;
  *
  * @author Paulo Pereira
  */
-public class StartSharingMenu extends JMenu{
+public class StartSharingMenu extends JMenu {
 
-   public StartSharingMenu(UIController uiController) {
+	public StartSharingMenu(UIController uiController) {
 		super("Network");
 		//setMnemonic(KeyEvent.);
 
 		// Adds send action
-		add(new StartSharingAction(uiController));
+		SendCellsAction scaction = new SendCellsAction(uiController);
+		add(scaction);
+		add(new StartSharingAction(uiController, scaction));
+
 	}
-    
+
 }
