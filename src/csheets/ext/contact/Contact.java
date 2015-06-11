@@ -81,27 +81,33 @@ public class Contact {
     /**
      * Mobile Number of the contact
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PhoneNumber mobileNumber;
 
     /**
      * Work Number of the contact
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PhoneNumber workNumber;
 
     /**
      * Home Number of the contact
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PhoneNumber homeNumber;
 
     /**
      * Work Mobile Number of the contact
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PhoneNumber workMobileNumber;
 
+    /**
+     * Notes where all the versions of notes of this contact are stored
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
+    
     /**
      * Constructor without parameters
      */
@@ -117,6 +123,7 @@ public class Contact {
         homeNumber = new PhoneNumber("");
         main_address = new Address();
         secundary_address = new Address();
+        this.notes= new Notes();
     }
 
     /**
@@ -146,6 +153,7 @@ public class Contact {
         this.secundary_address = secundary_address;
         this.agenda = new Agenda();
         this.listEmail = new ArrayList<Email>();
+        this.notes=new Notes();
     }
 
     /**
@@ -361,5 +369,27 @@ public class Contact {
         this.secundary_address.setPostalCode(tmp_postal_code);
         this.secundary_address.setCity(tmp_city);
         this.secundary_address.setCountry(tmp_country);
+    }
+    
+    /**
+     * @return the notes
+     */
+    public Notes getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+    }
+
+    public boolean addNote(Note note) {
+        return this.notes.addNote(note);
+    }
+
+    public boolean removeNote(Note n) {
+        return this.notes.removeNote(n);
     }
 }

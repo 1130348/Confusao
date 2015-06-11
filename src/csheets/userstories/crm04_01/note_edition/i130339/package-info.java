@@ -65,7 +65,10 @@
  * on the DataBase.
  * <br/>
  * <h2>3. Tests</h2>
- *
+ * see: <code>csheets.crm.ContactControllerTest</code><br/>
+ * see: <code>csheets.crm.ContactTest</code><br/>
+ * see: <code>csheets.crm.NoteTest</code><br/>
+ * see: <code>csheets.crm.NotesTest</code><br/>
  * <h2>4. Design</h2>
  * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It
@@ -76,7 +79,12 @@
  * <img src="doc-files/crm_04_01_sequence_diagram_design.png">
  * <br/><br/>
  * <h2>5. Coding</h2>
- *
+ * see: <code>csheets.ext.contact.Contact</code><br/>
+ * see: <code>csheets.ext.contact.Note</code><br/>
+ * see: <code>csheets.ext.contact.Notes</code><br/>
+ * see: <code>csheets.ext.contact.ui.ContactController</code><br/>
+ * see: <code>csheets.ext.contact.ui.EditContact</code><br/>
+ * see: <code>csheets.ext.contact.ui.EditNote</code><br/>
  * <h2>6. Final Remarks</h2>
  * 
  * <br/>
