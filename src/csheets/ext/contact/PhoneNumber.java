@@ -39,7 +39,7 @@ public class PhoneNumber {
      * @param text text of phone Number
      */
     public PhoneNumber(String text) {
-        if (validate(text)) {
+        if (validate(text) || text.equals("")) {
             this.text = text;
         }
     }

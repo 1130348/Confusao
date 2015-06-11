@@ -20,19 +20,19 @@
  */
 package csheets.core.formula.lang;
 
+import csheets.core.Address;
+import csheets.core.Cell;
+import csheets.core.Spreadsheet;
+import csheets.core.Value;
+import csheets.core.Variable;
+import csheets.core.formula.Reference;
+import csheets.core.formula.util.ExpressionVisitor;
+import csheets.core.formula.util.ExpressionVisitorException;
 import java.text.ParseException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import csheets.core.Address;
-import csheets.core.Cell;
-import csheets.core.Spreadsheet;
-import csheets.core.Value;
-import csheets.core.formula.Reference;
-import csheets.core.formula.util.ExpressionVisitor;
-import csheets.core.formula.util.ExpressionVisitorException;
 
 /**
  * A reference to a cell in a spreadsheet.
@@ -191,4 +191,10 @@ public class CellReference implements Reference {
 			+ (cell.getAddress().getRow() + 1);
 		return columnStr + rowStr;
 	}
+
+    @Override
+    public SortedSet<Variable> getVariables() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

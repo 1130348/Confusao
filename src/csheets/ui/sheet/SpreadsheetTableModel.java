@@ -20,13 +20,12 @@
  */
 package csheets.ui.sheet;
 
-import javax.swing.table.AbstractTableModel;
-
 import csheets.core.Address;
 import csheets.core.Cell;
 import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
 import csheets.ui.ctrl.UIController;
+import javax.swing.table.AbstractTableModel;
 
 /**
  * An table model that provides a table with data from a spreadsheet.

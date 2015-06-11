@@ -47,11 +47,11 @@ expression
 	;
 
 operation
-	: attribution | comparison | forcicle
+	: attribution | comparison | forcicle 
 	;
 
 attribution
-	: CELL_REF ATT^ comparison
+	: ( VARIABLE  | CELL_REF ) ATT^ comparison
 	;
 
 comparison
@@ -93,6 +93,7 @@ atom
 	|	literal
 	|	LPAR! comparison RPAR!
 	|	bloco
+        |       variables
 	;
 
 function_call
@@ -105,6 +106,10 @@ reference
 	:	CELL_REF
 		( ( COLON^ ) CELL_REF )?
 	;
+
+variables
+	:  VARIABLE ( ( COLON^ ) VARIABLE )? 
+        ;
 
 literal
 	:	NUMBER
@@ -135,6 +140,11 @@ CELL_REF
 		( ABS )? ( DIGIT )+
 	;
 
+VARIABLE
+        :
+           VAR LETTER (DIGIT | LETTER)* 
+        ;
+
 /* String literals, i.e. anything inside the delimiters */
 
 STRING	:	QUOT
@@ -153,6 +163,9 @@ DIGIT : '0'..'9' ;
 
 /* Atribution operators */
 ATT		: ':=' ;
+
+/* Variable reference */
+VAR		: '@' ;
 
 /* Comparison operators */
 EQ		: '=' ;

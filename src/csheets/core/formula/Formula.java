@@ -20,17 +20,17 @@
  */
 package csheets.core.formula;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
+import csheets.core.formula.lang.VariableReference;
 import csheets.core.formula.util.CircularReferenceException;
 import csheets.core.formula.util.CircularReferenceFinder;
 import csheets.core.formula.util.ExpressionVisitor;
 import csheets.core.formula.util.ExpressionVisitorException;
 import csheets.core.formula.util.ReferenceFetcher;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * A formula in a cell.
@@ -49,6 +49,9 @@ public class Formula implements Expression {
 
 	/** Returns the references in the expression */
 	private SortedSet<Reference> references;
+        
+        	/** Returns the variable references in the expression */
+	private SortedSet<VariableReference> varReferences;
 
 	/**
 	 * Creates a new formula.

@@ -30,8 +30,6 @@ public class Email {
 
     protected Email() {
     }
-    
-    
 
     /**
      * Constructor
@@ -66,5 +64,13 @@ public class Email {
         Matcher matcher = pattern.matcher(text);
         System.out.println(matcher.matches());
         return matcher.matches();
+    }
+
+    public boolean edit(String text) {
+        if (Email.validate(text)) {
+            this.text=text;
+            return true;
+        }
+        return false;
     }
 }
