@@ -75,8 +75,8 @@
  * and how will be integrated in cleansheets projet. One more study target is
  * the notification to the user when the date of an event aproaches.<br/>
  * <br/>
- * From right now the ideia is to creat this classes: Contact, Agenda, Event and
- * ContactsController. Below there is the first prototype of the classes diagram
+ * From right now the ideia is to create this classes: Contact, Agenda, Event,
+ * ContactsController and Notification(Thread). Below there is the first prototype of the classes diagram
  * of this projet cleansheets. Besides all that classes already said there are a
  * ContactsRepository, a Factory called RepositoryFactory and the persistence
  * that allows the connection with the database.<br/> <br/>
@@ -96,6 +96,7 @@
  * see: <code>csheets.crm.AgendaTest</code><br/>
  * see: <code>csheets.crm.ContactControllerTest</code><br/>
  * see: <code>csheets.crm.ContactTest</code><br/>
+ *
  *
  * <h2>4. Design</h2>
  * <br/>
@@ -141,7 +142,16 @@
  * event and then choose the option Remove. The system will ask confirmation and
  * will delete that event from the database.<br/> <br/>
  * <br/><br/><img src="doc-files/crm_01_01_removeEvent.png" <br/> <br/>
- * <br/><br/> <br/>
+ * <br/><br/>
+ * For the active user, all of his events will be notified to him, once the day 
+ * of said events arrives. Using the database to search the timestamps of the 
+ * events, the program will launch a Frame that reminds the main User of his events.
+ * This Notification could have a ON/OFF option.
+ * <br/><br/>
+ * <img src="doc-files/crm_01_01_notification.png">
+ * <br/><br/>
+ * 
+ * 
  *
  * <h2>5. Coding</h2>
  * <br/>

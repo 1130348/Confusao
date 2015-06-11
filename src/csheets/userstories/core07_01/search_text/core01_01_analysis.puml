@@ -1,5 +1,5 @@
 @startuml doc-files/core07_01_search_text.png
-participant user
+actor user
  participant "UIController" as UI
  participant "SearchAction" as sa
  participant search

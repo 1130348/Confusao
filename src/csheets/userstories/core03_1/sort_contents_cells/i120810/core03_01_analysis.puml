@@ -1,0 +1,17 @@
+  @startuml doc-files/core03_01_sort_analysis.png
+  actor User
+  participant "<<analysis>>\nSortUI" as UI
+  participant "<<analysis>>\nSortCtrl" as ctrl
+  participant "<<analysis>>\nSpreadsheet" as sheet
+  participant "<<analysis>>\nCell" as cell
+  User -> UI : getActiveCell()
+  activate UI
+  UI -> ctrl : getAddress().getColumn()
+  activate ctrl
+  ctrl -> cell : getAddress()
+  ctrl -> sheet : getColumn()
+  deactivate ctrl
+  UI -> UI : displaySort()
+  deactivate UI
+
+  @enduml
