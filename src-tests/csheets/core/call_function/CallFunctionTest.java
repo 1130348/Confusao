@@ -49,7 +49,7 @@ public class CallFunctionTest {
         System.out.println("fillList");
         boolean expResult= false;
         CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
+        CallFunctionController ctrl = new CallFunctionController();
         boolean result = ctrl.fillList().isEmpty();
         assertEquals(expResult, result);
     }
@@ -64,7 +64,7 @@ public class CallFunctionTest {
         String expResult= "=SUM(Term;...)";
         String identifier = "SUM";
         CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
+        CallFunctionController ctrl = new CallFunctionController();
         String result = ctrl.chooseFunction(identifier);
         assertEquals(expResult, result);
     }
@@ -78,7 +78,7 @@ public class CallFunctionTest {
         String func_def= "=SUM(2;3)";
         String expResult = "SUM";
         CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
+        CallFunctionController ctrl = new CallFunctionController();
         ctrl.callFunction(func_def);
         //assertEquals(expResult, result);
         fail();
