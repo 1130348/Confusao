@@ -35,6 +35,7 @@ public class Server implements Runnable {
 		this.port = port;
 		this.clientConnections = new HashMap<Socket, DataOutputStream>();
 		this.sem = new Semaphore(1);
+		this.isRunning = true;
 	}
 
 	@Override
@@ -55,12 +56,12 @@ public class Server implements Runnable {
 					clientConnections.
 						put(client, new DataOutputStream(client.
 								getOutputStream()));
-					sem.release();
 
 					new Thread(new ReceiveData(client, sendCells)).start();
 				} else {
 					client.close();
 				}
+				sem.release();
 			}
 
 		} catch (IOException ex) {

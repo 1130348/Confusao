@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
@@ -101,6 +102,18 @@ public class NetworkSendService {
 								  ObjectOutputStream sOut) {
 		try {
 			sOut.writeObject(object);
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void sendString(String message,
+								  DataOutputStream sOut) {
+		try {
+			byte[] data = new byte[300];
+			data = message.getBytes();
+			sOut.write(data, 0, message.length());
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);
