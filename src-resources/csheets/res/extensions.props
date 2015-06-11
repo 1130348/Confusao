@@ -3,7 +3,6 @@ csheets.ext.deptree.DependencyTreeExtension
 csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.startsharing.StartSharingExtension
-csheets.core.call_function.CallFunctionExtension
 csheets.ext.contact.ExtensionContact
 csheets.ext.Enable_Disable.EnableDisableExtension
 csheets.ext.address.ExtensionAddress
