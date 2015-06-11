@@ -20,6 +20,16 @@
  */
 package csheets.core;
 
+import csheets.core.formula.Formula;
+import csheets.core.formula.Reference;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.core.formula.compiler.FormulaCompiler;
+import csheets.core.formula.lang.CellReference;
+import csheets.core.formula.lang.VariableReference;
+import csheets.core.formula.util.ReferenceTransposer;
+import csheets.ext.CellExtension;
+import csheets.ext.Extension;
+import csheets.ext.ExtensionManager;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,15 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import csheets.core.formula.Formula;
-import csheets.core.formula.Reference;
-import csheets.core.formula.compiler.FormulaCompilationException;
-import csheets.core.formula.compiler.FormulaCompiler;
-import csheets.core.formula.util.ReferenceTransposer;
-import csheets.ext.CellExtension;
-import csheets.ext.Extension;
-import csheets.ext.ExtensionManager;
 
 /**
  * The implementation of the <code>Cell</code> interface.
@@ -62,6 +63,8 @@ public class CellImpl implements Cell {
 
 	/** The cell's formula */
 	private Formula formula;
+        
+        //Cell Dependencies
 
 	/** The cell's precedents */
 	private SortedSet<Cell> precedents = new TreeSet<Cell>();
@@ -72,6 +75,7 @@ public class CellImpl implements Cell {
 	/** The cell listeners that have been registered on the cell */
 	private transient List<CellListener> listeners
 		= new ArrayList<CellListener>();
+      
 
 	/** The cell extensions that have been instantiated */
 	private transient Map<String, CellExtension> extensions = 
@@ -218,15 +222,21 @@ public class CellImpl implements Cell {
 			((CellImpl)precedent).removeDependent(this);
 		precedents.clear();
 
-		if (formula != null)
+		if (formula != null )
 			// Registers as dependent with each new precedent
 			for (Reference reference : formula.getReferences())
+                            if ( reference instanceof CellReference)
+                            {
 				for (Cell precedent : reference.getCells()) {
 					if (!this.equals(precedent)) {
 						precedents.add(precedent);
 						((CellImpl)precedent).addDependent(this);
 					}
 				}
+                            } else if( reference instanceof VariableReference)
+                            {
+                                
+                            }
 	}
 
 	/**
@@ -260,6 +270,7 @@ public class CellImpl implements Cell {
 	public SortedSet<Cell> getDependents() {
 		return new TreeSet<Cell>(dependents);
 	}
+        
 
 	/**
 	 * Adds the given cell as a dependent of this cell, to be notified when its
@@ -289,6 +300,7 @@ public class CellImpl implements Cell {
 		for (CellExtension extension : extensions.values())
 			extension.dependentsChanged(this);
 	}
+
 
 /*
  * CLIPBOARD
@@ -430,4 +442,6 @@ public class CellImpl implements Cell {
 		for (CellExtension extension : extensions.values())
 			stream.writeObject(extension);
 	}
+
+
 }

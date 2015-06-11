@@ -20,10 +20,10 @@
  */
 package csheets.core.formula;
 
-import java.util.SortedSet;
-
 import csheets.core.Cell;
 import csheets.core.Value;
+import csheets.core.Variable;
+import java.util.SortedSet;
 
 /**
  * A reference to one or more cells in a spreadsheet.
@@ -45,4 +45,12 @@ public interface Reference extends Expression, Comparable<Reference> {
 	 * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
 	 */
 	public int compareTo(Reference reference);
+
+        /**
+         * 
+         * Returns the variable the reference points to
+         * 
+     * @return 
+         */
+    public SortedSet<Variable> getVariables();
 }
