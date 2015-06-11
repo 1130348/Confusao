@@ -4,6 +4,7 @@ import csheets.ext.address.Address;
 import csheets.ext.contact.Agenda;
 import csheets.ext.contact.Contact;
 import csheets.ext.contact.Event;
+import csheets.ext.contact.PhoneNumber;
 import csheets.persistenceTest.PersistenceTest;
 import java.awt.image.BufferedImage;
 import java.util.Date;
@@ -37,11 +38,11 @@ public class DataBaseTest {
      */
     public static void addData() {
 
-        Contact c = new Contact("TestF", "TestL", "TestMachine", new BufferedImage(1, 2, 3), new Address(),new Address());
-        Contact c1 = new Contact("Antonio", "Pinheiro", "Antonio96", new BufferedImage(1, 2, 3), new Address(),new Address());
-        Contact c2 = new Contact("Cristina", "Lopes", "Cris", new BufferedImage(1, 2, 3), new Address(),new Address());
-        Contact c3 = new Contact("Andre", "Sousa", "Andrezinho", new BufferedImage(1, 2, 3), new Address(),new Address());
-        Contact c4 = new Contact("Egidio", "Santos", "EgidioS", new BufferedImage(1, 2, 3), new Address(),new Address());
+        Contact c = new Contact("TestF", "TestL", "TestMachine", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
+        Contact c1 = new Contact("Antonio", "Pinheiro", "Antonio96", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
+        Contact c2 = new Contact("Cristina", "Lopes", "Cris", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
+        Contact c3 = new Contact("Andre", "Sousa", "Andrezinho", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
+        Contact c4 = new Contact("Egidio", "Santos", "EgidioS", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
 
         PersistenceTest.getRepositoryFactory().getContactRepository().add(c);
         PersistenceTest.getRepositoryFactory().getContactRepository().add(c1);
@@ -57,7 +58,7 @@ public class DataBaseTest {
     @Test
     public void addContactTest() {
 
-        Contact c = new Contact("TestAddF", "TestAddL", "TestAddMachine", new BufferedImage(1, 2, 3), new Address(),new Address());
+        Contact c = new Contact("TestAddF", "TestAddL", "TestAddMachine", new BufferedImage(1, 2, 3),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"),new PhoneNumber("99999999"), new Address(),new Address());
         PersistenceTest.getRepositoryFactory().getContactRepository().add(c);
 
         List<Contact> lresult = PersistenceTest.getRepositoryFactory().getContactRepository().all();
