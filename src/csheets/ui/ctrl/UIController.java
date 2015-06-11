@@ -433,4 +433,8 @@ public class UIController implements SpreadsheetAppListener {
             }
         }
     }
+    
+    public Workbook getOpenWorkbookByFileName(String fileName){
+        return app.getWorkbookByFileName(fileName);
+    }
 }

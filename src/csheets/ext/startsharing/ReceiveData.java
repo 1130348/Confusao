@@ -65,17 +65,44 @@ public class ReceiveData implements Runnable {
 	private void choosenFunctionality(String functionality) {
 		try {
 			sem.acquire();
-			Object data;
-
+			byte[] data = new byte[300];
+			int nChars;
 			if (functionality.equals("Share Cells")) {
+				Object obj;
 				List<Cell> receivedCells = new ArrayList<Cell>();
 				while (true) {
-					data = objectIn.read();
-					if (data == null) {
+					obj = objectIn.read();
+					if (obj == null) {
 						NetworkService.receiveCells(receivedCells, cellsAction);
 						break;
 					}
-					receivedCells.add((Cell) data);
+					receivedCells.add((Cell) obj);
+				}
+			} else if (functionality.equals("Share Cells Content")) {
+				String message;
+				List<String> cellsContent = new ArrayList<String>();
+				List<String> cellsColumns = new ArrayList<String>();
+				List<String> cellsRows = new ArrayList<String>();
+				while (true) {
+					nChars = dataIn.read();
+					dataIn.read(data, 0, nChars);
+					message = new String(data, 0, nChars);
+					if (message.equals("end")) {
+						NetworkService.
+							receiveCellsContent(cellsContent, cellsColumns, cellsRows, cellsAction);
+						break;
+					}
+					cellsContent.add(message);
+
+					nChars = dataIn.read();
+					dataIn.read(data, 0, nChars);
+					message = new String(data, 0, nChars);
+					cellsColumns.add(message);
+
+					nChars = dataIn.read();
+					dataIn.read(data, 0, nChars);
+					message = new String(data, 0, nChars);
+					cellsRows.add(message);
 				}
 			}
 

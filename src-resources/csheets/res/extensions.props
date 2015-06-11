@@ -7,6 +7,6 @@ csheets.core.call_function.CallFunctionExtension
 csheets.ext.contact.ExtensionContact
 csheets.ext.Enable_Disable.EnableDisableExtension
 csheets.ext.address.ExtensionAddress
+csheets.ext.selectgame.SelectGameExtension
 csheets.ext.findworkbooks.FindWorkbooksExtension
 csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceExtension
-
