@@ -52,7 +52,7 @@ public class ReceiveData implements Runnable {
 					break;
 				}
 
-				dataIn.read(data, 9, nChars);
+				dataIn.read(data, 0, nChars);
 				String functionality = new String(data, 0, nChars);
 				choosenFunctionality(functionality);
 			}
