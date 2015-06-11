@@ -27,21 +27,65 @@ import csheets.core.formula.Expression;
 
 /**
  * A subtracter of a numeric operand from another.
+ *
  * @author Einar Pehrson
  */
 public class Subtracter implements BinaryOperator {
 
-	/** The unique version identifier used for serialization */
+	/**
+	 * The unique version identifier used for serialization
+	 */
 	private static final long serialVersionUID = 2660304336585762625L;
 
 	/**
 	 * Creates a new subtracter.
 	 */
-	public Subtracter() {}
+	public Subtracter() {
+	}
 
 	public Value applyTo(Expression leftOperand, Expression rightOperand) throws IllegalValueTypeException {
-		return new Value(leftOperand.evaluate().toDouble()
-				- rightOperand.evaluate().toDouble());
+		int leftColumn = 0;
+		int rightColumn = 0;
+		int leftRow = 0;
+		int rightRow = 0;
+
+		Value.Type typeLeft = leftOperand.evaluate().getType();
+		Value.Type typeRight = leftOperand.evaluate().getType();
+
+		//enum Type
+		if ((typeLeft == typeRight) && (typeLeft == Value.Type.MATRIX)) {
+			Value[][] leftMatrix = leftOperand.evaluate().toMatrix();
+			Value[][] rightMatrix = rightOperand.evaluate().toMatrix();
+
+			for (Value[] row : leftMatrix) {
+				leftRow++; // Incrementa Linha(esquerda)
+				leftColumn += row.length;
+			}
+
+			for (Value[] row : rightMatrix) {
+				rightRow++;
+				rightColumn += row.length;
+			}
+
+			//Diferentes Tamanhos!
+			//Operação de Soma para matrizes de diferentes dimensões não é possível.
+			if ((leftRow != rightRow) && (leftColumn != rightColumn)) {
+				return new Value("#Type");
+			} else {
+				//Matrizes iguais, calcular a respectiva adiçao
+				Value[][] resultMatrix = new Value[rightMatrix.length][rightMatrix[0].length];
+				for (int i = 0; i < rightMatrix.length; i++) {
+					for (int j = 0; j < rightMatrix[i].length; j++) {
+						resultMatrix[i][j] = new Value(leftMatrix[i][j].
+							toDouble() - rightMatrix[i][j].toDouble());
+					}
+				}
+				return new Value(resultMatrix);
+			}
+		} else {
+			return new Value(leftOperand.evaluate().toDouble() - rightOperand.
+				evaluate().toDouble());
+		}
 	}
 
 	public String getIdentifier() {

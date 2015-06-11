@@ -5,6 +5,9 @@
  */
 package csheets.ext.startsharing;
 
+import csheets.ext.searchOnAnotherInstance.ReportWatch;
+import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceServer;
+import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -20,45 +23,53 @@ import java.util.logging.Logger;
  */
 public class NetworkReceiveService {
 
-	private static Thread receiveUDP;
-	private static final int TIMEOUT = 3;
+    private static Thread receiveUDP;
+    private static final int TIMEOUT = 3;
 
-	public NetworkReceiveService() {
-	}
+    public NetworkReceiveService() {
+    }
 
-	public static void startReceivingUDPDatagrams(int portUDP, int portTCP) {
-		receiveUDP = new Thread(new RespondToUDPRequest(portUDP, portTCP));
-		receiveUDP.start();
-	}
+    public static void startReceivingUDPDatagrams(int portUDP, int portTCP) {
+        receiveUDP = new Thread(new RespondToUDPRequest(portUDP, portTCP));
+        receiveUDP.start();
+    }
 
-	public static void stopReceivingUDPDatagrams(int portUDP) {
-		try {
-			String localHost = InetAddress.getLocalHost().getHostName();
+    public static void stopReceivingUDPDatagrams(int portUDP) {
+        try {
+            String localHost = InetAddress.getLocalHost().getHostName();
 
-			InetAddress destinationIP = InetAddress.getByName(localHost);
+            InetAddress destinationIP = InetAddress.getByName(localHost);
 
-			DatagramSocket socket = new DatagramSocket();
-			byte[] data = new byte[300];
-			String message = "Exit";
-			data = message.getBytes();
-			DatagramPacket exitMessage = new DatagramPacket(data, message.
-															length(), destinationIP, portUDP);
+            DatagramSocket socket = new DatagramSocket();
+            byte[] data = new byte[300];
+            String message = "Exit";
+            data = message.getBytes();
+            DatagramPacket exitMessage = new DatagramPacket(data, message.
+                    length(), destinationIP, portUDP);
 
-			socket.send(exitMessage);
-			receiveUDP.join();
-		} catch (UnknownHostException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		} catch (SocketException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		} catch (InterruptedException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
+            socket.send(exitMessage);
+            receiveUDP.join();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (SocketException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
 
-	}
+    }
+
+    public static void addObserver(SearchOnAnotherInstanceDialog dialog, ReportWatch reportWatch) {
+        SearchOnAnotherInstanceServer server = new SearchOnAnotherInstanceServer();
+        server.addObserver(dialog);
+        server.addObserver(reportWatch);
+        Thread serverThread = new Thread(server);
+        serverThread.start();
+    }
 }

@@ -17,7 +17,8 @@
  * The user selects the option to import or export data from a text file. The
  * system displays a window wizard and requests which character will serve as 
  * separator for the columns of the text file, it also asks if there is a first
- * row header , and whether it should be included in the operation. Now it is 
+ * row header , and whether it should be included in the operation. It is also
+ * necessary to choose the file to do the exportation/importation. Now it is 
  * only needed to import or export the text file.
  * <br/>
  * <br/>
@@ -26,8 +27,7 @@
  * In order to import or export the data from a text file I need to understand how 
  * manipulate a text file. It is also necessary to understand how threads work 
  * so that we can navigate the application without having to stop the 
- * exportation/importation. In addition to the previous I must also study the operation of 
- * networks and the definition of gateways.
+ * exportation/importation.
  * <br/>
  * <br/>
  * <h3>First "analysis" sequence diagram</h3>
@@ -59,6 +59,30 @@
  * beginning. The idea is that the tests will pass in the end.<br> 
  * <br/>
  * see: <code>csheets.ext.start_sharing.ImportExportText</code><br/>
+ * <h2>4. Design</h2>
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.<br/>
+ * 
+ * <h3>Import from a text file</h3>
+ * The following diagram illustrates what happens when the user wants to import
+ * data from a text file.
+ * When the user selects the option to import, the ImportExportAction has access to 
+ * SpreedSheatImpl who has access to all cells. After that the user chooses the column's 
+ * separator and if the header is supposed to be included in the importation. 
+ * Finally the importation is done.<br/><br/>
+ * <img src="doc-files/import_from_text_file_ipc04_01.png"/>
+ * <br/>
+ * <h3>Export to a text file</h3>
+ * The following diagram illustrates what happens when the user wants to export
+ * data to a text file.
+ * When the user selects the option to export, the ImportExportAction has access to 
+ * SpreedSheatImpl who has access to all cells. After that the user chooses the column's 
+ * separator and if the header is supposed to be included in the exportation. 
+ * Finally the exportation is done.
+ * <br/>
+ * <br/>
+ * <img src="doc-files/export_to_text_file_ipc04_01.png"/>
+ * 
  */
 
 package csheets.userstories.ipc04_01.import_export_text.i130664;

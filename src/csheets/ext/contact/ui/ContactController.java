@@ -1,6 +1,7 @@
 package csheets.ext.contact.ui;
 
 import csheets.ext.contact.Contact;
+import csheets.ext.contact.Note;
 import csheets.persistence.Persistence;
 import csheets.ui.ctrl.UIController;
 import java.util.List;
@@ -82,5 +83,17 @@ public class ContactController {
 	public void update() {
 		uiPanel.startList();
 	}
+
+          public boolean addNote(Contact c, String title, String text)
+        {
+            return c.addNote(new Note(title, text));
+        }
+        
+        public boolean removeNote(Contact c, Note n)
+        {
+            return c.removeNote(n);
+        }
+        
+        
 
 }

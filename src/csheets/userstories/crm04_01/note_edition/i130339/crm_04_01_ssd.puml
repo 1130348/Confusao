@@ -1,0 +1,15 @@
+  @startuml doc-files/crm_04_01_ssd.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Notes creation
+        s -> User: Show all contacts
+	User -> s: Selects one contact
+	s -> User: New window with contact information
+	User -> s: Selects button "Add note"
+	s -> User: Asks about information
+	User -> s: Inserts note (title and text)
+        s -> User: Asks confirmation
+        User -> s: Confirm
+	s -> User: Success of the use case
+  @enduml

@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
@@ -39,7 +40,7 @@ public class NetworkSendService {
 			DatagramSocket socket = new DatagramSocket();
 			socket.setBroadcast(true);
 			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("173.18.135.255");
+			InetAddress destinationIP = InetAddress.getByName("192.168.1.255");
 
 			byte[] data = new byte[300];
 			String message = String.format("%d", portTCP);
@@ -67,6 +68,9 @@ public class NetworkSendService {
 					NetworkService.
 						addClientToMap(Integer.parseInt(message), reply.
 									   getAddress());
+
+					activeInstances.put(reply.getAddress(), Integer.
+										parseInt(message));
 
 					endTime += System.currentTimeMillis();
 					time += endTime - startTime;
@@ -98,6 +102,18 @@ public class NetworkSendService {
 								  ObjectOutputStream sOut) {
 		try {
 			sOut.writeObject(object);
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void sendString(String message,
+								  DataOutputStream sOut) {
+		try {
+			byte[] data = new byte[300];
+			data = message.getBytes();
+			sOut.write(data, 0, message.length());
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);

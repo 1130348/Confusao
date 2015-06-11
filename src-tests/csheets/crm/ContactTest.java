@@ -2,6 +2,7 @@ package csheets.crm;
 
 import csheets.ext.address.Address;
 import csheets.ext.contact.Contact;
+import csheets.ext.contact.Note;
 import java.awt.image.BufferedImage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -107,34 +108,34 @@ public class ContactTest {
 		assertEquals(expResult, result);
 	}
 
-//    @Test
-//    public void testaddNote()
-//    {
-//
-//        Contact c = new Contact();
-//        String title = "title";
-//        String text = "text";
-//
-//        boolean expResult = true;
-//        boolean result = c.addNote(new Note("title", "text"));
-//
-//        assertEquals(expResult,result);
-//    }
-//
-//    @Test
-//    public void testremoveNote()
-//    {
-//        Contact c = new Contact();
-//        String title = "title";
-//        String text = "text";
-//
-//        Note n = new Note("title", "text");
-//
-//        c.addNote(n);
-//
-//
-//        boolean expResult = true;
-//        boolean result = c.removeNote(n);
-//
-//    }
+    @Test
+    public void testaddNote()
+    {
+
+        Contact c = new Contact();
+        String title = "title";
+        String text = "text";
+
+        boolean expResult = true;
+        boolean result = c.addNote(new Note("title", "text"));
+
+        assertEquals(expResult,result);
+    }
+
+    @Test
+    public void testremoveNote()
+    {
+        Contact c = new Contact();
+        String title = "title";
+        String text = "text";
+
+        Note n = new Note("title", "text");
+
+        c.addNote(n);
+
+
+        boolean expResult = true;
+        boolean result = c.removeNote(n);
+
+    }
 }

@@ -1,0 +1,23 @@
+@startuml doc-files/sequence_diagram_receiver.png
+actor Receiver as user
+participant "dialog : SearchAnotherInstanceDialog" as said
+participant "UIController" as uic
+participant "SearchAnotherInstanceController" as saic
+participant "Server" as serv
+participant "<<Service>>\nReportCreater" as repCrea
+participant "notEve : NotificationEvent" as notEve
+participant "<<Service>>\nNetwork" as net
+participant "<<Service>>\nNetworkSendService" as netSen
+== When receive the search request ==
+serv -> serv : socket.accept()
+serv -> notEve : create(address, workbookName)
+serv -> serv : setChanged()
+serv -> serv : notifyObservers(repEve)
+serv -> said : update()
+said -> uic : getOpenWorkbooks()
+said -> saic : searchWorkbook(workbookList, workbookName)
+saic -> repCrea : searchWorkbook(workbookList, workbookName)
+said -> saic : sendSpreadSheetlist(address, spreadSheetList)
+saic -> net : sendSpreadSheetList(address, spreadSheetList)
+net -> netSen : sendObject(socket, spreadSheetList)
+@enduml
