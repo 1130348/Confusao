@@ -5,8 +5,11 @@
  */
 package csheets.ext.startsharing;
 
+import csheets.core.Cell;
+import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,34 +23,35 @@ public class StartSharingController {
 	}
 
 	public void changePort(int port) {
-		Network.setPort(port);
+		NetworkService.setPort(port);
 	}
 
-	public boolean establishConnection(String address) {
-		return Network.establishConnection(address);
+	public void startServer(SendCellsAction cellsAction) {
+		NetworkService.startServer(cellsAction);
 	}
 
-	public boolean sendObject(Object obj) throws IOException {
-		return Network.sendSelectedCellRange(obj);
+	public boolean establishConnection(List<String> addresses,
+									   SendCellsAction action) {
+		return NetworkService.establishConnection(addresses, action);
 	}
 
-	public void setVisibleToOthers(boolean b) {
-		Network.isVisibleToOthers(b);
+	public void sendCells(List<Cell> selectedCells) throws IOException {
+		NetworkService.sendCells(selectedCells);
+	}
+
+	public void setVisibility(boolean b) {
+		NetworkService.isVisibleToOthers(b);
 	}
 
 	public Map<InetAddress, Integer> searchInstances() {
-		return Network.searchInstances();
-	}
-
-	public void waitConnection() {
-		Network.waitForConnection();
+		return NetworkService.searchInstances();
 	}
 
 	public void setSendPort(int port) {
-		Network.setPort(port);
+		NetworkService.setPort(port);
 	}
 
 	public void interruptConnection() {
-		Network.interruptConnection();
+		NetworkService.interruptConnection();
 	}
 }

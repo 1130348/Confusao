@@ -8,6 +8,7 @@ package csheets.ext.startsharing.ui;
 import csheets.ext.startsharing.StartSharingController;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
@@ -22,6 +23,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 	private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
 	private final ArrayList<Boolean> connectDisconnectToggleButtonClick = new ArrayList<Boolean>();
 	private StartSharingController controller;
+	private static SendCellsAction sendCellAction;
 
 	/**
 	 * This JDialog gives the user the option to define its connection port and
@@ -33,7 +35,8 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 	 */
 	private ChooseCleanSheetsInstanceToConnect(java.awt.Frame parent,
 											   boolean modal,
-											   StartSharingController controller) {
+											   StartSharingController controller,
+											   SendCellsAction action) {
 		super(parent, modal);
 		this.controller = controller;
 		initComponents();
@@ -42,15 +45,17 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 		availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
 			setEnabled(false);
 		availableCleanSheetsInstancesScrollPane.getViewport().setEnabled(false);
+		ChooseCleanSheetsInstanceToConnect.sendCellAction = action;
 	}
 
 	public ChooseCleanSheetsInstanceToConnect() {
 	}
 
 	public static synchronized ChooseCleanSheetsInstanceToConnect getInstance(
-		java.awt.Frame parent, boolean modal, StartSharingController controller) {
+		java.awt.Frame parent, boolean modal, StartSharingController controller,
+		SendCellsAction action) {
 		if (instance == null) {
-			instance = new ChooseCleanSheetsInstanceToConnect(parent, modal, controller);
+			instance = new ChooseCleanSheetsInstanceToConnect(parent, modal, controller, action);
 		}
 		return instance;
 	}
@@ -211,8 +216,8 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 			int index = availableCleanSheetsInstancesList.getSelectedIndex();
 			if (connectDisconnectToggleButtonClick.get(index)) {
 				controller.
-					establishConnection((String) availableCleanSheetsInstancesList.
-						getSelectedValue());
+					establishConnection((List<String>) availableCleanSheetsInstancesList.
+						getSelectedValuesList(), sendCellAction);
 				connectDisconnectToggleButtonClick.set(index, false);
 				connectDisconnectToggleButton.setText("Disconnect");
 			} else {
@@ -252,12 +257,6 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 	 */
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
 		retrieveAvailableCleanSheetsInstances();
-//        JOptionPane.showMessageDialog(
-//                rootPane,
-//                "The list has been successfully updated!",
-//                "Info",
-//                JOptionPane.INFORMATION_MESSAGE
-//        );
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void startStopSharingToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopSharingToggleButtonActionPerformed
@@ -273,7 +272,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 			availableCleanSheetsInstancesScrollPane.getViewport().
 				setEnabled(false);
 			startStopSharingToggleButton.setText("Start Sharing");
-			controller.setVisibleToOthers(false);
+			controller.setVisibility(false);
 			listOfAvailableCleanSheetsInstances.clear();
 		} else {
 			int port = (Integer) connectionPortSpinner.getValue();
@@ -297,9 +296,9 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
 				setEnabled(true);
 			startStopSharingToggleButton.setText("Stop Sharing");
 			controller.changePort(port);
-			controller.setVisibleToOthers(true);
+			controller.setVisibility(true);
 			retrieveAvailableCleanSheetsInstances();
-			controller.waitConnection();
+			controller.startServer(sendCellAction);
 		}
     }//GEN-LAST:event_startStopSharingToggleButtonActionPerformed
 
