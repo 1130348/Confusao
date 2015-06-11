@@ -190,7 +190,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
             InetAddress addressToSend = ((NotificationEvent) arg).getAddress();
             JOptionPane.showConfirmDialog(null, "You receive a search request for the workbook "
                     + workbookName + " by the user " + addressToSend.getHostName() + ".", "Notification", JOptionPane.INFORMATION_MESSAGE);
-            Workbook openWoorkbook = uiController.getOpenWorkbookByName(workbookName);
+            Workbook openWoorkbook = uiController.getWorkbookByFileName(workbookName);
             controller.sendWorkbook(addressToSend, openWoorkbook);
         } else if (arg instanceof String) {
             String message = ((String) arg);
