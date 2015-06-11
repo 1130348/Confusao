@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -60,5 +61,11 @@ public class StartWorkbooksSearch extends Thread {
         } catch (IOException ex) {
             System.out.println("Error!");
         }
+        JOptionPane.showMessageDialog(
+                null,
+                "Workbook search completed!\n",
+                "Search Completed",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 }
