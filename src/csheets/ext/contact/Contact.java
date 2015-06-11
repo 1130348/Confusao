@@ -107,7 +107,7 @@ public class Contact {
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
-    
+
     /**
      * Constructor without parameters
      */
@@ -123,7 +123,7 @@ public class Contact {
         homeNumber = new PhoneNumber("");
         main_address = new Address();
         secundary_address = new Address();
-        this.notes= new Notes();
+        this.notes = new Notes();
     }
 
     /**
@@ -153,7 +153,7 @@ public class Contact {
         this.secundary_address = secundary_address;
         this.agenda = new Agenda();
         this.listEmail = new ArrayList<Email>();
-        this.notes=new Notes();
+        this.notes = new Notes();
     }
 
     /**
@@ -308,15 +308,17 @@ public class Contact {
 
     /**
      * Return a new PhoneNumber object
+     *
      * @param newNumber text of the number
      * @return PhoneNumber object
      */
-    PhoneNumber newPhoneNumber(String newNumber) {
+    public PhoneNumber newPhoneNumber(String newNumber) {
         return new PhoneNumber(newNumber);
     }
 
     /**
      * Return a new Email object
+     *
      * @param text text of the object
      * @return Email object
      */
@@ -326,7 +328,8 @@ public class Contact {
 
     /**
      * add email to the list
-     * @param email 
+     *
+     * @param email
      */
     public void addEmail(Email email) {
         listEmail.add(email);
@@ -334,21 +337,31 @@ public class Contact {
 
     /**
      * remove email from the list
-     * @param email 
+     *
+     * @param email
      */
     public void removeEmail(Email email) {
         listEmail.remove(email);
     }
 
+    public boolean editEmail(Email e, String text) {
+        return e.edit(text);
+    }
+
     /**
      * Define primary email
-     * @param email 
+     *
+     * @param email
      */
     public void setPrimaryEmail(Email email) {
-        Email tempEmail = listEmail.get(0);
-        removeEmail(email);
-        listEmail.set(0, email);
-        addEmail(tempEmail);
+        if (!listEmail.get(0).equals(email)) {
+            if (listEmail.size() > 1) {
+                Email tempEmail = listEmail.get(0);
+                removeEmail(email);
+                listEmail.set(0, email);
+                addEmail(tempEmail);
+            }
+        }
     }
 
     /**
@@ -392,7 +405,7 @@ public class Contact {
         this.secundary_address.setCity(tmp_city);
         this.secundary_address.setCountry(tmp_country);
     }
-    
+
     /**
      * @return the notes
      */
@@ -413,5 +426,32 @@ public class Contact {
 
     public boolean removeNote(Note n) {
         return this.notes.removeNote(n);
+    }
+
+    public List getEmails() {
+        return this.listEmail;
+    }
+
+    public PhoneNumber getHomeNumber() {
+        return this.homeNumber;
+    }
+
+    public PhoneNumber getMobileNumber() {
+        return this.mobileNumber;
+    }
+
+    public PhoneNumber getWorkMobileNumber() {
+        return this.workMobileNumber;
+    }
+
+    public PhoneNumber getWorkNumber() {
+        return this.workNumber;
+    }
+
+    public Email getPrimaryEmail() {
+        if (listEmail.isEmpty()) {
+            return null;
+        }
+        return listEmail.get(0);
     }
 }

@@ -29,6 +29,7 @@ import csheets.core.formula.UnaryOperation;
 import csheets.core.formula.compiler.IllegalFunctionCallException;
 import csheets.core.formula.lang.CellReference;
 import csheets.core.formula.lang.ReferenceOperation;
+import csheets.core.formula.lang.VariableReference;
 
 /**
  * A base-class for classes that rebuild expressions. In this form, it simply
@@ -71,14 +72,18 @@ public class ExpressionBuilder implements ExpressionVisitor {
 			CellReference cellRef = (CellReference)reference;
 			return new CellReference(cellRef.getCell(),
 				cellRef.isColumnAbsolute(), cellRef.isRowAbsolute());
+		} else  if (reference instanceof VariableReference) {
+			VariableReference varRef = (VariableReference)reference;
+			return new VariableReference(varRef.getVariable());
 		} else {
 			ReferenceOperation refOp = (ReferenceOperation)reference;
 			return new ReferenceOperation(
-				(Reference)refOp.getLeftOperand().accept(this),
+				(VariableReference)refOp.getLeftOperand().accept(this),
 				refOp.getOperator(),
-				(Reference)refOp.getRightOperand().accept(this));
-		}
+				(VariableReference)refOp.getRightOperand().accept(this));
+                     } 
 	}
+        
 
 	public Expression visitFunctionCall(FunctionCall call) {
 		Expression[] arguments = call.getArguments();
@@ -93,4 +98,6 @@ public class ExpressionBuilder implements ExpressionVisitor {
 			return null;
 		}
 	}
+
+
 }

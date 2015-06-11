@@ -23,6 +23,8 @@ package csheets.core.formula.util;
 import csheets.core.Cell;
 import csheets.core.formula.Formula;
 import csheets.core.formula.Reference;
+import csheets.core.formula.lang.CellReference;
+import csheets.core.formula.lang.VariableReference;
 
 /**
  * An expression visitor that looks for circular references in a formula, i.e.
@@ -61,6 +63,8 @@ public class CircularReferenceFinder extends AbstractExpressionVisitor {
 	 * @throws CircularReferenceException if the given reference causes a circular reference
 	 */
 	public Object visitReference(Reference reference) throws CircularReferenceException, ExpressionVisitorException {
+            if(reference instanceof CellReference)
+            {
 		for (Cell precedent : reference.getCells()) {
 			// Checks for circularity
 			if (precedent.equals(formula.getCell()))
@@ -72,7 +76,27 @@ public class CircularReferenceFinder extends AbstractExpressionVisitor {
 				precedentFormula.accept(this);
 		}
 		return reference;
+            } else
+            {
+                 if(reference instanceof VariableReference)
+            {
+		/*for (Cell precedent : reference.getCells()) {
+			// Checks for circularity
+			if (precedent.equals(formula.getCell()))
+				throw new CircularReferenceException(formula);
+
+			// Looks further
+			Formula precedentFormula = precedent.getFormula();
+			if (precedentFormula != null)
+				precedentFormula.accept(this);
+		}
+		return reference;*/
+            }
+            }
+            return null;
 	}
+
+
 
 
 }

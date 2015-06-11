@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.searchOnAnotherInstance.ui;
+package csheets.core.call_function.ui;
 
 import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
@@ -12,33 +12,34 @@ import javax.swing.JMenu;
 
 /**
  *
- * @author Paulo Pereira <1130419@isep.ipp.pt>
+ * @author Andre
  */
-public class UIExtensionSearchOnAnotherInstance extends UIExtension{
+public class UIExtensionCallFunction extends UIExtension {
 
     /**
-     * A menu that provides search woorkbooks on another instances
+     * A menu that provides call function
      */
-    private SearchOnAnotherInstanceMenu menu;
+    private CallFunctionMenu menu;
 
     /**
-     * Creates a new user interface extension for search woorkbooks on another instances.
+     * Creates a new user interface extension for call function.
      *
      * @param extension the extension for which components are provided
      * @param uiController the user interface controller
      */
-    public UIExtensionSearchOnAnotherInstance(Extension extension, UIController uiController) {
+    public UIExtensionCallFunction(Extension extension,
+                                   UIController uiController) {
         super(extension, uiController);
     }
 
     /**
-     * Returns a menu that provides search woorkbooks on another instances.
+     * Returns a menu that provides editing of style.
      *
      * @return a JMenu component
      */
     public JMenu getMenu() {
         if (menu == null) {
-            menu = new SearchOnAnotherInstanceMenu(uiController);
+            menu = new CallFunctionMenu(uiController);
         }
         return menu;
     }

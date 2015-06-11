@@ -13,17 +13,19 @@ import java.util.Observer;
  *
  * @author Paulo Pereira <1130419@isep.ipp.pt>
  */
-public class ReportWatch extends Observable implements Observer{
+public class ReportWatch extends Observable implements Observer {
 
     public ReportWatch() {
     }
-    
+
     @Override
     public void update(Observable o, Object arg) {
-        Workbook workbook = ((ReportEvent)arg).getWorkbook();
-        String resume = ReportCreater.createResume(workbook);
-        setChanged();
-        notifyObservers(resume);
+        if (arg instanceof ReportEvent) {
+            Workbook workbook = ((ReportEvent) arg).getWorkbook();
+            String resume = ReportCreater.createResume(workbook);
+            setChanged();
+            notifyObservers(resume);
+        }
     }
-    
+
 }

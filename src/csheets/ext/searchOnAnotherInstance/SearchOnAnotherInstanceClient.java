@@ -5,7 +5,6 @@
  */
 package csheets.ext.searchOnAnotherInstance;
 
-import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -24,6 +23,7 @@ import java.util.logging.Logger;
 public class SearchOnAnotherInstanceClient {
 
     public SearchOnAnotherInstanceClient() {
+    
     }
 
     public void sendWorkbook(InetAddress address, Workbook workbook) {
@@ -32,6 +32,7 @@ public class SearchOnAnotherInstanceClient {
             System.out.println("O cliente se conectou ao servidor!");
             ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
             saida.writeObject(workbook);
+            saida.close();
         } catch (IOException ex) {
             Logger.getLogger(SearchOnAnotherInstanceClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,6 +44,7 @@ public class SearchOnAnotherInstanceClient {
             System.out.println("O cliente se conectou ao servidor!");
             ObjectOutputStream saida = new ObjectOutputStream(cliente.getOutputStream());
             saida.writeObject(workbookName);
+            saida.close();
         } catch (IOException ex) {
             Logger.getLogger(SearchOnAnotherInstanceClient.class.getName()).log(Level.SEVERE, null, ex);
         }
