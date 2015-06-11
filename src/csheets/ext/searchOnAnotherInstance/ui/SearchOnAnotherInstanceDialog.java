@@ -5,12 +5,9 @@
  */
 package csheets.ext.searchOnAnotherInstance.ui;
 
-import csheets.core.Spreadsheet;
-import csheets.core.SpreadsheetImpl;
 import csheets.core.Workbook;
 import csheets.ext.searchOnAnotherInstance.NotificationEvent;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceController;
-import csheets.ext.startsharing.NetworkService;
 import csheets.ui.ctrl.UIController;
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -155,6 +152,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        workbookToSearchText.setText("");
         String workbookToSearch = workbookToSearchText.getText();
         String addressToSend = (String) instancesList.getSelectedValue();
         controller.sendSearchRequest(addressToSend, workbookToSearch);
@@ -188,13 +186,13 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
         if (arg instanceof NotificationEvent) {
             String workbookName = ((NotificationEvent) arg).getWorkbookName();
             InetAddress addressToSend = ((NotificationEvent) arg).getAddress();
-            JOptionPane.showConfirmDialog(null, "You receive a search request for the workbook "
+            JOptionPane.showMessageDialog(null, "You receive a search request for the workbook "
                     + workbookName + " by the user " + addressToSend.getHostName() + ".", "Notification", JOptionPane.INFORMATION_MESSAGE);
             Workbook openWoorkbook = uiController.getOpenWorkbookByFileName(workbookName);
             controller.sendWorkbook(addressToSend, openWoorkbook);
         } else if (arg instanceof String) {
             String message = ((String) arg);
-            JOptionPane.showConfirmDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

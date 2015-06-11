@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -28,12 +29,6 @@ public class StartWorkbooksSearch extends Thread {
     public void startWorkbooksSearch() throws InterruptedException {
         StartWorkbooksSearch thread = new StartWorkbooksSearch();
         thread.start();
-//        thread.join();
-//
-//        System.out.println("Results:");
-//        for (Path workBookPath : workBooksFoundList) {
-//            System.out.println(workBookPath.getFileName());
-//        }
     }
 
     @Override
@@ -44,13 +39,17 @@ public class StartWorkbooksSearch extends Thread {
         if (os.contains("Windows")) {
             localDrive = "C:\\";
         } else if (os.contains("OS")) {
-            localDrive = "Macintosh HD\\";
+            localDrive = file.toString();
         } else {
-            System.out.println("Esta funcionalidade não está disponível neste sistema operativo");
+            JOptionPane.showMessageDialog(
+                null,
+                "This functionality is not available on your operative system!\n",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+        );
             return;
         }
 
-        //Ir buscar o disco local porque nem sempre é o C
         Path startingDir = Paths.get(localDrive);
 
         FindWorkbooks pf = new FindWorkbooks(workBooksFoundList);
@@ -60,5 +59,11 @@ public class StartWorkbooksSearch extends Thread {
         } catch (IOException ex) {
             System.out.println("Error!");
         }
+        JOptionPane.showMessageDialog(
+                null,
+                "Workbook search completed!\n",
+                "Search Completed",
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 }

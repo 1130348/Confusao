@@ -5,11 +5,9 @@
  */
 package csheets.ext.startsharing;
 
-import csheets.core.Cell;
 import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +21,18 @@ import java.util.logging.Logger;
  */
 public class ReceiveData implements Runnable {
 
-	private ObjectInputStream objectIn;
+	//private ObjectInputStream objectIn;
 	private DataInputStream dataIn;
 	Semaphore sem;
 	private static SendCellsAction cellsAction;
+	private Socket sock;
 
 	public ReceiveData(Socket sock, SendCellsAction cellsAction) {
 		try {
 			this.dataIn = new DataInputStream(sock.getInputStream());
-			this.objectIn = new ObjectInputStream(sock.getInputStream());
+			//this.objectIn = new ObjectInputStream(sock.getInputStream());
 			this.sem = new Semaphore(1);
+			this.sock = sock;
 			ReceiveData.cellsAction = cellsAction;
 		} catch (IOException ex) {
 			Logger.getLogger(ReceiveData.class.getName()).
@@ -43,18 +43,23 @@ public class ReceiveData implements Runnable {
 	@Override
 	public void run() {
 		int nChars;
-		byte[] data = new byte[300];
+
 		try {
 			while (true) {
-
+				dataIn = new DataInputStream(sock.getInputStream());
+				byte[] data = new byte[300];
+				System.out.println("func");
 				nChars = dataIn.read();
 				if (nChars == 0) {
 					break;
 				}
 
-				dataIn.read(data, 0, nChars);
-				String functionality = new String(data, 0, nChars);
-				choosenFunctionality(functionality);
+				if (nChars > 0) {
+					dataIn.read(data, 0, nChars);
+					String functionality = new String(data, 0, nChars);
+					choosenFunctionality(functionality);
+				}
+
 			}
 		} catch (IOException ex) {
 			Logger.getLogger(ReceiveData.class.getName()).
@@ -67,18 +72,19 @@ public class ReceiveData implements Runnable {
 			sem.acquire();
 			byte[] data = new byte[300];
 			int nChars;
-			if (functionality.equals("Share Cells")) {
-				Object obj;
-				List<Cell> receivedCells = new ArrayList<Cell>();
-				while (true) {
-					obj = objectIn.read();
-					if (obj == null) {
-						NetworkService.receiveCells(receivedCells, cellsAction);
-						break;
-					}
-					receivedCells.add((Cell) obj);
-				}
-			} else if (functionality.equals("Share Cells Content")) {
+//			if (functionality.equals("Share Cells")) {
+//				Object obj;
+//				List<Cell> receivedCells = new ArrayList<Cell>();
+//				while (true) {
+//					obj = objectIn.read();
+//					if (obj == null) {
+//						NetworkService.receiveCells(receivedCells, cellsAction);
+//						break;
+//					}
+//					receivedCells.add((Cell) obj);
+//				}
+//			} else
+			if (functionality.equals("Share Cells Content")) {
 				String message;
 				List<String> cellsContent = new ArrayList<String>();
 				List<String> cellsColumns = new ArrayList<String>();

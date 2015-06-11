@@ -108,6 +108,7 @@
  * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
+ * Once a variable is created it won't be deleted from the list.
  *
  * <br/>
  * <br/>

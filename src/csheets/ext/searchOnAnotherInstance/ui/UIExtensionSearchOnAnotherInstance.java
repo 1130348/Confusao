@@ -6,7 +6,6 @@
 package csheets.ext.searchOnAnotherInstance.ui;
 
 import csheets.ext.Extension;
-import csheets.ext.startsharing.ui.StartSharingMenu;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import javax.swing.JMenu;
