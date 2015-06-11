@@ -102,7 +102,7 @@ public class UIController implements SpreadsheetAppListener {
      */
     private List<EditListener> editListeners = new ArrayList<EditListener>();
 
-    // private Map<Workbook, Spreadsheet> activeSpreadsheets;
+	// private Map<Workbook, Spreadsheet> activeSpreadsheets;
     // private Map<Spreadsheet, Cell> activeCells;
     /**
      * Creates a new user interface controller.
@@ -126,8 +126,6 @@ public class UIController implements SpreadsheetAppListener {
                 = uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
     }
 
-    
-    
     /*
      * SELECTION
      */
@@ -162,10 +160,6 @@ public class UIController implements SpreadsheetAppListener {
                     prevWorkbook, prevSpreadsheet, prevCell));
         }
     }
-    
-    public Workbook getWorkbookByFileName(String fileName){
-        return app.getWorkbookByFileName(fileName);
-    }
 
     /**
      * Returns the active spreadsheet.
@@ -198,12 +192,11 @@ public class UIController implements SpreadsheetAppListener {
                     prevWorkbook, prevSpreadsheet, prevCell));
         }
     }
-
-    public Workbook[] getOpenWorkBooks() {
-        return app.getWorkbooks();
-    }
-
-    
+     
+        public Workbook[] getOpenWorkBooks(){
+           return app.getWorkbooks();
+        }
+        
     /**
      * Returns the active cell of the active workbook's active spreadsheet.
      *
