@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,6 +50,14 @@ public class FindWorkbooksAction extends FocusOwnerAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(
+                null,
+                "Workbook search has started!\n"
+                + "You can track the progress of your search "
+                + "on the sidebar under \"Find Workbooks\"",
+                "Search Started",
+                JOptionPane.INFORMATION_MESSAGE
+        );
         try {
             findWorkBooksController.startWorkbooksSearch();
         } catch (InterruptedException ex) {
