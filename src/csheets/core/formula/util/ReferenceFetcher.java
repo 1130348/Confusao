@@ -20,11 +20,10 @@
  */
 package csheets.core.formula.util;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import csheets.core.formula.Expression;
 import csheets.core.formula.Reference;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * An expression visitor that collects the references from an expression.
@@ -50,6 +49,7 @@ public class ReferenceFetcher extends AbstractExpressionVisitor {
 		expression.accept(this);
 		return references;
 	}
+        
 
 	/**
 	 * Adds the reference to the set.
@@ -59,4 +59,6 @@ public class ReferenceFetcher extends AbstractExpressionVisitor {
 		references.add(reference);
 		return reference;
 	}
+
+
 }

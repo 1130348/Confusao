@@ -21,13 +21,13 @@
  */
 package csheets.ext.deptree;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
 import csheets.core.formula.Reference;
+import csheets.core.formula.lang.CellReference;
 import csheets.ui.ctrl.UIController;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  * A mutable tree node containing a reference. The addresses that the reference
@@ -46,9 +46,11 @@ public class ReferenceNode extends DefaultMutableTreeNode {
 	public ReferenceNode(Reference reference, Spreadsheet spreadsheet,
 		DefaultTreeModel treeModel, UIController uiController) {
 		super(reference);
-
+                if(reference instanceof CellReference)
+                {
 		// Adds children
 		for (Cell cell : reference.getCells())
 			add(new PrecedentsNode(cell, treeModel, uiController));
+                }
 	}
 }
