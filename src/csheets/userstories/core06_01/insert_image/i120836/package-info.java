@@ -2,7 +2,6 @@
  * Technical documentation regarding the user story core06_1: Insert Image.
  * <br/>
  * <br/>
- *
  * <h2>1. Requirements</h2>
  * An option to insert a picture in the spreadsheet. The inserted picture is
  * associated with a cell (the cell that is currently active). There must be a
