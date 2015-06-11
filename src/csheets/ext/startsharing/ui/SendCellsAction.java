@@ -65,4 +65,16 @@ public class SendCellsAction extends FocusOwnerAction {
 
 	}
 
+	public void replaceCellsContent(List<String> cellsContent,
+									List<String> cellsColumns,
+									List<String> cellsRows) {
+		for (int i = 0; i < cellsContent.size(); i++) {
+			focusOwner.getModel().setValueAt(cellsContent.get(i), Integer.
+											 parseInt(cellsRows.
+												 get(i)), Integer.
+											 parseInt(cellsColumns.get(i)));
+		}
+
+	}
+
 }
