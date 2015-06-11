@@ -15,14 +15,6 @@ import csheets.core.Workbook;
  */
 public class ReportCreater {
 
-    public static SpreadsheetImpl[] getSpreadsheetsOfWorkbook(Workbook workbook) {
-        int spreads = workbook.getSpreadsheetCount();
-        Spreadsheet[] spreadsheetList = new Spreadsheet[spreads];
-        for (int i = 0; i < spreads; i++) {
-            spreadsheetList[i] = workbook.getSpreadsheet(i);
-        }
-        return null;
-    }
 
     private ReportCreater() {
 
@@ -35,7 +27,7 @@ public class ReportCreater {
         int spreadSheets = workbook.getSpreadsheetCount();
         Spreadsheet[] spreadSheetList = new Spreadsheet[spreadSheets];
         for (int i = 0; i < spreadSheets; i++) {
-            
+            spreadSheetList[i] = workbook.getSpreadsheet(i);
         }
         String resume = "";
         int hasContent = 0;

@@ -31,11 +31,12 @@ public class SearchOnAnotherInstanceServer extends Observable implements Runnabl
         try {
             ServerSocket servidor = new ServerSocket(port);
             System.out.println("Porta " + port + " aberta!");
-            Socket cliente = servidor.accept();
-            System.out.println("Nova conexão com o cliente "
-                    + cliente.getInetAddress().getHostAddress());
-            ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
             while (true) {
+                Socket cliente = servidor.accept();
+                System.out.println("Nova conexão com o cliente "
+                        + cliente.getInetAddress().getHostAddress());
+
+                ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
                 Object object = entrada.readObject();
                 if (object instanceof String) {
                     String workbookName = ((String) object);
@@ -43,7 +44,7 @@ public class SearchOnAnotherInstanceServer extends Observable implements Runnabl
                     NotificationEvent event = new NotificationEvent(requestClient, workbookName);
                     setChanged();
                     notifyObservers(event);
-                } else if (object instanceof Workbook) {
+                } else if (object instanceof Workbook || object == null) {
                     Workbook workbook = ((Workbook) object);
                     ReportEvent rep = new ReportEvent(workbook);
                     setChanged();
