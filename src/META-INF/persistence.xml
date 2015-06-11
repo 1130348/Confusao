@@ -5,6 +5,7 @@
 		<class>csheets.ext.contact.Contact</class>
 		<class>csheets.ext.contact.Event</class>
 		<class>csheets.ext.contact.Agenda</class>
+		<class>csheets.ext.address.Address</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:./db/CleanSheets"/>
 			<property name="javax.persistence.jdbc.user" value=""/>

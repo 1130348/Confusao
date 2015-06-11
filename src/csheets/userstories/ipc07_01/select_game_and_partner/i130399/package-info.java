@@ -82,22 +82,26 @@
  * for this use case.<br/>
  *
  * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Start Sharing" extension when
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * The following diagram shows the setup of the "Select Game and Partner"
+ * extension when cleansheets is run.<br/><br/>
+ * <img src="doc-files/Extension_setup_ipc_07_01.png"/>
  * <br/>
  * <h3>User Select Cells And Clicks Botton To Send</h3>
- * The following diagram illustrates what happens when the user select cells.
- * When the user selects the cells the object StartSharingAction has access to
- * SpreedSheatTable who knows the user selected cells. After the user selected
- * cells, he press the button to send and active actionPerformed() method of
- * class StartSharingAction<br/>
+ * The following diagram illustrates what happens when the user selects a
+ * partner and a game to play. When the user decides to play a game the object
+ * SelectGameAction is responsible to open a window to user where he can search
+ * for other partner and connect to him, as well as select the game and his own
+ * info. After the user select game and data, he press the button to send and
+ * active actionPerformed() method of class SelectGameAction. This problem will
+ * be implemented with strategy pattern, so according to the game (strategy)
+ * select by the user will be created an instance of the same.
  * <br/>
- * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
+ * <br/>
+ * <img src="doc-files/select_game_and_partner_ipc_07_01.png"/>
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.startsharing</a><br/>
- * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.startsharing.ui</a><br/>
+ * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.selectgame</a><br/>
+ * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.selectgame.ui</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
  * We cant achieve the objectives because we have a problem with ports<br/>

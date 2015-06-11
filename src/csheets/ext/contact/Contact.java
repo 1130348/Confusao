@@ -1,5 +1,6 @@
 package csheets.ext.contact;
 
+import csheets.ext.address.Address;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,24 @@ public class Contact {
     private BufferedImage image;
 
     /**
+     * Agenda of contact
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AGENDA_ID")
+    private Agenda agenda;
+
+    /**
+     * The main address of contact
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address main_address;
+
+    /**
+     * The secundary address of contact
+     */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address secundary_address;
+    /**
      * Emails List of the contact
      */
     @OneToMany(cascade = CascadeType.ALL)
@@ -64,12 +83,6 @@ public class Contact {
      */
     @OneToOne
     private PhoneNumber mobileNumber;
-
-    /**
-     * Work Mobile Number of the contact
-     */
-    @OneToOne
-    private PhoneNumber workMobileNumber;
 
     /**
      * Work Number of the contact
@@ -84,11 +97,10 @@ public class Contact {
     private PhoneNumber homeNumber;
 
     /**
-     * Agenda of contact
+     * Work Mobile Number of the contact
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "OWNER_ID")
-    private Agenda agenda;
+    @OneToOne
+    private PhoneNumber workMobileNumber;
 
     /**
      * Constructor without parameters
@@ -103,6 +115,8 @@ public class Contact {
         workMobileNumber = new PhoneNumber("");
         workNumber = new PhoneNumber("");
         homeNumber = new PhoneNumber("");
+        main_address = new Address();
+        secundary_address = new Address();
     }
 
     /**
@@ -116,8 +130,10 @@ public class Contact {
      * @param workMobileNumber
      * @param workNumber
      * @param homeNumber
+     * @param secundary_address
+     * @param main_address
      */
-    public Contact(String first_name, String last_name, String machine_name, BufferedImage image, PhoneNumber mobileNumber, PhoneNumber workMobileNumber, PhoneNumber workNumber, PhoneNumber homeNumber) {
+    public Contact(String first_name, String last_name, String machine_name, BufferedImage image, PhoneNumber mobileNumber, PhoneNumber workMobileNumber, PhoneNumber workNumber, PhoneNumber homeNumber, Address secundary_address, Address main_address) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.machine_name = machine_name;
@@ -126,15 +142,10 @@ public class Contact {
         this.workMobileNumber = workMobileNumber;
         this.workNumber = workNumber;
         this.homeNumber = homeNumber;
-    }
-
-    /**
-     * Returns the first name of the contact
-     *
-     * @return first_name
-     */
-    public String getFirst_Name() {
-        return this.first_name;
+        this.main_address = main_address;
+        this.secundary_address = secundary_address;
+        this.agenda = new Agenda();
+        this.listEmail = new ArrayList<Email>();
     }
 
     /**
@@ -165,12 +176,30 @@ public class Contact {
     }
 
     /**
-     * Returns the agenda of the contact
+     * Returns the first name of the contact
      *
-     * @return agenda
+     * @return first_name
      */
-    public Agenda getAgenda() {
-        return this.agenda;
+    public String getFirst_Name() {
+        return this.first_name;
+    }
+
+    /**
+     * Returns the main address of the contact
+     *
+     * @return main_address
+     */
+    public Address getMainAddress() {
+        return this.main_address;
+    }
+
+    /**
+     * Returns the secundary address of the contact
+     *
+     * @return secundary_address
+     */
+    public Address getSecundaryAddress() {
+        return this.secundary_address;
     }
 
     /**
@@ -269,27 +298,63 @@ public class Contact {
         this.homeNumber = homeNumber;
     }
 
-    PhoneNumber newPhoneNumber(String newNumber){
+    PhoneNumber newPhoneNumber(String newNumber) {
         return new PhoneNumber(newNumber);
     }
-    
-    public Email newEmail(String text){
+
+    public Email newEmail(String text) {
         return new Email(text);
     }
-    
-    public void addEmail(Email email){
+
+    public void addEmail(Email email) {
         listEmail.add(email);
     }
-    
-    public void removeEmail(Email email){
+
+    public void removeEmail(Email email) {
         listEmail.remove(email);
     }
-    
-    public void setPrimaryEmail(Email email){
-        Email tempEmail=listEmail.get(0);
+
+    public void setPrimaryEmail(Email email) {
+        Email tempEmail = listEmail.get(0);
         removeEmail(email);
         listEmail.set(0, email);
         addEmail(tempEmail);
     }
-    
+
+    /**
+     * Returns the agenda of the contact
+     *
+     * @return agenda
+     */
+    public Agenda getAgenda() {
+        return this.agenda;
+    }
+
+    /**
+     * Changes the value of the main address
+     *
+     */
+    public void setMainAddress(String tmp_street, String tmp_locality,
+            String tmp_postal_code, String tmp_city,
+            String tmp_country) {
+        this.main_address.setStreet(tmp_street);
+        this.main_address.setLocality(tmp_locality);
+        this.main_address.setPostalCode(tmp_postal_code);
+        this.main_address.setCity(tmp_city);
+        this.main_address.setCountry(tmp_country);
+    }
+
+    /**
+     * Changes the value of the secundary address
+     *
+     */
+    public void setSecundaryAddress(String tmp_street, String tmp_locality,
+            String tmp_postal_code, String tmp_city,
+            String tmp_country) {
+        this.secundary_address.setStreet(tmp_street);
+        this.secundary_address.setLocality(tmp_locality);
+        this.secundary_address.setPostalCode(tmp_postal_code);
+        this.secundary_address.setCity(tmp_city);
+        this.secundary_address.setCountry(tmp_country);
+    }
 }

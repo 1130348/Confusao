@@ -1,0 +1,24 @@
+@startuml doc-files/start_server_sequence_diagram.png
+actor User as user
+participant "SearchAnotherInstanceAction" as saia
+participant "dialog : SearchAnotherInstanceDialog" as said
+participant "SearchAnotherInstanceController" as saic
+participant "repwat : ReportWatch" as repWat
+participant "<<Service>>\nNetwork" as net
+participant "<<Service>>\nNetworkReceiveService" as netServ
+participant "Server" as serv
+participant "Thread" as thr
+user -> saia : actionPerformed()
+saia -> said : create()
+said -> saic : create()
+user -> said : activateDeactivateNotifications()
+said -> saic : startServer(this)
+saic -> repWat : create()
+saic -> repWat : addObserver(dialog)
+saic -> net : addObverser(dialog, repWat)
+net -> netServ : addObserver(dialog, repWat)
+netServ -> serv : create()
+netServ -> serv : addObserver(dialog, repWat)
+netServ -> thr : create(serv)
+netServ -> thr : run()
+@enduml

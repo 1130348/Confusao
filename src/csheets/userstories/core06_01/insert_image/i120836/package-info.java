@@ -2,7 +2,6 @@
  * Technical documentation regarding the user story core06_1: Insert Image.
  * <br/>
  * <br/>
- *
  * <h2>1. Requirements</h2>
  * An option to insert a picture in the spreadsheet. The inserted picture is
  * associated with a cell (the cell that is currently active). There must be a
@@ -68,16 +67,11 @@
  * <img src="doc-files/insert_image_extension_design1.png">
  * <br/>
  *
- * <h3>User Selects a Cell</h3>
+ * <h3>User Selects a Cell and Insert Image</h3>
  * The following diagram illustrates what happens when the user selects a cell. The idea is that when this happens the extension must display in the sidebar the Image of that cell (if it exists).<br/> 
  * <br/>
  * <img src="doc-files/insert_image_extension_design2.png">
  * <br/>
- * <h3>User Updates the Image of a Cell</h3>
- * The following diagram illustrates what happens when the user updates the image of the current cell. To be noticed that this diagram does not depict the actual selection of a cell (that is illustrated in the previous diagram).<br/>
- * <br/>
- * <img src="doc-files/insert_image_extension_design3.png">
- *
  * <h2>5. Coding</h2>
  * see:<br/>
  * <a href="../../../../csheets/ext/insert_image/package-summary.html">csheets.ext.insert_image</a><br/>
