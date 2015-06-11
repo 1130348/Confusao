@@ -30,8 +30,9 @@ public class ReportCreater {
             spreadSheetList[i] = workbook.getSpreadsheet(i);
         }
         String resume = "";
-        int hasContent = 0;
+        int hasContent;
         for (int i = 0; i < spreadSheetList.length; i++) {
+            hasContent = 0;
             resume += "\nTitle: ";
             resume += spreadSheetList[i].getTitle();
             for (int j = 0; j < spreadSheetList[i].getRowCount(); j++) {
@@ -41,6 +42,9 @@ public class ReportCreater {
                         hasContent = 1;
                         break;
                     }
+                }
+                if(hasContent == 1){
+                    break;
                 }
             }
             if(hasContent == 0){
