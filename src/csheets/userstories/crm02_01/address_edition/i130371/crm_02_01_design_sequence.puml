@@ -5,6 +5,8 @@
     participant "Persistence" as pers
     participant "RepositoryFactory" as repFactory
     participant "ContactsRepository" as contactsRep
+	participant "BufferedReader" as buffer
+    participant "FileReader" as file
 
 
 
@@ -16,7 +18,15 @@
     create jframe
     cp -> jframe : new (contact)
 
+	jframe -> ctrl : tmp = validatePostalCode(postalCode)
+	ctrl -> buffer : create()
+	buffer -> file : create(file_name)
 
+	loop while there are lines to read
+	ctrl -> buffer: readLine()
+	end loop
+
+	alt tmp == true
     jframe -> ctrl : updateAddress(contact, main_address, secundary_address)
 
     ctrl -> pers : getRepositoryFactory()
@@ -24,5 +34,6 @@
     ctrl -> repFactory : getContactsRepository()
 
     ctrl -> contactsRep : update(contact)
+	end
 
 @enduml
