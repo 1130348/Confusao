@@ -101,7 +101,6 @@ public class EditNote extends javax.swing.JFrame {
                                 note.setText(jTextArea1.getText(0, finalPosition));
                                 
                                 contact.addNote(note);
-                                controller.updateContact(contact);
                                 editContact.updateNotes();
                                 dispose();
                             } catch (BadLocationException ex) {
