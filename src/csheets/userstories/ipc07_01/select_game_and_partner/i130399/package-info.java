@@ -61,17 +61,18 @@
  * several games at once and the list of active games.
  * <br/>
  * <h2>3. Tests</h2>
- * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able communicate with other instances
- * of "CleanSheets" and send them a selected amount of cells.<br/>
- * Following this approach we can start by coding a unit test that uses the
- * class <code>Connect</code> and tests its attribute port. Furthermore we also
- * have to perform functional tests to see if the client is properly receiving
- * the information.<br/>
- * As usual, in a test driven development approach tests normally fail in the
- * beginning. The idea is that the tests will pass in the end.<br>
+ * Basically, from the requirements and analysis we revealed that the main
+ * feature of this use case is to be able to start the connection between two
+ * users in order to play a games, we can start by coding a unit test that uses
+ * a new attribute to the name and image with the corresponding accessor methods
+ * (set and get). A simple test to set this attribute with one point to see if
+ * the get method returns the same data. In another approach we can functionally
+ * test whether another instance of the "CleanSheets" after connecting receives
+ * the user information transmitted by the other instance, and another test to
+ * verify if the ative games are listed in sidebar.<br/>
  * <br/>
- * see: <code>csheets.ext.start_sharing.StartSharingTest</code><br/>
+ * see:
+ * <code>csheets.ext.select_game_and_partner.SelectGameAndPartnerTest</code><br/>
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
  * will also need to create a subclass of UIExtension. In the code of the
@@ -81,22 +82,26 @@
  * for this use case.<br/>
  *
  * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Start Sharing" extension when
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * The following diagram shows the setup of the "Select Game and Partner"
+ * extension when cleansheets is run.<br/><br/>
+ * <img src="doc-files/Extension_setup_ipc_07_01.png"/>
  * <br/>
  * <h3>User Select Cells And Clicks Botton To Send</h3>
- * The following diagram illustrates what happens when the user select cells.
- * When the user selects the cells the object StartSharingAction has access to
- * SpreedSheatTable who knows the user selected cells. After the user selected
- * cells, he press the button to send and active actionPerformed() method of
- * class StartSharingAction<br/>
+ * The following diagram illustrates what happens when the user selects a
+ * partner and a game to play. When the user decides to play a game the object
+ * SelectGameAction is responsible to open a window to user where he can search
+ * for other partner and connect to him, as well as select the game and his own
+ * info. After the user select game and data, he press the button to send and
+ * active actionPerformed() method of class SelectGameAction. This problem will
+ * be implemented with strategy pattern, so according to the game (strategy)
+ * select by the user will be created an instance of the same.
  * <br/>
- * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
+ * <br/>
+ * <img src="doc-files/select_game_and_partner_ipc_07_01.png"/>
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.startsharing</a><br/>
- * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.startsharing.ui</a><br/>
+ * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.selectgame</a><br/>
+ * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.selectgame.ui</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
  * We cant achieve the objectives because we have a problem with ports<br/>

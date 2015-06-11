@@ -1,0 +1,58 @@
+@startuml doc-files/crm_03_01_sequence_diagram_design.png
+  actor User 
+  participant "UIExtensionContacts" as UII
+  participant "nContactsController" as ctrll
+  participant "Contact" as contact
+  participant "PhoneNumber" as number
+  participant "Persistence" as pers
+  participant "RepositoryFactory" as repFactory
+  participant "ContactsRepository" as contactsRep
+
+  User -> UII : Selects Contact to Add/Edit/Delete Number
+
+    UII -> ctrll: addMobileNumber(contact, newNumber)
+    ctrll -> contact: newPhoneNumber(newNumber)
+    create number
+    contact -> number: create(newNumber)
+    number->number:validate()
+    ctrll -> ctrll: NumberValid(newNumber,number)
+    alt Number Valid
+    ctrll -> contact: addMobileNumber(number)
+    end
+
+
+    UII -> ctrll: addWorkNumber(contact, newNumber)
+    ctrll -> contact: newPhoneNumber(newNumber)
+    create number
+    contact -> number: create(newNumber)
+    number->number:validate()
+    ctrll -> ctrll: NumberValid(newNumber,number)
+    alt Number Valid
+    ctrll -> contact: addWorkNumber(number)
+    end
+
+
+    UII -> ctrll: addHomeNumber(contact, newNumber)
+    ctrll -> contact: newPhoneNumber(newNumber)
+    create number
+    contact -> number: create(newNumber)
+    number->number:validate()
+    ctrll -> ctrll: NumberValid(newNumber,number)
+    alt Number Valid
+    ctrll -> contact: addHomeNumber(number)
+    end
+
+    UII -> ctrll: addWorkMobileNumber(contact, newNumber)
+    ctrll -> contact: newPhoneNumber(newNumber)
+    create number
+    contact -> number: create(newNumber)
+    number->number:validate()
+    ctrll -> ctrll: NumberValid(newNumber,number)
+    alt Number Valid
+    ctrll -> contact: addWorkMobileNumber(number)
+    end
+    ctrll -> pers : getRepositoryFactory()
+    pers -> repFactory : newInstance()
+    ctrll -> repFactory : getContactsRepository()
+    ctrll -> contactsRep: updateContact(contact)
+  @enduml

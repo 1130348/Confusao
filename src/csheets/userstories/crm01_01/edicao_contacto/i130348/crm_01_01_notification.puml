@@ -1,0 +1,38 @@
+@startuml doc-files/crm_01_01_notification.png
+
+    participant "ContactsController" as ctrl
+    participant "Thread: Notification" as thread
+    participant "Event" as event
+    participant "DB" as db
+
+
+    ctrl -> thread : start()
+
+    loop flagON/OFF
+        alt !flag
+        
+        thread -> thread : break()
+    
+        else flag
+
+        thread -> db : getUserEvents()
+        group for
+            thread -> event : getNotified()
+            alt !flagNotified
+                
+            thread -> event : getTimeStamp()
+            alt timeStamp==SystemTime
+                
+                participant "Frame" as joption
+                thread -> joption : new()
+                thread -> event : setNotified(true)
+            end
+            end
+        end
+        
+        end
+    end
+
+
+
+@enduml

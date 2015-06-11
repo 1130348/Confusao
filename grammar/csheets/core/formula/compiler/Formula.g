@@ -43,13 +43,11 @@ package csheets.core.formula.compiler;
 }
 
 expression
-	: EQ! FOR^ LCHA! attribution SEMI! comparison (SEMI! operation)+ RCHA! EOF!
-	| EQ! LCHA! operation ( SEMI^ operation )* RCHA! EOF!
-	| EQ! operation EOF!
+	: EQ! operation EOF!
 	;
 
 operation
-	: attribution | comparison
+	: attribution | comparison | forcicle
 	;
 
 attribution
@@ -94,6 +92,7 @@ atom
 	|	reference
 	|	literal
 	|	LPAR! comparison RPAR!
+	|	bloco
 	;
 
 function_call
@@ -110,6 +109,14 @@ reference
 literal
 	:	NUMBER
 	|	STRING
+	;
+
+forcicle
+	:	FOR^ LCHA! attribution SEMI! comparison (SEMI! operation)+ RCHA!
+	;
+
+bloco
+	:	LCHA! operation ( SEMI^ operation )* RCHA!
 	;
 
 /* FOR operators */

@@ -1,5 +1,6 @@
 package csheets.ext.contact;
 
+import csheets.ext.address.Address;
 import java.awt.image.BufferedImage;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -54,8 +55,20 @@ public class Contact {
 	 * Agenda of contact
 	 */
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "OWNER_ID")
+	@JoinColumn(name = "AGENDA_ID")
 	private Agenda agenda;
+
+	/**
+	 * The main address of contact
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	private Address main_address;
+
+	/**
+	 * The secundary address of contact
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	private Address secundary_address;
 
 	/**
 	 * Constructor without parameters
@@ -65,6 +78,8 @@ public class Contact {
 		first_name = "";
 		last_name = "";
 		machine_name = "";
+		main_address = new Address();
+		secundary_address = new Address();
 	}
 
 	/**
@@ -76,12 +91,14 @@ public class Contact {
 	 * @param img
 	 */
 	public Contact(String firstN, String lastN, String machineN,
-				   BufferedImage img) {
+				   BufferedImage img, Address mainA, Address secundaryA) {
 		this.first_name = firstN;
 		this.last_name = lastN;
 		this.machine_name = machineN;
 		this.image = img;
-		agenda = new Agenda();
+		this.agenda = new Agenda();
+		this.main_address = mainA;
+		this.secundary_address = secundaryA;
 	}
 
 	/**
@@ -130,6 +147,24 @@ public class Contact {
 	}
 
 	/**
+	 * Returns the main address of the contact
+	 *
+	 * @return main_address
+	 */
+	public Address getMainAddress() {
+		return this.main_address;
+	}
+
+	/**
+	 * Returns the secundary address of the contact
+	 *
+	 * @return secundary_address
+	 */
+	public Address getSecundaryAddress() {
+		return this.secundary_address;
+	}
+
+	/**
 	 * Changes the value of the first name
 	 *
 	 * @param firstN
@@ -163,6 +198,34 @@ public class Contact {
 	 */
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+
+	/**
+	 * Changes the value of the main address
+	 *
+	 */
+	public void setMainAddress(String tmp_street, String tmp_locality,
+							   String tmp_postal_code, String tmp_city,
+							   String tmp_country) {
+		this.main_address.setStreet(tmp_street);
+		this.main_address.setLocality(tmp_locality);
+		this.main_address.setPostalCode(tmp_postal_code);
+		this.main_address.setCity(tmp_city);
+		this.main_address.setCountry(tmp_country);
+	}
+
+	/**
+	 * Changes the value of the secundary address
+	 *
+	 */
+	public void setSecundaryAddress(String tmp_street, String tmp_locality,
+									String tmp_postal_code, String tmp_city,
+									String tmp_country) {
+		this.secundary_address.setStreet(tmp_street);
+		this.secundary_address.setLocality(tmp_locality);
+		this.secundary_address.setPostalCode(tmp_postal_code);
+		this.secundary_address.setCity(tmp_city);
+		this.secundary_address.setCountry(tmp_country);
 	}
 
 	/**

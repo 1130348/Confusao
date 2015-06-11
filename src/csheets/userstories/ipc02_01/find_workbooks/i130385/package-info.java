@@ -26,7 +26,7 @@
  * that implements the interface SimpleFileVisitor which holds all the necessary
  * methods required to a fast and successful search. There will be at least 
  * three overriden methods in this class, respectively visitFile,
- * postVisitDirectory,visitFailed which will be necessary to ensure a succesful
+ * postVisitDirectory, visitFailed which will be necessary to ensure a succesful
  * search. These will be further explained on the Design section of this
  * documentation. There must also be a good understanding of the application's 
  * structure because on a later stage there will be a sidebar with all the
@@ -51,44 +51,52 @@
  * access to all the functionalities provided by the SearchWorkbooksFilesClass.
  * <br/>
  * <br/> 
- * <h3>Analysis of Core Technical Problem</h3>
+ * <h3>Analysis of The Core Technical Problem</h3>
  * The core technical problem still remains on the usage and implementation of 
  * the SimpleFileVisitor interface which embodies a search tree algorithm to
  * search through all the directories present in the local disk.
  * <br/>
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core 
- * functionality of this use case is to be able communicate with other instances
- * of "CleanSheets" and send them a selected amount of cells.<br/>
+ * functionality of this use case is to be able to search workbooks on the local
+ * disk.
+ * <br/>
  * Following this approach we can start by coding a unit test that uses the
- * class <code>Connect</code> and tests its attribute port. Furthermore we also have
- * to perform functional tests to see if the client is properly receiving the 
- * information.<br/>
+ * class <code>SearchWorkbookFiles</code>, since this is the only class we have
+ * in this use case besides the user interface and the controller which do not 
+ * require any unit tests. This class tests the method visitFile to ensure that
+ * it returns a list of files if the method finds any in its search. In the event 
+ * that there are none, the method visitFailed should return an empty Workbook 
+ * list. Furthermore we also have to perform functional tests to see if the user
+ * interface is communicating correctly between all the layers of the
+ * implementation.
+ * <br/>
  * As usual, in a test driven development approach tests normally fail in the 
- * beginning. The idea is that the tests will pass in the end.<br> 
+ * beginning. The idea is that the tests will pass in the end.
+ * <br/> 
  * <br/>
- * see: <code>csheets.ext.start_sharing.StartSharingTest</code><br/>
+ * see: <code>csheets.ext.findworkbooks.FindWorkbooksTests</code><br/>
  * <h2>4. Design</h2>
- * To realize this user story we will need to create a subclass of Extension. 
- * We will also need to create a subclass of UIExtension. In the code of the extension 
- * <code>csheets.ext.style</code> we can find examples that illustrate how to 
- * implement these technical requirements.<br/>
+ * To realize this user story we will need to extend the class Extension since
+ * we want to create a new extension for CleanSheets. 
+ * We will also need to create a subclass of UIExtension. In the code of the 
+ * extension <code>csheets.ext.style</code> we can find examples that illustrate
+ * how to implement these technical requirements.
+ * <br/>
  * The following diagrams illustrate core aspects of the design of the solution 
- * for this use case.<br/>
- * 
- * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Start Sharing" extension when 
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * for this use case.
  * <br/>
- * <h3>User Select Cells And Clicks Botton To Send</h3>
- * The following diagram illustrates what happens when the user select cells.
- * When the user selects the cells the object StartSharingAction has access to 
- * SpreedSheatTable who knows the user selected cells. After the user selected 
- * cells, he press the button to send  and active actionPerformed() method of class
- * StartSharingAction<br/>
+ * <h3>Search for workbooks on the local disk and open them</h3>
+ * The following diagram illustrates what happens when the user searches for 
+ * all existing workbooks on the local disk. When the user selects the menu item
+ * "Find Workbooks..." a new thread is created that implements the
+ * SimpleFileVisitor. This thread will be responsible for every aspect of the
+ * search proccess. After at least one workbook is found the user has the option
+ * to open it. This proccess is explained carefully on the openFoundWorkbooks()
+ * subsequent calls on the following diagram.
  * <br/>
- * <img src="doc-files/select_cells_and_click_ipc_01_01.png"/>
+ * <br/>
+ * <img src="doc-files/find_workbooks_design_sequence_diagram.png"/>
  */
 
 package csheets.userstories.ipc02_01.find_workbooks.i130385;

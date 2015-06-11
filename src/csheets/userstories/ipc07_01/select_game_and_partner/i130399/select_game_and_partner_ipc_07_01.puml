@@ -1,0 +1,83 @@
+@startuml doc-files/select_game_and_partner_ipc_07_01.png
+ actor User
+ participant "SelectGameAction" as sga
+ participant "StartGameAction" as stga
+ participant "ChoosePartner" as cp
+ participant "SelectGameController" as sgc
+ participant "GamesStrategyFactory" as gsf
+ participant "GameStrategy" as gs
+ participant "Player" as player
+ participant "GameScene" as scene
+ participant "ActiveGamesPanel" as agp
+ participant "<<Service>>\nNetworkService" as netw
+ participant "<<Service>>\nNetworkSendService" as netws
+ participant "<<Service>>\nNetworkReceiveService" as netwr
+ participant "th:Thread" as th
+ participant "RespondToUDPRequest" as respond
+ participant "Server" as server
+ participant "ReceiveData" as rd
+
+
+ User -> sga : actionPerformed()
+ sga -> cp : showDialog(lc);
+
+ cp -> sgc : setVisibility(true);
+ sgc->netw : isVisibleToOthers(true);
+ netw->netwr : startReceivingUDPDatagrams());
+ netwr->th : thUDPSearch = create(new RespondToUDPRequest());
+ netwr->respond : run();
+
+ cp -> sgc : lc=searchInstances();
+ sgc->netw : lc=serachIntances();
+ netw -> netws : lc=searchActiveIntances();
+
+ cp->sgc : startServer(startGameAction);
+ sgc->netw : startServer(startGameAction);
+ netw->netwr : startServer(startGameAction);
+ netwr->th : thServer = create(new Server(startGameAction));
+ netwr-> server : run();
+
+ User <-- cp : show active clients
+
+ alt client that wants to connect
+ User -> cp : chooseClient();
+ cp -> sgc : establishConnection(address);
+ sgc -> netw : establishConnection(address);
+
+ stga<-cp : setEnabled(true);
+
+ User -> cp : chooseGame();
+ cp -> sgc : createGame(strategy);
+ create gsf
+ sgc -> gsf : create(strategy);
+ sgc -> gsf : getInstance();
+ sgc -> gsf : getStrategy();
+ create gs
+ gsf -> gs : create();
+ sgc -> gs : createGame();
+ gs -> scene : showDialog();
+ User -> cp : chooseName();
+ cp -> sgc : setPlayerName(name);
+ sgc -> player : setName(name);
+ User -> cp : chooseImage();
+ cp -> sgc : setPlayerImage(image);
+ sgc -> player : setPlayerImage(image);
+ cp->sgc : sendUserInfo(userInfo);
+ sgc->netw : sendUserInfo(userInfo);
+ netw->netws : sendObject(user);
+ cp ->sgc : activeGame(game);
+ sgc -> agp : activeGame(game);
+
+ end alt
+
+ alt client that receives the connection
+ server->server : waitToReceiveMessage();
+ server->netw : establishConnetction(address);
+ server->th : thReceiveData = create(new ReceiveData(sendCellsAction));
+ server->rd : run();
+ server->stga : setEnabled(true);
+ rd->rd : waitForMessage();
+ rd->netw : receiveUserInfo(userInfo);
+ end alt
+
+@enduml

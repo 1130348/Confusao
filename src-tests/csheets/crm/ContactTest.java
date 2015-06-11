@@ -1,5 +1,6 @@
 package csheets.crm;
 
+import csheets.ext.address.Address;
 import csheets.ext.contact.Contact;
 import java.awt.image.BufferedImage;
 import static org.junit.Assert.assertEquals;
@@ -72,36 +73,68 @@ public class ContactTest {
 	/**
 	 * A method that tests if the main address is valid
 	 */
-//	@Test
-//	public void testValidaMainAddress() {
-//		Contact contact = new Contact();
-//		Address a = new Address();
-//		contact.setMainAddress(a);
-//
-//		boolean expResult = true;
-//		boolean result = false;
-//
-//		if (contact.getMainAddress().equals(a)) {
-//			result = true;
-//		}
-//
-//		assertEquals(expResult, result);
-//	}
+	@Test
+	public void testValidaMainAddress() {
+		Contact contact = new Contact();
+		Address a = new Address();
+		contact.setMainAddress("", "", "", "", "");
+
+		boolean expResult = true;
+		boolean result = false;
+
+		if (contact.getMainAddress().equals(a)) {
+			result = true;
+		}
+
+		assertEquals(expResult, result);
+	}
+
 	/**
 	 * A method that tests if the secundary address is valid
 	 */
-//	@Test
-//	public void testValidaSecundaryAddress() {
-//		Contact contact = new Contact();
-//		Address a = new Address();
-//		contact.setSecundaryAddress(a);
+	@Test
+	public void testValidaSecundaryAddress() {
+		Contact contact = new Contact();
+		Address a = new Address();
+		contact.setSecundaryAddress("", "", "", "", "");
+
+		boolean expResult = true;
+		boolean result = false;
+
+		if (contact.getSecundaryAddress().equals(a)) {
+			result = true;
+		}
+		assertEquals(expResult, result);
+	}
+
+//    @Test
+//    public void testaddNote()
+//    {
 //
-//		boolean expResult = true;
-//		boolean result = false;
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
 //
-//		if (contact.getSecundaryAddress().equals(a)) {
-//			result = true;
-//		}
-//		assertEquals(expResult, result);
-//	}
+//        boolean expResult = true;
+//        boolean result = c.addNote(new Note("title", "text"));
+//
+//        assertEquals(expResult,result);
+//    }
+//
+//    @Test
+//    public void testremoveNote()
+//    {
+//        Contact c = new Contact();
+//        String title = "title";
+//        String text = "text";
+//
+//        Note n = new Note("title", "text");
+//
+//        c.addNote(n);
+//
+//
+//        boolean expResult = true;
+//        boolean result = c.removeNote(n);
+//
+//    }
 }
