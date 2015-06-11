@@ -26,7 +26,8 @@ import java.util.logging.Logger;
 public class NetworkService {
 
 	private static Thread serverThread;
-	private static ArrayList<Socket> clientConnections;
+	private static ArrayList<Socket> clientConnections = clientConnections = new ArrayList<Socket>();
+	;
 	private static int portTCP;
 	private static int portUDP = 9050;
 	public static Map<InetAddress, Integer> activeInstances = new HashMap<InetAddress, Integer>();

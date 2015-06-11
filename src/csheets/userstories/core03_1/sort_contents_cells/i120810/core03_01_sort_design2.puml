@@ -8,10 +8,10 @@ participant "uic: UIController" as uic
 participant "Address : Address" as add
 participant "Cell : Cell" as cell
 participant "Spreadsheet" as spd
-user-> frame : select cell
-user -> frame : choose: "Extensions"->"Sort"->"Ascending/Descending"
+user --> frame : select cell
+user --> frame : choose: "Extensions"->"Sort"->"Ascending/Descending"
 frame -> sortctrl : sort(ActiveCell, typeOfSort)
-sortctrl -> uic : activecell.getAddress.getColumn
+sortctrl -> uic : activecell.getAddress.getColumn()
 uic -> add: getAddress()
 add -> cell : getColumn() 
 loop for

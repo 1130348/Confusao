@@ -39,7 +39,7 @@ public class NetworkSendService {
 			DatagramSocket socket = new DatagramSocket();
 			socket.setBroadcast(true);
 			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("173.18.135.255");
+			InetAddress destinationIP = InetAddress.getByName("172.18.135.255");
 
 			byte[] data = new byte[300];
 			String message = String.format("%d", portTCP);
@@ -67,6 +67,9 @@ public class NetworkSendService {
 					NetworkService.
 						addClientToMap(Integer.parseInt(message), reply.
 									   getAddress());
+
+					activeInstances.put(reply.getAddress(), Integer.
+										parseInt(message));
 
 					endTime += System.currentTimeMillis();
 					time += endTime - startTime;

@@ -192,6 +192,38 @@ public class UIController implements SpreadsheetAppListener {
                     prevWorkbook, prevSpreadsheet, prevCell));
         }
     }
+	/**
+	 * Returns the active workbook.
+	 * @return the active workbook
+	 */
+	public Workbook getActiveWorkbook() {
+		return activeWorkbook;
+	}
+        
+        public Workbook[] getOpenWorkBooks(){
+           return app.getWorkbooks();
+        }
+	/**
+	 * Sets the given workbook of the application.
+	 * @param workbook the workbook to use
+	 */
+	public void setActiveWorkbook(Workbook workbook) {
+		if (activeWorkbook == null || activeWorkbook != workbook) {
+			Workbook prevWorkbook = activeWorkbook;
+			Spreadsheet prevSpreadsheet = activeSpreadsheet;
+			Cell prevCell = activeCell;
+			activeWorkbook = workbook;
+			activeSpreadsheet = null;
+			activeCell = null;
+			if (activeWorkbook != null) {
+				workbooks.remove(activeWorkbook);
+				workbooks.push(activeWorkbook);
+			}
+			fireSelectionChanged(new SelectionEvent(this,
+				activeWorkbook, activeSpreadsheet, activeCell,
+				prevWorkbook, prevSpreadsheet, prevCell));
+		}
+	}
 
     /**
      * Returns the active cell of the active workbook's active spreadsheet.
