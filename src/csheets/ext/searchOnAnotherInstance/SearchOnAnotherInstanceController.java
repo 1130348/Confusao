@@ -39,7 +39,7 @@ public class SearchOnAnotherInstanceController {
     }
 
     public void sendWorkbook(InetAddress address, Workbook workbook) {
-        NetworkService.sendSpreadSheetList(address, workbook);
+        NetworkService.sendWorkbook(address, workbook);
     }
 
     public void setVisibility(boolean b) {

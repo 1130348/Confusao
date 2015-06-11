@@ -201,7 +201,7 @@ public class NetworkService {
 		NetworkReceiveService.addObserver(dialog, reportWatch);
 	}
 
-	public static void sendSpreadSheetList(InetAddress address,
+	public static void sendWorkbook(InetAddress address,
 										   Workbook workbook) {
 		SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
 		client.sendWorkbook(address, workbook);
