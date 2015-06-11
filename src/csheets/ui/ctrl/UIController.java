@@ -115,7 +115,10 @@ public class UIController implements SpreadsheetAppListener {
 	public Workbook getActiveWorkbook() {
 		return activeWorkbook;
 	}
-
+        
+        public Workbook[] getOpenWorkBooks(){
+           return app.getWorkbooks();
+        }
 	/**
 	 * Sets the given workbook of the application.
 	 * @param workbook the workbook to use
