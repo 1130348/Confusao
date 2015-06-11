@@ -11,5 +11,8 @@ package csheets.core.call_function.ui;
  * @author Andre
  */
 public class CallFunctionUI {
+
+    public CallFunctionUI() {
+    }
     
 }

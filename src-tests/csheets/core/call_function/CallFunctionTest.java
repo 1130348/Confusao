@@ -6,6 +6,7 @@
 package csheets.core.call_function;
 
 import csheets.core.call_function.ui.CallFunctionUI;
+import csheets.core.formula.lang.UnknownElementException;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -55,11 +56,12 @@ public class CallFunctionTest {
     
     /**
      * Test of chooseFunction method, of class CallFunctionController.
+     * @throws csheets.core.formula.lang.UnknownElementException
      */
     @Test
-    public void testchooseFunction() {
+    public void testchooseFunction() throws UnknownElementException {
         System.out.println("chooseFunction");
-        String expResult= "=SUM()";
+        String expResult= "=SUM(Term;...)";
         String identifier = "SUM";
         CallFunctionUI ui = new CallFunctionUI();
         CallFunctionController ctrl = new CallFunctionController(ui);
