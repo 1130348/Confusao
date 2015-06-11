@@ -15,7 +15,6 @@ deactivate UI
 ctrl -> cell : setContent(string)
 activate cell
 deactivate ctrl
-cell -> formula : create()
 cell -> formulaCompiler : compile(cell,string)
 deactivate cell
 activate formulaCompiler

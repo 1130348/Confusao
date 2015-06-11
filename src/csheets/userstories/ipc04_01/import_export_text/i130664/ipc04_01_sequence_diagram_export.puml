@@ -1,0 +1,39 @@
+@startuml doc-files/export_to_text_file_ipc04_01.png
+ actor User
+ participant "ImportExportAction" as iea
+ participant "ImportExportUI" as ui
+ participant "ImportExportController" as ctrl
+ participant "th:Thread" as th
+ participant "ImportExportThread" as thr
+ participant "ci:CustomImportationExportation" as cie
+ participant "SpreadSheetImpl" as ssi
+ participant "stream:FileOutputStream" as fos
+
+User -> iea : actionPerformed()
+iea -> ui : showDialog()
+User <-- ui : asks for the column's separator
+User -> ui : chooses separator
+ui -> ctrl : chooseSeparator(sep)
+User <-- ui : asks if the file has a header and if it is \nsupposed to be included in the operation
+ui -> ctrl : hasHeader(bool)
+ui -> ctrl : includeHeader(bool)
+ctrl -> th : th = create(new ImportExportThread())
+ctrl -> thr : run()
+create cie
+thr -> cie : new
+thr -> cie : export(sep, header)
+create fos
+cie -> fos : new
+cie -> ssi : map = getCells()
+
+loop for each string in the list, set the content of the cells in map, starting on the top left corner
+cie -> CellImpl : getAddress()
+cie -> CellImpl : str = getContent()
+cie -> fos : write(str)
+end loop
+
+
+
+
+
+@enduml

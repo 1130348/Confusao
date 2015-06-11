@@ -306,22 +306,44 @@ public class Contact {
         this.homeNumber = homeNumber;
     }
 
+    /**
+     * Return a new PhoneNumber object
+     * @param newNumber text of the number
+     * @return PhoneNumber object
+     */
     PhoneNumber newPhoneNumber(String newNumber) {
         return new PhoneNumber(newNumber);
     }
 
+    /**
+     * Return a new Email object
+     * @param text text of the object
+     * @return Email object
+     */
     public Email newEmail(String text) {
         return new Email(text);
     }
 
+    /**
+     * add email to the list
+     * @param email 
+     */
     public void addEmail(Email email) {
         listEmail.add(email);
     }
 
+    /**
+     * remove email from the list
+     * @param email 
+     */
     public void removeEmail(Email email) {
         listEmail.remove(email);
     }
 
+    /**
+     * Define primary email
+     * @param email 
+     */
     public void setPrimaryEmail(Email email) {
         Email tempEmail = listEmail.get(0);
         removeEmail(email);
