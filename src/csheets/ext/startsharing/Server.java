@@ -52,7 +52,7 @@ public class Server implements Runnable {
 													   getInetAddress().
 													   getCanonicalHostName() + " wants to establish a remote connection to your computer, do you accept it?", "Remote connection request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-				if (option == 1) {
+				if (option == 0) {
 					clientConnections.
 						put(client, new DataOutputStream(client.
 								getOutputStream()));
