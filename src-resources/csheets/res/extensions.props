@@ -10,3 +10,4 @@ csheets.ext.address.ExtensionAddress
 csheets.ext.selectgame.SelectGameExtension
 csheets.ext.findworkbooks.FindWorkbooksExtension
 csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceExtension
+csheets.ext.Email.ExtensionEmail
