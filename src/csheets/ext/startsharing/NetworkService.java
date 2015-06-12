@@ -10,6 +10,9 @@ import csheets.core.Workbook;
 import csheets.ext.searchOnAnotherInstance.ReportWatch;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceClient;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
+import csheets.ext.selectgame.Player;
+import csheets.ext.selectgame.SearchPartnersServer;
+import csheets.ext.selectgame.ui.GameScene;
 import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,6 +33,7 @@ import java.util.logging.Logger;
  */
 public class NetworkService {
 
+	private static Thread gameServerThread;
 	private static Thread serverThread;
 	private static ArrayList<Socket> clientConnections = clientConnections = new ArrayList<Socket>();
 	;
@@ -70,6 +74,20 @@ public class NetworkService {
 			NetworkReceiveService.startReceivingUDPDatagrams(portUDP, portTCP);
 		} else {
 			NetworkReceiveService.stopReceivingUDPDatagrams(portUDP);
+		}
+	}
+
+	public static void startGameServer(GameScene dialog, Player player) {
+		gameServerThread = new Thread(new SearchPartnersServer(dialog, player));
+	}
+
+	public static void establishConnectionToUser(String playerName) {
+		try {
+			NetworkSendService.
+				establishConnectionToUser(InetAddress.getByName(playerName));
+		} catch (UnknownHostException ex) {
+			Logger.getLogger(NetworkService.class.getName()).
+				log(Level.SEVERE, null, ex);
 		}
 	}
 

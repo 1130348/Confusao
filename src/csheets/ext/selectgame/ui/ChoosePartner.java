@@ -9,9 +9,7 @@ import csheets.ext.selectgame.Player;
 import csheets.ext.selectgame.SelectGameController;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ChoosePartner extends javax.swing.JDialog {
 
+	private GameScene dialog;
 	private Player player;
 	private static ChoosePartner instance;
 	private String activeGame;
@@ -30,31 +29,12 @@ public class ChoosePartner extends javax.swing.JDialog {
 
 	private ChoosePartner(java.awt.Frame parent,
 						  boolean modal,
-						  SelectGameController controller) {
+						  SelectGameController controller, Player player) {
 		super(parent, modal);
 		this.controller = controller;
+		this.player = player;
 		initComponents();
-		player = new Player();
-		gamesComboBox.removeAllItems();
-		iconsComboBox.removeAllItems();
-		gamesComboBox.addItem("Naval Battle");
-		gamesComboBox.addItem("Checkers");
-
-		String[] iconStrings = {"Sword", "Clover", "Spade", "Ball", "Horse", "Bishop", "Command"};
-
-		Object[] icons
-			= {
-				new ImageIcon("icons/icon1.png", iconStrings[0]),
-				new ImageIcon("icons/icon2.png", iconStrings[1]),
-				new ImageIcon("icons/icon3.png", iconStrings[2]),
-				new ImageIcon("icons/icon4.png", iconStrings[3]),
-				new ImageIcon("icons/icon5.png", iconStrings[4]),
-				new ImageIcon("icons/icon6.png", iconStrings[5]),
-				new ImageIcon("icons/icon7.png", iconStrings[6])
-			};
-		for (int i = 0; i < icons.length; i++) {
-			iconsComboBox.addItem(icons[i]);
-		}
+		dialog = new GameScene(null, true, controller, activeGame);
 	}
 
 	/**
@@ -64,9 +44,10 @@ public class ChoosePartner extends javax.swing.JDialog {
 	}
 
 	public static synchronized ChoosePartner getInstance(
-		java.awt.Frame parent, boolean modal, SelectGameController controller) {
+		java.awt.Frame parent, boolean modal, SelectGameController controller,
+		Player player) {
 		if (instance == null) {
-			instance = new ChoosePartner(parent, modal, controller);
+			instance = new ChoosePartner(parent, modal, controller, player);
 		}
 		return instance;
 	}
@@ -102,26 +83,12 @@ public class ChoosePartner extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        connectionPortSpinner = new javax.swing.JSpinner();
         searchPartnerButton = new javax.swing.JToggleButton();
         availableCleanSheetsInstancesOnLANLabel = new javax.swing.JLabel();
-        nickNameTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        iconsComboBox = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        gamesComboBox = new javax.swing.JComboBox();
-        startGameButton = new javax.swing.JButton();
         connectDisconnectToggleButton = new javax.swing.JToggleButton();
         refreshListButton = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         availableCleanSheetsInstancesList = new javax.swing.JList();
-        jSeparator1 = new javax.swing.JSeparator();
-
-        jLabel1.setText("Select new connection port (max. 65535):");
-
-        connectionPortSpinner.setModel(new javax.swing.SpinnerNumberModel(1026, 1026, 65535, 1));
 
         searchPartnerButton.setText("Search Partner");
         searchPartnerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,33 +98,6 @@ public class ChoosePartner extends javax.swing.JDialog {
         });
 
         availableCleanSheetsInstancesOnLANLabel.setText("Available CleanSheets instances on LAN:");
-
-        jLabel2.setText("NickName:");
-
-        jLabel3.setText("Image:");
-
-        iconsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        iconsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iconsComboBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Select Game:");
-
-        gamesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        gamesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gamesComboBoxActionPerformed(evt);
-            }
-        });
-
-        startGameButton.setText("Start Game");
-        startGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startGameButtonActionPerformed(evt);
-            }
-        });
 
         connectDisconnectToggleButton.setText("Connect");
         connectDisconnectToggleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -185,8 +125,6 @@ public class ChoosePartner extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(availableCleanSheetsInstancesList);
 
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,51 +134,24 @@ public class ChoosePartner extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(availableCleanSheetsInstancesOnLANLabel)
+                        .addGap(6, 6, 6))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(refreshListButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(connectDisconnectToggleButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel1)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(searchPartnerButton)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(refreshListButton)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(connectDisconnectToggleButton))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nickNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(iconsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(gamesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(startGameButton)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(searchPartnerButton)
+                        .addGap(60, 60, 60)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(connectionPortSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchPartnerButton))
+                .addComponent(searchPartnerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(availableCleanSheetsInstancesOnLANLabel)
                 .addGap(18, 18, 18)
@@ -249,23 +160,7 @@ public class ChoosePartner extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(connectDisconnectToggleButton)
                     .addComponent(refreshListButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(nickNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(iconsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(gamesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(startGameButton)
-                .addGap(14, 14, 14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,50 +174,20 @@ public class ChoosePartner extends javax.swing.JDialog {
 			refreshListButton.setEnabled(false);
 			connectDisconnectToggleButton.setEnabled(false);
 			availableCleanSheetsInstancesList.setEnabled(false);
-			/*availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
-			 setEnabled(false);
-			 availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
-			 setEnabled(false);
-			 availableCleanSheetsInstancesScrollPane.getViewport().
-			 setEnabled(false);*/
 			searchPartnerButton.setText("Start Searching");
 			controller.setVisibility(false);
 			listOfAvailableCleanSheetsInstances.clear();
 		} else {
-			int port = (Integer) connectionPortSpinner.getValue();
-			JOptionPane.showMessageDialog(
-				rootPane,
-				"You are now connected with the port " + port + "!",
-				"Success",
-				JOptionPane.INFORMATION_MESSAGE
-			);
 			startStopSearchingToggleButtonStatus = true;
 			refreshListButton.setEnabled(true);
 			connectDisconnectToggleButton.setEnabled(true);
 			availableCleanSheetsInstancesList.setEnabled(true);
-			/*availableCleanSheetsInstancesScrollPane.getHorizontalScrollBar().
-			 setEnabled(true);
-			 availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
-			 setEnabled(true);
-			 availableCleanSheetsInstancesScrollPane.getVerticalScrollBar().
-			 setEnabled(true);
-			 availableCleanSheetsInstancesScrollPane.getViewport().
-			 setEnabled(true);*/
 			searchPartnerButton.setText("Stop Searching");
-			controller.changePort(port);
 			controller.setVisibility(true);
 			retrieveAvailableCleanSheetsInstances();
-			//controller.startServer(sendCellAction);
+			controller.startGameServer(dialog, player);
 		}
     }//GEN-LAST:event_searchPartnerButtonActionPerformed
-
-    private void iconsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iconsComboBoxActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_iconsComboBoxActionPerformed
-
-    private void gamesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gamesComboBoxActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_gamesComboBoxActionPerformed
 
     private void refreshListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshListButtonActionPerformed
 		// TODO add your handling code here:
@@ -348,23 +213,6 @@ public class ChoosePartner extends javax.swing.JDialog {
 		}
     }//GEN-LAST:event_availableCleanSheetsInstancesListMouseClicked
 
-    private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
-		// TODO add your handling code here:
-		if (nickNameTextField.getText().equals("")) {
-			JOptionPane.
-				showMessageDialog(null, "Digit your nickname!!!", "Error", JOptionPane.ERROR_MESSAGE);
-		} else {
-			activeGame = gamesComboBox.getSelectedItem().toString();
-			player.setName(nickNameTextField.getText());
-			player.setPlayerIcon((ImageIcon) iconsComboBox.getSelectedItem());
-			controller.setActiveGame(activeGame);
-			dispose();
-			GameScene dialog = new GameScene(null, true, controller, player, activeGame);
-			dialog.setVisible(true);
-		}
-
-    }//GEN-LAST:event_startGameButtonActionPerformed
-
     private void connectDisconnectToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectDisconnectToggleButtonActionPerformed
 		// TODO add your handling code here:
 		if (availableCleanSheetsInstancesList.getSelectedValue() == null) {
@@ -379,8 +227,8 @@ public class ChoosePartner extends javax.swing.JDialog {
 			int index = availableCleanSheetsInstancesList.getSelectedIndex();
 			if (connectDisconnectToggleButtonClick.get(index)) {
 				controller.
-					establishConnection((List<String>) availableCleanSheetsInstancesList.
-						getSelectedValuesList(), null);
+					establishConnection((String) availableCleanSheetsInstancesList.
+						getSelectedValue());
 				connectDisconnectToggleButtonClick.set(index, false);
 				connectDisconnectToggleButton.setText("Disconnect");
 			} else {
@@ -395,18 +243,8 @@ public class ChoosePartner extends javax.swing.JDialog {
     private javax.swing.JList availableCleanSheetsInstancesList;
     private javax.swing.JLabel availableCleanSheetsInstancesOnLANLabel;
     private javax.swing.JToggleButton connectDisconnectToggleButton;
-    private javax.swing.JSpinner connectionPortSpinner;
-    private javax.swing.JComboBox gamesComboBox;
-    private javax.swing.JComboBox iconsComboBox;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField nickNameTextField;
     private javax.swing.JToggleButton refreshListButton;
     private javax.swing.JToggleButton searchPartnerButton;
-    private javax.swing.JButton startGameButton;
     // End of variables declaration//GEN-END:variables
 }

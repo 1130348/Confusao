@@ -6,10 +6,10 @@
 package csheets.ext.selectgame;
 
 import csheets.ext.selectgame.ui.ActiveGamesPanel;
+import csheets.ext.selectgame.ui.GameScene;
+import csheets.ext.startsharing.NetworkSendService;
 import csheets.ext.startsharing.NetworkService;
-import csheets.ext.startsharing.ui.SendCellsAction;
 import java.net.InetAddress;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,17 +18,12 @@ import java.util.Map;
  */
 public class SelectGameController {
 
-	public void changePort(int port) {
-		NetworkService.setPort(port);
+	public void establishConnection(String playerName) {
+		NetworkService.establishConnectionToUser(playerName);
 	}
 
-	public void startServer(SendCellsAction cellsAction) {
-		NetworkService.startServer(cellsAction);
-	}
-
-	public boolean establishConnection(List<String> addresses,
-									   SendCellsAction action) {
-		return NetworkService.establishConnection(addresses, action);
+	public void sendUserInfo(Player player) {
+		NetworkSendService.sendUserInfo(player);
 	}
 
 	public void setActiveGame(String game) {
@@ -47,8 +42,8 @@ public class SelectGameController {
 		return NetworkService.searchInstances();
 	}
 
-	public void setSendPort(int port) {
-		NetworkService.setPort(port);
+	public void startGameServer(GameScene dialog, Player player) {
+		NetworkService.startGameServer(dialog, player);
 	}
 
 	public void interruptConnection() {
