@@ -217,6 +217,7 @@ public class ContactPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+                    if(contactField.getSelectedIndex()!=-1){
 			Contact tmp = (Contact) contactList.get(contactField.
 				getSelectedIndex());
 			for (Contact c : controller.getContacts()) {
@@ -226,6 +227,7 @@ public class ContactPanel extends JPanel {
 				}
 			}
 			controller.update();
+                    }
 		}
 
 	};
