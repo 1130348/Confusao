@@ -5,13 +5,14 @@
  */
 package csheets.ext.selectgame;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Sergio
  */
-public class Player {
+public class Player implements Serializable {
 
 	private String name;
 

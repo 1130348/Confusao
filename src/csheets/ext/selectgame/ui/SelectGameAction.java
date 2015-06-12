@@ -48,8 +48,7 @@ public class SelectGameAction extends FocusOwnerAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ChoosePartner dialog = ChoosePartner.
-			getInstance(null, enabled, selectGameController);
+		PlayerInfo dialog = new PlayerInfo(null, enabled, selectGameController);
 		dialog.setVisible(true);
 	}
 }

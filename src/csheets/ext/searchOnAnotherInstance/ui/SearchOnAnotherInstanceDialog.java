@@ -169,6 +169,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
             wasActivated = 0;
             deactivatePanel();
             controller.setVisibility(false);
+            controller.deactivateServer();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 

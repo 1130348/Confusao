@@ -4,41 +4,38 @@
  participant "ImportExportUI" as ui
  participant "ImportExportController" as ctrl
  participant "th:Thread" as th
- participant "ImportExportThread" as thr
- participant "ci:CustomImportationExportation" as cie
- participant "SpreadSheetImpl" as ssi
+ participant "thr:CustomImportation" as thr
+ participant "UIController" as uictrl
  participant "stream:FileInputStream" as fis
- participant "list:ArrayList<String>" as list
+ participant "ef:ExtensionFilter" as ef
+ participant "wb:Workbook" as wb
 
 User -> iea : actionPerformed()
-iea -> ui : showDialog()
+iea -> ui : showDialog(app)
 User <-- ui : asks for the column's separator
 User -> ui : chooses separator
-ui -> ctrl : chooseSeparator(sep)
 User <-- ui : asks if the file has a header and if it is \nsupposed to be included in the operation
-ui -> ctrl : hasHeader(bool)
-ui -> ctrl : includeHeader(bool)
-ctrl -> th : th = create(new ImportExportThread())
-ctrl -> thr : run()
-create cie
-thr -> cie : new
-thr -> cie : import(sep, header)
+User -> ui : indicates if the file has header and if it is \nsupposed to be included in the operation
+User <-- ui : asks to the user to choose a file
+User -> ui : chooses the file(s)
+ui -> ctrl : importFiles(app, files, separator, header, includeHeader)
+ctrl -> th : th = create(new CustomImportation(app, uiController, \nfiles, separator, header, includeHeader))
+create thr
+th -> thr : new(app, uiController, files, \nseparator, header, includeHeader)
+ctrl -> th : start()
+th -> thr : run()
+thr -> thr : importText()
+create ef
+thr -> ef : new()
+thr -> uictrl : wb:getActiveWorkbook()
+loop for each file selected
 create fis
-cie -> fis : new
-create list
-cie -> list : new
-
-loop for each line in the input stream
-cie -> fis : st = readLine()
-cie -> list : add(st)
+thr -> fis : new(file)
+thr ->ef : accept(file)
+thr -> fis : content += readLine()
+thr -> wb : addSpreadSheet(content);
 end loop
 
-cie -> ssi : map = getCells()
 
-loop for each string in the list, set the content of the cells in map, starting on the top left corner
-cie -> list : str = get(i)
-cie -> CellImpl : getAddress()
-cie -> CellImpl : setContent(str)
-end loop
 
 @enduml

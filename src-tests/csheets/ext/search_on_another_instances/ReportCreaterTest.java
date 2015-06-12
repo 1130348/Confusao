@@ -42,7 +42,9 @@ public class ReportCreaterTest {
     //
     @Test
     public void makeSureWoorkbookIsFound() {
-        
+        //Este teste acabou por não ser implementado devido á mudança no plano 
+        //de testes. ReportCreater deixou de ter a responsabilidade de encontrar
+        //o woorkbook.
     }
     
 }

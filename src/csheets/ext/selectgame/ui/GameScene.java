@@ -24,15 +24,22 @@ public class GameScene extends javax.swing.JDialog {
 	 * Creates new form GameScene
 	 */
 	public GameScene(java.awt.Frame parent, boolean modal,
-					 SelectGameController controller, Player player,
+					 SelectGameController controller,
 					 String activeGame) {
 		super(parent, modal);
-		this.player = player;
 		this.controller = controller;
 		this.activeGame = activeGame;
 		initComponents();
 		myImage.setText("");
 		partnerImage.setText("");
+	}
+
+	public void setPartnerData(Player player) {
+		partnerImage.setIcon(player.getPlayerIcon());
+		partnerName.setText(player.getName());
+	}
+
+	public void setPlayerData(Player player) {
 		playerName.setText(player.getName());
 		myImage.setIcon(player.getPlayerIcon());
 	}
