@@ -119,6 +119,7 @@ public class NetworkSendService {
 		try {
 			byte[] data = new byte[300];
 			data = message.getBytes();
+			sOut.write((byte) message.length());
 			sOut.write(data, 0, message.length());
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).

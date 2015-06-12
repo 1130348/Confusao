@@ -160,6 +160,7 @@ public class NetworkService {
 				sOut = new DataOutputStream(clientConnection.
 					getOutputStream());
 				data = "Share Cells Content".getBytes();
+				sOut.write((byte) "Share Cells Content".length());
 				sOut.write(data, 0, "Share Cells Content".length());
 				for (Cell selectedCell : selectedCells) {
 					NetworkSendService.
@@ -171,19 +172,13 @@ public class NetworkService {
 						sendString(String.
 							format("%d", selectedCell.getAddress().getRow()), sOut);
 				}
-
 				data = "end".getBytes();
+				sOut.write((byte) "end".length());
 				sOut.write(data, 0, "end".length());
+				sOut.close();
 			} catch (IOException ex) {
 				Logger.getLogger(NetworkService.class.getName()).
 					log(Level.SEVERE, null, ex);
-			} finally {
-				try {
-					sOut.close();
-				} catch (IOException ex) {
-					Logger.getLogger(NetworkService.class.getName()).
-						log(Level.SEVERE, null, ex);
-				}
 			}
 		}
 	}
@@ -219,7 +214,7 @@ public class NetworkService {
 		NetworkReceiveService.addObserver(dialog, reportWatch);
 	}
 
-	public static void sendSpreadSheetList(InetAddress address,
+	public static void sendWorkbook(InetAddress address,
 										   Workbook workbook) {
 		SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
 		client.sendWorkbook(address, workbook);

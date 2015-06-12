@@ -152,10 +152,10 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        workbookToSearchText.setText("");
         String workbookToSearch = workbookToSearchText.getText();
         String addressToSend = (String) instancesList.getSelectedValue();
         controller.sendSearchRequest(addressToSend, workbookToSearch);
+        workbookToSearchText.setText("");
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -169,6 +169,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
             wasActivated = 0;
             deactivatePanel();
             controller.setVisibility(false);
+            controller.deactivateServer();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 

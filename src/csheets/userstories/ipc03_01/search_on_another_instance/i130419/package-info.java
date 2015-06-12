@@ -95,11 +95,12 @@
  * <img src="doc-files/sequence_diagram_receiver.png">
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.startsharing</a><br/>
- * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.startsharing.ui</a><br/>
+ * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.search_on_another_instance</a><br/>
+ * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.search_on_another_instance.ui</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
- * We cant achieve the objectives because we have a problem with ports<br/>
+ * We achieve the objectives and in our point of view all requirements have been
+ * accomplished.<br/>
  * <br/>
  * <br/>
  * 
