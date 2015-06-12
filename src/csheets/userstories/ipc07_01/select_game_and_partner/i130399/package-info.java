@@ -15,13 +15,13 @@
  * <br/>
  * <br/>
  * <b>Use Case "Select game and partner":</b>
- * The user starts the games extension and the system displays a list of
- * instances currently available for the connection. The user chooses the
- * partner with whom he wants to play. The system has two possible games,
- * including the checkers game and the naval battle game. The user selects the
- * game that he wants to play, this must be agreed by both. The system asks each
- * user name and image. The user enters their name and choose an image within
- * possible image list and the game starts.<br/>
+ * The system asks each user name and image. The users enters their name and
+ * choose an image within possible image list. The system has two possible
+ * games, including the checkers game and the naval battle game. The user
+ * selects the game that he wants to play, this must be agreed by both. The
+ * system displays a list of instances currently available for the connection.
+ * The user chooses the partner with whom he wants to play and the game starts.
+ * <br/>
  * <br/>
  *
  * <h2>2. Analysis</h2>
@@ -88,13 +88,13 @@
  * <br/>
  * <h3>User Select Cells And Clicks Botton To Send</h3>
  * The following diagram illustrates what happens when the user selects a
- * partner and a game to play. When the user decides to play a game the object
- * SelectGameAction is responsible to open a window to user where he can search
- * for other partner and connect to him, as well as select the game and his own
- * info. After the user select game and data, he press the button to send and
- * active actionPerformed() method of class SelectGameAction. This problem will
- * be implemented with strategy pattern, so according to the game (strategy)
- * select by the user will be created an instance of the same.
+ * partner and a game to play. Firstly the user fills his data and select a
+ * game, when he press the button to start another frame is created (the game
+ * scene) but is not yet visible. After this will open a window to user where he
+ * can search for other partner and connect to him. After the user connects to a
+ * partner, he will send his own info and receive the other user info, and in
+ * this moment the window created before is set to visible where the users info
+ * will appear and the game will run.
  * <br/>
  * <br/>
  * <img src="doc-files/select_game_and_partner_ipc_07_01.png"/>
@@ -104,7 +104,7 @@
  * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.selectgame.ui</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
- * We cant achieve the objectives because we have a problem with ports<br/>
+ * In the final of this week the objetives of this use case were reached.<br/>
  * <br/>
  * <br/>
  *

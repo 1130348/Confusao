@@ -39,6 +39,10 @@ public class GameScene extends javax.swing.JDialog {
 		partnerName.setText(player.getName());
 	}
 
+	public Player getPlayerData() {
+		return player;
+	}
+
 	public void setPlayerData(Player player) {
 		playerName.setText(player.getName());
 		myImage.setIcon(player.getPlayerIcon());
