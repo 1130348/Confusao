@@ -29,10 +29,12 @@ public class ChoosePartner extends javax.swing.JDialog {
 
 	private ChoosePartner(java.awt.Frame parent,
 						  boolean modal,
-						  SelectGameController controller, Player player) {
+						  SelectGameController controller, Player player,
+						  String activeGame) {
 		super(parent, modal);
 		this.controller = controller;
 		this.player = player;
+		this.activeGame = activeGame;
 		initComponents();
 		dialog = new GameScene(null, true, controller, activeGame);
 	}
@@ -45,9 +47,9 @@ public class ChoosePartner extends javax.swing.JDialog {
 
 	public static synchronized ChoosePartner getInstance(
 		java.awt.Frame parent, boolean modal, SelectGameController controller,
-		Player player) {
+		Player player, String activeGame) {
 		if (instance == null) {
-			instance = new ChoosePartner(parent, modal, controller, player);
+			instance = new ChoosePartner(parent, modal, controller, player, activeGame);
 		}
 		return instance;
 	}
@@ -132,19 +134,16 @@ public class ChoosePartner extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(availableCleanSheetsInstancesOnLANLabel)
-                        .addGap(6, 6, 6))
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(refreshListButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(connectDisconnectToggleButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(availableCleanSheetsInstancesOnLANLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(searchPartnerButton)
-                        .addGap(60, 60, 60)))
+                        .addGap(60, 60, 60))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(refreshListButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(connectDisconnectToggleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,7 +159,7 @@ public class ChoosePartner extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(connectDisconnectToggleButton)
                     .addComponent(refreshListButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,8 +228,13 @@ public class ChoosePartner extends javax.swing.JDialog {
 				controller.
 					establishConnection((String) availableCleanSheetsInstancesList.
 						getSelectedValue());
+				controller.sendUserInfo(player);
 				connectDisconnectToggleButtonClick.set(index, false);
 				connectDisconnectToggleButton.setText("Disconnect");
+				controller.setActiveGame(activeGame);
+				dialog.setPlayerData(player);
+				dispose();
+				dialog.setVisible(true);
 			} else {
 				controller.interruptConnection();
 				connectDisconnectToggleButtonClick.set(index, true);

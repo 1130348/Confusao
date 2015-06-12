@@ -165,10 +165,9 @@ public class PlayerInfo extends javax.swing.JDialog {
 			activeGame = gamesComboBox.getSelectedItem().toString();
 			player.setName(nickNameTextField.getText());
 			player.setPlayerIcon((ImageIcon) iconsComboBox.getSelectedItem());
-			controller.setActiveGame(activeGame);
 			dispose();
 			ChoosePartner dialog = ChoosePartner.
-				getInstance(null, true, controller, player);
+				getInstance(null, true, controller, player, activeGame);
 			dialog.setVisible(true);
 		}
     }//GEN-LAST:event_startGameButtonActionPerformed

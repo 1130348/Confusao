@@ -144,7 +144,6 @@ public class NetworkSendService {
 			saida = new ObjectOutputStream(cliente.
 				getOutputStream());
 			saida.writeObject(playerToSend);
-			saida.close();
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);

@@ -40,7 +40,8 @@ public class GameScene extends javax.swing.JDialog {
 	}
 
 	public void setPlayerData(Player player) {
-		this.player = player;
+		playerName.setText(player.getName());
+		myImage.setIcon(player.getPlayerIcon());
 	}
 
 	/**

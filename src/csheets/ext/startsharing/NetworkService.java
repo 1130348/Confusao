@@ -79,6 +79,7 @@ public class NetworkService {
 
 	public static void startGameServer(GameScene dialog, Player player) {
 		gameServerThread = new Thread(new SearchPartnersServer(dialog, player));
+		gameServerThread.start();
 	}
 
 	public static void establishConnectionToUser(String playerName) {
@@ -215,7 +216,7 @@ public class NetworkService {
 	}
 
 	public static void sendWorkbook(InetAddress address,
-										   Workbook workbook) {
+									Workbook workbook) {
 		SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
 		client.sendWorkbook(address, workbook);
 	}
