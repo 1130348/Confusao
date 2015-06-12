@@ -12,6 +12,7 @@ import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceClient;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
 import csheets.ext.selectgame.Player;
 import csheets.ext.selectgame.SearchPartnersServer;
+import csheets.ext.selectgame.ui.ChoosePartner;
 import csheets.ext.selectgame.ui.GameScene;
 import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.DataOutputStream;
@@ -77,8 +78,9 @@ public class NetworkService {
 		}
 	}
 
-	public static void startGameServer(GameScene dialog, Player player) {
-		gameServerThread = new Thread(new SearchPartnersServer(dialog, player));
+	public static void startGameServer(GameScene dialog, Player player,
+									   ChoosePartner partnersDialog) {
+		gameServerThread = new Thread(new SearchPartnersServer(dialog, player, partnersDialog));
 		gameServerThread.start();
 	}
 
