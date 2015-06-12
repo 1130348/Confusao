@@ -12,3 +12,4 @@ csheets.ext.findworkbooks.FindWorkbooksExtension
 csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceExtension
 csheets.ext.Email.ExtensionEmail
 csheets.ext.Sort.SortExtension
+csheets.ext.Insert_Image.InsertImageExtension
