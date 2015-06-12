@@ -82,6 +82,10 @@
  * <br/>
  * <br/>
  * <img src="doc-files/export_to_text_file_ipc04_01.png"/>
+ * <br/>
+ * <h2>6. Final Remarks</h2>
+ * I've achieved the objectives and in my point of view all requirements have been
+ * accomplished.<br/>
  * 
  */
 

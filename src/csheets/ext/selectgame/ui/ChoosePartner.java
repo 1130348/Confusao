@@ -184,7 +184,7 @@ public class ChoosePartner extends javax.swing.JDialog {
 			searchPartnerButton.setText("Stop Searching");
 			controller.setVisibility(true);
 			retrieveAvailableCleanSheetsInstances();
-			controller.startGameServer(dialog, player);
+			controller.startGameServer(dialog, player, this);
 		}
     }//GEN-LAST:event_searchPartnerButtonActionPerformed
 
