@@ -20,21 +20,6 @@
  */
 package csheets.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
-
 import csheets.CleanSheets;
 import csheets.core.Workbook;
 import csheets.ui.ctrl.AboutAction;
@@ -73,22 +58,41 @@ import csheets.ui.ext.UIExtension;
 import csheets.ui.sheet.AddressBox;
 import csheets.ui.sheet.CellEditor;
 import csheets.ui.sheet.WorkbookPane;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 
 /**
  * The main frame of the GUI.
+ *
  * @author Einar Pehrson
  */
 @SuppressWarnings("serial")
 public class Frame extends JFrame implements SelectionListener {
 
-	/** The base of the window title */
+	/**
+	 * The base of the window title
+	 */
 	public static final String TITLE = "CleanSheets";
 
-	/** The CleanSheets application */
+	/**
+	 * The CleanSheets application
+	 */
 	private CleanSheets app;
 
 	/**
 	 * Creates a new frame.
+	 *
 	 * @param app the CleanSheets application
 	 */
 	public Frame(CleanSheets app) {
@@ -100,17 +104,24 @@ public class Frame extends JFrame implements SelectionListener {
 		FileChooser chooser = null;
 		try {
 			chooser = new FileChooser(this, app.getUserProperties());
-		} catch (java.security.AccessControlException ace) {}
+		} catch (java.security.AccessControlException ace) {
+		}
 		ActionManager actionManager = new ActionManager(app, uiController, chooser);
 
 		// Registers file actions
 		actionManager.registerAction("new", new NewAction(app));
-		actionManager.registerAction("open", new OpenAction(app, uiController, chooser));
-		actionManager.registerAction("close", new CloseAction(app, uiController, chooser));
-		actionManager.registerAction("closeall", new CloseAllAction(app, uiController, chooser));
-		actionManager.registerAction("save", new SaveAction(app, uiController, chooser));
-		actionManager.registerAction("saveas", new SaveAsAction(app, uiController, chooser));
-		actionManager.registerAction("exit", new ExitAction(app, uiController, chooser));
+		actionManager.
+			registerAction("open", new OpenAction(app, uiController, chooser));
+		actionManager.
+			registerAction("close", new CloseAction(app, uiController, chooser));
+		actionManager.
+			registerAction("closeall", new CloseAllAction(app, uiController, chooser));
+		actionManager.
+			registerAction("save", new SaveAction(app, uiController, chooser));
+		actionManager.
+			registerAction("saveas", new SaveAsAction(app, uiController, chooser));
+		actionManager.
+			registerAction("exit", new ExitAction(app, uiController, chooser));
 		actionManager.registerAction("print", new PrintAction());
 
 		// Registers edit actions
@@ -122,13 +133,16 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.registerAction("clear", new ClearAction());
 		actionManager.registerAction("selectall", new SelectAllAction());
 		actionManager.registerAction("sort", new SortAction());
-		actionManager.registerAction("search", new SearchAction());
+		actionManager.registerAction("search", new SearchAction(uiController));
 		actionManager.registerAction("prefs", new PreferencesAction());
 
 		// Registers spreadsheet actions
-		actionManager.registerAction("addsheet", new AddSpreadsheetAction(uiController));
-		actionManager.registerAction("removesheet", new RemoveSpreadsheetAction(uiController));
-		actionManager.registerAction("renamesheet", new RenameSpreadsheetAction(uiController));
+		actionManager.
+			registerAction("addsheet", new AddSpreadsheetAction(uiController));
+		actionManager.
+			registerAction("removesheet", new RemoveSpreadsheetAction(uiController));
+		actionManager.
+			registerAction("renamesheet", new RenameSpreadsheetAction(uiController));
 		actionManager.registerAction("insertcolumn", new InsertColumnAction());
 		actionManager.registerAction("removecolumn", new RemoveColumnAction());
 		actionManager.registerAction("insertrow", new InsertRowAction());
@@ -149,8 +163,9 @@ public class Frame extends JFrame implements SelectionListener {
 		toolBarPanel.add(new StandardToolBar(actionManager));
 		for (UIExtension extension : uiController.getExtensions()) {
 			JToolBar extToolBar = extension.getToolBar();
-			if (extToolBar != null)
+			if (extToolBar != null) {
 				toolBarPanel.add(extToolBar);
+			}
 		}
 
 		// Creates and lays out top panel
@@ -165,19 +180,22 @@ public class Frame extends JFrame implements SelectionListener {
 		JTabbedPane sideBar = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 		sideBar.setPreferredSize(new Dimension(170, 480));
 		Font font = sideBar.getFont();
-		sideBar.setFont(new Font(font.getFamily(), Font.PLAIN, font.getSize() - 1));
+		sideBar.
+			setFont(new Font(font.getFamily(), Font.PLAIN, font.getSize() - 1));
 		for (UIExtension extension : uiController.getExtensions()) {
 			JComponent extBar = extension.getSideBar();
-			if (extBar != null)
-				sideBar.insertTab(extension.getExtension().getName(), extension.getIcon(),
-					extBar, null, sideBar.getTabCount());
+			if (extBar != null) {
+				sideBar.insertTab(extension.getExtension().getName(), extension.
+								  getIcon(),
+								  extBar, null, sideBar.getTabCount());
+			}
 		}
 
 		// Lays out split pane
 		workbookPane.setMinimumSize(new Dimension(300, 100));
 		sideBar.setMinimumSize(new Dimension(140, 100));
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-			workbookPane, sideBar);
+											  workbookPane, sideBar);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setResizeWeight(1.0);
 
@@ -192,7 +210,8 @@ public class Frame extends JFrame implements SelectionListener {
 		// Registers listeners
 		uiController.addSelectionListener(this);
 		addWindowListener(new WindowClosingHandler(this,
-			actionManager.getAction("exit")));
+												   actionManager.
+												   getAction("exit")));
 
 		// Configures appearance
 		setTitle(TITLE);
@@ -205,34 +224,43 @@ public class Frame extends JFrame implements SelectionListener {
 
 	/**
 	 * Updates the title of the window when a new active workbook is selected.
+	 *
 	 * @param event the selection event that was fired
 	 */
 	public void selectionChanged(SelectionEvent event) {
 		Workbook workbook = event.getWorkbook();
 		if (workbook != null) {
 			setVisible(true);
-			if (app.isWorkbookStored(workbook))
+			if (app.isWorkbookStored(workbook)) {
 				setTitle(TITLE + " - " + app.getFile(workbook).getName());
-			else
+			} else {
 				setTitle(TITLE + " - Untitled");
-		} else
+			}
+		} else {
 			setTitle(TITLE);
+		}
 	}
 
 	/**
 	 * A utility for creating a Frame on the AWT event dispatching thread.
+	 *
 	 * @author Einar Pehrson
 	 */
 	public static class Creator implements Runnable {
 
-		/** The component that was created */
+		/**
+		 * The component that was created
+		 */
 		private Frame frame;
 
-		/** The CleanSheets application */
+		/**
+		 * The CleanSheets application
+		 */
 		private CleanSheets app;
 
 		/**
 		 * Creates a new frame creator.
+		 *
 		 * @param app the CleanSheets application
 		 */
 		public Creator(CleanSheets app) {
@@ -241,6 +269,7 @@ public class Frame extends JFrame implements SelectionListener {
 
 		/**
 		 * Creates a component on the AWT event dispatching thread.
+		 *
 		 * @return the component that was created
 		 */
 		public Frame createAndWait() {
@@ -256,8 +285,8 @@ public class Frame extends JFrame implements SelectionListener {
 		}
 
 		/**
-		 * Asks the event queue to create a component at a later time.
-		 * (Included for conformity.)
+		 * Asks the event queue to create a component at a later time. (Included
+		 * for conformity.)
 		 */
 		public void createLater() {
 			EventQueue.invokeLater(this);
