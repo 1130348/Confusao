@@ -7,6 +7,7 @@ package csheets.ext.searchOnAnotherInstance;
 
 import csheets.core.Workbook;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
+import csheets.ext.startsharing.NetworkReceiveService;
 import csheets.ext.startsharing.NetworkService;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -48,5 +49,9 @@ public class SearchOnAnotherInstanceController {
 
     public Map<InetAddress, Integer> searchInstances() {
         return NetworkService.searchInstances();
+    }
+
+    public void deactivateServer() {
+        NetworkReceiveService.interruptServer();
     }
 }

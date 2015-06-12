@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class NetworkReceiveService {
 
     private static Thread receiveUDP;
+    private static Thread serverThread;
     private static final int TIMEOUT = 3;
 
     public NetworkReceiveService() {
@@ -69,7 +70,11 @@ public class NetworkReceiveService {
         SearchOnAnotherInstanceServer server = new SearchOnAnotherInstanceServer();
         server.addObserver(dialog);
         server.addObserver(reportWatch);
-        Thread serverThread = new Thread(server);
+        serverThread = new Thread(server);
         serverThread.start();
+    }
+    
+    public static void interruptServer(){
+        serverThread.interrupt();
     }
 }
