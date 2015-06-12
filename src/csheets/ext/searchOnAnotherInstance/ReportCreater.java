@@ -5,7 +5,9 @@
  */
 package csheets.ext.searchOnAnotherInstance;
 
+import csheets.core.Spreadsheet;
 import csheets.core.SpreadsheetImpl;
+import csheets.core.Workbook;
 
 /**
  *
@@ -13,17 +15,24 @@ import csheets.core.SpreadsheetImpl;
  */
 public class ReportCreater {
 
+
     private ReportCreater() {
 
     }
 
-    public static String createResume(SpreadsheetImpl[] spreadSheetList) {
-        if(spreadSheetList == null){
+    public static String createResume(Workbook workbook) {
+        if(workbook == null){
             return "Workbook not found";
         }
+        int spreadSheets = workbook.getSpreadsheetCount();
+        Spreadsheet[] spreadSheetList = new Spreadsheet[spreadSheets];
+        for (int i = 0; i < spreadSheets; i++) {
+            spreadSheetList[i] = workbook.getSpreadsheet(i);
+        }
         String resume = "";
-        int hasContent = 0;
+        int hasContent;
         for (int i = 0; i < spreadSheetList.length; i++) {
+            hasContent = 0;
             resume += "\nTitle: ";
             resume += spreadSheetList[i].getTitle();
             for (int j = 0; j < spreadSheetList[i].getRowCount(); j++) {
@@ -33,6 +42,9 @@ public class ReportCreater {
                         hasContent = 1;
                         break;
                     }
+                }
+                if(hasContent == 1){
+                    break;
                 }
             }
             if(hasContent == 0){

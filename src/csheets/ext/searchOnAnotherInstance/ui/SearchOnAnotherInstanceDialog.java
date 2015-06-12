@@ -5,13 +5,13 @@
  */
 package csheets.ext.searchOnAnotherInstance.ui;
 
-import csheets.core.SpreadsheetImpl;
 import csheets.core.Workbook;
 import csheets.ext.searchOnAnotherInstance.NotificationEvent;
-import csheets.ext.searchOnAnotherInstance.ReportEvent;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceController;
 import csheets.ui.ctrl.UIController;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -26,6 +26,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     private SearchOnAnotherInstanceController controller;
     private static SearchOnAnotherInstanceDialog dialog;
     private int wasActivated = 0;
+    private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
 
     private SearchOnAnotherInstanceDialog() {
         setModal(true);
@@ -95,6 +96,11 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
         });
 
         refreshButton.setText("Refresh List");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
 
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -149,15 +155,21 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
         String workbookToSearch = workbookToSearchText.getText();
         String addressToSend = (String) instancesList.getSelectedValue();
         controller.sendSearchRequest(addressToSend, workbookToSearch);
+        workbookToSearchText.setText("");
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         if (((String) jComboBox1.getSelectedItem()).equalsIgnoreCase("Activated")) {
             activatePanel();
             wasActivated = 1;
+            controller.startServer(this);
+            controller.setVisibility(true);
+            retrieveAvailableCleanSheetsInstances();
         } else if (wasActivated == 1) {
             wasActivated = 0;
             deactivatePanel();
+            controller.setVisibility(false);
+            controller.deactivateServer();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -166,20 +178,36 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
         workbookToSearchText.setText("");
     }//GEN-LAST:event_workbookToSearchTextActionPerformed
 
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        retrieveAvailableCleanSheetsInstances();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
     @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof NotificationEvent) {
-            String workbookName = ((NotificationEvent)arg).getWorkbookName();
-            InetAddress addressToSend = ((NotificationEvent)arg).getAddress();
-            JOptionPane.showConfirmDialog(null,"You receive a search request for the workbook "
-                    + workbookName + " by the user " + addressToSend.getHostName() + ".","Notification", JOptionPane.INFORMATION_MESSAGE);
-            Workbook[] openWoorkbooks = uiController.getOpenWorkBooks();
-            SpreadsheetImpl[] spreadSheetList = controller.searchWorkbook(openWoorkbooks, workbookName);
-            controller.sendSpreadSheetList(addressToSend, spreadSheetList);
-        } else if(arg instanceof String){
-            String message = ((String)arg);
-            JOptionPane.showConfirmDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
+            String workbookName = ((NotificationEvent) arg).getWorkbookName();
+            InetAddress addressToSend = ((NotificationEvent) arg).getAddress();
+            JOptionPane.showMessageDialog(null, "You receive a search request for the workbook "
+                    + workbookName + " by the user " + addressToSend.getHostName() + ".", "Notification", JOptionPane.INFORMATION_MESSAGE);
+            Workbook openWoorkbook = uiController.getOpenWorkbookByFileName(workbookName);
+            controller.sendWorkbook(addressToSend, openWoorkbook);
+        } else if (arg instanceof String) {
+            String message = ((String) arg);
+            JOptionPane.showMessageDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    private void retrieveAvailableCleanSheetsInstances() {
+        listOfAvailableCleanSheetsInstances.clear();
+        Map<InetAddress, Integer> activeInstances = controller.searchInstances();
+        for (Map.Entry<InetAddress, Integer> activeInstance : activeInstances.
+                entrySet()) {
+            listOfAvailableCleanSheetsInstances.add(activeInstance.getKey().
+                    getHostName());
+        }
+
+        instancesList.
+                setListData(listOfAvailableCleanSheetsInstances.toArray());
     }
 
     /**

@@ -73,7 +73,7 @@ public class RespondToUDPRequest implements Runnable {
 				System.out.println("Client: " + clientPort);
 				String port = String.format("%d", portTCP);
 				data = port.getBytes();
-				if (!(clientIP.getCanonicalHostName()).equals(localName)) {
+				//if (!(clientIP.getCanonicalHostName()).equals(localName)) {
 					DatagramPacket resposta = new DatagramPacket(data, port.
 																 length(), clientIP, clientPort);
 
@@ -81,7 +81,7 @@ public class RespondToUDPRequest implements Runnable {
 						addClientToMap(Integer.parseInt(message), request.
 									   getAddress());
 					sock.send(resposta);
-				}
+				//}
 
 			} catch (IOException ex) {
 				Logger.getLogger(RespondToUDPRequest.class.getName()).

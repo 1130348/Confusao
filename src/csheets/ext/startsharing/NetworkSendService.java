@@ -5,11 +5,14 @@
  */
 package csheets.ext.startsharing;
 
+import csheets.ext.selectgame.Player;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -23,6 +26,10 @@ import java.util.logging.Logger;
  * @author João Monteiro <1130372@isep.ipp.pt>
  */
 public class NetworkSendService {
+
+	public static Socket cliente;
+
+	public static boolean connectionState = false;
 
 	public static final int TIMEOUT = 3;
 
@@ -39,7 +46,7 @@ public class NetworkSendService {
 			DatagramSocket socket = new DatagramSocket();
 			socket.setBroadcast(true);
 			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("172.18.135.255");
+			InetAddress destinationIP = InetAddress.getByName("192.168.1.255");
 
 			byte[] data = new byte[300];
 			String message = String.format("%d", portTCP);
@@ -105,5 +112,43 @@ public class NetworkSendService {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);
 		}
+	}
+
+	public static void sendString(String message,
+								  DataOutputStream sOut) {
+		try {
+			byte[] data = new byte[300];
+			data = message.getBytes();
+			sOut.write((byte) message.length());
+			sOut.write(data, 0, message.length());
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void establishConnectionToUser(InetAddress address) {
+		try {
+			cliente = new Socket(address, 9001);
+			connectionState = true;
+			System.out.println("O cliente se conectou ao servidor!");
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void sendUserInfo(Player playerToSend) {
+		ObjectOutputStream saida;
+		try {
+			saida = new ObjectOutputStream(cliente.
+				getOutputStream());
+			saida.writeObject(playerToSend);
+			saida.close();
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+
 	}
 }

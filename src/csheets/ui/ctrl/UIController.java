@@ -47,338 +47,394 @@ import csheets.ui.sheet.CellTransferHandler;
  * A controller for managing the current selection, i.e. the active workbook,
  * spreadsheet and cell, as well as for keeping track of modifications to
  * workbooks and of user interface extensions.
+ *
  * @author Einar Pehrson
  */
 public class UIController implements SpreadsheetAppListener {
 
-	/** The active workbook */
-	private Workbook activeWorkbook;
+    /**
+     * The active workbook
+     */
+    private Workbook activeWorkbook;
 
-	/** The active spreadsheet */
-	private Spreadsheet activeSpreadsheet;
+    /**
+     * The active spreadsheet
+     */
+    private Spreadsheet activeSpreadsheet;
 
-	/** The active cell */
-	private Cell activeCell;
+    /**
+     * The active cell
+     */
+    private Cell activeCell;
 
-	/** The workbooks that have been selected, in order */
-	private Stack<Workbook> workbooks = new Stack<Workbook>();
+    /**
+     * The workbooks that have been selected, in order
+     */
+    private Stack<Workbook> workbooks = new Stack<Workbook>();
 
-	/** The map that registers whether workbooks have changes */
-	private Map<Workbook, Boolean> changeLog = new HashMap<Workbook, Boolean>();
+    /**
+     * The map that registers whether workbooks have changes
+     */
+    private Map<Workbook, Boolean> changeLog = new HashMap<Workbook, Boolean>();
 
-	/** The CleanSheets application */
-	private CleanSheets app;
+    /**
+     * The CleanSheets application
+     */
+    private CleanSheets app;
 
-	/** The transfer haandler used to transfer ranges of cells */
-	private TransferHandler transferHandler = new CellTransferHandler();
+    /**
+     * The transfer haandler used to transfer ranges of cells
+     */
+    private TransferHandler transferHandler = new CellTransferHandler();
 
-	/** The user interface extensions that have been loaded */
-	private UIExtension[] extensions;
+    /**
+     * The user interface extensions that have been loaded
+     */
+    private UIExtension[] extensions;
 
-	/** The selection listeners registered to receive events */
-	private List<SelectionListener> selListeners = new ArrayList<SelectionListener>();
+    /**
+     * The selection listeners registered to receive events
+     */
+    private List<SelectionListener> selListeners = new ArrayList<SelectionListener>();
 
-	/** The edit listeners registered to receive events */
-	private List<EditListener> editListeners = new ArrayList<EditListener>();
+    /**
+     * The edit listeners registered to receive events
+     */
+    private List<EditListener> editListeners = new ArrayList<EditListener>();
 
 	// private Map<Workbook, Spreadsheet> activeSpreadsheets;
-	// private Map<Spreadsheet, Cell> activeCells;
+    // private Map<Spreadsheet, Cell> activeCells;
+    /**
+     * Creates a new user interface controller.
+     *
+     * @param app the CleanSheets application
+     */
+    public UIController(CleanSheets app) {
+        // Stores members
+        this.app = app;
+        app.addSpreadsheetAppListener(this);
 
-	/**
-	 * Creates a new user interface controller.
-	 * @param app the CleanSheets application
-	 */
-	public UIController(CleanSheets app) {
-		// Stores members
-		this.app = app;
-		app.addSpreadsheetAppListener(this);
+        // Fetches extensions
+        List<UIExtension> uiExtensions = new LinkedList<UIExtension>();
+        for (Extension extension : ExtensionManager.getInstance().getExtensions()) {
+            UIExtension uiExtension = extension.getUIExtension(this);
+            if (uiExtension != null) {
+                uiExtensions.add(uiExtension);
+            }
+        }
+        this.extensions
+                = uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
+    }
 
-		// Fetches extensions
-		List<UIExtension> uiExtensions = new LinkedList<UIExtension>();
-		for (Extension extension : ExtensionManager.getInstance().getExtensions()) {
-			UIExtension uiExtension = extension.getUIExtension(this);
-			if (uiExtension != null)
-				uiExtensions.add(uiExtension);
-		}
-		this.extensions =
-			uiExtensions.toArray(new UIExtension[uiExtensions.size()]);
-	}
+    /*
+     * SELECTION
+     */
+    /**
+     * Returns the active workbook.
+     *
+     * @return the active workbook
+     */
+    public Workbook getActiveWorkbook() {
+        return activeWorkbook;
+    }
 
-/*
- * SELECTION
- */
+    /**
+     * Sets the given workbook of the application.
+     *
+     * @param workbook the workbook to use
+     */
+    public void setActiveWorkbook(Workbook workbook) {
+        if (activeWorkbook == null || activeWorkbook != workbook) {
+            Workbook prevWorkbook = activeWorkbook;
+            Spreadsheet prevSpreadsheet = activeSpreadsheet;
+            Cell prevCell = activeCell;
+            activeWorkbook = workbook;
+            activeSpreadsheet = null;
+            activeCell = null;
+            if (activeWorkbook != null) {
+                workbooks.remove(activeWorkbook);
+                workbooks.push(activeWorkbook);
+            }
+            fireSelectionChanged(new SelectionEvent(this,
+                    activeWorkbook, activeSpreadsheet, activeCell,
+                    prevWorkbook, prevSpreadsheet, prevCell));
+        }
+    }
 
-	/**
-	 * Returns the active workbook.
-	 * @return the active workbook
-	 */
-	public Workbook getActiveWorkbook() {
-		return activeWorkbook;
-	}
-        
+    /**
+     * Returns the active spreadsheet.
+     *
+     * @return the active spreadsheet
+     */
+    public Spreadsheet getActiveSpreadsheet() {
+        return activeSpreadsheet;
+    }
+
+    /**
+     * Sets the active spreadsheet of the application, and thereby also the
+     * active workbook.
+     *
+     * @param spreadsheet the spreadsheet to use
+     */
+    public void setActiveSpreadsheet(Spreadsheet spreadsheet) {
+        if (activeSpreadsheet == null || activeSpreadsheet != spreadsheet) {
+            Workbook prevWorkbook = activeWorkbook;
+            Spreadsheet prevSpreadsheet = activeSpreadsheet;
+            Cell prevCell = activeCell;
+            activeSpreadsheet = spreadsheet;
+            activeWorkbook = activeSpreadsheet.getWorkbook();
+            if (activeWorkbook != null) {
+                workbooks.remove(activeWorkbook);
+                workbooks.push(activeWorkbook);
+            }
+            fireSelectionChanged(new SelectionEvent(this,
+                    activeWorkbook, activeSpreadsheet, activeCell,
+                    prevWorkbook, prevSpreadsheet, prevCell));
+        }
+    }
+     
         public Workbook[] getOpenWorkBooks(){
            return app.getWorkbooks();
         }
-	/**
-	 * Sets the given workbook of the application.
-	 * @param workbook the workbook to use
-	 */
-	public void setActiveWorkbook(Workbook workbook) {
-		if (activeWorkbook == null || activeWorkbook != workbook) {
-			Workbook prevWorkbook = activeWorkbook;
-			Spreadsheet prevSpreadsheet = activeSpreadsheet;
-			Cell prevCell = activeCell;
-			activeWorkbook = workbook;
-			activeSpreadsheet = null;
-			activeCell = null;
-			if (activeWorkbook != null) {
-				workbooks.remove(activeWorkbook);
-				workbooks.push(activeWorkbook);
-			}
-			fireSelectionChanged(new SelectionEvent(this,
-				activeWorkbook, activeSpreadsheet, activeCell,
-				prevWorkbook, prevSpreadsheet, prevCell));
-		}
-	}
+        
+    /**
+     * Returns the active cell of the active workbook's active spreadsheet.
+     *
+     * @return the active cell
+     */
+    public Cell getActiveCell() {
+        return activeCell;
+    }
 
-	/**
-	 * Returns the active spreadsheet.
-	 * @return the active spreadsheet
-	 */
-	public Spreadsheet getActiveSpreadsheet() {
-		return activeSpreadsheet;
-	}
+    /**
+     * Sets the active cell of the application, and thereby also the active
+     * spreadsheet and workbook.
+     *
+     * @param cell the cell to use
+     */
+    public void setActiveCell(Cell cell) {
+        if (activeCell == null || activeCell != cell) {
+            Workbook prevWorkbook = activeWorkbook;
+            Spreadsheet prevSpreadsheet = activeSpreadsheet;
+            Cell prevCell = activeCell;
+            activeCell = cell;
+            activeSpreadsheet = cell.getSpreadsheet();
+            activeWorkbook = activeSpreadsheet.getWorkbook();
+            if (activeWorkbook != null) {
+                workbooks.remove(activeWorkbook);
+                workbooks.push(activeWorkbook);
+            }
+            fireSelectionChanged(new SelectionEvent(this,
+                    activeWorkbook, activeSpreadsheet, activeCell,
+                    prevWorkbook, prevSpreadsheet, prevCell));
+        }
+    }
 
-	/**
-	 * Sets the active spreadsheet of the application, and thereby also the
-	 * active workbook.
-	 * @param spreadsheet the spreadsheet to use
-	 */
-	public void setActiveSpreadsheet(Spreadsheet spreadsheet) {
-		if (activeSpreadsheet == null || activeSpreadsheet != spreadsheet) {
-			Workbook prevWorkbook = activeWorkbook;
-			Spreadsheet prevSpreadsheet = activeSpreadsheet;
-			Cell prevCell = activeCell;
-			activeSpreadsheet = spreadsheet;
-			activeWorkbook = activeSpreadsheet.getWorkbook();
-			if (activeWorkbook != null) {
-				workbooks.remove(activeWorkbook);
-				workbooks.push(activeWorkbook);
-			}
-			fireSelectionChanged(new SelectionEvent(this,
-				activeWorkbook, activeSpreadsheet, activeCell,
-				prevWorkbook, prevSpreadsheet, prevCell));
-		}
-	}
+    /*
+     * EDITING
+     */
+    /**
+     * Returns whether the active workbook has been modified.
+     *
+     * @return whether the active workbook has been modified
+     */
+    public boolean isActiveWorkbookModified() {
+        if (activeWorkbook != null) {
+            Boolean modified = changeLog.get(activeWorkbook);
+            return modified != null && modified == true;
+        } else {
+            return false;
+        }
+    }
 
-	/**
-	 * Returns the active cell of the active workbook's active spreadsheet.
-	 * @return the active cell
-	 */
-	public Cell getActiveCell() {
-		return activeCell;
-	}
+    /**
+     * Returns whether the given workbook has been modified.
+     *
+     * @return whether the given workbook has been modified
+     */
+    public boolean isWorkbookModified(Workbook workbook) {
+        Boolean modified = changeLog.get(workbook);
+        return modified != null && modified == true;
+    }
 
-	/**
-	 * Sets the active cell of the application, and thereby also the active
-	 * spreadsheet and workbook.
-	 * @param cell the cell to use
-	 */
-	public void setActiveCell(Cell cell) {
-		if (activeCell == null || activeCell != cell) {
-			Workbook prevWorkbook = activeWorkbook;
-			Spreadsheet prevSpreadsheet = activeSpreadsheet;
-			Cell prevCell = activeCell;
-			activeCell = cell;
-			activeSpreadsheet = cell.getSpreadsheet();
-			activeWorkbook = activeSpreadsheet.getWorkbook();
-			if (activeWorkbook != null) {
-				workbooks.remove(activeWorkbook);
-				workbooks.push(activeWorkbook);
-			}
-			fireSelectionChanged(new SelectionEvent(this,
-				activeWorkbook, activeSpreadsheet, activeCell,
-				prevWorkbook, prevSpreadsheet, prevCell));
-		}
-	}
+    /**
+     * Specifies whether the given workbook has been modified.
+     *
+     * @param workbook the relevant workbook
+     */
+    public void setWorkbookModified(Workbook workbook) {
+        changeLog.put(workbook, true);
+        fireWorkbookModified(workbook);
+    }
 
-/*
- * EDITING
- */
+    /**
+     * Returns the transfer haandler used to transfer ranges of cells.
+     *
+     * @return the transfer haandler used to transfer ranges of cells
+     */
+    public TransferHandler getCellTransferHandler() {
+        return transferHandler;
+    }
 
-	/**
-	 * Returns whether the active workbook has been modified.
-	 * @return whether the active workbook has been modified
-	 */
-	public boolean isActiveWorkbookModified() {
-		if (activeWorkbook != null) {
-			Boolean modified = changeLog.get(activeWorkbook);
-			return modified != null && modified == true;
-		} else
-			return false;
-	}
+    /*
+     * PROPERTIES
+     */
+    /**
+     * Returns the current user properties.
+     *
+     * @return the current user properties
+     */
+    public Properties getUserProperties() {
+        return app.getUserProperties();
+    }
 
-	/**
-	 * Returns whether the given workbook has been modified.
-	 * @return whether the given workbook has been modified
-	 */
-	public boolean isWorkbookModified(Workbook workbook) {
-		Boolean modified = changeLog.get(workbook);
-		return modified != null && modified == true;
-	}
+    /*
+     * EXTENSIONS
+     */
+    /**
+     * Returns the user interface extensions that have been loaded.
+     *
+     * @return the user interface extensions that have been loaded
+     */
+    public UIExtension[] getExtensions() {
+        return extensions;
+    }
 
-	/**
-	 * Specifies whether the given workbook has been modified.
-	 * @param workbook the relevant workbook
-	 */
-	public void setWorkbookModified(Workbook workbook) {
-		changeLog.put(workbook, true);
-		fireWorkbookModified(workbook);
-	}
+    /*
+     * EVENT FIRING & LISTENING
+     */
+    public void workbookCreated(SpreadsheetAppEvent event) {
+        Workbook workbook = event.getWorkbook();
+        changeLog.put(workbook, false);
+        if (workbook.getSpreadsheetCount() > 0) {
+            setActiveCell(workbook.getSpreadsheet(0).getCell(0, 0));
+        } else {
+            setActiveWorkbook(workbook);
+        }
+    }
 
-	/**
-	 * Returns the transfer haandler used to transfer ranges of cells.
-	 * @return the transfer haandler used to transfer ranges of cells
-	 */
-	public TransferHandler getCellTransferHandler() {
-		return transferHandler;
-	}
+    public void workbookLoaded(SpreadsheetAppEvent event) {
+        workbookCreated(event);
+    }
 
-/*
- * PROPERTIES
- */
+    public void workbookUnloaded(SpreadsheetAppEvent event) {
+        changeLog.remove(event.getWorkbook());
+        workbooks.remove(event.getWorkbook());
+        Workbook activeWorkbook = null;
+        try {
+            activeWorkbook = workbooks.peek();
+        } catch (EmptyStackException e) {
+        }
+        setActiveWorkbook(activeWorkbook);
+    }
 
-	/**
-	 * Returns the current user properties.
-	 * @return the current user properties
-	 */
-	public Properties getUserProperties() {
-		return app.getUserProperties();
-	}
+    public void workbookSaved(SpreadsheetAppEvent event) {
+        changeLog.put(event.getWorkbook(), false);
+    }
 
-/*
- * EXTENSIONS
- */
+    /**
+     * Registers the given listener on the user interface controller.
+     *
+     * @param listener the listener to be added
+     */
+    public void addSelectionListener(SelectionListener listener) {
+        selListeners.add(listener);
+    }
 
-	/**
-	 * Returns the user interface extensions that have been loaded.
-	 * @return the user interface extensions that have been loaded
-	 */
-	public UIExtension[] getExtensions() {
-		return extensions;
-	}
+    /**
+     * Removes the given listener from the user interface controller.
+     *
+     * @param listener the listener to be removed
+     */
+    public void removeSelectionListener(SelectionListener listener) {
+        selListeners.remove(listener);
+    }
 
-/*
- * EVENT FIRING & LISTENING
- */
+    /**
+     * Registers the given listener on the user interface controller.
+     *
+     * @param listener the listener to be added
+     */
+    public void addEditListener(EditListener listener) {
+        editListeners.add(listener);
+    }
 
-	public void workbookCreated(SpreadsheetAppEvent event) {
-		Workbook workbook = event.getWorkbook();
-		changeLog.put(workbook, false);
-		if (workbook.getSpreadsheetCount() > 0)
-			setActiveCell(workbook.getSpreadsheet(0).getCell(0, 0));
-		else
-			setActiveWorkbook(workbook);
-	}
+    /**
+     * Removes the given listener from the user interface controller.
+     *
+     * @param listener the listener to be removed
+     */
+    public void removeEditListener(EditListener listener) {
+        editListeners.remove(listener);
+    }
 
-	public void workbookLoaded(SpreadsheetAppEvent event) {
-		workbookCreated(event);
-	}
+    public CleanSheets getApp() {
+        return app;
+    }
 
-	public void workbookUnloaded(SpreadsheetAppEvent event) {
-		changeLog.remove(event.getWorkbook());
-		workbooks.remove(event.getWorkbook());
-		Workbook activeWorkbook = null;
-		try {
-			activeWorkbook = workbooks.peek();
-		} catch (EmptyStackException e) {}
-		setActiveWorkbook(activeWorkbook);
-	}
+    /**
+     * Notifies all registered listeners that the selection changed.
+     *
+     * @param event the event to fire
+     */
+    private void fireSelectionChanged(SelectionEvent event) {
+        SwingUtilities.invokeLater(new EventDispatcher(event,
+                selListeners.toArray(new SelectionListener[selListeners.size()])));
+    }
 
-	public void workbookSaved(SpreadsheetAppEvent event) {
-		changeLog.put(event.getWorkbook(), false);
-	}
+    /**
+     * Notifies all registered listeners that the workbook was modified.
+     *
+     * @param workbook the workbook that was modified
+     */
+    private void fireWorkbookModified(Workbook workbook) {
+        EditEvent event = new EditEvent(this, workbook);
+        for (EditListener listener : editListeners.toArray(
+                new EditListener[editListeners.size()])) {
+            listener.workbookModified(event);
+        }
+    }
 
-	/**
-	 * Registers the given listener on the user interface controller.
-	 * @param listener the listener to be added
-	 */
-	public void addSelectionListener(SelectionListener listener) {
-		selListeners.add(listener);
-	}
+    /**
+     * A utility for dispatching events on the AWT event dispatching thread.
+     *
+     * @author Einar Pehrson
+     */
+    public static class EventDispatcher implements Runnable {
 
-	/**
-	 * Removes the given listener from the user interface controller.
-	 * @param listener the listener to be removed
-	 */
-	public void removeSelectionListener(SelectionListener listener) {
-		selListeners.remove(listener);
-	}
+        /**
+         * The event to fire
+         */
+        private SelectionEvent event;
 
-	/**
-	 * Registers the given listener on the user interface controller.
-	 * @param listener the listener to be added
-	 */
-	public void addEditListener(EditListener listener) {
-		editListeners.add(listener);
-	}
+        /**
+         * The listeners to which the event should be dispatched
+         */
+        private SelectionListener[] listeners;
 
-	/**
-	 * Removes the given listener from the user interface controller.
-	 * @param listener the listener to be removed
-	 */
-	public void removeEditListener(EditListener listener) {
-		editListeners.remove(listener);
-	}
+        /**
+         * Creates a new event dispatcher.
+         *
+         * @param event the event to fire
+         * @param listeners the listeners to which the event should be
+         * dispatched
+         */
+        public EventDispatcher(SelectionEvent event, SelectionListener[] listeners) {
+            this.event = event;
+            this.listeners = listeners;
+        }
 
-	/**
-	 * Notifies all registered listeners that the selection changed.
-	 * @param event the event to fire
-	 */
-	private void fireSelectionChanged(SelectionEvent event) {
-		SwingUtilities.invokeLater(new EventDispatcher(event,
-			selListeners.toArray(new SelectionListener[selListeners.size()])));
-	}
-
-	/**
-	 * Notifies all registered listeners that the workbook was modified.
-	 * @param workbook the workbook that was modified
-	 */
-	private void fireWorkbookModified(Workbook workbook) {
-		EditEvent event = new EditEvent(this, workbook);
-		for (EditListener listener : editListeners.toArray(
-				new EditListener[editListeners.size()]))
-			listener.workbookModified(event);
-	}
-
-	/**
-	 * A utility for dispatching events on the AWT event dispatching thread.
-	 * @author Einar Pehrson
-	 */
-	public static class EventDispatcher implements Runnable {
-
-		/** The event to fire */
-		private SelectionEvent event;
-
-		/** The listeners to which the event should be dispatched */
-		private SelectionListener[] listeners;
-
-		/**
-		 * Creates a new event dispatcher.
-		 * @param event the event to fire
-		 * @param listeners the listeners to which the event should be dispatched
-		 */
-		public EventDispatcher(SelectionEvent event, SelectionListener[] listeners) {
-			this.event = event;
-			this.listeners = listeners;
-		}
-
-		/**
-		 * Dispatches the event.
-		 */
-		public void run() {
-			for (SelectionListener listener : listeners)
-				listener.selectionChanged(event);
-		}
-	}
+        /**
+         * Dispatches the event.
+         */
+        public void run() {
+            for (SelectionListener listener : listeners) {
+                listener.selectionChanged(event);
+            }
+        }
+    }
+    
+    public Workbook getOpenWorkbookByFileName(String fileName){
+        return app.getWorkbookByFileName(fileName);
+    }
 }
