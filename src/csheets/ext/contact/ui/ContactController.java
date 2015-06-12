@@ -3,6 +3,7 @@ package csheets.ext.contact.ui;
 import csheets.ext.contact.Contact;
 import csheets.ext.contact.Email;
 import csheets.ext.contact.Note;
+import csheets.ext.contact.Notification;
 import csheets.ext.contact.PhoneNumber;
 import csheets.persistence.Persistence;
 import csheets.ui.ctrl.UIController;
@@ -165,6 +166,11 @@ public class ContactController {
     
     public void setNotification(boolean flag) {
         this.flagNotification=flag;
+    }
+    
+    public void startNotification(){
+        Thread notify = new Thread(new Notification(this));
+                notify.start();
     }
 
 }

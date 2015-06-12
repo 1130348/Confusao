@@ -84,8 +84,7 @@ public class ContactPanel extends JPanel {
 		controller = new ContactController(uiController, this);
 		contactList = new ArrayList<Contact>();
                 
-                Thread notify = new Thread(new Notification(controller));
-                notify.start();
+                controller.startNotification();
                 
 		startList();
 
@@ -152,6 +151,7 @@ public class ContactPanel extends JPanel {
                             controller.setNotification(false);
                         }else{
                             controller.setNotification(true);
+                            controller.startNotification();
                         }
                     }
                 });

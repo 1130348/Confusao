@@ -8,6 +8,8 @@
     <class>csheets.ext.address.Address</class>
     <class>csheets.ext.contact.PhoneNumber</class>
     <class>csheets.ext.contact.Email</class>
+    <class>csheets.ext.contact.Notes</class>
+    <class>csheets.ext.contact.Note</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:./dbTest/CleanSheets"/>
       <property name="javax.persistence.jdbc.user" value=""/>

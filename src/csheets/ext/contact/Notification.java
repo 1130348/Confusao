@@ -29,37 +29,37 @@ public class Notification implements Runnable {
 
         while (true) {
 
-            if (controller.getNotification()) {
-                List<Contact> lContact = Persistence.getRepositoryFactory().getContactRepository().all();
-                List<Event> lEvent = new ArrayList<Event>();
+            if (!controller.getNotification()) {
+                break;
+            }
+            List<Contact> lContact = Persistence.getRepositoryFactory().getContactRepository().all();
+            List<Event> lEvent = new ArrayList<Event>();
 
-                for (Contact c : lContact) {
-                    lEvent.addAll(c.getAgenda().toList());
-                }
+            for (Contact c : lContact) {
+                lEvent.addAll(c.getAgenda().toList());
+            }
 
-                for (Event e : lEvent) {
-                    if (!e.getNotified()) {
-                        Date eventDate = e.getTimestamp();
+            for (Event e : lEvent) {
+                if (!e.getNotified()) {
+                    Date eventDate = e.getTimestamp();
 
-                        Date systemDate = new Date();
+                    Date systemDate = new Date();
 
-                        if (eventDate.getYear() == systemDate.getYear() && eventDate.getMonth() == systemDate.getMonth() && eventDate.getDay() == systemDate.getDay()) {
-                            JOptionPane.showMessageDialog(null, "Event: " + e.getDescription(), "Event Alert", JOptionPane.INFORMATION_MESSAGE);
-                            e.setNotified(true);
-                            for (Contact c : lContact) {
-                                List<Event> replaceEvent = c.getAgenda().toList();
-                                for (Event e1 : replaceEvent) {
-                                    if (e.equals(e1)) {
-                                        c.rmvEvent(e1);
-                                        c.addEvent(e);
-                                        Persistence.getRepositoryFactory().getContactRepository().edit(c);
-                                    }
+                    if (eventDate.getYear() == systemDate.getYear() && eventDate.getMonth() == systemDate.getMonth() && eventDate.getDay() == systemDate.getDay()) {
+                        JOptionPane.showMessageDialog(null, "Event: " + e.getDescription(), "Event Alert", JOptionPane.INFORMATION_MESSAGE);
+                        e.setNotified(true);
+                        for (Contact c : lContact) {
+                            List<Event> replaceEvent = c.getAgenda().toList();
+                            for (Event e1 : replaceEvent) {
+                                if (e.equals(e1)) {
+                                    c.rmvEvent(e1);
+                                    c.addEvent(e);
+                                    Persistence.getRepositoryFactory().getContactRepository().edit(c);
                                 }
                             }
                         }
                     }
                 }
-
             }
 
         }
