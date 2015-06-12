@@ -23,62 +23,63 @@ import java.util.logging.Logger;
  */
 public class CustomExportation implements Runnable {
 
-    private CleanSheets app;
-    private UIController uiController;
-    private FileOutputStream file;
-    private String separator;
-    private int header;
-    private int includeHeader;
+	private CleanSheets app;
+	private UIController uiController;
+	private FileOutputStream file;
+	private String separator;
+	private int header;
+	private int includeHeader;
 
-    public CustomExportation(CleanSheets app, UIController uiController, String fileName,
-            String separator, int header, int includeHeader) throws FileNotFoundException {
-        this.app = app;
-        this.uiController = uiController;
-        this.separator = separator;
-        file = new FileOutputStream(fileName);
-        this.header = header;
-        this.includeHeader = includeHeader;
-    }
+	public CustomExportation(CleanSheets app, UIController uiController,
+							 String fileName,
+							 String separator, int header, int includeHeader) throws FileNotFoundException {
+		this.app = app;
+		this.uiController = uiController;
+		this.separator = separator;
+		file = new FileOutputStream(fileName);
+		this.header = header;
+		this.includeHeader = includeHeader;
+	}
 
-    public void exportText() throws FileNotFoundException {
+	public void exportText() throws FileNotFoundException {
 
-        try {
-            PrintWriter writer = new PrintWriter(new BufferedWriter(
-                    new OutputStreamWriter(file)));
+		try {
+			PrintWriter writer = new PrintWriter(new BufferedWriter(
+				new OutputStreamWriter(file)));
 
-            // Writes content of rows
-            Spreadsheet sheet = uiController.getActiveSpreadsheet();
-            for (int row = 0; row < sheet.getRowCount(); row++) {
-                if (row == 0 && ((includeHeader == 0 && header == 0) || (includeHeader == 0 && header == 1))) {
-                    continue;
-                }
-                for (int column = 0; column < sheet.getColumnCount(); column++) {
-                    if (column + 1 < sheet.getColumnCount()) {
-                        writer.print(sheet.getCell(column, row).getContent()
-                                + separator);
-                    }
-                }
-                if (row + 1 < sheet.getRowCount()) {
-                    writer.println();
-                }
-            }
+			// Writes content of rows
+			Spreadsheet sheet = uiController.getActiveSpreadsheet();
+			for (int row = 0; row < sheet.getRowCount(); row++) {
+				if (row == 0 && ((includeHeader == 0 && header == 0) || (includeHeader == 0 && header == 1))) {
+					continue;
+				}
+				for (int column = 0; column < sheet.getColumnCount(); column++) {
+					writer.print(sheet.getCell(column, row).getContent()
+						+ separator);
 
-            // Frees resources
-            writer.close();
-            file.close();
+				}
+				writer.println();
 
-        } catch (IOException ex) {
-            Logger.getLogger(CustomExportation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+			}
 
-    @Override
-    public void run() {
-        try {
-            exportText();
+			// Frees resources
+			writer.close();
+			file.close();
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CustomExportation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+		} catch (IOException ex) {
+			Logger.getLogger(CustomExportation.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
+
+	@Override
+	public void run() {
+		try {
+			exportText();
+
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(CustomExportation.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
 }
