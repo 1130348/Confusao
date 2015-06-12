@@ -30,9 +30,10 @@ public class SearchPartnersServer extends Observable implements Runnable {
 
 	private Player player;
 
-	public SearchPartnersServer(GameScene dialog, Player playerToSend, ChoosePartner partnersDialog) {
+	public SearchPartnersServer(GameScene dialog, Player playerToSend,
+								ChoosePartner partnersDialog) {
 		gameInfoDialog = dialog;
-                this.partnersDialog = partnersDialog;
+		this.partnersDialog = partnersDialog;
 		player = playerToSend;
 	}
 
@@ -50,23 +51,20 @@ public class SearchPartnersServer extends Observable implements Runnable {
 					establishConnectionToUser(cliente.getInetAddress());
 			}
 
-                        System.out.println("sergey é um bot");
-                        
 			ObjectInputStream entrada = new ObjectInputStream(cliente.
 				getInputStream());
 			Object object = entrada.readObject();
-                        
-                        System.out.println("prof");
 
 			NetworkSendService.sendUserInfo(player);
 
 			Player playerReceived = ((Player) object);
 			gameInfoDialog.setPartnerData(playerReceived);
-                        
-                        partnersDialog.dispose();
-                        partnersDialog.getController().setActiveGame(partnersDialog.getActiveGame());
-                        gameInfoDialog.setPlayerData(player);
-                        gameInfoDialog.setVisible(true);
+
+			partnersDialog.dispose();
+			partnersDialog.getController().setActiveGame(partnersDialog.
+				getActiveGame());
+			gameInfoDialog.setPlayerData(player);
+			gameInfoDialog.setVisible(true);
 		} catch (IOException ex) {
 			Logger.getLogger(SearchOnAnotherInstanceServer.class.getName()).
 				log(Level.SEVERE, null, ex);
