@@ -212,6 +212,14 @@ public class ChoosePartner extends javax.swing.JDialog {
 		}
     }//GEN-LAST:event_availableCleanSheetsInstancesListMouseClicked
 
+    public String getActiveGame(){
+        return activeGame;
+    }
+    
+    public SelectGameController getController(){
+        return controller;
+    }
+    
     private void connectDisconnectToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectDisconnectToggleButtonActionPerformed
 		// TODO add your handling code here:
 		if (availableCleanSheetsInstancesList.getSelectedValue() == null) {

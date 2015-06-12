@@ -64,7 +64,8 @@ public class SearchPartnersServer extends Observable implements Runnable {
 			gameInfoDialog.setPartnerData(playerReceived);
                         
                         partnersDialog.dispose();
-                        
+                        partnersDialog.getController().setActiveGame(partnersDialog.getActiveGame());
+                        gameInfoDialog.setPlayerData(player);
                         gameInfoDialog.setVisible(true);
 		} catch (IOException ex) {
 			Logger.getLogger(SearchOnAnotherInstanceServer.class.getName()).
