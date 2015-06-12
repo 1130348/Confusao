@@ -6,6 +6,7 @@
 package csheets.ext.selectgame;
 
 import csheets.ext.selectgame.ui.ActiveGamesPanel;
+import csheets.ext.selectgame.ui.ChoosePartner;
 import csheets.ext.selectgame.ui.GameScene;
 import csheets.ext.startsharing.NetworkSendService;
 import csheets.ext.startsharing.NetworkService;
@@ -42,8 +43,8 @@ public class SelectGameController {
 		return NetworkService.searchInstances();
 	}
 
-	public void startGameServer(GameScene dialog, Player player) {
-		NetworkService.startGameServer(dialog, player);
+	public void startGameServer(GameScene dialog, Player player, ChoosePartner partnersDialog) {
+		NetworkService.startGameServer(dialog, player, partnersDialog);
 	}
 
 	public void interruptConnection() {
