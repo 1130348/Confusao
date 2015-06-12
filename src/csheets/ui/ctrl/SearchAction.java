@@ -20,47 +20,71 @@
  */
 package csheets.ui.ctrl;
 
+import csheets.CleanSheets;
+import csheets.core.Address;
+import csheets.core.Spreadsheet;
+import csheets.ext.search.Search;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-
-import csheets.CleanSheets;
 
 /**
  * A search and replace operation.
+ *
  * @author Einar Pehrson
  */
 @SuppressWarnings("serial")
 public class SearchAction extends FocusOwnerAction {
 
-	/**
-	 * Creates a new search and replace action.
-	 */
-	public SearchAction() {}
+	private UIController uiController;
 
+	boolean patternExists = false;
+
+	public SearchAction(UIController uiController) {
+		this.uiController = uiController;
+
+	}
+
+//	public SearchAction() {
+//		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//	}
 	protected String getName() {
 		return "Search And Replace...";
 	}
 
 	protected void defineProperties() {
-		setEnabled(false);
+		setEnabled(true);
 		putValue(MNEMONIC_KEY, KeyEvent.VK_F);
-		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
-		putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.getResource("res/img/find.gif")));
+		putValue(ACCELERATOR_KEY, KeyStroke.
+				 getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+		putValue(SMALL_ICON, new ImageIcon(CleanSheets.class.
+				 getResource("res/img/find.gif")));
 	}
 
 	/**
 	 * Inserts a column before the active cell in the focus owner table.
+	 *
 	 * @param event the event that was fired
 	 */
 	public void actionPerformed(ActionEvent event) {
-		if (focusOwner != null) {
-			focusOwner.changeSelection(0, 0, false, false);
-			focusOwner.changeSelection(
-				focusOwner.getSpreadsheet().getRowCount() - 1,
-				focusOwner.getSpreadsheet().getColumnCount() - 1, false, true);
+//		if (focusOwner != null) {
+//			focusOwner.changeSelection(0, 0, false, false);
+//			focusOwner.changeSelection(
+//				focusOwner.getSpreadsheet().getRowCount() - 1,
+//				focusOwner.getSpreadsheet().getColumnCount() - 1, false, true);
+//		}
+		Spreadsheet spreadsheet = uiController.getActiveSpreadsheet();
+		String pattern = JOptionPane.
+			showInputDialog("Word or Regular Expression to search");
+		Address address = Search.Search(pattern, focusOwner);
+		if (address != null) {
+			uiController.setActiveCell(spreadsheet.
+				getCell(address));
+		} else {
+			JOptionPane.
+				showMessageDialog(null, "There was no correspondence in Sheet!");
 		}
 	}
 }

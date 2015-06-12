@@ -1,4 +1,4 @@
-@startuml doc-files/crm_03_01_sequence_diagram_design.png
+@startuml doc-files/crm_03_01_phonenumber_sequence_diagram_design.png
   actor User 
   participant "UIExtensionContacts" as UII
   participant "nContactsController" as ctrll

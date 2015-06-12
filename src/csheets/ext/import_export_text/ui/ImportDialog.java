@@ -189,7 +189,7 @@ public class ImportDialog extends javax.swing.JDialog {
             int header = 0;
             int includeHeader = 0;
             if (!txtSeparator.getText().isEmpty()) {
-                if (fileChoosed != null) {
+                if (fileChoosed != null && !lblTextFile.getText().equals("")) {
                     if (chkHeader.isSelected()) {
                         header = 1;
                     }

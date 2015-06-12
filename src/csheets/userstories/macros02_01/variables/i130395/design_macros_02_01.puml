@@ -13,22 +13,6 @@ activate UI
 UI -> ctrl : setContent(string)
 activate ctrl
 deactivate UI
-alt se nao for uma formula
-ctrl -> cell : setContent(string)
-activate cell
-deactivate ctrl
-
-cell->Workbook : getContent(value)
-activate Workbook
-Workbook->Workbook : valida()
-deactivate cell
-Workbook -> Variable : getContent(value)
-
-deactivate Workbook
-
-
-
-else
 
 ctrl -> cell : setContent(string)
 activate cell
@@ -38,12 +22,10 @@ Formula->Workbook : setContent(value)
 activate Workbook
 Workbook->Workbook : valida()
 alt se nao existir
-Workbook->Variable : create(value)
-   Workbook -> Workbook : add(value)
+Workbook->Variable : create(value, workbook)
+   Workbook -> Workbook : add(variable)
 else
-Workbook -> Variable : setContent(value)
+Workbook -> Variable : setVariableValue(value,workbook)
 end
-end
-
 
 @enduml

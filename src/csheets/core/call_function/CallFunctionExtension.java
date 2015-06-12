@@ -18,9 +18,9 @@ import csheets.ui.ext.UIExtension;
 public class CallFunctionExtension extends Extension {
 
     /**
-     * The name of the extension
-     */
-    public static final String NAME = "Execute Function";
+	 * The name of the extension
+	 */
+	public static final String NAME = "Formulas Register";
 
     /**
      * Creates a new Call Function extension.

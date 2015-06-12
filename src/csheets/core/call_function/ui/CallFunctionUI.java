@@ -10,6 +10,7 @@ import csheets.core.formula.lang.UnknownElementException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -161,6 +162,7 @@ public class CallFunctionUI extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String func_def = jTextField1.getText();
         controller.callFunction(func_def);
+        JOptionPane.showMessageDialog(this, "Function was added to Formulas Register");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
