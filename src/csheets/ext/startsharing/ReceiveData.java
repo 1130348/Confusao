@@ -48,7 +48,7 @@ public class ReceiveData implements Runnable {
 			while (true) {
 				dataIn = new DataInputStream(sock.getInputStream());
 				byte[] data = new byte[300];
-				System.out.println("func");
+
 				nChars = dataIn.read();
 				if (nChars == 0) {
 					break;
