@@ -92,7 +92,7 @@ public class ExportDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Choose the file:");
+        jLabel1.setText("Choose the file's name:");
 
         btnExport.setText("Export");
         btnExport.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +177,7 @@ public class ExportDialog extends javax.swing.JDialog {
                     if (chkIncludeHeader.isSelected()) {
                         includeHeader = 1;
                     }
-                    ieController.exportFile(app, txtFileName.getText(), txtSeparator.getText(), header, includeHeader);
+                    ieController.exportFile(app, txtFileName.getText() + ".txt", txtSeparator.getText(), header, includeHeader);
                     JOptionPane.showMessageDialog(null, "Your file has been exported to a text file", "Exportation Complete", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                 } catch (FileNotFoundException ex) {
@@ -210,7 +210,7 @@ public class ExportDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_chkHeaderActionPerformed
 
     private void txtFileNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFileNameActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtFileNameActionPerformed
 
 
