@@ -47,7 +47,7 @@ expression
 	;
 
 operation
-	: attribution | comparison | forcicle 
+	: comparison | forcicle 
 	;
 
 attribution
@@ -93,6 +93,7 @@ atom
 	|	literal
 	|	LPAR! comparison RPAR!
 	|	bloco
+        |       attribution 
         |       variables
 	;
 
