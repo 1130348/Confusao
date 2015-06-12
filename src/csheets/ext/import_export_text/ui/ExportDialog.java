@@ -37,7 +37,7 @@ public class ExportDialog extends javax.swing.JDialog {
      *
      */
     public ExportDialog(java.awt.Frame parent, boolean modal, UIController uiController, CleanSheets app) {
-        super(parent, "Import Text Wizard", modal);
+        super(parent, "Export Text Wizard", modal);
         this.uiController = uiController;
         this.app = app;
         this.ieController = new ImportExportController(uiController);
