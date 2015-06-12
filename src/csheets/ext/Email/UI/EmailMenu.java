@@ -7,7 +7,6 @@ package csheets.ext.Email.UI;
 
 import csheets.ext.Email.EmailController;
 import csheets.ext.Email.ExtensionEmail;
-import csheets.ext.Email.SmtpConfig;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -73,13 +72,13 @@ public class EmailMenu extends JPanel {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				SmtpConfig smtp = new SmtpConfig(textService.getText().
-					toLowerCase());
-				labelAction.setText(smtp.getPort());
+				//SmtpConfig smtp = new SmtpConfig(textService.getText().
+				//	toLowerCase());
+				//labelAction.setText(smtp.getPort());
 				labelAction.setBackground(Color.red);
 				//textAction.setEnabled(false);
 				labelAction.setFont(new Font("Serif", Font.BOLD, 12));
-				labelAction2.setText(smtp.getService());
+				//labelAction2.setText(smtp.getService());
 				labelAction2.setBackground(Color.red);
 				labelAction2.setFont(new Font("Serif", Font.BOLD, 12));
 			}
