@@ -22,7 +22,7 @@ public class ImportExportController {
         this.uiController = uiController;
     }
 
-    public void importFile(CleanSheets app, File[] files, String separator, int header, int includeHeader) throws FileNotFoundException {
+    public void importFiles(CleanSheets app, File[] files, String separator, int header, int includeHeader) throws FileNotFoundException {
         Thread th = new Thread(new CustomImportation(app, uiController, files, separator, header, includeHeader));
         th.start();
     }

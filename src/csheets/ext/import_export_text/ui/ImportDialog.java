@@ -196,7 +196,7 @@ public class ImportDialog extends javax.swing.JDialog {
                     if (chkIncludeHeader.isSelected()) {
                         includeHeader = 1;
                     }
-                    ieController.importFile(app, fileChoosed.getSelectedFiles(), txtSeparator.getText(), header, includeHeader);
+                    ieController.importFiles(app, fileChoosed.getSelectedFiles(), txtSeparator.getText(), header, includeHeader);
                     dispose();
                 }else {
                     JOptionPane.showMessageDialog(null, "Choose a file to be imported", "Warning", JOptionPane.WARNING_MESSAGE);
