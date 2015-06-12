@@ -152,6 +152,10 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        if(instancesList.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Please select on instance to send search request", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         String workbookToSearch = workbookToSearchText.getText();
         String addressToSend = (String) instancesList.getSelectedValue();
         controller.sendSearchRequest(addressToSend, workbookToSearch);
@@ -166,6 +170,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
             controller.setVisibility(true);
             retrieveAvailableCleanSheetsInstances();
         } else if (wasActivated == 1) {
+            listOfAvailableCleanSheetsInstances.clear();
             wasActivated = 0;
             deactivatePanel();
             controller.setVisibility(false);
