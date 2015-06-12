@@ -47,8 +47,14 @@
  * <code>csheets.ext.contact.PhoneNumberTest</code><br/>
  * 
  * <h2>4. Design</h2>
- *
+ *<img src="doc-files/crm_03_01_email_sequence_diagram_design.png">
+ * <img src="doc-files/crm_03_01_phonenumber_sequence_diagram_design.png">
+ * 
  * <h2>5. Coding</h2>
+ * see: <code>csheets.ext.contact.Email</code><br/>
+ * <code>csheets.ext.contact.PhoneNumber</code><br/>
+ * <code>csheets.ext.contact.ContactController</code><br/>
+ * <code>csheets.ext.contact.Contact</code><br/>
  *
  * <h2>6. Final Remarks</h2>
  * 
