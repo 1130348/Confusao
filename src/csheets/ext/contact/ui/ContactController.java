@@ -25,6 +25,9 @@ public class ContactController {
      * User interface panel *
      */
     private ContactPanel uiPanel;
+    
+    
+    private boolean flagNotification;
 
     /**
      * Creates a new comment controller.
@@ -35,6 +38,7 @@ public class ContactController {
     public ContactController(UIController uiController, ContactPanel uiPanel) {
         this.uiController = uiController;
         this.uiPanel = uiPanel;
+        this.flagNotification=true;
     }
 
     /**
@@ -153,6 +157,14 @@ public class ContactController {
     
     public boolean editEmail(Contact c,Email e,String text){
         return c.editEmail(e, text);
+    }
+
+    public boolean getNotification() {
+        return this.flagNotification;
+    }
+    
+    public void setNotification(boolean flag) {
+        this.flagNotification=flag;
     }
 
 }
