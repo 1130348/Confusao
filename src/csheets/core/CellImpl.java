@@ -237,6 +237,41 @@ public class CellImpl implements Cell {
                             {
                                 
                             }
+                
+                /*
+                                                  
+                                    Expression expressao = this.getFormula().getExpression();
+                                    
+                                    if (expressao instanceof BinaryOperation) {
+                                        
+                                        BinaryOperation atributionOne = (BinaryOperation) expressao;
+                                        String operator = atributionOne.getOperator().getIdentifier();
+                                        
+                                        if ((operator.equalsIgnoreCase(":="))) {
+                                            
+                                            Cell leftCell = (((CellReference)atributionOne.getLeftOperand()).getCell());
+                                            Cell rightCell = (((CellReference)atributionOne.getRightOperand()).getCell());
+                                           
+                                            if (!this.equals(precedent)) {
+                                               precedents.add(precedent);  
+                                            
+                                            if (!(leftCell.equals(this))) {
+                                               
+						((CellImpl)precedent).addDependent(((CellReference)atributionOne.getRightOperand()).getCell());
+                                            }
+                                            
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                   	
+                                         if (!this.equals(precedent)) {
+						precedents.add(precedent);
+						((CellImpl)precedent).addDependent(this);
+					}  
+                                    
+				}*/
 	}
 
 	/**
