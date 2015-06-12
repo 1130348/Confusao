@@ -7,6 +7,7 @@ package csheets.core.call_function;
 
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
+import csheets.core.call_function.ui.FormulasPanel;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
 import csheets.core.formula.compiler.IllegalFunctionCallException;
@@ -52,22 +53,17 @@ public class CallFunctionController {
         return func_def;
     }
 
-    public void callFunction(String func_def) {
+    public Value callFunction(String func_def) {
+        Value value = new Value();
         try {
-            Value value = caller.executeFunc(func_def);
-        } catch (ParseException ex) {
-            Logger.getLogger(CallFunctionController.class.getName()).
-                log(Level.SEVERE, null, ex);
-        } catch (IllegalFunctionCallException ex) {
-            Logger.getLogger(CallFunctionController.class.getName()).
-                log(Level.SEVERE, null, ex);
-        } catch (UnknownElementException ex) {
-            Logger.getLogger(CallFunctionController.class.getName()).
-                log(Level.SEVERE, null, ex);
-        } catch (IllegalValueTypeException ex) {
+            value = caller.executeFunc(func_def);
+            String formula = func_def.substring(1) + " = " + value;
+            FormulasPanel.addFormula(formula);
+        } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException ex) {
             Logger.getLogger(CallFunctionController.class.getName()).
                 log(Level.SEVERE, null, ex);
         }
+        return value;
     }
 
 }

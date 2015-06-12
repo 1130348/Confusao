@@ -22,16 +22,25 @@ deactivate ctrl
 activate UI
 UI -> UI : fillTextBox(func_def)
 User -> UI : Fill Data and Enter
-activate ctrl
 UI -> ctrl : callFunction(func_def)
+activate ctrl
 deactivate UI
 ctrl -> caller : executeFunc(func_def)
-deactivate ctrl
+activate caller
 create FunctionCall as f_call
 caller -> f_call : create(function, arguments) 
 caller -> f_call : value = evaluate()
 deactivate caller
+activate f_call
 participant "Function" as func
 f_call -> func : value = applyTo(arguments)
+activate func
+deactivate f_call
+deactivate func
+participant "FormulaPanel" as panel
+ctrl -> panel : addFormula(formula)
+activate panel
+deactivate ctrl
+deactivate panel
 
 @enduml
