@@ -6,6 +6,7 @@
 package csheets.ext.selectgame;
 
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceServer;
+import csheets.ext.selectgame.ui.ChoosePartner;
 import csheets.ext.selectgame.ui.GameScene;
 import csheets.ext.startsharing.NetworkSendService;
 import java.io.IOException;
@@ -25,11 +26,13 @@ public class SearchPartnersServer extends Observable implements Runnable {
 	private int port = 9001;
 
 	private GameScene gameInfoDialog;
+	private ChoosePartner partnersDialog;
 
 	private Player player;
 
-	public SearchPartnersServer(GameScene dialog, Player playerToSend) {
+	public SearchPartnersServer(GameScene dialog, Player playerToSend, ChoosePartner partnersDialog) {
 		gameInfoDialog = dialog;
+                this.partnersDialog = partnersDialog;
 		player = playerToSend;
 	}
 
@@ -47,15 +50,22 @@ public class SearchPartnersServer extends Observable implements Runnable {
 					establishConnectionToUser(cliente.getInetAddress());
 			}
 
+                        System.out.println("sergey é um bot");
+                        
 			ObjectInputStream entrada = new ObjectInputStream(cliente.
 				getInputStream());
 			Object object = entrada.readObject();
+                        
+                        System.out.println("prof");
 
 			NetworkSendService.sendUserInfo(player);
 
 			Player playerReceived = ((Player) object);
 			gameInfoDialog.setPartnerData(playerReceived);
-
+                        
+                        partnersDialog.dispose();
+                        
+                        gameInfoDialog.setVisible(true);
 		} catch (IOException ex) {
 			Logger.getLogger(SearchOnAnotherInstanceServer.class.getName()).
 				log(Level.SEVERE, null, ex);
