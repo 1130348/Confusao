@@ -29,6 +29,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     private final ArrayList<String> listOfAvailableCleanSheetsInstances = new ArrayList<String>();
 
     private SearchOnAnotherInstanceDialog() {
+        setTitle("Search On Another Instace");
         setModal(true);
         controller = new SearchOnAnotherInstanceController();
         initComponents();

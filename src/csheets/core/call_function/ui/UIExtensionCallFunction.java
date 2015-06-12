@@ -8,6 +8,7 @@ package csheets.core.call_function.ui;
 import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 /**
@@ -20,6 +21,8 @@ public class UIExtensionCallFunction extends UIExtension {
      * A menu that provides call function
      */
     private CallFunctionMenu menu;
+
+    private JComponent sideBar;
 
     /**
      * Creates a new user interface extension for call function.
@@ -42,6 +45,13 @@ public class UIExtensionCallFunction extends UIExtension {
             menu = new CallFunctionMenu(uiController);
         }
         return menu;
+    }
+
+    public JComponent getSideBar() {
+        if (sideBar == null) {
+            sideBar = new FormulasPanel(uiController);
+        }
+        return sideBar;
     }
 
 }

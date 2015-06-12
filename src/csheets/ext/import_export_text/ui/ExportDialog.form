@@ -122,7 +122,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Choose the file:"/>
+        <Property name="text" type="java.lang.String" value="Choose the file&apos;s name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnExport">

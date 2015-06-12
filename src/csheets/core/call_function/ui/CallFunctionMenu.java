@@ -15,7 +15,7 @@ import javax.swing.JMenu;
 public class CallFunctionMenu extends JMenu {
 
     public CallFunctionMenu(UIController uiController) {
-        super("Call Function");
+        super("Functions Wizard");
 
         // Adds send action
         add(new CallFunctionAction(uiController));

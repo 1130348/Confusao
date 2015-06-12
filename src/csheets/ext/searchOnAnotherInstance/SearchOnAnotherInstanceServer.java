@@ -31,7 +31,7 @@ public class SearchOnAnotherInstanceServer extends Observable implements Runnabl
         try {
             ServerSocket servidor = new ServerSocket(port);
             System.out.println("Porta " + port + " aberta!");
-            while (Thread.interrupted()) {
+            while (true) {
                 Socket cliente = servidor.accept();
                 System.out.println("Nova conexão com o cliente "
                         + cliente.getInetAddress().getHostAddress());
