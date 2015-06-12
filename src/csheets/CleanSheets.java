@@ -461,4 +461,12 @@ public class CleanSheets {
 			}
 		}
 	}
+        public Workbook getWorkbookByFileName(String file) {
+		for (Map.Entry<Workbook, File> entry : workbooks.entrySet()) {
+			if (entry.getValue() != null && entry.getValue().getName().equals(file)) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
 }

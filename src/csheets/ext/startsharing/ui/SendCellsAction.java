@@ -7,11 +7,14 @@ package csheets.ext.startsharing.ui;
 
 import csheets.core.Address;
 import csheets.core.Cell;
+import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.startsharing.SendCellsController;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -61,6 +64,23 @@ public class SendCellsAction extends FocusOwnerAction {
 			focusOwner.getModel().
 				setValueAt(newCell.getValue(), add.getRow(), add.
 						   getColumn());
+		}
+
+	}
+
+	public void replaceCellsContent(List<String> cellsContent,
+									List<String> cellsColumns,
+									List<String> cellsRows) {
+		for (int i = 0; i < cellsContent.size(); i++) {
+			try {
+				focusOwner.getSpreadsheet().getCell(Integer.
+					parseInt(cellsColumns.
+						get(i)), Integer.parseInt(cellsRows.get(i))).
+					setContent(cellsContent.get(i));
+			} catch (FormulaCompilationException ex) {
+				Logger.getLogger(SendCellsAction.class.getName()).
+					log(Level.SEVERE, null, ex);
+			}
 		}
 
 	}

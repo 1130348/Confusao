@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.MaskFormatter;
@@ -72,19 +73,22 @@ public class EditEvent extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				event.setDescription(jTextArea1.getText());
 				DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
-				Date d;
-				try {
-					d = format.parse(jFormattedTextField1.getText());
-					event.setTimestamp(d);
-					contact.addEvent(event);
-					controller.updateContact(contact);
-					controller.update();
-					ec.updateEvent();
-					dispose();
-				} catch (ParseException ex) {
-					Logger.getLogger(EditEvent.class.getName()).
-						log(Level.SEVERE, null, ex);
-				}
+				Date d = new Date();
+                                String date=jFormattedTextField1.getText();
+                                String[] dateSplit=date.split("/");
+                                int day=Integer.parseInt(dateSplit[0]);
+                                int month=Integer.parseInt(dateSplit[1]);
+                                int year=Integer.parseInt(dateSplit[2]);
+                                d.setMonth(month-1);
+                                d.setYear(year-1900);
+                                d.setDate(day);
+                       
+                                event.setTimestamp(d);
+                                contact.addEvent(event);
+                                controller.updateContact(contact);
+                                controller.update();
+                                ec.updateEvent();
+                                dispose();
 			}
 		}
 		);
@@ -114,9 +118,9 @@ public class EditEvent extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setText("Description: ");
+        jLabel1.setText("Descrição : ");
 
-        jLabel2.setText("Date:");
+        jLabel2.setText("Date :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,7 +131,7 @@ public class EditEvent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -136,10 +140,10 @@ public class EditEvent extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -163,7 +167,7 @@ public class EditEvent extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();

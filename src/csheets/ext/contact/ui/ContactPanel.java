@@ -23,6 +23,7 @@ package csheets.ext.contact.ui;
  */
 import csheets.ext.contact.Contact;
 import csheets.ext.contact.ExtensionContact;
+import csheets.ext.contact.Notification;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -40,6 +41,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -81,12 +83,10 @@ public class ContactPanel extends JPanel {
 		// Creates controller
 		controller = new ContactController(uiController, this);
 		contactList = new ArrayList<Contact>();
-//		Event e = new Event("Teste: ola adeus.", new Date());
-		//ImageIcon image = new ImageIcon("C:\\Users\\Egidio73\\Desktop\\props.png");
-//		Contact c = new Contact("Egidio", "Santos", "PC-Egidio", null);
-//		c.addEvent(e);
-//		contactList.add(c);
-
+                
+                Thread notify = new Thread(new Notification(controller));
+                notify.start();
+                
 		startList();
 
 		contactField.addMouseListener(new MouseAdapter() {
@@ -141,12 +141,28 @@ public class ContactPanel extends JPanel {
 
 		adicionar.addActionListener(addAction);
 		JButton remover = new JButton("Remove");
+                
+                JCheckBox notifyButton = new JCheckBox("Notify");
+                notifyButton.setSelected(true);
+                notifyButton.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(controller.getNotification()){
+                            controller.setNotification(false);
+                        }else{
+                            controller.setNotification(true);
+                        }
+                    }
+                });
 
 		remover.addActionListener(removeAction);
 
 		southPanel.add(adicionar);
 
 		southPanel.add(remover);
+                
+                southPanel.add(notifyButton);
 
 		northPanel.add(southPanel, BorderLayout.SOUTH);
 
@@ -201,14 +217,17 @@ public class ContactPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+                    if(contactField.getSelectedIndex()!=-1){
 			Contact tmp = (Contact) contactList.get(contactField.
 				getSelectedIndex());
 			for (Contact c : controller.getContacts()) {
 				if (c.getMachine_Name().equals(tmp.getMachine_Name())) {
 					controller.removeContact(c);
+                                        break;
 				}
 			}
 			controller.update();
+                    }
 		}
 
 	};

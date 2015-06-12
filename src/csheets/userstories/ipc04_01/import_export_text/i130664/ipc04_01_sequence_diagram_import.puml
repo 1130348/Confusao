@@ -1,0 +1,41 @@
+@startuml doc-files/import_from_text_file_ipc04_01.png
+ actor User
+ participant "ImportAction" as iea
+ participant "ImportExportUI" as ui
+ participant "ImportExportController" as ctrl
+ participant "th:Thread" as th
+ participant "thr:CustomImportation" as thr
+ participant "UIController" as uictrl
+ participant "stream:FileInputStream" as fis
+ participant "ef:ExtensionFilter" as ef
+ participant "wb:Workbook" as wb
+
+User -> iea : actionPerformed()
+iea -> ui : showDialog(app)
+User <-- ui : asks for the column's separator
+User -> ui : chooses separator
+User <-- ui : asks if the file has a header and if it is \nsupposed to be included in the operation
+User -> ui : indicates if the file has header and if it is \nsupposed to be included in the operation
+User <-- ui : asks to the user to choose a file
+User -> ui : chooses the file(s)
+ui -> ctrl : importFiles(app, files, separator, header, includeHeader)
+ctrl -> th : th = create(new CustomImportation(app, uiController, \nfiles, separator, header, includeHeader))
+create thr
+th -> thr : new(app, uiController, files, \nseparator, header, includeHeader)
+ctrl -> th : start()
+th -> thr : run()
+thr -> thr : importText()
+create ef
+thr -> ef : new()
+thr -> uictrl : wb:getActiveWorkbook()
+loop for each file selected
+create fis
+thr -> fis : new(file)
+thr ->ef : accept(file)
+thr -> fis : content += readLine()
+thr -> wb : addSpreadSheet(content);
+end loop
+
+
+
+@enduml

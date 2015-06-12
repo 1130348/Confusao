@@ -5,12 +5,12 @@
  */
 package csheets.core.call_function;
 
+import csheets.core.Value;
 import csheets.core.call_function.ui.CallFunctionUI;
 import csheets.core.formula.lang.UnknownElementException;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class CallFunctionTest {
         System.out.println("fillList");
         boolean expResult= false;
         CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
+        CallFunctionController ctrl = new CallFunctionController();
         boolean result = ctrl.fillList().isEmpty();
         assertEquals(expResult, result);
     }
@@ -64,7 +64,7 @@ public class CallFunctionTest {
         String expResult= "=SUM(Term;...)";
         String identifier = "SUM";
         CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
+        CallFunctionController ctrl = new CallFunctionController();
         String result = ctrl.chooseFunction(identifier);
         assertEquals(expResult, result);
     }
@@ -76,13 +76,13 @@ public class CallFunctionTest {
     public void testcallFunction() {
         System.out.println("callFunction");
         String func_def= "=SUM(2;3)";
-        String expResult = "SUM";
-        CallFunctionUI ui = new CallFunctionUI();
-        CallFunctionController ctrl = new CallFunctionController(ui);
-        ctrl.callFunction(func_def);
-        //assertEquals(expResult, result);
-        fail();
+        Value expResult = new Value(5);
+        CallFunctionController ctrl = new CallFunctionController();
+        CallFunctionUI.getInstance(null, true, ctrl);
+        Value result = ctrl.callFunction(func_def);
+        assertEquals(expResult, result);
     }
+    
     
 }
 

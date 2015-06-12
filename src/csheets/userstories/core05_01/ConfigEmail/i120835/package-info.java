@@ -58,6 +58,35 @@
  * <br/>
  * <br/>
  *
+ * <b>core05_01: Design</b><br/>
+ * The following diagram shows how the process to set the Email settings works
+ * from the user point of view.<br/><br/>
+ * <img src="../../../csheets/userstories/us016/doc-files/us016_design.png">
+ * <br/>
+ * <br/>
+ * <br/>
+ * <b>core05_01: Coding</b><br/>
+ * see:<br/>
+ * <a
+ * href="../../../csheets/ext/Email/package-frame.html">csheets.ext.Email</a><br/>
+ * <a
+ * href="../../../csheets/ext/Email/UI/package-frame.html">csheets.ext.Email.UI</a><br/>
+ * <br/>
+ * <br/>
+ *
+ *
+ * <b>core05_01: Unit Tests</b><br/>
+ * see:<br/>
+ * <a href="../../../csheets/ext/Email/package-summary.html">csheets.ext.Email</a><br/>
+ * Unit tests were made for the Email class only. <br/>
+ * On email controller many variables were to be considered such as internet
+ * connection or authentication issues, so unit tests to this situations were
+ * not made.<br/>
+ * The method on email controller to set the email was not included on unit
+ * tests as it only sets an Email object and it was test on Email class.
+ * <br/><br/><br/>
+ *
+ *
  *
  *
  * @author 1120835 Paulo Brito

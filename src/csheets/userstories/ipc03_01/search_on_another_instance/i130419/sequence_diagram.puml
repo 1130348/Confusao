@@ -1,24 +1,26 @@
 @startuml doc-files/sequence_diagram.png
 actor Sender as user
-participant "dialog : SearchAnotherInstanceDialog" as said
-participant "SearchAnotherInstanceController" as saic
-participant "<<Service>>\nReportCreater" as repCrea
-participant "<<Service>>\nNetwork" as net
-participant "<<Service>>\nNetworkSendService" as netSen
+participant "dialog : SearchOnAnotherInstanceDialog" as said
+participant "SearchOnAnotherInstanceController" as saic
+participant "<<Service>>\nNetworkService" as net
+participant "SearchOnAnotherInstanceClient" as soaic
 participant "repwat : ReportWatch" as repWat
-participant "Server" as serv
+participant "<<Service>>\nReportCreater" as repCrea
+participant "SearchOnAnotherInstanceServer" as serv
 participant "repoEve : ReportEvent" as repoEve
 user -> said : searchActionPerformed()
 said -> saic : sendSearchRequest(address, workbookName)
 saic -> net : sendSearchRequest(address, workbookName)
-net -> netSen : sendSearchRequest(address, workbookName)
+net -> soaic : create()
+net -> soaic : sendWorkbookName(address, workbookName)
 == Wait response to request ==
 serv -> serv : socket.accept()
-serv -> repoEve : create(spreadSheetList)
+serv -> repoEve : create(workbook)
 serv -> serv : setChanged()
 serv -> serv : notifyObservers(repoEve)
 serv -> repWat : update()
-repWat -> repCrea : createResume(spreadSheetList)
+repWat -> repoEve : workbook = getWorkbook()
+repWat -> repCrea : createResume(workbook)
 repWat -> repWat : setChanged()
 repWat -> repWat : notifyObservers(strResume)
 repWat -> said : update()

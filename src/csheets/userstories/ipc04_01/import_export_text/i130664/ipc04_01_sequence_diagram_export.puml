@@ -1,0 +1,40 @@
+@startuml doc-files/export_from_text_file_ipc04_01.png
+ actor User
+ participant "ExportAction" as iea
+ participant "ExportUI" as ui
+ participant "ExportController" as ctrl
+ participant "th:Thread" as th
+ participant "thr:CustomExportation" as thr
+ participant "UIController" as uictrl
+ participant "stream:PrintWriter" as pw
+ participant "ef:ExtensionFilter" as ef
+ participant "ss:Spreadsheet" as ss
+ participant "cl:CellImpl" as cl
+
+User -> iea : actionPerformed()
+iea -> ui : showDialog(app)
+User <-- ui : asks for the column's separator
+User -> ui : chooses separator
+User <-- ui : asks if the file has a header and if it is \nsupposed to be included in the operation
+User -> ui : indicates if the file has header and if it is \nsupposed to be included in the operation
+User <-- ui : asks to the user to choose a file
+User -> ui : chooses the file
+ui -> ctrl : exportFile(app, file, separator, header, includeHeader)
+ctrl -> th : th = create(new CustomExportation(app, uiController, \nfile, separator, header, includeHeader))
+create thr
+th -> thr : new(app, uiController, files, \nseparator, header, includeHeader)
+ctrl -> th : start()
+th -> thr : run()
+thr -> thr : exportText()
+create ef
+thr -> ef : new()
+thr -> uictrl : ss=getActiveSpreadsheet()
+create pw
+thr -> pw : new(file)
+loop for each column and each line
+thr -> ss : cl=getCell(column, line)
+thr-> cl : line=getContent()
+thr -> pw : println(line)
+end loop
+
+@enduml

@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.Sort.ui;
+package csheets.persistenceTest;
 
 /**
  *
- * @author DMMCA
+ * @author rddm
  */
-public class UIExtensionsSort {
-    
+class PersistenceSettingsTest {
+
+	/**
+	 * The persistence unit name
+	 */
+	public static final String PERSISTENCE_UNIT_NAME = "cleansheetsPUTest";
+
 }

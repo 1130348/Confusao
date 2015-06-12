@@ -24,6 +24,7 @@ package csheets.core.formula.compiler;
 
 import csheets.core.Cell;
 import csheets.core.Value;
+import csheets.core.Variable;
 import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.BinaryOperator;
 import csheets.core.formula.Expression;
@@ -37,6 +38,7 @@ import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.RangeReference;
 import csheets.core.formula.lang.ReferenceOperation;
 import csheets.core.formula.lang.UnknownElementException;
+import csheets.core.formula.lang.VariableReference;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +131,18 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 					case FormulaLexer.CELL_REF:
 						return new CellReference(cell.getSpreadsheet(), node.
 												 getText());
+                                        case FormulaLexer.VARIABLE:
+                                            
+                                            if(cell.getSpreadsheet().getWorkbook().validateVariable(node.getText()))
+                                            {
+                                                return new VariableReference(cell.getSpreadsheet().getWorkbook().getVariable(node.getText()));
+                                            }
+                                            else{
+                                                Variable temp = new Variable(node.getText(),new Value(""),cell.getSpreadsheet().getWorkbook());
+                                                cell.getSpreadsheet().getWorkbook().addVariable(temp);
+                                                return new VariableReference(temp);
+                                            }
+						
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
 					 getRange(node.getText()) (Reference)*/

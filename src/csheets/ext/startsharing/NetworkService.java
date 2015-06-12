@@ -6,7 +6,16 @@
 package csheets.ext.startsharing;
 
 import csheets.core.Cell;
+import csheets.core.Workbook;
+import csheets.ext.searchOnAnotherInstance.ReportWatch;
+import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceClient;
+import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
+import csheets.ext.selectgame.Player;
+import csheets.ext.selectgame.SearchPartnersServer;
+import csheets.ext.selectgame.ui.ChoosePartner;
+import csheets.ext.selectgame.ui.GameScene;
 import csheets.ext.startsharing.ui.SendCellsAction;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -25,12 +34,20 @@ import java.util.logging.Logger;
  */
 public class NetworkService {
 
+	private static Thread gameServerThread;
 	private static Thread serverThread;
 	private static ArrayList<Socket> clientConnections = clientConnections = new ArrayList<Socket>();
 	;
-	private static int portTCP;
+	private static int portTCP = 8888;
 	private static int portUDP = 9050;
 	public static Map<InetAddress, Integer> activeInstances = new HashMap<InetAddress, Integer>();
+
+	public static void sendSearchRequest(InetAddress newAddress,
+										 String workbookName) {
+		SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
+		client.sendWorkbookName(newAddress, workbookName);
+	}
+
 
 	/*
 	 * To make sure that this class is a service class
@@ -58,6 +75,22 @@ public class NetworkService {
 			NetworkReceiveService.startReceivingUDPDatagrams(portUDP, portTCP);
 		} else {
 			NetworkReceiveService.stopReceivingUDPDatagrams(portUDP);
+		}
+	}
+
+	public static void startGameServer(GameScene dialog, Player player,
+									   ChoosePartner partnersDialog) {
+		gameServerThread = new Thread(new SearchPartnersServer(dialog, player, partnersDialog));
+		gameServerThread.start();
+	}
+
+	public static void establishConnectionToUser(String playerName) {
+		try {
+			NetworkSendService.
+				establishConnectionToUser(InetAddress.getByName(playerName));
+		} catch (UnknownHostException ex) {
+			Logger.getLogger(NetworkService.class.getName()).
+				log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -122,6 +155,37 @@ public class NetworkService {
 		}
 	}
 
+	public static void sendCellsContent(List<Cell> selectedCells) {
+		byte[] data = new byte[300];
+		for (Socket clientConnection : clientConnections) {
+			DataOutputStream sOut = null;
+			try {
+				sOut = new DataOutputStream(clientConnection.
+					getOutputStream());
+				data = "Share Cells Content".getBytes();
+				sOut.write((byte) "Share Cells Content".length());
+				sOut.write(data, 0, "Share Cells Content".length());
+				for (Cell selectedCell : selectedCells) {
+					NetworkSendService.
+						sendString(selectedCell.getContent(), sOut);
+					NetworkSendService.
+						sendString(String.
+							format("%d", selectedCell.getAddress().getColumn()), sOut);
+					NetworkSendService.
+						sendString(String.
+							format("%d", selectedCell.getAddress().getRow()), sOut);
+				}
+				data = "end".getBytes();
+				sOut.write((byte) "end".length());
+				sOut.write(data, 0, "end".length());
+				sOut.close();
+			} catch (IOException ex) {
+				Logger.getLogger(NetworkService.class.getName()).
+					log(Level.SEVERE, null, ex);
+			}
+		}
+	}
+
 	public static void addClientToMap(int port, InetAddress clientAddress) {
 		activeInstances.put(clientAddress, port);
 	}
@@ -138,5 +202,24 @@ public class NetworkService {
 	public static void receiveCells(List<Cell> newCells,
 									SendCellsAction cellsAction) {
 		cellsAction.replaceCells(newCells);
+	}
+
+	public static void receiveCellsContent(List<String> cellsContent,
+										   List<String> cellsColumns,
+										   List<String> cellsRows,
+										   SendCellsAction cellsAction) {
+
+		cellsAction.replaceCellsContent(cellsContent, cellsColumns, cellsRows);
+	}
+
+	public static void addObserver(SearchOnAnotherInstanceDialog dialog,
+								   ReportWatch reportWatch) {
+		NetworkReceiveService.addObserver(dialog, reportWatch);
+	}
+
+	public static void sendWorkbook(InetAddress address,
+									Workbook workbook) {
+		SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
+		client.sendWorkbook(address, workbook);
 	}
 }
