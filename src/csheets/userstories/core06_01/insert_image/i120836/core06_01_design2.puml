@@ -24,8 +24,8 @@
     cp -> cell : activeCell=getExtension(InsertImageExtension.NAME)
 
     cp -> ctrl : cellSelected();
-    ctrl -> activeCell : getInsertImage()
-    ctrl -> cp : setInsertImage()
+    ctrl -> activeCell : getImage()
+    ctrl -> cp : setImage()
 
     note right of cp
         ... the InsertImagePanel displays the Image of the current cell.

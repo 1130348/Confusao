@@ -5,6 +5,7 @@
  */
 package csheets.ext.Insert_Image.ui;
 
+import csheets.core.Cell;
 import csheets.ext.Insert_Image.InsertImageCell;
 import csheets.ext.Insert_Image.InsertImageCellListener;
 import csheets.ext.Insert_Image.InsertImageExtension;
@@ -12,23 +13,30 @@ import csheets.ui.ctrl.SelectionEvent;
 import csheets.ui.ctrl.SelectionListener;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.io.IOException;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 /**
  *
  * @author Marcos
  */
 public class InsertImagePanel extends JPanel implements SelectionListener, InsertImageCellListener {
+
+    /**
+     * The label in which the image of the cell is displayed.
+     */
+    private JLabel l = new JLabel();
+
+    /**
+     * The string path for the image
+     */
+    private String PATH = "";
 
     /**
      * The assertion controller
@@ -41,14 +49,7 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
     private InsertImageCell cell;
 
     /**
-     * The label in which the image of the cell is displayed.
-     */
-    private JLabel imageLabel = new JLabel();
-
-    //String path;
-
-    /**
-     * Creates a new image panel.
+     * Creates a new insert image panel.
      *
      * @param uiController the user interface controller
      */
@@ -57,82 +58,87 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
         super(new BorderLayout());
         setName(InsertImageExtension.NAME);
 
-        uiController.addSelectionListener(this);
-
         // Creates controller
         controller = new InsertImageController(uiController, this);
         uiController.addSelectionListener(this);
 
-        // Creates comment components
-        ApplyAction applyAction = new ApplyAction();
+        // Add 2 buttons (Insert and Delete)
+        JButton in = new JButton("Insert");
+        in.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PATH = controller.ChooserIMG();
+                setImage(PATH);
+                controller.setImage(cell, PATH);
 
-        imageLabel.setPreferredSize(new Dimension(120, 240));		// width, height
-        imageLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
-        imageLabel.addFocusListener(applyAction);
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            }
+        });
 
-        // Lays out comment components
-        JPanel ImagePanel = new JPanel();
-        ImagePanel.setLayout(new BoxLayout(ImagePanel, BoxLayout.PAGE_AXIS));
-        ImagePanel.setPreferredSize(new Dimension(130, 336));
-        ImagePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
-        ImagePanel.add(imageLabel);
+        JButton del = new JButton("Delete");
+        del.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setImage(null);
+                controller.setImage(cell, null);
+            }
+        });
 
-        // Adds borders
-        TitledBorder border = BorderFactory.createTitledBorder("Image");
-        border.setTitleJustification(TitledBorder.CENTER);
-        ImagePanel.setBorder(border);
+        // Lays out image and button components
+        setSize(300, 300);
+        setLayout(null);
+        l.setBounds(0, 0, 310, 230);
+        add(l);
+        JLabel buttonholder = new JLabel();
+        buttonholder.setBounds(0, 230, 310, 40);
+        buttonholder.setLayout(new FlowLayout());
+        buttonholder.add(in);
+        buttonholder.add(del);
+        add(buttonholder);
 
-        // Adds panels
-        JPanel northPanel = new JPanel(new BorderLayout());
-        northPanel.add(ImagePanel, BorderLayout.NORTH);
-        add(northPanel, BorderLayout.NORTH);
-        
+    }
+
+    public void setImage(String Path) {
+        Image img = new ImageIcon(Path).getImage();
+        Image newimg = img.getScaledInstance(310, 230, java.awt.Image.SCALE_SMOOTH);
+        l.setIcon(new ImageIcon(newimg));
     }
 
     /**
-     * Updates the image field
+     * Updates the image label
      *
      * @param event the selection event that was fired
      */
+    @Override
     public void selectionChanged(SelectionEvent event) {
+        Cell cell = event.getCell();
+        if (cell != null) {
+            InsertImageCell activeCell
+                    = (InsertImageCell) cell.getExtension(InsertImageExtension.NAME);
+            activeCell.addInsertImageCellListener(this);
 
+            imageChanged(activeCell);
+        } else {
+            l.setIcon(null);
+        }
+
+        // Stops listening to previous active cell
+        if (event.getPreviousCell() != null) {
+            ((InsertImageCell) event.getPreviousCell().getExtension(InsertImageExtension.NAME))
+                    .removeInsertImageCellListener(this);
+        }
     }
 
     /**
-     * Updates the image field when the image of the active cell is changed.
+     * Updates the image label when the image of the active cell is changed.
      *
      * @param cell the cell whose image changed
      */
+    @Override
     public void imageChanged(InsertImageCell cell) {
+        // Stores the cell for use when applying image
+        this.cell = cell;
 
-    }
-
-    public void setImage(String path) throws IOException {
-
-//        BufferedImage myPicture = ImageIO.read(new File(path));
-//        JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-//        add(picLabel);
-        ImageIcon image = new ImageIcon(path);
-        JLabel label = new JLabel("", image, JLabel.CENTER);
-        add(label, BorderLayout.CENTER);
-
-    }
-
-    protected class ApplyAction implements FocusListener {
-
-        @Override
-        public void focusGained(FocusEvent e) {
-            // TODO Auto-generated method stub
-
-        }
-
-        @Override
-        public void focusLost(FocusEvent e) {
-            // TODO Auto-generated method stub
-//            if (cell != null) {
-//                controller.setImage(cell, imageLabel.getText().trim());
-//            }
-        }
+        // The controller must decide what to do...
+        controller.cellSelected(cell);
     }
 }
