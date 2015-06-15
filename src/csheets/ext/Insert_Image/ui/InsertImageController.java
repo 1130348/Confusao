@@ -16,9 +16,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Marcos
  */
+
 /**
  *
- * /**
+ *
  * A controller for updating the path image of a cell.
  *
  */
