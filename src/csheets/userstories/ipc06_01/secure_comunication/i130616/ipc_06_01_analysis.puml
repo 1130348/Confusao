@@ -1,37 +1,31 @@
-  @startuml doc-files/ipc01_01_analysis.png
+  @startuml doc-files/ipc06_01_analysis.png
   actor User
-  participant "<<analysis>>\nStartSharingUI" as UI
-  participant "<<analysis>>\nStartSharingCtrl" as ctrl
-  participant "<<analysis>>\nSpreadsheet" as sheet
-  participant "<<analysis>>\nCell" as cell
-  participant "<<analysis>>\nConnection" as connect
-  User -> UI : selectCells()
+  participant "<<analysis>>\nSecureComunicationUI" as UI
+  participant "<<analysis>>\nSecureComunicationCtrl" as ctrl
+  participant "<<analysis>>\nNetwork" as net
+  participant "<<analysis>>\nMessage" as msg
+  participant "<<analysis>>\nSecureConnection" as connect
+  User -> UI : searchUsers()
   activate UI
-  UI -> ctrl : getCells()
+  UI -> ctrl : searchUsers()
   activate ctrl
   deactivate UI
-  ctrl -> sheet : getCell()
-  ctrl -> cell : getContent()
-  deactivate cell
-  deactivate ctrl
-  User -> UI : getClients()
-  activate UI
-  UI -> ctrl : getClients()
-  deactivate UI
-  activate ctrl
-  activate connect
-  ctrl -> connect : getClients()
+  ctrl -> net : searchInstances()
+  deactivate net
   deactivate ctrl
   activate UI
   User -> UI : selectClient()
-  UI -> ctrl : connectChoosenClient()
+  UI -> ctrl : newSecureConnectionClient()
   activate ctrl
-  ctrl -> connect : connectChoosenClient()
+  create connect
+  ctrl -> connect : create(Client)
   deactivate ctrl
-  User -> UI : sendCells()
-  UI -> ctrl : sendCellsInfo()
+  deactivate UI
+  User -> UI : sendMessage()
+  activate UI
+  UI -> ctrl : sendMessage()
   activate ctrl
-  ctrl -> connect : sendCellsInfo()
+  ctrl -> connect : sendMessage()
   deactivate ctrl
   deactivate UI
   @enduml
