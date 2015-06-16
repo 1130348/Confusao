@@ -1,0 +1,22 @@
+  @startuml doc-files/ipc_04_02_analysis_sequece_import.png
+  actor User
+  participant "<<analysis>>\nImportExportUI" as UI
+  participant "<<analysis>>\nImportationExportationLinkController" as ctrl
+  participant "<<analysis>>\nImport" as import
+  participant "<<analysis>>\nCell" as cell
+  participant "<<analysis>>\nFile" as file
+  User -> UI : startImpExpLink()
+  UI -> ctrl : import()
+  ctrl -> import : import()
+  import -> file : create(name_file)
+  file -> import : importFile(name_file)
+  loop cleansheet runs
+  alt date.before(file.lastModification())
+	file -> import: importFile(name_file)
+loop all cells
+  import -> cell : setContent(content)
+end
+  end alt
+end
+
+  @enduml

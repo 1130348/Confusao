@@ -1,0 +1,20 @@
+  @startuml doc-files/ipc_02_02_sequence_diagram_analysis.png
+  
+actor user 
+  participant "<<analysis>>\nFindWorkbooksUI" as ui
+  participant "<<analysis>>\nWorkBook" as WorkBook
+  participant "<<analysis>>\ns: Spreadsheet" as Spreadsheet
+  participant "<<analysis>>\nc: Cell" as Cell
+ 
+    user -> ui: Chooses a WorkBook to see the preview
+    loop Gets all the spreadsheets in the workbook
+        ui -> WorkBook: s = getSpreadsheet(num)
+
+        loop
+            ui -> Spreadsheet: c = getCell(column, row)
+            ui -> Cell: getContent()
+        end loop
+    end loop
+    
+    ui -> user: Shows the first cells with \ncontent of the workbook
+  @enduml

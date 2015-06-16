@@ -10,7 +10,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -37,9 +36,23 @@ public class AdvancedFunctionsTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void makeSureMultiplyMatricesAreCorrect() {
+    
+    }
+    
+    @Test
+    public void makeSureInverseMatricesAreCorrect() {
+    
+    }
+    
+    @Test(expected = Exception.class)
+    public void matrixToInverseIsSquare() {
+    
+    }
+    
+    @Test(expected = Exception.class)
+    public void matricesToMultiplyNumberOfColumnsOfFirstIsEqualToNumberOfRowsOfSecond() {
+    
+    }
 }
