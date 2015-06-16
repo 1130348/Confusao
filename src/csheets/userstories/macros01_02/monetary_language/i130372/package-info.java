@@ -85,20 +85,9 @@
  * edit with AntlWorks this file and add their behavior.
  *
  * <h2>3. Tests</h2>
- * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to enable the use of instructions blocks,
- * the operator attribution and for cycle. We need to be able in case of having
- * more than 2 instructions, applying them sequentially and store the proper
- * result. If it uses the attribution operator we must save the correct result
- * on the right, in the variable to the left of the operator. In the case of a
- * for cycle we must detect correctly the beginning of the cycle and its ending
- * condition. The instructions inside the cycle must be repeated not only
- * correctly but the correct number of times. Following this approach we can
- * start by coding a unit test that tests the creation of an instruction block
- * inside a cell. Another test must be made to validate the result of the
- * instruction block. As usual, in a test driven development approach tests
- * normally fail in the beginning. The idea is that the tests will pass in the
- * end.
+ * From our analysis, we can see that many tests from the previous use case are also needed
+ * in this use case. In addiction to that already implemented tests we need to modify some
+ * of them to match the new requirements, like the new grammar and the new compiler.
  * <br/>
  * <br/>
  * see: <code>csheets.ext.comments.InstructionsBlockTest</code><br/>
