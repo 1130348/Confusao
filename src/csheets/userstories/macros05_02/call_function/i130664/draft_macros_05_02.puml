@@ -1,0 +1,29 @@
+@startuml doc-files/draft_macros_05_02.png
+actor User
+ participant "<<analysis>>\nCallFunctionUI" as UI
+ participant "<<analysis>>\nCallFunctionCtrl" as ctrl
+ participant "<<analysis>>\nLanguage" as language
+User -> UI : show
+activate UI
+UI -> ctrl : lf = fillList()
+activate ctrl
+deactivate UI
+ctrl -> language : lf = getFunctions()
+activate UI
+deactivate ctrl
+UI -> UI : fillFunctionsList(lf)
+User -> UI : choose function
+UI -> ctrl : func_def = chooseFunction(f)
+deactivate UI
+activate ctrl
+ctrl -> language : func = getFunction(f)
+deactivate ctrl
+activate UI
+UI -> UI : fillTextBox(func_def)
+User -> UI : Fill Data and Enter
+activate ctrl
+UI -> ctrl : callFunction(func_def)
+deactivate UI
+deactivate ctrl
+
+@enduml
