@@ -1,0 +1,40 @@
+@startuml doc-files/ipc_04_02_analysis_classes.png
+
+    interface "<<analysis>> ImportExportUI" as UI{
+		+startImpExpLink()
+    }
+
+    class "<<analysis>> ImportationExportatioLinkController" as controller{
+		-Date date_last_modification
+        +export()
+		+import()
+    }
+
+    class "<<analysis>> Export" as export{
+		+run()
+		+export()
+    }
+    class "<<analysis>> Import" as import{
+		+import()
+		+run()
+		+importFile(name_file)
+    }
+
+    class "<<analysis>> Cell" as cell{
+		+setContent(new_content)
+    }
+
+    class "<<analysis>> File" as file{
+		+create(name_file)
+		+exportFile(name_file)
+    }
+
+	controller <|-- UI
+    export <|-- controller
+    import <|-- controller
+	export <|-- cell
+	file <|-- export
+	file <|-- import
+
+@enduml
+
