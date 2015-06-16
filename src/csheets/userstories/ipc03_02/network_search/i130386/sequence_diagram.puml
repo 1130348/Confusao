@@ -1,0 +1,15 @@
+@startuml doc-files/sequence_diagram.png
+actor Sender as user
+participant "dialog : NetworkSearchDialog" as nsd
+participant "NetworkSearchController" as nscc
+participant "<<Service>>\nNetworkService" as net
+participant "NetworkSearchClient" as nsc
+user -> nsd : searchActionPerformed()
+nsd -> nscc : searchActionPerformed()
+nscc -> net : NetworkSearchRequest(workbookName)
+net -> said : NetworkSearchRequest(workbookName)
+said -> nscc : NetworkSearchRequest(workbookName)
+
+net -> nsc : create()
+net -> nsc : sendWorkbookName(workbookName)
+@enduml

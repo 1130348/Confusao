@@ -1,0 +1,28 @@
+  @startuml doc-files/IPC05_01_send_message_ext_design_analysis.png
+  actor User
+  participant "<<analysis>>\nSendMessageUI" as UI
+  participant "<<analysis>>\nSendMessageCtrl" as ctrl
+  participant "<<analysis>>\nConnection" as connect
+
+
+  User -> UI : startService()
+ 
+  User -> UI : setConnection()
+
+  activate UI
+  UI -> ctrl : setConnection()
+  deactivate UI
+  activate ctrl
+  activate connect
+  ctrl -> connect : create()
+  connect --> ctrl : 
+  deactivate ctrl
+  ctrl --> UI
+  UI -> UI : MSG()
+
+  activate UI
+  User -> UI : sendMSG()
+
+  UI -> ctrl : sendMSG()
+  deactivate UI
+  @enduml

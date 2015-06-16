@@ -22,12 +22,12 @@ public class InsertImageCell extends CellExtension {
     private static final long serialVersionUID = 1L;
 
     /**
-     * The cell's user-specified image
+     * The image path
      */
     private String path;
 
     /**
-     * The listeners registered to receive events from the comentable cell
+     * The listeners registered to receive events from the image cell
      */
     private transient List<InsertImageCellListener> listeners
             = new ArrayList<InsertImageCellListener>();
@@ -64,14 +64,14 @@ public class InsertImageCell extends CellExtension {
     }
 
     /*
-     * COMMENT MODIFIERS
+     * IMAGE MODIFIERS
      */
     /**
      * Sets the user-specified image for the cell.
      *
-     * @param path the user-specified comment
+     * @param path the path for the image
      */
-    public void setUserImage(String path) {
+    public void setImagePath(String path) {
         this.path = path;
         // Notifies listeners
         fireImageChanged();
@@ -85,11 +85,15 @@ public class InsertImageCell extends CellExtension {
      * Registers the given listener on the cell.
      *
      * @param listener the listener to be FFFF public void
-     * addInsertImageCellListener(InsertImageCellListener listener) {
-     * listeners.add(listener); }
      *
-     * /**
+     */
+    public void addInsertImageCellListener(InsertImageCellListener listener) {
+        listeners.add(listener);
+    }
+
+    /**
      * Removes the given listener from the cell.
+     *
      * @param listener the listener to be removed
      */
     public void removeInsertImageCellListener(InsertImageCellListener listener) {
@@ -97,7 +101,7 @@ public class InsertImageCell extends CellExtension {
     }
 
     /**
-     * Notifies all registered listeners that the cell's comments changed.
+     * Notifies all registered listeners that the cell's image changed.
      */
     protected void fireImageChanged() {
         for (InsertImageCellListener listener : listeners) {

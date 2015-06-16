@@ -51,7 +51,7 @@
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
- * see: <code>csheets.ext.Insert_Image.InsertImageCellTest</code><br/>
+ * see: <code>csheets.ext.insert_image.ImageCellTest</code><br/>
  *
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
