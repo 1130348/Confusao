@@ -110,10 +110,6 @@
  * see:<br/>
  * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
  * <br/>
- * <h2>6. Final Remarks</h2>
- * As an extra this use case to apply the new functions and operators needs them
- * to be written in the language.props file (n the src-resources package)<br/>
- * <br/>
  * <br/>
  *
  * @author i130386
@@ -125,7 +121,7 @@ package csheets.userstories.macros03_01.baseOperators.i130386;
  * EMPTY package! Do not remove this class!
  *
  *
- * @author alexandrebraganca
+ * @author luis
  */
 class _baseOperators_ {
 }

@@ -17,31 +17,35 @@ import csheets.ui.ext.UIExtension;
  */
 public class InsertImageExtension extends Extension {
 
-	/** The name of the extension */
-	public static final String NAME = "Image";
+    /**
+     * The name of the extension
+     */
+    public static final String NAME = "Image";
 
-	/**
-	 * Creates a new Example extension.
-	 */
-	public InsertImageExtension() {
-		super(NAME);
-	}
-	
-	/**
-	 * Makes the given cell with image.
-	 * @param cell the cell to insert image
-	 * @return a image cell
-	 */
-	public InsertImageCell extend(Cell cell) {
-		return new InsertImageCell(cell);
-	}
-	
-	/**
-	 * Returns the user interface extension of this extension 
-	 * @param uiController the user interface controller
-	 * @return a user interface extension, or null if none is provided
-	 */
-	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionInsertImage(this, uiController);
-	}
+    /**
+     * Creates a new InsertImage extension.
+     */
+    public InsertImageExtension() {
+        super(NAME);
+    }
+
+    /**
+     * Makes the given cell with image.
+     *
+     * @param cell the cell to insert image
+     * @return a image cell
+     */
+    public InsertImageCell extend(Cell cell) {
+        return new InsertImageCell(cell);
+    }
+
+    /**
+     * Returns the user interface extension of this extension
+     *
+     * @param uiController the user interface controller
+     * @return a user interface extension, or null if none is provided
+     */
+    public UIExtension getUIExtension(UIController uiController) {
+        return new UIExtensionInsertImage(this, uiController);
+    }
 }

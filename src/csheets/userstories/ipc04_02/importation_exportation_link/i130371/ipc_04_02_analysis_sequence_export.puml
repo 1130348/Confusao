@@ -1,0 +1,17 @@
+@startuml doc-files/ipc_04_02_analysis_sequence_export.png
+  actor User
+  participant "<<analysis>>\nImportExportUI" as UI
+  participant "<<analysis>>\nImportationExportationLinkController" as ctrl
+  participant "<<analysis>>\nExport" as export
+  participant "<<analysis>>\nCell" as cell
+  participant "<<analysis>>\nFile" as file
+  User -> UI : startImpExpLink()
+  UI -> ctrl : export()
+  ctrl -> export : export()
+  export -> file : exportFile(name_file)
+  loop cleansheet runs
+  alt cells modified
+	export -> file: exportFile(name_file)
+  end alt
+end
+  @enduml

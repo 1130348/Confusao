@@ -61,27 +61,23 @@
  * functionality of this use case is to be able to search workbooks on the local
  * disk.
  * <br/>
- * Following this approach we can start by coding a unit test that uses the
- * class <code>SearchWorkbookFiles</code>, since this is the only class we have
- * in this use case besides the user interface and the controller which do not 
- * require any unit tests. This class tests the method visitFile to ensure that
- * it returns a list of files if the method finds any in its search. In the event 
- * that there are none, the method visitFailed should return an empty Workbook 
- * list. Furthermore we also have to perform functional tests to see if the user
- * interface is communicating correctly between all the layers of the
- * implementation.
+ * Because our model class <code>FindWorkbooks</code> implements the interface
+ * SimpleFileVisitor and the only methods in the class are overriden methods of 
+ * that interface that mandatorily return the static constant CONTINUE no unit 
+ * tests were made to this class. The class <code>StartSearch</code> is
+ * responsible for creating a thread of the class <code>FindWorkbooks</code> and
+ * since it only calls the start() method of the Thread class no unit tests 
+ * could be made. Instead functional tests were made in order to make sure
+ * that the use case was functioning properly. These were creating .cls files
+ * in the local disk and making sure they would appear on the sidebar and 
+ * making sure that the found files would open when double-clicked.
  * <br/>
- * As usual, in a test driven development approach tests normally fail in the 
- * beginning. The idea is that the tests will pass in the end.
- * <br/> 
- * <br/>
- * see: <code>csheets.ext.findworkbooks.FindWorkbooksTests</code><br/>
  * <h2>4. Design</h2>
  * To realize this user story we will need to extend the class Extension since
- * we want to create a new extension for CleanSheets. 
- * We will also need to create a subclass of UIExtension. In the code of the 
- * extension <code>csheets.ext.style</code> we can find examples that illustrate
- * how to implement these technical requirements.
+ * we want to create a new extension for CleanSheets. We will also need to 
+ * create a subclass of UIExtension. In the code of the extension 
+ * <code>csheets.ext.style</code> we can find examples that illustrate how to
+ * implement these technical requirements.
  * <br/>
  * The following diagrams illustrate core aspects of the design of the solution 
  * for this use case.

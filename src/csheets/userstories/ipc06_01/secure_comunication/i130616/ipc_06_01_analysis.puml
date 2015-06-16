@@ -1,0 +1,31 @@
+  @startuml doc-files/ipc06_01_analysis.png
+  actor User
+  participant "<<analysis>>\nSecureComunicationUI" as UI
+  participant "<<analysis>>\nSecureComunicationCtrl" as ctrl
+  participant "<<analysis>>\nNetwork" as net
+  participant "<<analysis>>\nMessage" as msg
+  participant "<<analysis>>\nSecureConnection" as connect
+  User -> UI : searchUsers()
+  activate UI
+  UI -> ctrl : searchUsers()
+  activate ctrl
+  deactivate UI
+  ctrl -> net : searchInstances()
+  deactivate net
+  deactivate ctrl
+  activate UI
+  User -> UI : selectClient()
+  UI -> ctrl : newSecureConnectionClient()
+  activate ctrl
+  create connect
+  ctrl -> connect : create(Client)
+  deactivate ctrl
+  deactivate UI
+  User -> UI : sendMessage()
+  activate UI
+  UI -> ctrl : sendMessage()
+  activate ctrl
+  ctrl -> connect : sendMessage()
+  deactivate ctrl
+  deactivate UI
+  @enduml
