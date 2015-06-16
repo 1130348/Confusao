@@ -1,0 +1,33 @@
+@startuml doc-files/draft_macros_02_02.png
+ actor User
+ participant "<<analysis>>\nCellUI" as UI
+ participant "<<analysis>>\nCellCtrl" as ctrl
+ participant "<<analysis>>\nCell" as cell
+ participant "<<analysis>>\nWorkbook" as workbook
+ participant "<<analysis>>\nArray" as array
+
+User -> UI : defineArray()
+activate UI
+UI -> ctrl : setContent(string)
+activate ctrl
+deactivate UI
+ctrl -> cell : setContent(string)
+activate cell
+deactivate ctrl
+
+cell -> workbook : setContent(value)
+activate workbook
+workbook -> workbook : validate()
+alt case not exists
+workbook -> array : create(value)
+workbook -> workbook : add(value)
+else
+workbook -> array : setContent(value)
+end
+deactivate workbook
+
+deactivate cell
+
+
+
+@enduml
