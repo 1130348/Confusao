@@ -1,0 +1,28 @@
+@startuml doc-files/find_workbooks_analysis_diagram.png
+actor user 
+participant "<<analysis>>\nMacrosWindowUI" as ui
+participant "<<analysis>>\nMacroWindowController" as controller
+participant "<<analysis>>\nLanguage" as language
+user  -> ui : startMacrosCreation()
+activate ui
+ui -> controller : fl : retrieveExistingMacrosList()
+activate controller
+controller -> language : fl : retrieveExistingMacrosList()
+user -> user 
+note right of user
+The previous self message
+represents the creation of the
+macro by the user in the ui.
+end note
+user -> ui : runMacroButtonActionPerformed()
+note right of ui
+The process of executing
+macros will be explained
+with more detail in the
+Design section, since at
+this stage little is known
+about it.
+end note
+deactivate controller
+deactivate ui
+@enduml
