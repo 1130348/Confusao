@@ -39,7 +39,7 @@ public class SSLServer implements Runnable {
         int option;
         try {
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(9999);
+            serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(port);
             SSLSocket client;
             while (isRunning) {
                 sem.acquire();
