@@ -97,7 +97,7 @@ public class CommentableCell extends CellExtension {
     public String getAllComments() {
         String tmp = "";
         for (int i = 0; i < userComment.size(); i++) {
-            tmp += userComment.get(i)+ "\r\n";
+            tmp += userComment.get(i)+ "<br>";
         }
         return tmp;
     }
