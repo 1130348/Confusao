@@ -11,6 +11,7 @@ import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ext.startsharing.SendCellsController;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
+import csheets.ui.sheet.SpreadsheetTable;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.logging.Level;
@@ -84,5 +85,9 @@ public class SendCellsAction extends FocusOwnerAction {
 		}
 
 	}
+        
+        public SpreadsheetTable getSpreadsheetTable(){
+            return this.focusOwner;
+        }
 
 }

@@ -132,7 +132,7 @@ public class NetworkSendService {
 		try {
 			cliente = new Socket(address, 9001);
 			connectionState = true;
-			System.out.println("O cliente se conectou ao servidor!");
+			System.out.println("O cliente conectou-se ao servidor!");
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);
@@ -164,7 +164,7 @@ public class NetworkSendService {
 				getDefault();
 			cliente = sslsocketfactory.createSocket(address, 1337);
 			connectionState = true;
-			System.out.println("O cliente se conectou ao servidor SSL!");
+			System.out.println("O cliente conectou-se ao servidor SSL!");
 			return true;
 		} catch (IOException ex) {
 			ex.printStackTrace();

@@ -22,6 +22,7 @@ public class StartSharingMenu extends JMenu {
 		SendCellsAction scaction = new SendCellsAction(uiController);
 		add(scaction);
 		add(new StartSharingAction(uiController, scaction));
+                add(new StartAutomaticSharingAction(uiController, scaction));
 
 	}
 
