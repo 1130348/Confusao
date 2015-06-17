@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.searchOnAnotherInstance;
+package csheets.ext.networkSearch;
 
 import csheets.ext.Extension;
-import csheets.ext.searchOnAnotherInstance.ui.UIExtensionSearchOnAnotherInstance;
+import csheets.ext.networkSearch.ui.UIExtensionNetworkSearchInstance;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
 /**
  *
- * @author Paulo Pereira <1130419@isep.ipp.pt>
+ * @author Luis
  */
-public class SearchOnAnotherInstanceExtension extends Extension {
+public class NetworkSearchExtension extends Extension {
 
 	/**
 	 * The name of the extension
 	 */
-	public static final String NAME = "Workbook LAN Search";
+	public static final String NAME = "Local Network Results";
 
 	/**
 	 * Creates a new Search on another instance extension.
 	 */
-	public SearchOnAnotherInstanceExtension() {
+	public NetworkSearchExtension() {
 		super(NAME);
 	}
 
@@ -36,6 +36,6 @@ public class SearchOnAnotherInstanceExtension extends Extension {
 	 */
 	@Override
 	public UIExtension getUIExtension(UIController uiController) {
-		return new UIExtensionSearchOnAnotherInstance(this, uiController);
+		return new UIExtensionNetworkSearchInstance(this, uiController);
 	}
 }
