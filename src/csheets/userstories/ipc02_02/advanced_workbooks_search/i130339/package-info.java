@@ -59,7 +59,10 @@
  * the window and return to the main window.
  * <br/>
  * <h2>3. Tests</h2>
- * 
+ * For this use case, there will be no additional tests, since all the methods that are used
+ * in this UC were already implemented in the original program, so i assume that the given
+ * code was correct, even without having tests, since who made the program didnt do a approach 
+ * based on tests.
  * <h2>4. Design</h2>
  * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It

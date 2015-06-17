@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -46,7 +47,7 @@ public class NetworkSendService {
 			DatagramSocket socket = new DatagramSocket();
 			socket.setBroadcast(true);
 			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("172.18.135.255");
+			InetAddress destinationIP = InetAddress.getByName("10.8.255.255");
 
 			byte[] data = new byte[300];
 			String message = String.format("%d", portTCP);
@@ -131,7 +132,7 @@ public class NetworkSendService {
 		try {
 			cliente = new Socket(address, 9001);
 			connectionState = true;
-			System.out.println("O cliente se conectou ao servidor!");
+			System.out.println("O cliente conectou-se ao servidor!");
 		} catch (IOException ex) {
 			Logger.getLogger(NetworkSendService.class.getName()).
 				log(Level.SEVERE, null, ex);
@@ -150,4 +151,25 @@ public class NetworkSendService {
 		}
 
 	}
+
+	/**
+	 * Connection using SSL
+	 *
+	 * @param address
+	 * @return
+	 */
+	public static boolean establishSecureConnectionToUser(InetAddress address) {
+		try {
+			SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.
+				getDefault();
+			cliente = sslsocketfactory.createSocket(address, 1337);
+			connectionState = true;
+			System.out.println("O cliente conectou-se ao servidor SSL!");
+			return true;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
 }

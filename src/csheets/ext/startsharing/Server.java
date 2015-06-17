@@ -10,7 +10,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
@@ -57,6 +59,15 @@ public class Server implements Runnable {
 						put(client, new DataOutputStream(client.
 								getOutputStream()));
 
+                                        NetworkService.addClientToMap(port+1, client.getInetAddress());
+                                        StartSharingController controller = new StartSharingController();
+                                        
+                                        List<String> cli = new ArrayList<>();
+                                        cli.add(client.getInetAddress().getHostName());
+                                        controller.establishConnection(cli, sendCells);
+                                        
+                                        sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());
+                                        
 					new Thread(new ReceiveData(client, sendCells)).start();
 				} else {
 					client.close();

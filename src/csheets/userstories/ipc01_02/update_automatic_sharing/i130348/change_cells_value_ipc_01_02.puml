@@ -1,0 +1,22 @@
+@startuml doc-files/change_cells_value_ipc_01_02.png
+actor User
+participant "StartAutomaticSharingAction" as ssa 
+participant "ClientChooser" as cc
+participant "<<Service>>\nNetwork" as net
+participant "SendCellsController" as ssc
+ 
+User -> User : change cell value
+User -> ssa : AutomaticCellListener()
+ssa -> net : sendCell(cell);
+net -> ssc : sendCell(cell);
+ssc -> net : sendCellContent(cell);
+net -> net : sendCellsContent(cell)
+
+loop
+    net -> cc : selectClient(address);
+    cc -> ssc : establishConnection(address);
+    ssc -> net : establishConnection(addres);
+    net -> net : send();
+end
+
+@enduml

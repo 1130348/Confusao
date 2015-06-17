@@ -43,14 +43,9 @@ public class InsertImageCellDecorator extends CellDecorator {
             if (InsertImageCell.hasImage()) {
                 // Stores current graphics context properties
                 Graphics2D g2 = (Graphics2D) g;
-                Color oldPaint = g2.getColor();
-
-                // Prints 'A' using own font, then restores the old font
+                
                 g2.setColor(Color.BLUE);
-                g2.drawString("+", 4, 12);
-
-                // Restores graphics context properties
-                g2.setColor(oldPaint);
+                g2.drawString("IMG", 4, 12);
             }
         }
     }

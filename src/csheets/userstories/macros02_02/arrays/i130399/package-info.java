@@ -73,23 +73,23 @@
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to enable the use variables. If the
- * variable is called inside a cell this must return a value or call an error
- * because the variable that was called doesn't exist. In a formula context, the
- * variable can be changed or created. The variables must be persisent and exist
- * inside the same workbook. The variable must be able to save any type of
- * value.
+ * functionality of this use case is to enable the use arrays. If the array is
+ * called inside a cell fill the the cell with the value of position called or
+ * generate an error if the array doens't exist. In a formula context, the array
+ * positions can be changed. The arrays must be persisent and can be used inside
+ * the same workbook for other spreadsheets. Different positions of the array
+ * must be able to save numeric values and alphanumeric values. When the array
+ * is called only by the name it should fill the cell with the value of the
+ * first position.
  * <br/>
  * Following this approach we can start by coding a unit test that tests the
- * creation of variables inside a cell and inside a formula. Another test must
- * be made to validate the result of the variable. The variables must be acessed
- * from different spreedsheets in the same workbook.
- * <br/>
- * As usual, in a test driven development approach tests normally fail in the
- * beginning. The idea is that the tests will pass in the end.
+ * creation of arrays inside a cell and inside a formula. Another test to
+ * validate the result of the variable. And another test to verify if when
+ * access a array by the name it returns the value of the first positon of the
+ * array.
  * <br/>
  * <br/>
- * see: <code>csheets.userstories.macros02_01.blocks</code><br/>
+ * see: <code>csheets.userstories.macros02_02.arrays</code><br/>
  *
  * <h2>4. Design</h2>
  *
@@ -104,7 +104,7 @@
  * type of command is written and choose the correct behavior.<br/>
  * The following diagram illustrate the approach used in the design of the
  * solution for this use case.<br/>
- * <img src="doc-files/design_macros_02_01.png"/>
+ * <img src="doc-files/design_macros_02_02.png"/>
  * </br>
  *
  * <h2>5. Coding</h2>
