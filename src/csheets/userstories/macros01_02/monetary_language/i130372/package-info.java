@@ -106,7 +106,7 @@
  * <img src="doc-files/sequence_diagram_macros_01_02_chooseFile.png"/>
  * </br>
  * The following diagram illustrate the formula parsing process
- * <img src="doc-files/design_macros_01_01.png"/>
+ * <img src="doc-files/design_macros_01_02.png"/>
  *
  * <h2>5. Coding</h2>
  * see:<br/>
