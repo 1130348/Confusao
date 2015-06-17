@@ -61,8 +61,8 @@
  * functionality of this use case is to be able communicate with other instances
  * of "CleanSheets" and send them automatically the content of the cells.<br/>
  * As the connection was developed in ipc01.1, the connection tests are already done.
- * Now we need to focus on the content we are sending and if it's being received 
- * on the other instance.
+ * Furthermore we also have to perform functional tests to
+ * see if the client is properly receiving the information.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
@@ -77,16 +77,18 @@
  * for this use case.<br/>
  *
  * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Start automatic Sharing" extension when
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/Extension_setup_ipc_01_01.png"/>
+ * The following diagram shows the setup of the "Start Sharing" extension when
+ * cleansheets is run.
+ * As you can see, we used ipc01.1 exetension and added the automatic sharing action.
+ * <br/><br/>
+ * <img src="doc-files/Extension_setup_ipc_01_02.png"/>
  * <br/>
  * <h3>User Changes Cells Value</h3>
  * The following diagram illustrates what happens when the user changes cells value.
  * When the user changes cells value, the object Network has access to
  * the changed cell, and sends it automatically to other instances.<br/>
  * <br/>
- * <img src="doc-files/select_cells_and_click_ipc_01_01.png">
+ * <img src="doc-files/change_cells_value_ipc_01_02.png">
  *
  */
 package csheets.userstories.ipc01_02.update_automatic_sharing.i130348;

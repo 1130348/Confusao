@@ -13,3 +13,4 @@ csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceExtension
 csheets.ext.Email.ExtensionEmail
 csheets.ext.Sort.SortExtension
 csheets.ext.Insert_Image.InsertImageExtension
+csheets.ext.secure_comunication.SecureComunicationExtension

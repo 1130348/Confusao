@@ -22,6 +22,7 @@ package csheets.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
+import csheets.ext.import_export_link.ui.LinkImportExportAction;
 import csheets.ext.import_export_text.ui.ExportAction;
 import csheets.ext.import_export_text.ui.ImportAction;
 import csheets.ui.ctrl.AboutAction;
@@ -125,9 +126,12 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.
 			registerAction("exit", new ExitAction(app, uiController, chooser));
 		actionManager.registerAction("print", new PrintAction());
-                actionManager.registerAction("import", new ImportAction(app, uiController));
-                actionManager.registerAction("export", new ExportAction(app, uiController));
-                
+		actionManager.
+			registerAction("import", new ImportAction(app, uiController));
+		actionManager.
+			registerAction("export", new ExportAction(app, uiController));
+		actionManager.
+			registerAction("link", new LinkImportExportAction(app, uiController));
 
 		// Registers edit actions
 		actionManager.registerAction("undo", new UndoAction());

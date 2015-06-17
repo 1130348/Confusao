@@ -7,35 +7,32 @@
  * create and run macros. These macros are composed of either formulas or 
  * comments. The formulas are the same formulas used within spreadsheet cells. 
  * To fulfill such requirements, a new grammar, similar to the already existing 
- * ones, should be added to the CleanSheets aplication.
+ * ones, should be added to the CleanSheets application.
  * <br/>
  * <br/>
  * <b>Use Case "Macros Window":</b>
  * The user opens the macros window. From here on out he can either create a new
- * macro, select a pre-existing one, or cancel the macro creating process
- * altogether. Although there is an option to select an existing macro, it is not
- * the purpose of this use case to implement a persistance mechanism that saves
+ * macro, select a pre-existing one, or cancel the macro creating process.
+ * Although there is an option to select an existing macro, it is not the
+ * purpose of this use case to implement a persistance mechanism that saves
  * created macros between sessions, thus it will only be possible to load macros
  * created in the same CleanSheets session. Prior to creating a macro there are 
  * several options that a user should contemplate. These are, respectively,
  * selecting and adding a function from a list of available CleanSheets
- * functions, adding an operator or writing a comment. Although the previous
- * process is somewhat limited in terms of possibilities, since those options
- * are almost entirely hidden from the user interface, it is possible to
- * customize macros at any given time by pressing an editing button that 
- * will allow the user to make all the changes he may find appropriate.
+ * functions, adding an operation, assigning a variable or writing a comment.
+ * After the macro is created, it can be run or saved for later use. A name
+ * should be provided to allow the identification of the macro. After running
+ * the macro its output will be displayed (the output corresponds to the last
+ * instruction in the macro, excluding comments).
  * <br/>
  * <br/> 
  * <h2>2. Analysis</h2>
- * In order to implement macro creation it is primarily necessary to understand
- * how functions, formulas and grammars have been implemented inside the
- * CleanSheets application. Since macros creation consists, at least during this
- * stage, only in a sequence of formulas that will be executed by order, it is a
- * good idea to have a list of all implemented formulas so that the user can
- * choose them from a known formula list. Before that, however, it is
- * fundamental to have the right notion of what a formula is inside the 
- * CleanSheets paradigm. Is a formula the same thing as a function? Or does it
- * englobe operators or something else? 
+ * In order to implement macro creation it is first necessary to understand how
+ * functions, formulas and grammars have been implemented inside the CleanSheets
+ * application. Since macros creation consists, at least during this stage, only
+ * in a sequence of formulas that will be executed by order, it is a good idea
+ * to know, beforehand, what a formula consists of. In our use case our formula
+ * concept will cover functions, variable assignments and operations.
  * <br/>
  * <br/>
  * <h3>First "analysis" sequence diagram</h3>
@@ -50,10 +47,8 @@
  * <br/>
  * <img src="doc-files/macros_window_analysis_diagram.png"/>
  * <br/>
- * Through this early draft we can see that the class SearchWorkbookFiles will
- * have total responsibilities in regards to the workbook files search. The user
- * interface will have to communicate through a controller in order to gain
- * access to all the functionalities provided by the SearchWorkbooksFilesClass.
+ * Through this early draft we can see where we will be retrieving our functions
+ * list from and the global aspect of our use case.
  * <br/>
  * <br/> 
  * <h3>Analysis of The Core Technical Problem</h3>
