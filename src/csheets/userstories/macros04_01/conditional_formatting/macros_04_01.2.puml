@@ -1,0 +1,17 @@
+@startuml doc-files/macros_04_01.2.png
+
+participant "UIController" as uic
+participant "ExtensionManager" as em
+participant "FormattingExtension" as ext
+
+
+    uic -> em : extensions=getExtensions()
+    uic -> ext : uiExtension = getUIExtension(this)
+    create "uiExtension:FormattingUI" as uiExt
+
+        ext -> uiExt : new(FormattingExtension, UIController)
+
+    uic -> uic : uiExtensions.add(uiExtension)
+
+
+@enduml

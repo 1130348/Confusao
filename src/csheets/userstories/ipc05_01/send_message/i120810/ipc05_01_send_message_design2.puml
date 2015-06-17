@@ -1,0 +1,31 @@
+@startuml doc-files/ipc05_01_send_message_design2.png
+    participant "uic: UIController" as uic
+    participant "uiExtension : UIExtensionSendMessage" as UIExt
+    participant "SendMessagePanel : JPanel" as cp
+    participant "SendMessageController" as ctrl
+    participant "ChatUI : JFrame" as cui
+    participant "TCP : TCP" as tcp
+    participant "Socket : Socket" as skt
+
+
+
+    UIExt -> cp :  new(uic) 
+
+
+    cp -> ctrl : new(uic) 
+
+    uic -> cp : ActionPerformed()
+    cp -> ctrl : ActionPerformed()
+    alt true
+        ctrl -> ctrl : startService()
+        ctrl -> cui : create()
+        cui -> ctrl : sendMessage(message, ip)
+        ctrl-> skt : create(ip, port)
+        ctrl->tcp : sendMessage(message , ip)
+
+
+    end
+    alt false
+        ctrl -> ctrl : stopService()
+    end
+@enduml

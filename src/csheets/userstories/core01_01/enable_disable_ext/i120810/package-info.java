@@ -68,12 +68,12 @@
  * see:<br/>
  * <h3>Created</h3>
  *
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.Enable_Disable</a><br/>
- * <a href="../../../../csheets/ext/comments/ui/package-summary.html">csheets.ext.Enable_Disable.ui</a>
+ * <a href="../../../../csheets/ext/Enable_Disable/package-summary.html">csheets.ext.Enable_Disable</a><br/>
+ * <a href="../../../../csheets/ext/Enable_Disable/ui/package-summary.html">csheets.ext.Enable_Disable.ui</a>
  *
  * <h3>Modified</h3>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ui</a><br/>
- * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ui.ext</a>
+ * <a href="../../../../csheets/ui/package-summary.html">csheets.ui</a><br/>
+ * <a href="../../../../csheets/ui/ext/package-summary.html">csheets.ui.ext</a>
  * <br/>
  * <br/>
  * <br/>
