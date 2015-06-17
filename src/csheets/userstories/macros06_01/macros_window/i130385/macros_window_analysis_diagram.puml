@@ -1,13 +1,13 @@
-@startuml doc-files/find_workbooks_analysis_diagram.png
+@startuml doc-files/macros_window_analysis_diagram.png
 actor user 
 participant "<<analysis>>\nMacrosWindowUI" as ui
 participant "<<analysis>>\nMacroWindowController" as controller
 participant "<<analysis>>\nLanguage" as language
 user  -> ui : startMacrosCreation()
 activate ui
-ui -> controller : fl : retrieveExistingMacrosList()
+ui -> controller : fl : retrieveExistingFuntcionsList()
 activate controller
-controller -> language : fl : retrieveExistingMacrosList()
+controller -> language : fl : retrieveExistingFunctionsList()
 user -> user 
 note right of user
 The previous self message

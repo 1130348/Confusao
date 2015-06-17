@@ -71,6 +71,53 @@
  * in the beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
  *
+ * * <h2>4. Design</h2>
+ * A sequence diagram shows object interactions arranged in time sequence. It
+ * depicts the objects and classes involved in the scenario and the sequence of
+ * messages exchanged betwween the objets needed to carry out the functionality
+ * of the scenario.<br/>
+ * A new item on the menu will be created in order to the user do the
+ * importation and exportation link. The user just need to choose the file and
+ * the separator and then the choosen text file will be linked. If the user
+ * changes the content of any cell the text file needs to updated. For the
+ * system know about the modification it is necessary a thread that will be
+ * constantly checking if any changes were made to any cell of the workbook. If
+ * any changes is made on the cells the file will be exported again. From now,
+ * will be called the importation/exportation that is already implemented on the
+ * cleansheets project. Let's now see the sequence diagram for the exportation
+ * process. To do exportation I used the class that was already done
+ * "CustomExportation" that is implemented like a thread and has got a method
+ * that allows exportation.
+ * <br/><br/>
+ * <br/><img src="doc-files/ipc_04_02_design_sequence_export.png" <br/> <br/>
+ * <br/>
+ * If the user changes the text file the cells need to be updated with the new
+ * content. In order to the system know about a modification that is a thread
+ * constantly checking if any change was taken to the text file. If were changes
+ * that is necessary to import all the information and update the content of all
+ * cells. I thought that was possible to call the class already created on the
+ * first use case but were some problems. To do importation was not possible to
+ * work with the code already done because will open a new sheet. The
+ * importation and exportation link will be done in the sheet that is open.
+ * Observe now the sequence diagram for the importation process.
+ * <br/><br/>
+ * <br/><img src="doc-files/ipc_04_02_design_sequence_import.png" <br/> <br/>
+ * <br/>
+ * It was necessary to separate in Importation Link and Exportation Link because
+ * it is impossible to know from what order the user will execute all the
+ * modifications. If he first changes the content of cells exportation will be
+ * done. But the user can call importation link process first. Because of that I
+ * opted to a division in Importation Link and Exportation Link.
+ *
+ * <h2>5. Coding</h2>
+ *
+ * <h2>6. Final Remarks</h2>
+ * This use case is the second and the last of this sub-area "IPC Export/Import
+ * Text". The main problem I believe was the understanding of the code that was
+ * already done on the first use case. This was necessary because this use case
+ * will call the Importation and Exportation Process.
+ * <br/>
+ *
  */
 package csheets.userstories.ipc04_02.importation_exportation_link.i130371;
 
