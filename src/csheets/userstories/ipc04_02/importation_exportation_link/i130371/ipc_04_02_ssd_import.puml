@@ -1,0 +1,16 @@
+  @startuml doc-files/ipc_04_02_ssd_import.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Importation (Exportation) Link
+    s -> User: Show the files
+	User -> s: Choose the file to link
+	s -> User: Asks about separator
+	User -> s: Choose the separator
+	s -> User: Confirmation
+	User -> s: Confirm
+	s -> User: Imports all the information
+	User -> s: Changes the text file
+	s -> User: Import to the cells
+	s -> User: Success of the use case
+  @enduml
