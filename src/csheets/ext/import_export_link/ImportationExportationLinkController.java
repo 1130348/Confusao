@@ -67,7 +67,7 @@ public class ImportationExportationLinkController {
 	 * To put false the variable ImportExportLink
 	 */
 	public void closeLink() {
-//		uiController.setImportExportLink(false);
+		uiController.setImportExportLink(false);
 	}
 
 	/**

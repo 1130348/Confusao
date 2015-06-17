@@ -1,6 +1,7 @@
 package csheets.ext.import_export_link;
 
 import csheets.core.Cell;
+import csheets.core.CellListener;
 import csheets.core.Spreadsheet;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.ui.ctrl.UIController;
@@ -72,41 +73,41 @@ public class Import implements Runnable {
 	 * cells to the file.
 	 */
 	private void modifications() {
-//		// Collums A -> AZ
-//		for (int i = 0; i < 52; i++) {
-//			// Lines 1 -> 128
-//			for (int j = 0; j < 128; j++) {
-//				Cell c = uiController.getActiveSpreadsheet().getCell(i, j);
-//				// put a listener on each cell to know if the cells were changed
-//				c.addCellListener(new CellListener() {
-//
-//					@Override
-//					public void valueChanged(Cell cell) {
-//						uiController.setModificationOnCells(true);
-//					}
-//
-//					@Override
-//					public void contentChanged(Cell cell) {
-//						uiController.setModificationOnCells(true);
-//					}
-//
-//					@Override
-//					public void dependentsChanged(Cell cell) {
-//						uiController.setModificationOnCells(true);
-//					}
-//
-//					@Override
-//					public void cellCleared(Cell cell) {
-//						uiController.setModificationOnCells(true);
-//					}
-//
-//					@Override
-//					public void cellCopied(Cell cell, Cell source) {
-//						uiController.setModificationOnCells(true);
-//					}
-//				});
-//			}
-//		}
+		// Collums A -> AZ
+		for (int i = 0; i < 52; i++) {
+			// Lines 1 -> 128
+			for (int j = 0; j < 128; j++) {
+				Cell c = uiController.getActiveSpreadsheet().getCell(i, j);
+				// put a listener on each cell to know if the cells were changed
+				c.addCellListener(new CellListener() {
+
+					@Override
+					public void valueChanged(Cell cell) {
+						uiController.setModificationOnCells(true);
+					}
+
+					@Override
+					public void contentChanged(Cell cell) {
+						uiController.setModificationOnCells(true);
+					}
+
+					@Override
+					public void dependentsChanged(Cell cell) {
+						uiController.setModificationOnCells(true);
+					}
+
+					@Override
+					public void cellCleared(Cell cell) {
+						uiController.setModificationOnCells(true);
+					}
+
+					@Override
+					public void cellCopied(Cell cell, Cell source) {
+						uiController.setModificationOnCells(true);
+					}
+				});
+			}
+		}
 	}
 
 	/**
@@ -114,41 +115,41 @@ public class Import implements Runnable {
 	 */
 	@Override
 	public void run() {
-//		uiController.setCondImp(true);
-//		uiController.setModificationOnCells(false);
-//		Thread th = new Thread(new FileImporterFirstSheet(file, uiController, separator));
-//		th.start();
-//
-//		while (th.isAlive()) {
-//		}
-//		uiController.setCondImp(false);
-//		modifications();
-//		while (uiController.getImportExportLink()) {
-//			while (uiController.getCondExp()) {
-//				try {
-//					Thread.sleep(500);
-//				} catch (InterruptedException ex) {
-//					Logger.getLogger(Export.class.getName()).
-//						log(Level.SEVERE, null, ex);
-//				}
-//			}
-//			// if the date_last_update is before the date of the last modification in the file will export all the information to the cells
-//			if (date_last_update < file.lastModified()) {
-//				uiController.setCondImp(true);
-//				Thread th1 = new Thread(new FileImporterFirstSheet(file, uiController, separator));
-//				th1.start();
-//				// updates the date_last_update
-//				date_last_update = file.lastModified();
-//				uiController.setCondImp(false);
-//			}
-//			// To don't check all the time. Not to test right after testing
-//			try {
-//				Thread.sleep(600);
-//			} catch (InterruptedException ex) {
-//				Logger.getLogger(Import.class.getName()).
-//					log(Level.SEVERE, null, ex);
-//			}
-//		}
+		uiController.setCondImp(true);
+		uiController.setModificationOnCells(false);
+		Thread th = new Thread(new FileImporterFirstSheet(file, uiController, separator));
+		th.start();
+
+		while (th.isAlive()) {
+		}
+		uiController.setCondImp(false);
+		modifications();
+		while (uiController.getImportExportLink()) {
+			while (uiController.getCondExp()) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException ex) {
+					Logger.getLogger(Export.class.getName()).
+						log(Level.SEVERE, null, ex);
+				}
+			}
+			// if the date_last_update is before the date of the last modification in the file will export all the information to the cells
+			if (date_last_update < file.lastModified()) {
+				uiController.setCondImp(true);
+				Thread th1 = new Thread(new FileImporterFirstSheet(file, uiController, separator));
+				th1.start();
+				// updates the date_last_update
+				date_last_update = file.lastModified();
+				uiController.setCondImp(false);
+			}
+			// To don't check all the time. Not to test right after testing
+			try {
+				Thread.sleep(600);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Import.class.getName()).
+					log(Level.SEVERE, null, ex);
+			}
+		}
 	}
 
 	/**

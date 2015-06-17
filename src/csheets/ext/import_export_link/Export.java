@@ -4,6 +4,8 @@ import csheets.ext.import_export_text.CustomExportation;
 import csheets.ui.ctrl.UIController;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -56,39 +58,39 @@ public class Export implements Runnable {
 	 */
 	@Override
 	public void run() {
-//
-//		//THREAD checks if the file is linked
-//		while (uiController.getImportExportLink()) {
-//			while (uiController.getCondImp()) {
-//				try {
-//					Thread.sleep(500);
-//				} catch (InterruptedException ex) {
-//					Logger.getLogger(Export.class.getName()).
-//						log(Level.SEVERE, null, ex);
-//				}
-//			}
-//			if (uiController.getModificationsOnCells()) {// Is a boolean variable that becames true if the cells are changed
-//				uiController.setCondExp(true);
-//				try {
-//					c = new CustomExportation(this.uiController, this.file, separator);
-//					c.run();
-//				} catch (FileNotFoundException ex) {
-//					Logger.getLogger(Export.class.getName()).
-//						log(Level.SEVERE, null, ex);
-//				}
-//				uiController.setModificationOnCells(false);
-//				i.setDate(file.lastModified());
-//				uiController.setCondExp(false);
-//			}
-//
-//			// To don't check all the time. Not to test right after testing
-//			try {
-//				Thread.sleep(600);
-//			} catch (InterruptedException ex) {
-//				Logger.getLogger(Import.class.getName()).
-//					log(Level.SEVERE, null, ex);
-//			}
-//		}
+
+		//THREAD checks if the file is linked
+		while (uiController.getImportExportLink()) {
+			while (uiController.getCondImp()) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException ex) {
+					Logger.getLogger(Export.class.getName()).
+						log(Level.SEVERE, null, ex);
+				}
+			}
+			if (uiController.getModificationsOnCells()) {// Is a boolean variable that becames true if the cells are changed
+				uiController.setCondExp(true);
+				try {
+					c = new CustomExportation(this.uiController, this.file, separator);
+					c.run();
+				} catch (FileNotFoundException ex) {
+					Logger.getLogger(Export.class.getName()).
+						log(Level.SEVERE, null, ex);
+				}
+				uiController.setModificationOnCells(false);
+				i.setDate(file.lastModified());
+				uiController.setCondExp(false);
+			}
+
+			// To don't check all the time. Not to test right after testing
+			try {
+				Thread.sleep(600);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(Import.class.getName()).
+					log(Level.SEVERE, null, ex);
+			}
+		}
 	}
 
 }
