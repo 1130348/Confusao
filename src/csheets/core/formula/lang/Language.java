@@ -35,138 +35,171 @@ import csheets.core.formula.UnaryOperator;
 
 /**
  * A factory for creating certain types of language elements.
+ *
  * @author Einar Pehrson
  */
 public class Language {
 
-	/** The singleton instance */
-	private static final Language instance = new Language();
+    /**
+     * The singleton instance
+     */
+    private static final Language instance = new Language();
 
-	/** The name of the file in which language properties are stored */
-	private static final String PROPERTIES_FILENAME = "res/language.props";
+    /**
+     * The name of the file in which language properties are stored
+     */
+    private static final String PROPERTIES_FILENAME = "res/language.props";
 
-	/** The unary operators that are supported by the language */
-	private List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
+    /**
+     * The unary operators that are supported by the language
+     */
+    private List<UnaryOperator> unaryOperators = new ArrayList<UnaryOperator>();
 
-	/** The binary operators that are supported by the language */
-	private List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
-        
-	/** The functions that are supported by the language */
-	private List<Function> functions = new ArrayList<Function>();
+    /**
+     * The binary operators that are supported by the language
+     */
+    private List<BinaryOperator> binaryOperators = new ArrayList<BinaryOperator>();
 
-	/**
-	 * Creates a new language.
-	 */
-	private Language() {
-		// Loads properties
-		Properties language = new Properties();
-		InputStream stream = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
-		if (stream != null) {
-			try {
-				language.load(stream);
-			} catch (IOException e) {
-				System.err.println("An I/O error occurred when loading language"
-					+ " properties file (" + PROPERTIES_FILENAME + ").");
-				return;
-			} finally {
-				try {
-					if (stream != null)
-						stream.close();
-				} catch (IOException e) {}
-			}
+    /**
+     * The functions that are supported by the language
+     */
+    private List<Function> functions = new ArrayList<Function>();
 
-			// Loads elements
-			for (Object className : language.keySet()) {
-				// Loads class and instantiates element
-				Class elementClass;
-				Object element;
-				try {
-					elementClass = Class.forName(getClass().getPackage()
-						.getName() + "." + (String)className);
-					element = elementClass.newInstance();
-				} catch (Exception e) {
-					// Skip this element, regardless of what went wrong
-					continue;
-				}
+    /**
+     * Creates a new language.
+     */
+    private Language() {
+        // Loads properties
+        Properties language = new Properties();
+        InputStream stream = CleanSheets.class.getResourceAsStream(PROPERTIES_FILENAME);
+        if (stream != null) {
+            try {
+                language.load(stream);
+            } catch (IOException e) {
+                System.err.println("An I/O error occurred when loading language"
+                        + " properties file (" + PROPERTIES_FILENAME + ").");
+                return;
+            } finally {
+                try {
+                    if (stream != null) {
+                        stream.close();
+                    }
+                } catch (IOException e) {
+                }
+            }
 
-				// Stores element
-				if (Function.class.isAssignableFrom(elementClass))
-					functions.add(Function.class.cast(element));
-				if (BinaryOperator.class.isAssignableFrom(elementClass))
-					binaryOperators.add(BinaryOperator.class.cast(element));
-				if (UnaryOperator.class.isAssignableFrom(elementClass))
-					unaryOperators.add(UnaryOperator.class.cast(element));
+            // Loads elements
+            for (Object className : language.keySet()) {
+                // Loads class and instantiates element
+                Class elementClass;
+                Object element;
+                try {
+                    elementClass = Class.forName(getClass().getPackage()
+                            .getName() + "." + (String) className);
+                    element = elementClass.newInstance();
+                } catch (Exception e) {
+                    // Skip this element, regardless of what went wrong
+                    continue;
+                }
 
-			}
-		} else
-			System.err.println("Could not find language properties file ("
-				+ PROPERTIES_FILENAME + ").");
+                // Stores element
+                if (Function.class.isAssignableFrom(elementClass)) {
+                    functions.add(Function.class.cast(element));
+                }
+                if (BinaryOperator.class.isAssignableFrom(elementClass)) {
+                    binaryOperators.add(BinaryOperator.class.cast(element));
+                }
+                if (UnaryOperator.class.isAssignableFrom(elementClass)) {
+                    unaryOperators.add(UnaryOperator.class.cast(element));
+                }
 
-		// Loads static methods from java.lang.Math that use double precision
-		for (Method method : Math.class.getMethods())
-			if (Modifier.isStatic(method.getModifiers()) &&
-						method.getReturnType() == Double.TYPE)
-				functions.add(new NumericFunction(method));
-	}
+            }
+        } else {
+            System.err.println("Could not find language properties file ("
+                    + PROPERTIES_FILENAME + ").");
+        }
 
-	/**
-	 * Returns the singleton instance.
-	 * @return the singleton instance
-	 */
-	public static Language getInstance() {
-		return instance;
-	}
+        // Loads static methods from java.lang.Math that use double precision
+        for (Method method : Math.class.getMethods()) {
+            if (Modifier.isStatic(method.getModifiers())
+                    && method.getReturnType() == Double.TYPE) {
+                functions.add(new NumericFunction(method));
+            }
+        }
+    }
 
-	/**
-	 * Returns the unary operator with the given identifier.
-	 * @return the unary operator with the given identifier
-	 */
-	public UnaryOperator getUnaryOperator(String identifier) throws UnknownElementException {
-		for (UnaryOperator operator : unaryOperators)
-			if (identifier.equalsIgnoreCase(operator.getIdentifier()))
-				return operator; // .clone()
-		throw new UnknownElementException(identifier);
-	}
+    /**
+     * Returns the singleton instance.
+     *
+     * @return the singleton instance
+     */
+    public static Language getInstance() {
+        return instance;
+    }
 
-	/**
-	 * Returns the binary operator with the given identifier.
-	 * @return the binary operator with the given identifier
-	 */
-	public BinaryOperator getBinaryOperator(String identifier) throws UnknownElementException {
-		for (BinaryOperator operator : binaryOperators)
-			if (identifier.equalsIgnoreCase(operator.getIdentifier()))
-				return operator; // .clone()
-		throw new UnknownElementException(identifier);
-	}
-        
-	/**
-	 * Returns the function with the given identifier.
-	 * @return the function with the given identifier
-	 */
-	public Function getFunction(String identifier) throws UnknownElementException {
-		for (Function function : functions)
-			if (identifier.equalsIgnoreCase(function.getIdentifier()))
-				return function; // .clone()
-		throw new UnknownElementException(identifier);
-	}
+    /**
+     * Returns the unary operator with the given identifier.
+     *
+     * @return the unary operator with the given identifier
+     */
+    public UnaryOperator getUnaryOperator(String identifier) throws UnknownElementException {
+        for (UnaryOperator operator : unaryOperators) {
+            if (identifier.equalsIgnoreCase(operator.getIdentifier())) {
+                return operator; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+    }
 
-	/**
-	 * Returns whether there is a function with the given identifier.
-	 * @return whether there is a function with the given identifier
-	 */
-	public boolean hasFunction(String identifier) {
-		try {
-			return getFunction(identifier) != null;
-		} catch (UnknownElementException e) {
-			return false;
-		}
-	}
+    /**
+     * Returns the binary operator with the given identifier.
+     *
+     * @return the binary operator with the given identifier
+     */
+    public BinaryOperator getBinaryOperator(String identifier) throws UnknownElementException {
+        for (BinaryOperator operator : binaryOperators) {
+            if (identifier.equalsIgnoreCase(operator.getIdentifier())) {
+                return operator; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+    }
 
-	/**
-	 * Returns the functions that are supported by the syntax.
-	 * @return the functions that are supported by the syntax
-	 */
-	public Function[] getFunctions() {
-		return functions.toArray(new Function[functions.size()]);
-	}
+    /**
+     * Returns the function with the given identifier.
+     *
+     * @return the function with the given identifier
+     */
+    public Function getFunction(String identifier) throws UnknownElementException {
+        for (Function function : functions) {
+            String s = function.getIdentifier();
+            if (identifier.equalsIgnoreCase(function.getIdentifier())) {
+                return function; // .clone()
+            }
+        }
+        throw new UnknownElementException(identifier);
+
+    }
+
+    /**
+     * Returns whether there is a function with the given identifier.
+     *
+     * @return whether there is a function with the given identifier
+     */
+    public boolean hasFunction(String identifier) {
+        try {
+            return getFunction(identifier) != null;
+        } catch (UnknownElementException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the functions that are supported by the syntax.
+     *
+     * @return the functions that are supported by the syntax
+     */
+    public Function[] getFunctions() {
+        return functions.toArray(new Function[functions.size()]);
+    }
 }

@@ -47,7 +47,7 @@ public class InsertImageCellDecorator extends CellDecorator {
 
                 // Prints 'A' using own font, then restores the old font
                 g2.setColor(Color.BLUE);
-                g2.drawString("+", 4, 12);
+                g2.drawString("IMG", 4, 12);
 
                 // Restores graphics context properties
                 g2.setColor(oldPaint);

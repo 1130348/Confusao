@@ -55,149 +55,147 @@ import org.antlr.runtime.tree.Tree;
  */
 public class ExcelExpressionCompiler implements ExpressionCompiler {
 
-	/**
-	 * The character that signals that a cell's content is a formula ('=')
-	 */
-	public static final char FORMULA_STARTER = '=';
+    /**
+     * The character that signals that a cell's content is a formula ('=')
+     */
+    public static final char FORMULA_STARTER = '=';
 
-	/**
-	 * Creates the Excel expression compiler.
-	 */
-	public ExcelExpressionCompiler() {
-	}
+    /**
+     * Creates the Excel expression compiler.
+     */
+    public ExcelExpressionCompiler() {
+    }
 
-	public char getStarter() {
-		return FORMULA_STARTER;
-	}
+    public char getStarter() {
+        return FORMULA_STARTER;
+    }
 
-	public Expression compile(Cell cell, String source) throws FormulaCompilationException {
-		// Creates the lexer and parser
-		ANTLRStringStream input = new ANTLRStringStream(source);
+    public Expression compile(Cell cell, String source) throws FormulaCompilationException {
+        // Creates the lexer and parser
+        ANTLRStringStream input = new ANTLRStringStream(source);
 
-		// create the buffer of tokens between the lexer and parser
-		FormulaLexer lexer = new FormulaLexer(input);
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
+        // create the buffer of tokens between the lexer and parser
+        FormulaLexer lexer = new FormulaLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-		FormulaParser parser = new FormulaParser(tokens);
+        FormulaParser parser = new FormulaParser(tokens);
 
-		CommonTree tree = null;
+        CommonTree tree = null;
 
-		try {
-			// Attempts to match an expression
-			tree = (CommonTree) parser.expression().getTree();
-			//System.out.println(tree.toStringTree());
-		} /* catch (MismatchedTokenException e){
-		 //not production-quality code, just forming a useful message
-		 String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
-		 String found = e.getUnexpectedType() == -1 ? "<EOF>" : parser.tokenNames[e.getUnexpectedType()];
+        try {
+            // Attempts to match an expression
+            tree = (CommonTree) parser.expression().getTree();
+            //System.out.println(tree.toStringTree());
+        } /* catch (MismatchedTokenException e){
+         //not production-quality code, just forming a useful message
+         String expected = e.expecting == -1 ? "<EOF>" : parser.tokenNames[e.expecting];
+         String found = e.getUnexpectedType() == -1 ? "<EOF>" : parser.tokenNames[e.getUnexpectedType()];
 
-		 String message="At ("+e.line+";"+e.charPositionInLine+"): "+"Fatal mismatched token exception: expected " + expected + " but was " + found;
-		 throw new FormulaCompilationException(message);
-		 } catch (NoViableAltException e) {
-		 //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
-		 String message=parser.getErrorMessage(e, parser.tokenNames);
-		 String message2="At ("+e.line+";"+e.charPositionInLine+"): "+message;
-		 throw new FormulaCompilationException(message2);
-		 } */ catch (RecognitionException e) {
-			//String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
-			String message = parser.getErrorMessage(e, parser.tokenNames);
-			throw new FormulaCompilationException("At (" + e.line + ";" + e.charPositionInLine + "): " + message);
-		} catch (Exception e) {
-			String message = "Other exception : " + e.getMessage();
-			throw new FormulaCompilationException(message);
-		}
+         String message="At ("+e.line+";"+e.charPositionInLine+"): "+"Fatal mismatched token exception: expected " + expected + " but was " + found;
+         throw new FormulaCompilationException(message);
+         } catch (NoViableAltException e) {
+         //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+         String message=parser.getErrorMessage(e, parser.tokenNames);
+         String message2="At ("+e.line+";"+e.charPositionInLine+"): "+message;
+         throw new FormulaCompilationException(message2);
+         } */ catch (RecognitionException e) {
+            //String message="Fatal recognition exception " + e.getClass().getName()+ " : " + e;
+            String message = parser.getErrorMessage(e, parser.tokenNames);
+            throw new FormulaCompilationException("At (" + e.line + ";" + e.charPositionInLine + "): " + message);
+        } catch (Exception e) {
+            String message = "Other exception : " + e.getMessage();
+            throw new FormulaCompilationException(message);
+        }
 
-		// Converts the expression and returns it
-		return convert(cell, tree);
-	}
+        // Converts the expression and returns it
+        return convert(cell, tree);
+    }
 
-	/**
-	 * Converts the given ANTLR AST to an expression.
-	 *
-	 * @param node the abstract syntax tree node to convert
-	 * @return the result of the conversion
-	 */
-	public Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
-		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
-		if (node.getChildCount() == 0) {
-			try {
-				switch (node.getType()) {
-					case FormulaLexer.NUMBER:
-						return new Literal(Value.parseNumericValue(node.
-							getText()));
-					case FormulaLexer.STRING:
-						return new Literal(Value.
-							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
-					case FormulaLexer.CELL_REF:
-						return new CellReference(cell.getSpreadsheet(), node.
-												 getText());
-                                        case FormulaLexer.VARIABLE:
-                                            
-                                            if(cell.getSpreadsheet().getWorkbook().validateVariable(node.getText()))
-                                            {
-                                                return new VariableReference(cell.getSpreadsheet().getWorkbook().getVariable(node.getText()));
-                                            }
-                                            else{
-                                                Variable temp = new Variable(node.getText(),new Value(""),cell.getSpreadsheet().getWorkbook());
-                                                cell.getSpreadsheet().getWorkbook().addVariable(temp);
-                                                return new VariableReference(temp);
-                                            }
-						
+    /**
+     * Converts the given ANTLR AST to an expression.
+     *
+     * @param node the abstract syntax tree node to convert
+     * @return the result of the conversion
+     */
+    public Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
+        System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree());
+        if (node.getChildCount() == 0) {
+            try {
+                switch (node.getType()) {
+                    case FormulaLexer.NUMBER:
+                        return new Literal(Value.parseNumericValue(node.
+                                getText()));
+                    case FormulaLexer.STRING:
+                        return new Literal(Value.
+                                parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
+                    case FormulaLexer.CELL_REF:
+                        return new CellReference(cell.getSpreadsheet(), node.
+                                getText());
+                    case FormulaLexer.VARIABLE:
+
+                        if (cell.getSpreadsheet().getWorkbook().validateVariable(node.getText())) {
+                            return new VariableReference(cell.getSpreadsheet().getWorkbook().getVariable(node.getText()));
+                        } else {
+                            Variable temp = new Variable(node.getText(), new Value(""), cell.getSpreadsheet().getWorkbook());
+                            cell.getSpreadsheet().getWorkbook().addVariable(temp);
+                            return new VariableReference(temp);
+                        }
+
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
-					 getRange(node.getText()) (Reference)*/
-				}
-			} catch (ParseException e) {
-				throw new FormulaCompilationException(e);
-			}
-		}
+                     getRange(node.getText()) (Reference)*/
+                }
+            } catch (ParseException e) {
+                throw new FormulaCompilationException(e);
+            }
+        }
 
-		// Convert function call
-		Function function = null;
-		try {
-			function = Language.getInstance().getFunction(node.getText());
-		} catch (UnknownElementException e) {
-		}
+        // Convert function call
+        Function function = null;
+        try {
+            function = Language.getInstance().getFunction(node.getText());
+        } catch (UnknownElementException e) {
+        }
 
-		if (function != null) {
-			List<Expression> args = new ArrayList<Expression>();
-			Tree child = node.getChild(0);
-			if (child != null) {
-				for (int nChild = 0; nChild < node.getChildCount(); ++nChild) {
-					child = node.getChild(nChild);
-					args.add(convert(cell, child));
-				}
-			}
-			Expression[] argArray = args.toArray(new Expression[args.size()]);
-			return new FunctionCall(function, argArray);
-		}
+        if (function != null) {
+            List<Expression> args = new ArrayList<Expression>();
+            Tree child = node.getChild(0);
+            if (child != null) {
+                for (int nChild = 0; nChild < node.getChildCount(); ++nChild) {
+                    child = node.getChild(nChild);
+                    args.add(convert(cell, child));
+                }
+            }
+            Expression[] argArray = args.toArray(new Expression[args.size()]);
+            return new FunctionCall(function, argArray);
+        }
 
-		if (node.getChildCount() == 1) // Convert unary operation
-		{
-			return new UnaryOperation(
-				Language.getInstance().getUnaryOperator(node.getText()),
-				convert(cell, node.getChild(0))
-			);
-		} else if (node.getChildCount() == 2) {
-			// Convert binary operation
-			BinaryOperator operator = Language.getInstance().
-				getBinaryOperator(node.getText());
-			if (operator instanceof RangeReference) {
-				return new ReferenceOperation(
-					(Reference) convert(cell, node.getChild(0)),
-					(RangeReference) operator,
-					(Reference) convert(cell, node.getChild(1))
-				);
-			} else {
-				return new BinaryOperation(
-					convert(cell, node.getChild(0)),
-					operator,
-					convert(cell, node.getChild(1))
-				);
-			}
-		} else // Shouldn't happen
-		{
-			throw new FormulaCompilationException();
-		}
-	}
+        if (node.getChildCount() == 1) // Convert unary operation
+        {
+            return new UnaryOperation(
+                    Language.getInstance().getUnaryOperator(node.getText()),
+                    convert(cell, node.getChild(0))
+            );
+        } else if (node.getChildCount() == 2) {
+            // Convert binary operation
+            BinaryOperator operator = Language.getInstance().
+                    getBinaryOperator(node.getText());
+            if (operator instanceof RangeReference) {
+                return new ReferenceOperation(
+                        (Reference) convert(cell, node.getChild(0)),
+                        (RangeReference) operator,
+                        (Reference) convert(cell, node.getChild(1))
+                );
+            } else {
+                return new BinaryOperation(
+                        convert(cell, node.getChild(0)),
+                        operator,
+                        convert(cell, node.getChild(1))
+                );
+            }
+        } else // Shouldn't happen
+        {
+            throw new FormulaCompilationException();
+        }
+    }
 }
