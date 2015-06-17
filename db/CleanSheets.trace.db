@@ -1,0 +1,2271 @@
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_WORKMOBILENUMBER_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_SECUNDARY_ADDRESS_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_WORKNUMBER_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_MOBILENUMBER_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_HOMENUMBER_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_NOTES_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_MAIN_ADDRESS_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+ALTER TABLE CONTACT DROP CONSTRAINT FK_CONTACT_AGENDA_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+ALTER TABLE AGENDA_EVENT DROP CONSTRAINT FK_AGENDA_EVENT_Agenda_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+ALTER TABLE AGENDA_EVENT DROP CONSTRAINT FK_AGENDA_EVENT_eventList_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+ALTER TABLE NOTES_NOTE DROP CONSTRAINT FK_NOTES_NOTE_Notes_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+ALTER TABLE NOTES_NOTE DROP CONSTRAINT FK_NOTES_NOTE_noteList_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+ALTER TABLE CONTACT_EMAIL DROP CONSTRAINT FK_CONTACT_EMAIL_listEmail_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+ALTER TABLE CONTACT_EMAIL DROP CONSTRAINT FK_CONTACT_EMAIL_Contact_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+DROP TABLE EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+DROP TABLE AGENDA [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+DROP TABLE ADDRESS [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+DROP TABLE NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+DROP TABLE NOTES [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+DROP TABLE EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+DROP TABLE PHONENUMBER [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+DROP TABLE CONTACT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+DROP TABLE AGENDA_EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+DROP TABLE NOTES_NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+DROP TABLE CONTACT_EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+DROP TABLE EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+DROP TABLE AGENDA [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+DROP TABLE ADDRESS [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+DROP TABLE NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+DROP TABLE NOTES [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+DROP TABLE EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+DROP TABLE PHONENUMBER [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+DROP TABLE CONTACT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+DROP TABLE AGENDA_EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+DROP TABLE NOTES_NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+DROP TABLE CONTACT_EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+DROP TABLE EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+DROP TABLE AGENDA [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+DROP TABLE ADDRESS [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+DROP TABLE NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+DROP TABLE NOTES [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+DROP TABLE EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+DROP TABLE PHONENUMBER [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+DROP TABLE CONTACT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+DROP TABLE AGENDA_EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+DROP TABLE NOTES_NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+DROP TABLE CONTACT_EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+DROP TABLE EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+DROP TABLE AGENDA [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+DROP TABLE ADDRESS [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+DROP TABLE NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+DROP TABLE NOTES [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+DROP TABLE EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+DROP TABLE PHONENUMBER [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+DROP TABLE CONTACT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+DROP TABLE AGENDA_EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+DROP TABLE NOTES_NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+DROP TABLE CONTACT_EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+DROP TABLE EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+DROP TABLE AGENDA [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+DROP TABLE ADDRESS [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+DROP TABLE NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+DROP TABLE NOTES [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+DROP TABLE EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+DROP TABLE PHONENUMBER [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+DROP TABLE CONTACT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+DROP TABLE AGENDA_EVENT [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+DROP TABLE NOTES_NOTE [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+DROP TABLE CONTACT_EMAIL [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEQUENCE" not found; SQL statement:
+SELECT SEQ_NAME FROM SEQUENCE WHERE SEQ_NAME <> SEQ_NAME [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEQUENCE" not found; SQL statement:
+DELETE FROM SEQUENCE WHERE SEQ_NAME = 'SEQ_GEN' [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:29:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SEQUENCE" not found; SQL statement:
+SELECT SEQ_NAME FROM SEQUENCE WHERE SEQ_NAME <> SEQ_NAME [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:30:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:32:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:36:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:36:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:39:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:40:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:41:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:49:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:50:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:53:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:55:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:56:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 16:56:33 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.prepareStatement(DatabaseAccessor.java:1556)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.prepareStatement(DatabaseAccessor.java:1505)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseCall.prepareStatement(DatabaseCall.java:778)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:619)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-16 16:56:33 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.processExceptionForCommError(DatabaseAccessor.java:1607)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:674)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-16 16:56:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.sessions.server.ConnectionPool.acquireConnection(ConnectionPool.java:173)
+	at org.eclipse.persistence.sessions.server.ServerSession.getAccessors(ServerSession.java:538)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:557)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.retryQuery(AbstractSession.java:1874)
+	at org.eclipse.persistence.sessions.server.ClientSession.retryQuery(ClientSession.java:687)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.retryQuery(UnitOfWorkImpl.java:5538)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1840)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 16:57:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 17:05:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 17:06:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 17:07:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 17:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 17:08:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 19:15:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 19:50:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-16 19:59:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 14:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 14:47:46 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3182)
+	at org.h2.jdbc.JdbcResultSet.getMetaData(JdbcResultSet.java:143)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.processResultSet(DatabaseAccessor.java:723)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:655)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 14:47:46 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.processExceptionForCommError(DatabaseAccessor.java:1607)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:674)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 14:47:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.sessions.server.ConnectionPool.acquireConnection(ConnectionPool.java:173)
+	at org.eclipse.persistence.sessions.server.ServerSession.getAccessors(ServerSession.java:538)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:557)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.retryQuery(AbstractSession.java:1874)
+	at org.eclipse.persistence.sessions.server.ClientSession.retryQuery(ClientSession.java:687)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.retryQuery(UnitOfWorkImpl.java:5538)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1840)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 14:49:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 14:54:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 14:55:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:21:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:26:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:29:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:29:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:33:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:36:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:37:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:40:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:41:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:44:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:47:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:47:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:50:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:50:11 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:987)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1621)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:961)
+	at org.h2.jdbc.JdbcResultSet.checkClosed(JdbcResultSet.java:3179)
+	at org.h2.jdbc.JdbcResultSet.next(JdbcResultSet.java:123)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.processResultSet(DatabaseAccessor.java:758)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:655)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 15:50:11 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.processExceptionForCommError(DatabaseAccessor.java:1607)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:674)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:558)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2002)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 15:50:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1443)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:274)
+	at org.eclipse.persistence.internal.databaseaccess.DatabasePlatform.wasFailureCommunicationBased(DatabasePlatform.java:2848)
+	at org.eclipse.persistence.platform.server.ServerPlatformBase.wasFailureCommunicationBased(ServerPlatformBase.java:528)
+	at org.eclipse.persistence.sessions.server.ConnectionPool.acquireConnection(ConnectionPool.java:173)
+	at org.eclipse.persistence.sessions.server.ServerSession.getAccessors(ServerSession.java:538)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:557)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeSelectCall(DatasourceCallQueryMechanism.java:299)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.selectAllRows(DatasourceCallQueryMechanism.java:694)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRowsFromTable(ExpressionQueryMechanism.java:2738)
+	at org.eclipse.persistence.internal.queries.ExpressionQueryMechanism.selectAllRows(ExpressionQueryMechanism.java:2691)
+	at org.eclipse.persistence.queries.ReadAllQuery.executeObjectLevelReadQuery(ReadAllQuery.java:495)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeDatabaseQuery(ObjectLevelReadQuery.java:1168)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:899)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.execute(ObjectLevelReadQuery.java:1127)
+	at org.eclipse.persistence.queries.ReadAllQuery.execute(ReadAllQuery.java:403)
+	at org.eclipse.persistence.queries.ObjectLevelReadQuery.executeInUnitOfWork(ObjectLevelReadQuery.java:1215)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.retryQuery(AbstractSession.java:1874)
+	at org.eclipse.persistence.sessions.server.ClientSession.retryQuery(ClientSession.java:687)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.retryQuery(UnitOfWorkImpl.java:5538)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1840)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1751)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getResultList(QueryImpl.java:469)
+	at csheets.persistence.ContactRepositoryImpl.all(ContactRepositoryImpl.java:55)
+	at csheets.ext.contact.Notification.run(Notification.java:35)
+	at java.lang.Thread.run(Thread.java:745)
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:50:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:51:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:51:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:52:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:52:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:55:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 15:58:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 16:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 16:25:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 16:25:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 16:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EVENT" not found; SQL statement:
+SELECT ID FROM EVENT WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA" not found; SQL statement:
+SELECT ID FROM AGENDA WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "ADDRESS" not found; SQL statement:
+SELECT ID FROM ADDRESS WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+SELECT ID FROM NOTE WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES" not found; SQL statement:
+SELECT ID FROM NOTES WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EMAIL" not found; SQL statement:
+SELECT ID FROM EMAIL WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "PHONENUMBER" not found; SQL statement:
+SELECT ID FROM PHONENUMBER WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT" not found; SQL statement:
+SELECT ID FROM CONTACT WHERE ID <> ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "AGENDA_EVENT" not found; SQL statement:
+SELECT eventList_ID FROM AGENDA_EVENT WHERE eventList_ID <> eventList_ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTES_NOTE" not found; SQL statement:
+SELECT noteList_ID FROM NOTES_NOTE WHERE noteList_ID <> noteList_ID [42102-176]
+06-17 16:33:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "CONTACT_EMAIL" not found; SQL statement:
+SELECT listEmail_ID FROM CONTACT_EMAIL WHERE listEmail_ID <> listEmail_ID [42102-176]
