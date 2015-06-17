@@ -5,6 +5,7 @@
  */
 package csheets.ext.secure_comunication.ui;
 
+import csheets.ext.secure_comunication.SecureComunicationController;
 import csheets.ext.startsharing.NetworkService;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
@@ -33,10 +34,15 @@ public class SecureComunicationPanel extends JPanel {
     public static JList connectedList = new JList();
     public static JButton refresh;
     private UIController uiController;
+    /**
+     * The controller
+     */
+    private final SecureComunicationController secureComunicationController;
 
     public SecureComunicationPanel(UIController uiController) {
         super(new BorderLayout());
         this.uiController = uiController;
+        this.secureComunicationController=new SecureComunicationController();
         setLayout(new BorderLayout());
         initComponents();
         addActions();
@@ -58,7 +64,10 @@ public class SecureComunicationPanel extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                        NetworkService.establishSSLConnectionToUser((InetAddress) clientList.getSelectedValue());
+                        if(secureComunicationController.newSSLConnection(clientList.getSelectedValue().toString()))
+                            System.out.println("correu bem o ssl");
+                        else
+                            System.out.println("correu mal o ssl");
                     }
                 }
             });
@@ -67,7 +76,7 @@ public class SecureComunicationPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                clientList.setListData(NetworkService.searchInstances().keySet().toArray());
+                clientList.setListData(secureComunicationController.refreshInstances().toArray());
             }
         });
 

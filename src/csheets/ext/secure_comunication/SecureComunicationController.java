@@ -5,9 +5,12 @@
  */
 package csheets.ext.secure_comunication;
 
-import csheets.ext.findworkbooks.ui.FindWorkbooksPanel;
 import csheets.ext.startsharing.NetworkService;
+import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -15,10 +18,30 @@ import java.util.List;
  */
 public class SecureComunicationController {
 
+    Set<InetAddress> activeIPs;
+
     public SecureComunicationController() {
     }
 
-    public void searchInstances() {
+    public List<String> refreshInstances() {
+        List<String> listInstances = new ArrayList<>();
+        activeIPs = NetworkService.searchInstances().keySet();
+        for (InetAddress i : activeIPs) {
+            listInstances.add(i.getHostName());
+        }
+        return listInstances;
+    }
+
+    public void starSSL() {
         NetworkService.isVisibleToOthers(true);
+        NetworkService.startSSLServer();
+    }
+
+    public boolean newSSLConnection(String selectedValue) {
+        for (InetAddress i: activeIPs) {
+            if(selectedValue.equals(i.getHostName()))
+                return NetworkService.establishSSLConnectionToUser(i);
+        }
+        return false;
     }
 }
