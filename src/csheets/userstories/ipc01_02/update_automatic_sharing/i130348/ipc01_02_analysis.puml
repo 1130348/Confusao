@@ -1,4 +1,4 @@
-  @startuml doc-files/ipc01_01_analysis.png
+  @startuml doc-files/ipc01_02_analysis.png
   actor User
   participant "<<analysis>>\nStartAutomaticSharingUI" as UI
   participant "<<analysis>>\nStartSharingCtrl" as ctrl
