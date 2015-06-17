@@ -1,0 +1,38 @@
+@startuml doc-files/ipc_02_02_class_diagram_analysis.png
+   
+
+    class "<<analysis>> FindWorkbooksUI" as UI{
+
+    }
+
+    class "<<analysis>> WorkBook" as workbook{
+        -Spreadsheet spreadsheet
+        +getSpreadsheet()
+    }
+
+    class "<<analysis> Spreadsheet" as spreadsheet{
+        -Map<Address, Cell> cells
+        +getCell();
+    }
+
+    class "<<analysis>> Cell" as cell{
+        -String content
+        -Address address
+        +getContent()
+        +getAddress()
+    }
+
+    class "<<analysis>> Address" as address{
+        -int column
+        -int row
+        +getColumn()
+        +getRow()
+    }
+
+    
+    workbook <|-- UI
+    spreadsheet <|-- workbook
+    cell <|-- spreadsheet
+    address <|-- cell
+
+@enduml
