@@ -56,8 +56,7 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
     public InsertImagePanel(UIController uiController) {
         // Configures panel
         super(new BorderLayout());
-        setName(InsertImageExtension.NAME);
-
+        
         // Creates controller
         controller = new InsertImageController(uiController, this);
         uiController.addSelectionListener(this);
@@ -70,7 +69,6 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
                 PATH = controller.ChooserIMG();
                 setImage(PATH);
                 controller.setImage(cell, PATH);
-
             }
         });
 
@@ -84,7 +82,6 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
         });
 
         // Lays out image and button components
-        setSize(300, 300);
         setLayout(null);
         l.setBounds(0, 0, 310, 230);
         add(l);
