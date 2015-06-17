@@ -26,8 +26,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLSocket;
 
 /**
  *
@@ -37,9 +39,10 @@ public class NetworkService {
 
     private static Thread gameServerThread;
     private static Thread serverThread;
-    private static Thread sslServerThread;
+    private static SSLServer sslServer;
     private static ArrayList<Socket> clientConnections = clientConnections = new ArrayList<>();
     ;
+    private static ArrayList<Socket> secureConnections = new ArrayList<>();
     private static int portTCP = 8888;
     private static final int portUDP = 9050;
     private static final int portSSL = 1337;
@@ -98,7 +101,8 @@ public class NetworkService {
     }
 
     public static boolean establishSSLConnectionToUser(InetAddress in) {
-        return NetworkSendService.establishSecureConnectionToUser(in);
+        if (NetworkSendService.establishSecureConnectionToUser(in)) return true;
+        return false;
     }
 
     public static Map<InetAddress, Integer> searchInstances() {
@@ -205,9 +209,7 @@ public class NetworkService {
      *
      */
     public static void startSSLServer() {
-        serverThread
-                = new Thread(new SSLServer(portSSL));
-        serverThread.start();
+        sslServer = new SSLServer(portSSL);
     }
 
     public static void interruptConnection() {
@@ -215,7 +217,7 @@ public class NetworkService {
     }
 
     public static void interruptSSLConnection() {
-        sslServerThread.interrupt();
+        sslServer.interrupt();
     }
 
     public static void receiveCells(List<Cell> newCells,
@@ -248,5 +250,9 @@ public class NetworkService {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static Set<SSLSocket> getSSLConnectionsActive() {
+        return sslServer.getConnectionsList();
     }
 }
