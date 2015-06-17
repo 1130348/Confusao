@@ -1,0 +1,37 @@
+  @startuml doc-files/ipc_04_02_design_sequence_export.png
+  actor User
+  participant "ImportExportUI" as UI
+  participant "UIController" as UIc
+participant "ImportationExportationLinkController" as ctrl
+  participant "Export" as export
+  participant "CustomExportation" as ce
+  participant "Cell" as cell
+  participant "Import" as i
+  participant "File" as file
+  User -> UI : startImpExpLink()
+  UI -> ctrl : export()
+  ctrl -> ctrl : create Thread(Export)
+  ctrl -> export : start()
+  export -> export: run()
+
+loop ImportExportLink == true
+
+loop Verifie if is not importing
+export -> export: thread.sleep()
+end
+  alt uiController.getModificationOnCells
+note right of export
+        If some cell is modified the file needs to be update (Cells Listeners)
+    end note
+  export -> UIc: setCondExp(true)
+  export -> import: new CustomExportation()
+note right of export
+        Class already done on the use case IPC 04.02 that has a nethod to export
+    end note
+  export -> ce: run()
+  end alt
+  export -> UIc: setModificationOnCells(false)
+  export -> import: setDate(file.lastModified())
+  export -> UIc : setCondExp(false)
+end
+  @enduml
