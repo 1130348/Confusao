@@ -1,0 +1,28 @@
+@startuml doc-files/core07_02_search_multi_2.png
+actor user
+ participant "UIController" as UI
+ participant "SearchAction" as sa
+ participant "Search" as s
+participant "SearchPanel" as panel
+participant "SpreadsheetTable" as st
+
+user -> UI: choose "Edit -> Search and Replace"
+activate UI
+UI -> sa: actionListener()
+deactivate UI
+activate sa
+sa -> user: String or Regular expression to search
+user -> sa: Input
+sa -> s: search(input)
+activate s
+s -> sa: List of Matches
+deactivate s
+sa -> panel: initComps()
+sa -> panel: addAddressList()
+activate panel
+user -> panel: Select Match
+panel -> st:changeSelection(match_address)
+deactivate panel
+ @enduml
+ *
+ */
