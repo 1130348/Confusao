@@ -177,7 +177,7 @@ public class LinkDialog extends javax.swing.JDialog {
 				// And a choosen file
 				if (fileChoosed != null && !jLabel4.getText().equals("")) {
 
-					uiController.setImportExportLink(true);
+					//uiController.setImportExportLink(true);
 					ieController.
 						importation(fileChoosed.getSelectedFiles(), jTextField1.
 									getText());
