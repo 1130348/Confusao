@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -82,16 +83,13 @@ public class InsertImagePanel extends JPanel implements SelectionListener, Inser
         });
 
         // Lays out image and button components
-        setLayout(null);
+        setLayout(new BorderLayout());
         l.setBounds(0, 0, 310, 230);
-        add(l);
-        JLabel buttonholder = new JLabel();
-        buttonholder.setBounds(0, 230, 310, 40);
-        buttonholder.setLayout(new FlowLayout());
-        buttonholder.add(in);
-        buttonholder.add(del);
-        add(buttonholder);
-
+        add(l, BorderLayout.CENTER);
+        JPanel button = new JPanel();
+        button.add(in);
+        button.add(del);
+        add(button, BorderLayout.SOUTH);
     }
 
     public void setImage(String Path) {
