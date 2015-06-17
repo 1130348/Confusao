@@ -14,28 +14,28 @@ import csheets.ui.ext.UIExtension;
  *
  * @author Paulo Pereira <1130419@isep.ipp.pt>
  */
-public class SearchOnAnotherInstanceExtension extends Extension{
+public class SearchOnAnotherInstanceExtension extends Extension {
 
-    /**
-     * The name of the extension
-     */
-    public static final String NAME = "SearchOnAnotherInstance";
+	/**
+	 * The name of the extension
+	 */
+	public static final String NAME = "Workbook LAN Search";
 
-    /**
-     * Creates a new Search on another instance extension.
-     */
-    public SearchOnAnotherInstanceExtension() {
-        super(NAME);
-    }
+	/**
+	 * Creates a new Search on another instance extension.
+	 */
+	public SearchOnAnotherInstanceExtension() {
+		super(NAME);
+	}
 
-    /**
-     * Returns the user interface extension of this extension
-     *
-     * @param uiController the user interface controller
-     * @return a user interface extension, or null if none is provided
-     */
-    @Override
-    public UIExtension getUIExtension(UIController uiController) {
-        return new UIExtensionSearchOnAnotherInstance(this, uiController);
-    }
+	/**
+	 * Returns the user interface extension of this extension
+	 *
+	 * @param uiController the user interface controller
+	 * @return a user interface extension, or null if none is provided
+	 */
+	@Override
+	public UIExtension getUIExtension(UIController uiController) {
+		return new UIExtensionSearchOnAnotherInstance(this, uiController);
+	}
 }

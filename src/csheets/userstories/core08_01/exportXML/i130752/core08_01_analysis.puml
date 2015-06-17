@@ -1,0 +1,38 @@
+@startuml doc-files/core08_01_analysis.png
+
+ actor User
+ participant "<<analysis>>\nExportUI" as UI
+ participant "<<analysis>>\nExportCtrl" as ctrl
+ participant "<<analysis>>\nExportProcess" as process
+ participant "<<interface>>\n<<analysis>>\nExportStrategy" as strategy
+ participant "<<analysis>>\nExportStrategyFactory" as strategyFactory
+ participant "<<analysis>>\nSpreadsheet" as Spreadsheet
+User -> UI : startXMLExportProcess
+activate UI
+UI -> ctrl : selectExportProcess(XML)
+activate ctrl
+deactivate UI
+ctrl -> process : create()
+activate process
+deactivate process
+ctrl -> Spreadsheet : getElements()
+activate Spreadsheet
+deactivate Spreadsheet
+ctrl -> process : selectedElements(elements)
+activate process
+deactivate ctrl
+process -> strategyFactory : getInstance()
+activate strategyFactory
+process -> strategyFactory : getExportStrategy(XML)
+deactivate process
+deactivate strategyFactory
+activate ctrl
+ctrl -> process : export()
+activate process
+deactivate ctrl
+process -> strategy : export(this)
+deactivate process
+activate strategy
+
+
+@enduml
