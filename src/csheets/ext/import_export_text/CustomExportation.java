@@ -9,6 +9,7 @@ import csheets.CleanSheets;
 import csheets.core.Spreadsheet;
 import csheets.ui.ctrl.UIController;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,11 +37,36 @@ public class CustomExportation implements Runnable {
 		this.app = app;
 		this.uiController = uiController;
 		this.separator = separator;
-		file = new FileOutputStream(fileName);
+		// to do overwrite
+		file = new FileOutputStream(fileName, false);
 		this.header = header;
 		this.includeHeader = includeHeader;
 	}
 
+	/**
+	 * Constructor with parameters
+	 *
+	 * @param uiController
+	 * @param fileName
+	 * @param separator
+	 * @throws FileNotFoundException
+	 */
+	public CustomExportation(UIController uiController,
+							 File fileName,
+							 String separator) throws FileNotFoundException {
+		this.uiController = uiController;
+		this.separator = separator;
+		// to do overrite
+		file = new FileOutputStream(fileName, false);
+		this.header = 1;
+		this.includeHeader = 1;
+	}
+
+	/**
+	 * The method to export to a .txt file
+	 *
+	 * @throws FileNotFoundException
+	 */
 	public void exportText() throws FileNotFoundException {
 
 		try {
@@ -53,13 +79,11 @@ public class CustomExportation implements Runnable {
 				if (row == 0 && ((includeHeader == 0 && header == 0) || (includeHeader == 0 && header == 1))) {
 					continue;
 				}
-				for (int column = 0; column < sheet.getColumnCount(); column++) {
+				for (int column = 0; column < 52; column++) {
 					writer.print(sheet.getCell(column, row).getContent()
 						+ separator);
-
 				}
 				writer.println();
-
 			}
 
 			// Frees resources
@@ -72,6 +96,9 @@ public class CustomExportation implements Runnable {
 		}
 	}
 
+	/**
+	 * The method run that calls exportation method
+	 */
 	@Override
 	public void run() {
 		try {
