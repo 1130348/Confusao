@@ -25,21 +25,21 @@
  * The research is carried out in the open Workbook and selected Spreadsheet.
  * <br/>
  *
- * <h2>a) First Sequence Diagram</h2>
- * <img src="doc-files/macros_04_01.1.png">
  *
  * * <h2>3. Tests</h2>
- *
+ * To make easier the tests process we will make some funcional test where we
+ * will verify if the conditional formating is working according to the guide
  *
  *
  *
  * <br/>
  * <h2>4. Design</h2>
- *
+ * To realize this use case we create rwo new mtehods, ConditionalFormatChoser
+ * and conditionalFormatAction
  * <br/>
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.<br/>
- * <img src="doc-files/macros_04_01.2.png">
+ * <img src="doc-files/macros_04_01.1.png">
  *
  * <h2>5. Coding</h2>
  * see:<br/>
