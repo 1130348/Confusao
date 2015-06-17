@@ -45,7 +45,7 @@ public class AdvancedFunctionsTest {
     }
 
     @Test
-    public void makeSureMultiplyMatricesAreCorrect() throws IllegalDimensionException {
+    public void makeSureMultiplyMatricesAreCorrect() throws IllegalDimensionException, IllegalValueTypeException {
         Value[][] matrix1 = new Value[2][2];
         Value[][] matrix2 = new Value[2][2];
         Value[][] expresult = new Value[2][2];
@@ -139,7 +139,7 @@ public class AdvancedFunctionsTest {
     }
 
     @Test(expected = IllegalDimensionException.class)
-    public void matricesToMultiplyNumberOfColumnsOfFirstIsEqualToNumberOfRowsOfSecond() throws IllegalDimensionException {
+    public void matricesToMultiplyNumberOfColumnsOfFirstIsEqualToNumberOfRowsOfSecond() throws IllegalDimensionException, IllegalValueTypeException {
         Value[][] matrix1 = new Value[2][2];
         Value[][] matrix2 = new Value[3][2];
         Value v1 = new Value(1);
