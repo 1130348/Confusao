@@ -261,27 +261,28 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
             String[] aux = currentMacroTextArea.getText().split("\n");
             macroFormulasList.addAll(Arrays.asList(aux));
             for (String formula : macroFormulasList) {
-                if (formula.charAt(0) != ';') {
-                    if (formula.charAt(0) == '=') {
-                        formula = formula.substring(1);
+                try {
+                    if (formula.charAt(0) != ';') {
+                        if (formula.charAt(0) == '=') {
+                            formula = formula.substring(1);
+                        }
                     }
-                    try {
-                        value = callFunctionController.callMacroFunction(formula);
-                    } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException e) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Some of the functions in the macro are not currently supported!",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                    } catch (StringIndexOutOfBoundsException e) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Your macro syntax is invalid!",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                    }
+                    value = callFunctionController.callMacroFunction(formula);
+                } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Some of the functions in the macro are not currently supported!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                } catch (StringIndexOutOfBoundsException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Your macro syntax is invalid!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+
                 }
             }
             macroFormulasList.clear();
