@@ -59,6 +59,9 @@
  * functionality of this use case is search within the open workbooks the
  * workbook with the desired name in the local network.
  * <br/>
+ *  * see: <code>csheets.ext.search_on_another_instances</code><br/>
+ * <br/>
+ * <h4>Functional Tests</h4>
  * Following this approach we can start by coding a unit test that uses the
  * class <code>ReportCreater</code> and tests if this class founds the woorkbook
  * with the given name. Furthermore we also have to perform functional tests to
