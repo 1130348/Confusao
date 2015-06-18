@@ -1,12 +1,10 @@
 package csheets.ext.comments;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * A Unit Test class to test CommentableCell.
@@ -58,7 +56,7 @@ public class CommentableCellTest {
 
 		cc.setUserComment("Hello");
 		
-		assertTrue("Hello".compareTo(cc.getUserComment())==0);		
+		assertTrue("Hello".compareTo(cc.getSingleUserComment(0))==0);		
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Semaphore;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -26,12 +27,15 @@ public class SSLServer implements Runnable {
     Map<SSLSocket, DataOutputStream> clientConnections;
     SSLServerSocket serverSocket;
     Semaphore sem;
+    Thread thread;
 
     public SSLServer(int port) {
         this.port = port;
         this.clientConnections = new HashMap<>();
         this.sem = new Semaphore(1);
         this.isRunning = true;
+        this.thread=new Thread();
+        this.thread.start();
     }
 
     @Override
@@ -47,13 +51,12 @@ public class SSLServer implements Runnable {
                 option = JOptionPane.showConfirmDialog(null, client.
                         getInetAddress().
                         getCanonicalHostName() + " wants to establish a secure comunication, do you accept it?", "Secure comunication request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
                 if (option == 0) {
                     clientConnections.
                             put(client, new DataOutputStream(client.
                                             getOutputStream()));
 
-                    // new Thread(new ReceiveData(client, sendCells)).start();
+                    new Thread(new ReceiveMessages(client)).start();
                 } else {
                     client.close();
                 }
@@ -63,6 +66,14 @@ public class SSLServer implements Runnable {
             ex.printStackTrace();
         }
 
+    }
+    
+    public Set<SSLSocket> getConnectionsList(){
+       return clientConnections.keySet();
+    }
+
+    public void interrupt() {
+        thread.interrupt();
     }
 
 }

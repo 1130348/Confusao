@@ -52,9 +52,7 @@ public class SecureComunicationAction extends FocusOwnerAction{
                 "Search Started",
                 JOptionPane.INFORMATION_MESSAGE
         );
-        NetworkService.isVisibleToOthers(true);
-        NetworkService.startSSLServer();
-        secureComunicationController.searchInstances();
+        secureComunicationController.starSSL();
     }
     
 }
