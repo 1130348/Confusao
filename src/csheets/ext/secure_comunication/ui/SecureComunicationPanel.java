@@ -129,8 +129,8 @@ public class SecureComunicationPanel extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                        String message = JOptionPane.showInputDialog("null", "New Message");
-                        secureComunicationController.sendMessage(clientList.getSelectedValue().toString(), message);
+                        String message = JOptionPane.showInputDialog("Enter text", "");
+                        secureComunicationController.sendMessage(connectedList.getSelectedValue().toString(), message);
                     }
                 }
             });
