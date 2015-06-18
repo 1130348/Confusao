@@ -4,11 +4,11 @@ import csheets.CleanSheets;
 import csheets.core.Address;
 import csheets.core.Spreadsheet;
 import csheets.core.formula.compiler.FormulaCompilationException;
-import static csheets.ext.search.Search.Search;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -28,10 +28,9 @@ public class SearchTest {
 		Spreadsheet ss = cs.getWorkbooks()[0].getSpreadsheet(0);
 		SpreadsheetTable focusOwner = new SpreadsheetTable(ss, contr);
 		String expression = "jose";
-		Search instance = new Search();
 		Address expResult = new Address(0, 0);
-		Address result = Search(expression, focusOwner);
-		assertEquals(expResult, result);
+		List<Address> result = Search.search(expression, focusOwner);
+		assertEquals(expResult, result.get(0));
 
 	}
 
@@ -45,10 +44,9 @@ public class SearchTest {
 		Spreadsheet ss = cs.getWorkbooks()[0].getSpreadsheet(0);
 		SpreadsheetTable focusOwner = new SpreadsheetTable(ss, contr);
 		String expression = "1[a-z][0-9]*";
-		Search instance = new Search();
 		Address expResult = new Address(1, 2);
-		Address result = Search(expression, focusOwner);
-		assertEquals(expResult, result);
+		List<Address> result = Search.search(expression, focusOwner);
+		assertEquals(expResult, result.get(0));
 	}
 
 	@Test
@@ -62,8 +60,9 @@ public class SearchTest {
 		SpreadsheetTable focusOwner = new SpreadsheetTable(ss, contr);
 		String expression = "teste";
 		Search instance = new Search();
-		Address expResult = null;
-		Address result = Search(expression, focusOwner);
+		boolean expResult = true;
+		List<Address> res = Search.search(expression, focusOwner);
+                boolean result = res.isEmpty();
 		assertEquals(expResult, result);
 	}
 }
