@@ -108,20 +108,19 @@ public class SecureComunicationPanel extends JPanel {
                                 secureComunicationController.removeConnection(inet);
                             }
                         } else {
-                            if (secureComunicationController.refreshConnections().contains(inet)) {
-                                option = JOptionPane.showConfirmDialog(null, "You want to connect with " + inet, "New Secure Connection", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                                if (option == 0) {
+                            option = JOptionPane.showConfirmDialog(null, "You want to connect with " + inet, "New Secure Connection", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if (option == 0) {
 
-                                    if (secureComunicationController.newSSLConnection(inet)) {
-                                        JOptionPane.showMessageDialog(null, "You are now connected with " + clientList.getSelectedValue().toString(), "Connection Success", JOptionPane.INFORMATION_MESSAGE);
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Some error occured during the connection", "Connection Failed", JOptionPane.ERROR_MESSAGE);
-                                    }
+                                if (secureComunicationController.newSSLConnection(inet)) {
+                                    JOptionPane.showMessageDialog(null, "You are now connected with " + clientList.getSelectedValue().toString(), "Connection Success", JOptionPane.INFORMATION_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Some error occured during the connection", "Connection Failed", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                         }
                     }
                 }
+
             }
             );
         }
