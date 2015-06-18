@@ -83,12 +83,6 @@ public class SSLService {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                bufferedwriter.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         }
     }
 
