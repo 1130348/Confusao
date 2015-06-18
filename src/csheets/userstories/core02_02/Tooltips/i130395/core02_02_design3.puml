@@ -42,7 +42,7 @@
     deactivate applyAction
 
     activate ctrl
-    ctrl -> cell : setUserComment(txt)
+    ctrl -> cell : setUserComment(txt, index)
     ctrl -> uic : setWorkbookModified(...)
     deactivate ctrl
 

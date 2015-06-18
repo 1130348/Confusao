@@ -4,7 +4,7 @@
  * <br/>
  * 
  * <h2>1. Requirement</h2>
- * If a cell as at least one commentary (the multiple commentaries must be supported), the user should be able to see the commentaries as a tooltip. The 
+ * If a cell has at least one commentary (the multiple commentaries must be supported), the user should be able to see the commentaries as a tooltip. The 
  * username of the author of the commentary must be associated.
  * <br/>
  * <br/>
@@ -37,7 +37,7 @@
  * <h3>First "analysis" sequence diagram</h3>
  * The following diagram depicts a proposal for the realization of the previously described use case. We call this diagram an "analysis" use case realization because it functions like a draft that we can do during analysis or early design in order to get a previous approach to the design. For that reason we mark the elements of the diagram with the stereotype "analysis" that states that the element is not a design element and, therefore, does not exists as such in the code of the application (at least at the moment that this diagram was created).<br/> 
  * <br/>
- * <img src="doc-files/comments_extension_uc_realization1.png"> 
+ * <img src="doc-files/comments_extension_uc_realization1.png"/> 
  * <br/> 
  * <br/>
  * From the previous diagram we see that we need to add the compatibility to multiple comments in a single cell.<br/>
@@ -53,7 +53,7 @@
  * Therefore, we will assume that it is possible to extend cells and start to implement tests for this use case. <br/>
  * <br/>
  * The <a href="http://en.wikipedia.org/wiki/Delegation_pattern">delegation design pattern</a> is used in the cell extension mechanism of cleansheets. The following class diagram depicts the relations between classes in the "Cell" hierarchy.<br/> 
- * <img src="doc-files/core02_01_analysis_cell_delegate.png"> 
+ * <img src="doc-files/core02_01_analysis_cell_delegate.png"/>  
  * <br/>
  * 
  * One important aspect is how extensions are dynamically created and returned. The <code>Extensible</code> interface has only one method, <code>getExtension</code>. Any class, to be extensible, must return a specific extension by its name. The default (and base) implementation for the <code>Cell</code> interface, the class <code>CellImpl</code>, implements the method in the following manner:<br/>
@@ -82,6 +82,7 @@
  * For instance, <code>StylableCell</code> (the delegator) will delegate to <code>CellImpl</code> all the method 
  * invocations regarding methods of the <code>Cell</code> interface. Obviously, methods specific to <code>StylableCell</code> must be implemented by it.<br/>
  * Therefore, to implement a cell that can have a associated comment we need to implement a class similar to <code>StylableCell</code>.<br/> 
+ * The tooltip will get the information given by a commentable cell (extension of a cell) while it is being rendered (Cell Renderer)</br>
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core functionality of 
  * this use case is to be able to store multiple comments/texts and show this information as a tooltip. <br/>
@@ -99,20 +100,20 @@
  * 
  * <h3>Extension Setup</h3>
  * The following diagram shows the setup of the "comments" extension when cleansheets is run.<br/><br/>
- * <img> src="doc-files/core02_02_design.png"</img>
+ * <img src="doc-files/core02_02_design.png"/>
  * <br/>
  *
  * <h3>User Selects a Cell</h3>
  * The following diagram illustrates what happens when the user selects a cell. The idea is that when this happens the extension must display in the sidebar the comment of that cell (if it exists).<br/> 
  * <br/>
- * <img> src="doc-files/core02_02_design2.png"</img>
+ * <img src="doc-files/core02_02_design2.png"/>
  * <br/>
  * <h3>User Updates the Comment of a Cell</h3>
  * The following diagram illustrates what happens when the user updates the 
  * text of the comment of the current cell. To be noticed that this diagram does not
  * depict the actual selection of a cell (that is illustrated in the previous diagram).<br/>
  * <br/>
- * <img> src="doc-files/core02_02_design3.png"</img>
+ * <img src="doc-files/core02_02_design3.png"/>
  * 
  * <h2>5. Coding</h2>
  * see:<br/>
@@ -128,7 +129,7 @@
  * @author i130395
  */
 
-package csheets.userstories.core02_02.Tooltips;
+package csheets.userstories.core02_02.Tooltips.i130395;
 
 /**
  * 
