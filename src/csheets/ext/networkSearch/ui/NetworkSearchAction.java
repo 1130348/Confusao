@@ -31,7 +31,7 @@ public class NetworkSearchAction extends BaseAction {
 
 	@Override
 	protected String getName() {
-		return "Search Workbook by (NAME)";
+		return "Workbook Network Search";
 	}
 
 	@Override

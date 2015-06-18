@@ -6,6 +6,7 @@
 package csheets.ext.searchOnAnotherInstance;
 
 import csheets.core.Workbook;
+import csheets.ext.networkSearch.ui.NetworkSearchPanel;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
 import csheets.ext.startsharing.NetworkReceiveService;
 import csheets.ext.startsharing.NetworkService;
@@ -21,37 +22,44 @@ import java.util.logging.Logger;
  */
 public class SearchOnAnotherInstanceController {
 
-    public SearchOnAnotherInstanceController() {
-    }
+	private ReportWatch report;
 
-    public void startServer(SearchOnAnotherInstanceDialog dialog) {
-        ReportWatch reportWatch = new ReportWatch();
-        reportWatch.addObserver(dialog);
-        NetworkService.addObserver(dialog, reportWatch);
-    }
+	public SearchOnAnotherInstanceController() {
+	}
 
-    public void sendSearchRequest(String address, String workbookName) {
-        try {
-            InetAddress newAddress = InetAddress.getByName(address);
-            NetworkService.sendSearchRequest(newAddress, workbookName);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(SearchOnAnotherInstanceController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	public void startServer(SearchOnAnotherInstanceDialog dialog) {
+		report = new ReportWatch();
+		report.addObserver(dialog);
+		NetworkService.addObserver(dialog, report);
+	}
 
-    public void sendWorkbook(InetAddress address, Workbook workbook) {
-        NetworkService.sendWorkbook(address, workbook);
-    }
+	public void addObserverWatch(NetworkSearchPanel panel) {
+		report.addObserver(panel);
+	}
 
-    public void setVisibility(boolean b) {
-        NetworkService.isVisibleToOthers(b);
-    }
+	public void sendSearchRequest(String address, String workbookName) {
+		try {
+			InetAddress newAddress = InetAddress.getByName(address);
+			NetworkService.sendSearchRequest(newAddress, workbookName);
+		} catch (UnknownHostException ex) {
+			Logger.getLogger(SearchOnAnotherInstanceController.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
 
-    public Map<InetAddress, Integer> searchInstances() {
-        return NetworkService.searchInstances();
-    }
+	public void sendWorkbook(InetAddress address, Workbook workbook) {
+		NetworkService.sendWorkbook(address, workbook);
+	}
 
-    public void deactivateServer() {
-        NetworkReceiveService.interruptServer();
-    }
+	public void setVisibility(boolean b) {
+		NetworkService.isVisibleToOthers(b);
+	}
+
+	public Map<InetAddress, Integer> searchInstances() {
+		return NetworkService.searchInstances();
+	}
+
+	public void deactivateServer() {
+		NetworkReceiveService.interruptServer();
+	}
 }

@@ -19,7 +19,7 @@ public class NetworkSearchExtension extends Extension {
 	/**
 	 * The name of the extension
 	 */
-	public static final String NAME = "Local Network Results";
+	public static final String NAME = "Workbook Network Search";
 
 	/**
 	 * Creates a new Search on another instance extension.
