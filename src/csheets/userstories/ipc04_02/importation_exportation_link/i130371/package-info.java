@@ -67,8 +67,23 @@
  * when linked to a text file. From this moment, I don't see the necessity of
  * doing more that the actual tests that are already implemented. Since all the
  * used methods in this use case were made previosly and I assumed they were
- * working. As usual, in a test driven development approach tests normally fail
- * in the beginning. The idea is that the tests will pass in the end.<br>
+ * working. Almost all the methods that I implemented use threads or are methods
+ * from the interface or using it (the class uiController). The controller
+ * (ImportationExportationLinkCOntroller) has got the constructor, two methods
+ * that calls the threads Import and Export, one that sets a variable on the
+ * uiController and another to know if the thread is alive. The class Import and
+ * Export has the abstract methods cause implements Runnable and the class
+ * Import has a private class that was created because the method done on the
+ * CustomImportation was openning a new sheet and I prefere not to change the
+ * code of the person that had implemented because was working too. All this
+ * methods I tested by functional tests and using debugging. The new class I
+ * test the importation seeing the file and that everything was alright. I try
+ * to find some methods to do unitary tests because the teacher said that was
+ * important to do tests and use the test driven development but I don't see the
+ * necessity to do more than the tests that were already implemented so I did
+ * functional tests. As usual, in a test driven development approach tests
+ * normally fail in the beginning. The idea is that the tests will pass in the
+ * end.<br>
  * <br/>
  *
  * * <h2>4. Design</h2>

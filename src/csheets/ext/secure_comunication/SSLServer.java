@@ -31,7 +31,7 @@ public class SSLServer implements Runnable {
         this.port = port;
         this.clientConnections = new HashMap<>();
         this.sem = new Semaphore(1);
-        this.thread = new Thread();
+        this.thread = new Thread(this);
         this.thread.start();
     }
 

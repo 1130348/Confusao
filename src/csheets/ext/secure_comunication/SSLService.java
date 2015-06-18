@@ -5,8 +5,10 @@
  */
 package csheets.ext.secure_comunication;
 
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +39,9 @@ public class SSLService {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.
                     getDefault();
             SSLSocket newSocket;
+            System.out.println(address.getHostName());
             newSocket = (SSLSocket) sslsocketfactory.createSocket(address, portSSL);
+            newSocket.startHandshake();
             System.out.println("O cliente se conectou ao servidor SSL!");
             connectionsActive.put(address, newSocket);
             return true;
@@ -63,11 +67,14 @@ public class SSLService {
     public static void sendSecureMessages(String str, InetAddress client) {
         SSLSocket socketClient = connectionsActive.get(client);
         try {
-            DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
-            byte[] data = new byte[300];
-            data = str.getBytes();
-            sOut.write((byte) str.length());
-            sOut.write(data, 0, str.length());
+            /*DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
+             byte[] data = new byte[300];
+             data = str.getBytes();
+             sOut.write((byte) str.length());
+             sOut.write(data, 0, str.length());*/
+            BufferedWriter bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+            bufferedwriter.write(str);
+            bufferedwriter.flush();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

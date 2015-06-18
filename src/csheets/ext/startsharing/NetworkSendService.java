@@ -47,7 +47,6 @@ public class NetworkSendService {
             socket.setBroadcast(true);
             socket.setSoTimeout(1000 * TIMEOUT);
             InetAddress destinationIP = InetAddress.getByName("10.8.255.255");
-
             byte[] data = new byte[300];
             String message = String.format("%d", portTCP);
             data = message.getBytes("ISO-8859-1");
