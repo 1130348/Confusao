@@ -74,9 +74,6 @@ public class CallFunctionUI extends javax.swing.JDialog {
             java.awt.Frame parent, boolean modal, CallFunctionController controller, int n, UIController uiController) {
         if (instance == null || uiNumber != n) {
             instance = new CallFunctionUI(parent, modal, controller, n, uiController);
-            java.awt.Frame parent, boolean modal, CallFunctionController controller) {
-        if (instance == null) {
-            instance = new CallFunctionUI(parent, modal, controller);
         }
         return instance;
     }
@@ -266,20 +263,20 @@ public class CallFunctionUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String func_def = jTextField4.getText();
-        if(uiNumber == 1){
+        if (uiNumber == 1) {
             controller.addFunctionToFormulasPanel(func_def);
             JOptionPane.showMessageDialog(this, "Function was added to Formulas Register");
-        }else{
+        } else {
             try {
                 int index = func_def.indexOf("=");
-                func_def = func_def.substring(0, index-1);
+                func_def = func_def.substring(0, index - 1);
                 controller.addResultToCell(uiController.getActiveCell(), "=" + func_def);
                 JOptionPane.showMessageDialog(this, "Function result was added to the active cell");
             } catch (FormulaCompilationException ex) {
                 Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
