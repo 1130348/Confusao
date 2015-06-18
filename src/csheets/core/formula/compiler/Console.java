@@ -70,6 +70,7 @@ public class Console {
 
 		// Reads and compiles input
 		ExcelExpressionCompiler compiler = new ExcelExpressionCompiler();
+                MoneyExpressionCompiler moneyCompiler = new MoneyExpressionCompiler();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		String line;
 		try {
@@ -86,7 +87,8 @@ public class Console {
 					if (ast != null) {
 						printer.println("AST: " + ast.toStringTree());
 						// new antlr.debug.misc.ASTFrame("Formula Viewer", ast).setVisible(true);
-						Expression expression = compiler.convert(cell, ast);
+						//Expression expression = compiler.convert(cell, ast);
+						Expression expression = moneyCompiler.convert(cell, ast);
 						printer.println("Formula: " + expression + " = " + expression.evaluate());
 					}
 				} catch (RecognitionException e) {

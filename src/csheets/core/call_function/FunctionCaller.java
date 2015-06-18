@@ -30,18 +30,24 @@ public class FunctionCaller {
     }
 
     public Value executeFunc(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
+        Expression[] argArray;
         String identifier = func_def.substring(0, func_def.
-            indexOf("("));
+                indexOf("("));
         Function function = Language.getInstance().getFunction(identifier);
-        List<Expression> args = new ArrayList<Expression>();
-        String temp = func_def.substring(func_def.indexOf("(") + 1, func_def.
-            lastIndexOf(")"));
-        String[] params = temp.split(";");
-        for (String s : params) {
-            args.add(new Literal(Value.parseNumericValue(s)));
+        if (!identifier.equals("RANDOM") && !identifier.equals("FALSE")) {
+            List<Expression> args = new ArrayList<>();
+            String temp = func_def.substring(func_def.indexOf("(") + 1, func_def.
+                    lastIndexOf(")"));
+            String[] params = temp.split(";");
+            for (String s : params) {
+                args.add(new Literal(Value.parseNumericValue(s)));
+            }
+            argArray = args.toArray(new Expression[args.size()]);
+            func_call = new FunctionCall(function, argArray);
+        } else {
+            argArray = new Expression[0];
+            func_call = new FunctionCall(function, argArray);
         }
-        Expression[] argArray = args.toArray(new Expression[args.size()]);
-        func_call = new FunctionCall(function, argArray);
         return func_call.evaluate();
     }
 

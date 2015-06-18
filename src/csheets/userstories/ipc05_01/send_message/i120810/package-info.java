@@ -43,12 +43,12 @@
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able to communicate with other
  * instances of "CleanSheets" and send a message.<br/>
- * Following this approach we can start by coding a unit test that uses the
- * class <code>Connect</code> and tests its attribute port. Furthermore we also
- * have to perform functional tests to see if the client is properly receiving
- * and sending the message.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
+ * In the end this use case requires only Functional Tests:
+ *  #Send Message;
+ *  #See if message reached its destination;
+ *  #See if can receive answer from sent message;
  * <br/>
  *
  * <br/>
