@@ -6,7 +6,7 @@
 package csheets.ext.searchOnAnotherInstance;
 
 import csheets.core.Workbook;
-import csheets.ext.networkSearch.ui.NetworkSearchPanel;
+import csheets.ext.searchOnAnotherInstance.ui.NetworkSearchPanel;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
 import csheets.ext.startsharing.NetworkReceiveService;
 import csheets.ext.startsharing.NetworkService;

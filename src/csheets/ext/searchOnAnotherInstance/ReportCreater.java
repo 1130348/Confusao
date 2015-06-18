@@ -21,7 +21,7 @@ public class ReportCreater {
 	public static String createResume(Workbook workbook, String instancia) {
 		if (workbook == null) {
 
-			return "Workbook not found";
+			return "Instance: " + instancia + "\nWorkbook not found";
 		}
 		int spreadSheets = workbook.getSpreadsheetCount();
 		Spreadsheet[] spreadSheetList = new Spreadsheet[spreadSheets];
