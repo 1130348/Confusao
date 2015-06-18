@@ -133,7 +133,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
 					case FormulaLexer.ALPHA:
 						return new Literal(Value.
-							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
+							parseValue(node.getText()));
 					case FormulaLexer.CELL_REF:
 						return new CellReference(cell.getSpreadsheet(), node.
 												 getText());
