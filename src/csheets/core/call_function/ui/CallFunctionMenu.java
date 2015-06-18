@@ -18,6 +18,6 @@ public class CallFunctionMenu extends JMenu {
         super("Functions Wizard");
 
         // Adds send action
-        add(new CallFunctionAction(uiController));
+        //add(new CallFunctionAction(uiController));
     }
 }

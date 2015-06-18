@@ -268,6 +268,9 @@ public class MenuBar extends JMenuBar {
 			}
 
 		}
+                
+                JMenu functionsMenu = addMenu("Functions", KeyEvent.VK_0);
+                functionsMenu.add(actionManager.getAction("callfunction"));
 
 		// Creates the window menu
 		add(
