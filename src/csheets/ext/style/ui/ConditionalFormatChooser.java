@@ -16,7 +16,6 @@ import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -76,20 +75,6 @@ public class ConditionalFormatChooser extends JPanel {
 	}
 
 	/**
-	 * Creates a pattern chooser for the given date format.
-	 *
-	 * @param format the format to configure
-	 * @param value the value to format
-	 */
-	public ConditionalFormatChooser(DateFormat format, Date value) {
-		this(getPatterns(format));
-
-		// Initializes format
-		this.value = value;
-		setFormat(format);
-	}
-
-	/**
 	 * Creates a pattern chooser for the given number format.
 	 *
 	 * @param format the format to configure
@@ -100,7 +85,7 @@ public class ConditionalFormatChooser extends JPanel {
 
 		// Initializes format
 		this.value = value;
-		setFormat(format);
+		this.format = format;
 	}
 
 	/**
@@ -109,16 +94,7 @@ public class ConditionalFormatChooser extends JPanel {
 	 * @param patterns the patterns to choose from
 	 */
 	private ConditionalFormatChooser(String[] patterns) {
-		// Creates format box
-//		if (patterns != null) {
-//			choices.setModel(new DefaultComboBoxModel(patterns));
-//		}
-//		choices.setEditable(true);
-//		choices.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent event) {
-//				applyPattern(false);
-//			}
-//		});
+
 		choicesCondition.
 			setModel(new DefaultComboBoxModel(getConditionalChosser()));
 		choicesCondition.setEditable(true);
@@ -138,10 +114,6 @@ public class ConditionalFormatChooser extends JPanel {
 		});
 		conditionPanel.setBorder(BorderFactory.createTitledBorder("Condition"));
 
-		// Creates format container
-//		JPanel boxPanel = new JPanel();
-//		boxPanel.add(choices);
-//		boxPanel.setBorder(BorderFactory.createTitledBorder("Format"));
 		// Configures preview label
 		previewLabel.setHorizontalAlignment(JLabel.CENTER);
 		previewLabel.setPreferredSize(new Dimension(70, 50));
@@ -151,12 +123,9 @@ public class ConditionalFormatChooser extends JPanel {
 				BorderFactory.createEmptyBorder(5, 5, 5, 5)
 			));
 
-		// Configures layout and adds components
 		setLayout(new BorderLayout(5, 5));
 		add(conditionPanel, BorderLayout.NORTH);
-//		add(boxPanel, BorderLayout.CENTER);
 		add(previewLabel, BorderLayout.SOUTH);
-//		choices.getEditor().getEditorComponent().requestFocus();
 	}
 
 	/**
@@ -256,71 +225,6 @@ public class ConditionalFormatChooser extends JPanel {
 	}
 
 	/**
-	 * Set the format to configure. The default implementation accept instance
-	 * of {@link DecimalFormat} or {@link SimpleDateFormat}.
-	 *
-	 * @param format the format to congifure.
-	 * @throws IllegalArgumentException if the format is invalid.
-	 */
-	public void setFormat(Format format) throws IllegalArgumentException {
-		Format old = this.format;
-		this.format = format;
-		try {
-			update();
-		} catch (IllegalStateException exception) {
-			this.format = old;
-			// The format is not one of recognized type.  Since this format was given in argument
-			// (rather then the internal format field), Change the exception type for consistency
-			// with the usual specification.
-			IllegalArgumentException e = new IllegalArgumentException(
-				exception.getLocalizedMessage());
-			e.initCause(exception);
-			throw e;
-		}
-		firePropertyChange("format", old, format);
-	}
-
-	/**
-	 * Returns the localized pattern for the
-	 * {@linkplain #getFormat current format}. The default implementation
-	 * recognize {@link DecimalFormat} and {@link SimpleDateFormat} instances.
-	 *
-	 * @return The pattern for the current format.
-	 * @throws IllegalStateException is the current format is not one of
-	 * recognized type.
-	 */
-	public String getPattern() throws IllegalStateException {
-		if (format instanceof DecimalFormat) {
-			return ((DecimalFormat) format).toLocalizedPattern();
-		}
-		if (format instanceof SimpleDateFormat) {
-			return ((SimpleDateFormat) format).toLocalizedPattern();
-		}
-		throw new IllegalStateException();
-	}
-
-	/**
-	 * Sets the localized pattern for the
-	 * {@linkplain #getFormat current format}. The default implementation
-	 * recognize {@link DecimalFormat} and {@link SimpleDateFormat} instances.
-	 *
-	 * @param pattern The pattern for the current format.
-	 * @throws IllegalStateException is the current format is not one of
-	 * recognized type.
-	 * @throws IllegalArgumentException if the specified pattern is invalid.
-	 */
-//	public void setPattern(String pattern)
-//		throws IllegalStateException, IllegalArgumentException {
-//		if (format instanceof DecimalFormat) {
-//			((DecimalFormat) format).applyLocalizedPattern(pattern);
-//		} else if (format instanceof SimpleDateFormat) {
-//			((SimpleDateFormat) format).applyLocalizedPattern(pattern);
-//		} else {
-//			throw new IllegalStateException();
-//		}
-//		update();
-//	}
-	/**
 	 * Update the preview text according the current format pattern.
 	 */
 	private void update() {
@@ -335,56 +239,15 @@ public class ConditionalFormatChooser extends JPanel {
 	}
 
 	/**
-	 * Apply the currently selected pattern. If <code>add</code> is
-	 * <code>true</code>, then the pattern is added to the combo box list.
-	 *
-	 * @param add <code>true</code> for adding the pattern to the combo box
-	 * list.
-	 * @return <code>true</code> if the pattern is valid.
-	 */
-//	private boolean applyPattern(boolean add) {
-//		String pattern = choices.getSelectedItem().toString();
-//		if (pattern.trim().length() == 0) {
-//			update();
-//			return false;
-//		}
-//		try {
-//			setPattern(pattern);
-//		} catch (RuntimeException exception) {
-//			/* The pattern is not valid. Replace the value by an error message */
-//			previewLabel.setText(exception.getLocalizedMessage());
-//			previewLabel.setForeground(ERROR_COLOR);
-//			return false;
-//		}
-//		if (add) {
-//			DefaultComboBoxModel model = (DefaultComboBoxModel) choices.
-//				getModel();
-//			pattern = choices.getSelectedItem().toString();
-//			int index = model.getIndexOf(pattern);
-//			if (index > 0) {
-//				model.removeElementAt(index);
-//			}
-//			if (index != 0) {
-//				model.insertElementAt(pattern, 0);
-//			}
-//			int size = model.getSize();
-//			while (size > HISTORY_SIZE) {
-//				model.removeElementAt(size - 1);
-//			}
-//			if (size != 0) {
-//				choices.setSelectedIndex(0);
-//			}
-//		}
-//		return true;
-//	}
-	/**
 	 * Shows a dialog box requesting input from the user.
 	 *
 	 * @param owner the parent component for the dialog box
 	 * @param title the dialog box title
 	 * @return the selected format or, if the user did not press OK, null
 	 */
-	public Format showDialog(Component owner, String title) {
+	public ConditionalFormatChooser showDialog(Component owner,
+											   String title) {
+
 		int returnValue = JOptionPane.showConfirmDialog(
 			owner,
 			this,
@@ -393,10 +256,15 @@ public class ConditionalFormatChooser extends JPanel {
 			JOptionPane.PLAIN_MESSAGE,
 			(Icon) null);
 		if (returnValue == JOptionPane.OK_OPTION) {
-//			if (applyPattern(true)) {
-//				return getFormat();
-//			}
 		}
-		return null;
+		return this;
+	}
+
+	public String getTextFieldText() {
+		return textCondition.getText();
+	}
+
+	public String getChoiseText() {
+		return choicesCondition.getSelectedItem().toString();
 	}
 }
