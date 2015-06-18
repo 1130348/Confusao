@@ -5,6 +5,7 @@
  */
 package csheets.core.formula.lang;
 
+import csheets.core.Array;
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Spreadsheet;
@@ -23,112 +24,135 @@ import java.util.logging.Logger;
  */
 public class Attribution implements BinaryOperator {
 
-    /**
-     * The unique version identifier used for serialization
-     */
-    private static final long serialVersionUID = 4364553607579868087L;
+	/**
+	 * The unique version identifier used for serialization
+	 */
+	private static final long serialVersionUID = 4364553607579868087L;
 
-    /**
-     * Creates a new attribution
-     */
-    public Attribution() {
-    }
+	/**
+	 * Creates a new attribution
+	 */
+	public Attribution() {
+	}
 
-    @Override
-    /**
-     *
-     * Gets the result of the rigth operand and saves int the left operand
-     *
-     *
-     */
-    public Value applyTo(Expression leftOperand, Expression rightOperand) throws IllegalValueTypeException {
-        //Validates if the left operand is a CellReference
-        if (!(leftOperand instanceof CellReference) && !(leftOperand instanceof VariableReference)) {
-            return new Value(new IllegalArgumentException("#OPERAND!"));
-        }
+	@Override
+	/**
+	 *
+	 * Gets the result of the rigth operand and saves int the left operand
+	 *
+	 *
+	 */
+	public Value applyTo(Expression leftOperand, Expression rightOperand) throws IllegalValueTypeException {
+		//Validates if the left operand is a CellReference
+		if (!(leftOperand instanceof CellReference) && !(leftOperand instanceof VariableReference) && !(leftOperand instanceof ArrayReference)) {
+			return new Value(new IllegalArgumentException("#OPERAND!"));
+		}
 
-        
-        Value value;
-        if (leftOperand instanceof CellReference) {
+		Value value;
+		if (leftOperand instanceof CellReference) {
 
-            CellReference ref1 = (CellReference) leftOperand;
+			CellReference ref1 = (CellReference) leftOperand;
 
-            Cell cell;
-            try {
+			Cell cell;
+			try {
 
-                cell = getCell(ref1);
-            } catch (IllegalArgumentException e) {
-                return new Value(e);
-            }
-            value = rightOperand.evaluate();
+				cell = getCell(ref1);
+			} catch (IllegalArgumentException e) {
+				return new Value(e);
+			}
+			value = rightOperand.evaluate();
 
-            try {
+			try {
 
-                cell.setContent(value.toString());
-            } catch (FormulaCompilationException ex) {
-                Logger.getLogger(Attribution.class.getName()).
-                    log(Level.SEVERE, null, ex);
-            }
-        } else if (leftOperand instanceof VariableReference) {
+				cell.setContent(value.toString());
+			} catch (FormulaCompilationException ex) {
+				Logger.getLogger(Attribution.class.getName()).
+					log(Level.SEVERE, null, ex);
+			}
+		} else if (leftOperand instanceof VariableReference) {
 
-            VariableReference ref1 = (VariableReference) leftOperand;
+			VariableReference ref1 = (VariableReference) leftOperand;
 
-            Variable variable;
-            try {
+			Variable variable;
+			try {
 
-                variable = ref1.getVariable();
-            } catch (IllegalArgumentException e) {
-                return new Value(e);
-            }
-            value = rightOperand.evaluate();
+				variable = ref1.getVariable();
+			} catch (IllegalArgumentException e) {
+				return new Value(e);
+			}
+			value = rightOperand.evaluate();
+			if (variable instanceof Array) {
+				Array temp = (Array) ref1.getWorkbook().getVariable(leftOperand.
+					toString());
+				temp.setPositionValue(0, value);
+			}
+			variable.setValue(value);
+		} else if (leftOperand instanceof ArrayReference) {
+			ArrayReference ref1 = (ArrayReference) leftOperand;
 
-            variable.setValue(value);
-        }
-        value = new Value();
-        return value;
-    }
+			Array array;
+			try {
 
-    /**
-     * Returns the range of cells formed by the two cell references.
-     *
-     * @param reference1 the first reference
-     * @param reference2 the other reference
-     * @return an array of the cells that constitute the range
-     */
-    public Cell getCell(Reference reference1) {
-        // Casts operands
-        if (!(reference1 instanceof CellReference)) {
-            throw new IllegalArgumentException("#OPERAND!");
-        }
-        CellReference ref1 = (CellReference) reference1;
+				array = ref1.getArray();
+			} catch (IllegalArgumentException e) {
+				return new Value(e);
+			}
 
-        // Checks that the references point to cells in the same spreadsheet
-        Spreadsheet spreadsheet = ref1.getCell().getSpreadsheet();
+			int actualPosition = array.getActualPosition();
+			value = rightOperand.evaluate();
+			if (actualPosition == 0) {
+				array.setValue(value);
+			}
+			array.setPositionValue(actualPosition, value);
+			System.out.
+				println("Valor da posição " + actualPosition + " = " + array.
+					getPositionValue(actualPosition));
+		}
+		value = new Value();
+		return value;
+	}
 
-        // Fetches coordinates
-        int column1 = ref1.getCell().getAddress().getColumn();
+	/**
+	 * Returns the range of cells formed by the two cell references.
+	 *
+	 * @param reference1 the first reference
+	 * @param reference2 the other reference
+	 * @return an array of the cells that constitute the range
+	 */
+	public Cell getCell(Reference reference1) {
+		// Casts operands
+		if (!(reference1 instanceof CellReference)) {
+			throw new IllegalArgumentException("#OPERAND!");
+		}
+		CellReference ref1 = (CellReference) reference1;
 
-        int row1 = ref1.getCell().getAddress().getRow();
+		// Checks that the references point to cells in the same spreadsheet
+		Spreadsheet spreadsheet = ref1.getCell().getSpreadsheet();
 
-        //Get Cell
-        Cell cell = spreadsheet.
-            getCell(column1, row1);
+		// Fetches coordinates
+		int column1 = ref1.getCell().getAddress().getColumn();
 
-        return cell;
-    }
+		int row1 = ref1.getCell().getAddress().getRow();
 
-    @Override
-    public String getIdentifier() {
-        return ":=";
-    }
+		//Get Cell
+		Cell cell = spreadsheet.
+			getCell(column1, row1);
 
-    @Override
-    public Value.Type getOperandValueType() {
-        return Value.Type.TEXT;
-    }
+		return cell;
+	}
 
-    @Override
-    public String toString() {
-        return getIdentifier();
-    }
+	@Override
+	public String getIdentifier() {
+		return ":=";
+	}
+
+	@Override
+	public Value.Type getOperandValueType() {
+		return Value.Type.TEXT;
+	}
+
+	@Override
+	public String toString() {
+		return getIdentifier();
+	}
 }

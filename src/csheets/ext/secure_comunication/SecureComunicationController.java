@@ -10,7 +10,6 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.net.ssl.SSLSocket;
 
 /**
  *
@@ -19,7 +18,7 @@ import javax.net.ssl.SSLSocket;
 public class SecureComunicationController {
 
     Set<InetAddress> activeIPs;
-    Set<SSLSocket> connectedIPs;
+    Set<InetAddress> connectedIPs;
 
     public SecureComunicationController() {
     }
@@ -35,13 +34,13 @@ public class SecureComunicationController {
 
     public void starSSL() {
         NetworkService.isVisibleToOthers(true);
-        NetworkService.startSSLServer();
+        SSLService.startServer();
     }
 
     public boolean newSSLConnection(String selectedValue) {
         for (InetAddress i : activeIPs) {
             if (selectedValue.equals(i.getHostName())) {
-                return NetworkService.establishSSLConnectionToUser(i);
+                return SSLService.establishSecureConnectionToUser(i);
             }
         }
         return false;
@@ -49,17 +48,25 @@ public class SecureComunicationController {
 
     public List<String> refreshConnections() {
         List<String> listInstances = new ArrayList<>();
-        connectedIPs = NetworkService.getSSLConnectionsActive();
-        for (SSLSocket ssls : connectedIPs) {
-            listInstances.add(ssls.getInetAddress().getHostName());
+        connectedIPs = SSLService.getConnectionsActive();
+        for (InetAddress i : connectedIPs) {
+            listInstances.add(i.getHostName());
         }
         return listInstances;
     }
 
-    public void sendMessage(String ssls, String message) {
-        for (SSLSocket ssl : connectedIPs) {
-            if (ssls.equals(ssl.getInetAddress().getHostName())) {
-                NetworkService.sendSecureMessages(message, ssl);
+    public void sendMessage(String name, String message) {
+        for (InetAddress ssl : connectedIPs) {
+            if (name.equals(ssl.getHostName())) {
+                SSLService.sendSecureMessages(message, ssl);
+            }
+        }
+    }
+    
+    public void removeConnection(String name){
+        for (InetAddress ssl : connectedIPs) {
+            if (name.equals(ssl.getHostName())) {
+                SSLService.disconnectSecureConnectionToUser(ssl);
             }
         }
     }
