@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.networkSearch.ui;
+package csheets.ext.MacrosWindow.ui;
 
 import csheets.ui.ctrl.UIController;
 import javax.swing.JMenu;
 
 /**
  *
- * @author Luis
+ * @author João Paiva da Costa Pinto <1130385@isep.ipp.pt>
  */
-class NetworkSearchMenu extends JMenu {
-
-	public NetworkSearchMenu(UIController uiController) {
-		super("Network Search");
+public class MacrosWindowMenu extends JMenu {
+    
+     public MacrosWindowMenu(UIController uiController) {
+		super("Macros");
 		//setMnemonic(KeyEvent.);
 
 		// Adds send action
-		add(new NetworkSearchAction(uiController));
+		add(new MacrosWindowAction(uiController));
 	}
 }
