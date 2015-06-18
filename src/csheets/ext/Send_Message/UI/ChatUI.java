@@ -102,7 +102,6 @@ public class ChatUI extends JFrame {
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
-                    System.out.println(ConList.get(index));
                     selectedCon = ConList.get(index).toString();
                     try {
                         SendMessageController.StartCon();
@@ -141,7 +140,6 @@ public class ChatUI extends JFrame {
     }
 
     public void setMsg(String msg) {
-        System.out.println(msg);
         if (!msg.substring(msg.indexOf(":") + 2, msg.length()).equals("")) {
             MsgList.addElement(msg);
             MessagesList.ensureIndexIsVisible(MsgList.size() - 1);
@@ -151,7 +149,9 @@ public class ChatUI extends JFrame {
 
     public void SetConnection(String msg) {
         if (!msg.equals("")) {
-            ConList.addElement(msg);
+            if(!ConList.contains(msg)){
+                ConList.addElement(msg);
+            }
         }
 
     }

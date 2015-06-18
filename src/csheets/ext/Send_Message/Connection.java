@@ -105,7 +105,6 @@ public class Connection extends Thread {
     }
     
     public void setUI(ChatUI ui){
-        System.out.println(":"+ui.getName());
         Connection.ui = ui;
     }
 

@@ -51,9 +51,10 @@ public class UIExtensionSendMessage extends UIExtension {
      * @return a JMenu component
      */
     public JMenu getMenu() {
-		if (menu == null)
-			menu = new SendMessageMenu(uiController);
-		return menu;
-	}
+        if (menu == null) {
+            menu = new SendMessageMenu(uiController);
+        }
+        return menu;
+    }
 
 }
