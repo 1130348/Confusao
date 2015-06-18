@@ -84,12 +84,12 @@ public class SSLService {
                 ex.printStackTrace();
             }
         } catch (IOException ex) {
-            Logger.getLogger(SSLService.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             try {
                 bufferedwriter.close();
             } catch (IOException ex) {
-                Logger.getLogger(SSLService.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }
