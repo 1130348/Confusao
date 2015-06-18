@@ -127,26 +127,28 @@ public class NetworkSendService {
         }
     }
 
-    public static void establishConnectionToUser(InetAddress address) {
-        try {
-            cliente = new Socket(address, 9001);
-            connectionState = true;
-            System.out.println("O cliente se conectou ao servidor!");
-        } catch (IOException ex) {
-            Logger.getLogger(NetworkSendService.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
-    }
+	public static void establishConnectionToUser(InetAddress address) {
+		try {
+			cliente = new Socket(address, 9001);
+			connectionState = true;
+			System.out.println("O cliente conectou-se ao servidor!");
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+	}
 
-    public static void sendUserInfo(Player playerToSend) {
-        ObjectOutputStream saida;
-        try {
-            saida = new ObjectOutputStream(cliente.
-                    getOutputStream());
-            saida.writeObject(playerToSend);
-        } catch (IOException ex) {
-            Logger.getLogger(NetworkSendService.class.getName()).
-                    log(Level.SEVERE, null, ex);
-        }
-    }
+	public static void sendUserInfo(Player playerToSend) {
+		ObjectOutputStream saida;
+		try {
+			saida = new ObjectOutputStream(cliente.
+				getOutputStream());
+			saida.writeObject(playerToSend);
+		} catch (IOException ex) {
+			Logger.getLogger(NetworkSendService.class.getName()).
+				log(Level.SEVERE, null, ex);
+		}
+
+	}
+
 }
