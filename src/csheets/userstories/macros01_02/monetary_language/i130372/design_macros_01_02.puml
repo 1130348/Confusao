@@ -1,0 +1,62 @@
+@startuml doc-files/design_macros_01_02.png
+ actor User
+ participant "CellUI" as UI
+ participant "CellCtrl" as ctrl
+ participant "Cell" as cell
+ participant "Formula" as formula
+ participant "FormulaCompiler" as formulaCompiler
+ participant "Expression" as expression
+ participant "ExpressionCompiler" as expressionCompiler
+ participant "ANTLRStringStream" as antlr
+ participant "FormulaLexer" as formulaLexer
+ participant "CommonTokenStream" as tokStream
+ participant "FormulaParser" as formulaParser
+ participant "CommonTree" as tree
+
+User -> UI : string
+activate UI
+UI -> ctrl : setContent(string)
+activate ctrl
+deactivate UI
+ctrl -> cell : setContent(string)
+activate cell
+deactivate ctrl
+cell -> cell : storeContent(string)
+activate formula
+cell -> formula : formula = create()
+deactivate formula
+activate formulaCompiler
+cell -> formulaCompiler : formula = compile(this,string)
+activate expression
+formulaCompiler -> expression : expression = create()
+deactivate expression
+activate expressionCompiler
+formulaCompiler -> expressionCompiler : expression = compile(cell, string)
+activate antlr
+expressionCompiler -> antlr : input = create(string)
+deactivate antlr
+activate formulaLexer
+expressionCompiler -> formulaLexer : lexer = create(input)
+deactivate formulaLexer
+activate tokStream
+expressionCompiler -> tokStream : tokens = create(lexer)
+deactivate tokStream
+activate formulaParser
+expressionCompiler -> formulaParser : parser = create(tokens)
+deactivate formulaParser
+activate tree
+expressionCompiler -> tree : tree = create()
+deactivate tree
+activate formulaParser
+expressionCompiler -> formulaParser : tree = expression().getTree()
+deactivate formulaParser
+expressionCompiler -> expressionCompiler : expression = convert(cell, tree)
+formulaCompiler <-- expressionCompiler : expression
+deactivate expressionCompiler
+formulaCompiler --> cell : formula
+deactivate formulaCompiler
+cell -> cell : updateDependencies()
+cell -> cell : fireContentChanged()
+cell -> cell : reevaluate()
+
+@enduml

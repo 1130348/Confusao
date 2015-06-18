@@ -21,73 +21,72 @@ import java.util.logging.Logger;
  */
 public class RespondToUDPRequest implements Runnable {
 
-	private DatagramSocket sock;
-	private final int portUDP;
-	private final int portTCP;
+    private DatagramSocket sock;
+    private final int portUDP;
+    private final int portTCP;
 
-	public RespondToUDPRequest(int portUDP, int portTCP) {
-		this.portUDP = portUDP;
-		this.portTCP = portTCP;
-	}
+    public RespondToUDPRequest(int portUDP, int portTCP) {
+        this.portUDP = portUDP;
+        this.portTCP = portTCP;
+    }
 
-	@Override
-	public void run() {
-		byte[] data = new byte[300];
-		String message;
-		InetAddress clientIP;
-		int clientPort;
+    @Override
+    public void run() {
+        byte[] data = new byte[300];
+        String message;
+        InetAddress clientIP;
+        int clientPort;
 
-		try {
-			sock = new DatagramSocket(portUDP);
-		} catch (BindException ex) {
-			System.out.println("The choosen port is not available!");
-		} catch (SocketException ex) {
-			Logger.getLogger(RespondToUDPRequest.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
+        try {
+            sock = new DatagramSocket(portUDP);
+        } catch (BindException ex) {
+            System.out.println("The choosen port is not available!");
+        } catch (SocketException ex) {
+            System.out.println("Socket Exception UDP");
+        }
 
-		String localName = "";
-		try {
-			localName = InetAddress.getLocalHost().getCanonicalHostName();
-		} catch (UnknownHostException ex) {
-			Logger.getLogger(RespondToUDPRequest.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
+        String localName = "";
+        try {
+            localName = InetAddress.getLocalHost().getCanonicalHostName();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(RespondToUDPRequest.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
 
-		while (true) {
-			try {
+        while (true) {
+            try {
 
-				DatagramPacket request = new DatagramPacket(data, data.length);
-				sock.receive(request);
-				message = new String(request.getData(), 0, request.getLength());
-				System.out.println("Mensagem" + message);
+                DatagramPacket request = new DatagramPacket(data, data.length);
+                sock.receive(request);
+                message = new String(request.getData(), 0, request.getLength());
+                System.out.println("Mensagem" + message);
 
-				if (message.equals("Exit")) {
-					sock.close();
-					break;
-				}
+                if (message.equals("Exit")) {
+                    sock.close();
+                    break;
+                }
 
-				clientIP = request.getAddress();
-				clientPort = request.getPort();
+                clientIP = request.getAddress();
+                clientPort = request.getPort();
 
-				System.out.println("Client: " + clientPort);
-				String port = String.format("%d", portTCP);
-				data = port.getBytes();
-				//if (!(clientIP.getCanonicalHostName()).equals(localName)) {
-					DatagramPacket resposta = new DatagramPacket(data, port.
-																 length(), clientIP, clientPort);
+                System.out.println("Client: " + clientPort);
+                String port = String.format("%d", portTCP);
+                data = port.getBytes();
+                //if (!(clientIP.getCanonicalHostName()).equals(localName)) {
+                DatagramPacket resposta = new DatagramPacket(data, port.
+                        length(), clientIP, clientPort);
 
-					NetworkService.
-						addClientToMap(Integer.parseInt(message), request.
-									   getAddress());
-					sock.send(resposta);
-				//}
+                NetworkService.
+                        addClientToMap(Integer.parseInt(message), request.
+                                getAddress());
+                sock.send(resposta);
+                //}
 
-			} catch (IOException ex) {
-				Logger.getLogger(RespondToUDPRequest.class.getName()).
-					log(Level.SEVERE, null, ex);
-			}
-		}
-	}
+            } catch (IOException ex) {
+                Logger.getLogger(RespondToUDPRequest.class.getName()).
+                        log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
 }

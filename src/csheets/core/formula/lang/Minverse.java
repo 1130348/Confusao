@@ -39,7 +39,7 @@ public class Minverse implements Function {
     @Override
     public Value applyTo(Expression[] args) throws IllegalValueTypeException {
         Value[][] sum = null;
-        Value ret = null;
+        Value ret = new Value("#ERROR");
         Value value = args[0].evaluate();
         if (value.getType() == Value.Type.MATRIX
                 && args.length == 1) {
@@ -48,7 +48,8 @@ public class Minverse implements Function {
                 sum = MatrixMathematics.inverse(matrix1);
                 ret = new Value(sum);
             } catch (NoSquareException ex) {
-                ret = new Value("#ERROR");
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            } catch (MatrixIsNotInvertibleException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {

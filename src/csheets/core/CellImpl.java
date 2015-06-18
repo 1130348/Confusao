@@ -25,6 +25,7 @@ import csheets.core.formula.Reference;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.compiler.FormulaCompiler;
 import csheets.core.formula.lang.CellReference;
+import csheets.core.formula.lang.ReferenceOperation;
 import csheets.core.formula.lang.VariableReference;
 import csheets.core.formula.util.ReferenceTransposer;
 import csheets.ext.CellExtension;
@@ -178,8 +179,12 @@ public class CellImpl implements Cell {
                 Value[][] matrix = value.toMatrix();
                 for (int i = 0; i < matrix.length; i++) {
                     for (int j = 0; j < matrix[0].length; j++) {
-                        String content = matrix[i][j].toString().replace(".", ",");
-                        spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
+                        if (i == 0 && j == 0) {
+                            this.value = matrix[0][0];
+                        } else {
+                            String content = matrix[i][j].toString().replace(".", ",");
+                            spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
+                        }
                     }
                 }
 
@@ -282,6 +287,13 @@ public class CellImpl implements Cell {
                     }
                 } else if (reference instanceof VariableReference) {
 
+                } else if (reference instanceof ReferenceOperation) {
+                    for (Cell precedent : reference.getCells()) {
+                        if (!this.equals(precedent)) {
+                            precedents.add(precedent);
+                            ((CellImpl) precedent).addDependent(this);
+                        }
+                    }
                 }
             }
         }
