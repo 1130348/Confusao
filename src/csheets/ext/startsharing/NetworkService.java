@@ -39,19 +39,19 @@ public class NetworkService {
 
     private static Thread gameServerThread;
     private static Thread serverThread;
-    private static SSLServer sslServer;
     private static ArrayList<Socket> clientConnections = clientConnections = new ArrayList<>();
-    ;
-    private static ArrayList<Socket> secureConnections = new ArrayList<>();
     private static int portTCP = 8888;
     private static final int portUDP = 9050;
-    private static final int portSSL = 1337;
     public static Map<InetAddress, Integer> activeInstances = new HashMap<>();
 
     public static void sendSearchRequest(InetAddress newAddress,
             String workbookName) {
         SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
         client.sendWorkbookName(newAddress, workbookName);
+    }
+
+    static void addSSLSocket(Socket cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -98,11 +98,6 @@ public class NetworkService {
             Logger.getLogger(NetworkService.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-    }
-
-    public static boolean establishSSLConnectionToUser(InetAddress in) {
-        if (NetworkSendService.establishSecureConnectionToUser(in)) return true;
-        return false;
     }
 
     public static Map<InetAddress, Integer> searchInstances() {
@@ -205,20 +200,11 @@ public class NetworkService {
         serverThread.start();
     }
 
-    /**
-     *
-     */
-    public static void startSSLServer() {
-        sslServer = new SSLServer(portSSL);
-    }
 
     public static void interruptConnection() {
         serverThread.interrupt();
     }
 
-    public static void interruptSSLConnection() {
-        sslServer.interrupt();
-    }
 
     public static void receiveCells(List<Cell> newCells,
             SendCellsAction cellsAction) {
@@ -242,17 +228,5 @@ public class NetworkService {
             Workbook workbook) {
         SearchOnAnotherInstanceClient client = new SearchOnAnotherInstanceClient();
         client.sendWorkbook(address, workbook);
-    }
-
-    public static void sendSecureMessages(String str, Socket client) {
-        try {
-            NetworkSendService.sendString(str, new DataOutputStream(client.getOutputStream()));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static Set<SSLSocket> getSSLConnectionsActive() {
-        return sslServer.getConnectionsList();
     }
 }

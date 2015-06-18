@@ -71,7 +71,7 @@ public class SecureComunicationPanel extends JPanel {
         border.setTitleJustification(TitledBorder.CENTER);
 
         panel.setBorder(border);
-        
+
         JPanel panel2 = new JPanel();
         panel2.setLayout(
                 new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
@@ -88,9 +88,9 @@ public class SecureComunicationPanel extends JPanel {
         border2.setTitleJustification(TitledBorder.CENTER);
 
         panel2.setBorder(border2);
-        add(panel,BorderLayout.NORTH);
-        add(panel2,BorderLayout.CENTER);
-        add(refresh,BorderLayout.SOUTH);
+        add(panel, BorderLayout.NORTH);
+        add(panel2, BorderLayout.CENTER);
+        add(refresh, BorderLayout.SOUTH);
 
     }
 
@@ -100,22 +100,38 @@ public class SecureComunicationPanel extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                        if (secureComunicationController.newSSLConnection(clientList.getSelectedValue().toString())) {
-                            JOptionPane.showMessageDialog(null, "You are now connected with "+clientList.getSelectedValue().toString(), "Connection Success",JOptionPane.INFORMATION_MESSAGE);
+                        int option;
+                        String inet = clientList.getSelectedValue().toString();
+                        if (secureComunicationController.refreshConnections().contains(inet)) {
+                            option = JOptionPane.showConfirmDialog(null, "You want to disconnect with " + inet, "Remove Secure Connection", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if (option == 0) {
+                                secureComunicationController.removeConnection(inet);
+                            }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Some error occured during the connection","Connection Failed",JOptionPane.ERROR_MESSAGE);
+                            if (secureComunicationController.refreshConnections().contains(inet)) {
+                                option = JOptionPane.showConfirmDialog(null, "You want to connect with " + inet, "New Secure Connection", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                                if (option == 0) {
+
+                                    if (secureComunicationController.newSSLConnection(inet)) {
+                                        JOptionPane.showMessageDialog(null, "You are now connected with " + clientList.getSelectedValue().toString(), "Connection Success", JOptionPane.INFORMATION_MESSAGE);
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Some error occured during the connection", "Connection Failed", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-            });
+            }
+            );
         }
         if (connectedList != null) {
             connectedList.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                       String message=JOptionPane.showInputDialog("null","New Message");
-                       secureComunicationController.sendMessage(clientList.getSelectedValue().toString(), message);
+                        String message = JOptionPane.showInputDialog("null", "New Message");
+                        secureComunicationController.sendMessage(clientList.getSelectedValue().toString(), message);
                     }
                 }
             });

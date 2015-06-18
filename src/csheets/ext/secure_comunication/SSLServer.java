@@ -5,11 +5,10 @@
  */
 package csheets.ext.secure_comunication;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Semaphore;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
@@ -22,9 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class SSLServer implements Runnable {
 
-    boolean isRunning;
     int port;
-    Map<SSLSocket, DataOutputStream> clientConnections;
+    Map<InetAddress, ReceiveMessages> clientConnections;
     SSLServerSocket serverSocket;
     Semaphore sem;
     Thread thread;
@@ -33,8 +31,7 @@ public class SSLServer implements Runnable {
         this.port = port;
         this.clientConnections = new HashMap<>();
         this.sem = new Semaphore(1);
-        this.isRunning = true;
-        this.thread=new Thread();
+        this.thread = new Thread();
         this.thread.start();
     }
 
@@ -45,35 +42,42 @@ public class SSLServer implements Runnable {
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(port);
             SSLSocket client;
-            while (isRunning) {
+            while (!thread.isInterrupted()) {
                 sem.acquire();
                 client = (SSLSocket) serverSocket.accept();
-                option = JOptionPane.showConfirmDialog(null, client.
-                        getInetAddress().
-                        getCanonicalHostName() + " wants to establish a secure comunication, do you accept it?", "Secure comunication request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (option == 0) {
+                if (SSLService.getConnectionsActive().contains(client.getInetAddress())) {
                     clientConnections.
-                            put(client, new DataOutputStream(client.
-                                            getOutputStream()));
-
-                    new Thread(new ReceiveMessages(client)).start();
+                            put(client.
+                                    getInetAddress(), new ReceiveMessages(client));
                 } else {
-                    client.close();
+                    option = JOptionPane.showConfirmDialog(null, client.
+                            getInetAddress().
+                            getCanonicalHostName() + " wants to establish a secure comunication, do you accept it?", "Secure comunication request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (option == 0) {
+                        clientConnections.
+                                put(client.
+                                        getInetAddress(), new ReceiveMessages(client));
+                        SSLService.establishSecureConnectionToUser(client.getInetAddress());
+                    } else {
+                        client.close();
+                    }
                 }
                 sem.release();
             }
         } catch (InterruptedException | IOException ex) {
             ex.printStackTrace();
         }
-
-    }
-    
-    public Set<SSLSocket> getConnectionsList(){
-       return clientConnections.keySet();
     }
 
     public void interrupt() {
+        for (ReceiveMessages receive : clientConnections.values()) {
+            receive.interrupt();
+        }
         thread.interrupt();
     }
 
+    public void removeConnection(InetAddress address) {
+        this.clientConnections.get(address).interrupt();
+        this.clientConnections.remove(address);
+    }
 }
