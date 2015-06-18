@@ -47,18 +47,24 @@
  * implementation of this process so all the classes will be created from scratch.<br/>
 
  * <h2>3. Tests</h2>
- * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to enable the use of a Export function.
- * For testing we will test if the content selected by the user corresponds to
- * the content exported.
- * <br/>
- * As usual, in a test driven development approach tests normally fail in the
+ * Basically, from requirements and also analysis, we see that the core 
+ * functionality of this use case is to be able to import or export data from
+ * a text file.<br/>
+ * I have to perform functional tests to see if the file is being created when
+ * doing an exportation. I also need to test if the data from the text file is 
+ * being imported correctly. Furthermore I also have to test if the file created 
+ * by the exportation has the correct data.<br/>
+ * As usual, in a test driven development approach tests normally fail in the 
  * beginning. The idea is that the tests will pass in the end.
- * <br/>
+ * <br/> 
  * <br/>
  *
  * <h2>4. Design</h2>
- *
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.
+ * <br/>
+ * <img src="doc-files/core08_01_design.png"/>
+ * <br/>
  * </br>
  *
  * <h2>5. Coding</h2>
