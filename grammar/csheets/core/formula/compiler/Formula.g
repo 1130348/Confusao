@@ -158,7 +158,7 @@ ARRAY
 		;
 
 ALPHA
-		: (((DIGIT)+(LETTER)+) | ((LETTER)+(DIGIT)+))*
+		: (LETTER|DIGIT)*(LETTER|DIGIT)(LETTER|DIGIT)*
 		;
 
 /* String literals, i.e. anything inside the delimiters */

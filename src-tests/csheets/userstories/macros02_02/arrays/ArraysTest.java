@@ -135,8 +135,8 @@ public class ArraysTest {
 	 */
 	@Test
 	public void testEditArray() {
-		String line = "=@ola[2]:=3+3";
-		Value expResult = new Value(6);
+		String line = "=@ola[1]:=50";
+		Value expResult = new Value(50);
 		Value result = new Value();
 		ANTLRStringStream input = new ANTLRStringStream(line);
 
@@ -158,7 +158,7 @@ public class ArraysTest {
 				SortedSet<Variable> vars = workbook.getVariables();
 				for (Variable v : vars) {
 					if (v.getName().equals("@ola")) {
-						result = v.getPositionValue(2);
+						result = v.getPositionValue(1);
 					}
 				}
 			}
