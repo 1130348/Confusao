@@ -1,0 +1,48 @@
+@startuml doc-files/core08_01_design.png
+
+ actor User
+ participant "ExportUI" as UI
+ participant "ExportCtrl" as ctrl
+ participant "ExportProcess" as process
+ participant "<<interface>>\nExportStrategy" as strategy
+ participant "ExportStrategyFactory" as strategyFactory
+ participant "Workbook" as Workbook
+ participant "SpreadSheet" as spreadsheet
+ participant "Cell" as cell
+User -> UI : startXMLExportProcess
+activate UI
+UI -> ctrl : selectExportProcess(XML)
+activate ctrl
+deactivate UI
+ctrl -> process : create()
+activate process
+deactivate process
+ctrl -> Workbook : getElements()
+activate Workbook
+loop while user selects
+Workbook -> spreadsheet : getSelectedSpreadsheet(spreadsheet)
+activate spreadsheet
+spreadsheet -> cell : getSelectedCell(cell)
+activate cell
+deactivate cell
+deactivate spreadsheet
+end while
+deactivate Workbook
+ctrl -> process : selectedElements(Workbook)
+activate process
+deactivate ctrl
+process -> strategyFactory : getInstance()
+activate strategyFactory
+process -> strategyFactory : getExportStrategy(XML)
+deactivate process
+deactivate strategyFactory
+activate ctrl
+ctrl -> process : export()
+activate process
+deactivate ctrl
+process -> strategy : export(this)
+deactivate process
+activate strategy
+
+
+@enduml

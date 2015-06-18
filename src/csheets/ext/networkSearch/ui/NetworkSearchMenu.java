@@ -15,7 +15,7 @@ import javax.swing.JMenu;
 class NetworkSearchMenu extends JMenu {
 
 	public NetworkSearchMenu(UIController uiController) {
-		super("Local Network");
+		super("Network Search");
 		//setMnemonic(KeyEvent.);
 
 		// Adds send action

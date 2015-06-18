@@ -15,17 +15,18 @@ import java.util.Observer;
  */
 public class ReportWatch extends Observable implements Observer {
 
-    public ReportWatch() {
-    }
+	public ReportWatch() {
+	}
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (arg instanceof ReportEvent) {
-            Workbook workbook = ((ReportEvent) arg).getWorkbook();
-            String resume = ReportCreater.createResume(workbook);
-            setChanged();
-            notifyObservers(resume);
-        }
-    }
+	@Override
+	public void update(Observable o, Object arg) {
+		if (arg instanceof ReportEvent) {
+			Workbook workbook = ((ReportEvent) arg).getWorkbook();
+			String instancia = ((ReportEvent) arg).getInstancia();
+			String resume = ReportCreater.createResume(workbook, instancia);
+			setChanged();
+			notifyObservers(resume);
+		}
+	}
 
 }

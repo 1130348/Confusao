@@ -17,6 +17,11 @@ import java.util.List;
 public class InsertImageCell extends CellExtension {
 
     /**
+     * The unique version identifier used for serialization
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * The image path
      */
     private String path;

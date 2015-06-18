@@ -30,7 +30,7 @@ public class FunctionCaller {
     }
 
     public Value executeFunc(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
-        String identifier = func_def.substring(1, func_def.
+        String identifier = func_def.substring(0, func_def.
             indexOf("("));
         Function function = Language.getInstance().getFunction(identifier);
         List<Expression> args = new ArrayList<Expression>();

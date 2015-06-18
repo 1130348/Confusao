@@ -41,7 +41,7 @@ public class CallFunctionController {
 
     public String chooseFunction(String identifier) throws UnknownElementException {
         Function func = Language.getInstance().getFunction(identifier);
-        String func_def = "=" + func.getIdentifier() + "(";
+        String func_def = func.getIdentifier() + "(";
         for (FunctionParameter p : func.getParameters()) {
             func_def += p.getName() + ";";
         }

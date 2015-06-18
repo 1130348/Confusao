@@ -12,16 +12,25 @@ import csheets.core.Workbook;
  * @author Paulo Pereira <1130419@isep.ipp.pt>
  */
 public class ReportEvent {
-    
-    private Workbook workbook;
 
-    public ReportEvent(Workbook workbook) {
-        this.workbook = workbook;
-    }
+	private Workbook workbook;
+	private String instancia;
 
-    public Workbook getWorkbook() {
-        return workbook;
-    }
+	public ReportEvent(Workbook workbook) {
+		this.workbook = workbook;
+	}
 
-    
+	public ReportEvent(Workbook workbook, String instancia) {
+		this.workbook = workbook;
+		this.instancia = instancia;
+	}
+
+	public Workbook getWorkbook() {
+		return workbook;
+	}
+
+	public String getInstancia() {
+		return instancia;
+	}
+
 }

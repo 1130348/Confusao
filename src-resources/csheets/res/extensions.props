@@ -15,3 +15,4 @@ csheets.ext.Sort.SortExtension
 csheets.ext.Insert_Image.InsertImageExtension
 csheets.ext.secure_comunication.SecureComunicationExtension
 csheets.ext.search.SearchExtension
+csheets.ext.MacrosWindow.MacrosWindowExtension
