@@ -1,0 +1,37 @@
+@startuml doc-files/design_macros_02_02.png
+ actor User
+ participant "CellUI" as UI
+ participant "CellCtrl" as ctrl
+ participant "Cell" as cell
+ participant "Formula" as formula
+ participant "FormulaCompiler" as formulaCompiler
+ participant "Expression" as expression
+ participant "ExcelExpressionCompiler" as expressionCompiler
+ participant "Array" as array
+ participant "WorkBook" as workbook
+
+User -> UI : string
+UI -> ctrl : setContent(string)
+ctrl -> cell : setContent(string)
+cell -> cell : storeContent(string)
+cell -> formula : formula = create()
+cell -> formulaCompiler : formula = compile(this,string)
+formulaCompiler -> expression : expression = create()
+formulaCompiler -> expressionCompiler : expression = compile(cell, string)
+expressionCompiler -> expressionCompiler : expression = convert(cell, tree)
+
+alt case not exists
+create array
+expressionCompiler -> array : create(name,value,workbook,position)
+expressionCompiler -> workbook : add(array)
+else
+expressionCompiler -> array : setPositionValue(position,value)
+end
+
+formulaCompiler <-- expressionCompiler : expression
+formulaCompiler --> cell : formula
+cell -> cell : updateDependencies()
+cell -> cell : fireContentChanged()
+cell -> cell : reevaluate()
+
+@enduml

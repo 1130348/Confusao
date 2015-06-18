@@ -1,0 +1,27 @@
+@startuml doc-files/ipc_02_02_sequence_diagram_design.png
+@startuml
+
+actor user
+
+participant "FindWorkbooksPanel" as findworkbookspanel
+participant "workbook" as workbook
+participant "s: Spreadsheet" as spreadsheet
+participant "c: Cell" as cell
+participant "a: Address" as address
+
+user -> findworkbookspanel: Chooses the workbook to see the preview
+
+findworkbookspanel -> workbook: getSpreadsheetCount()
+
+loop
+    findworkbookspanel -> workbook: s = getSpreadsheet()
+    loop
+        findworkbookspanel -> spreadsheet: c = getCell()
+        findworkbookspanel -> cell: a = getAddress()
+        findworkbookspanel -> address: getColumn()
+        findworkbookspanel -> address: getRow()
+        findworkbookspanel -> cell: getContent()
+    end loop
+end loop
+
+@enduml

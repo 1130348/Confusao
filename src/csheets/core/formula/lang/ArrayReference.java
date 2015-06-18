@@ -1,54 +1,39 @@
 /*
- * Copyright (c) 2005 Einar Pehrson <einar@pehrson.nu>.
- *
- * This file is part of
- * CleanSheets - a spreadsheet application for the Java platform.
- *
- * CleanSheets is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * CleanSheets is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with CleanSheets; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package csheets.core.formula.lang;
 
+import csheets.core.Array;
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.Variable;
-import csheets.core.Workbook;
 import csheets.core.formula.Reference;
 import csheets.core.formula.util.ExpressionVisitor;
 import csheets.core.formula.util.ExpressionVisitorException;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.Vector;
 import java.util.regex.Pattern;
 
 /**
- * A reference to a cell in a spreadsheet.
  *
- * @author Einar Pehrson
+ * @author Sergio
  */
-public class VariableReference implements Reference {
+public class ArrayReference implements Reference {
 
 	/**
 	 * The unique version identifier used for serialization
 	 */
-	private static final long serialVersionUID = -6600693551615086693L;
+	private static final long serialVersionUID = -6700695451615096683L;
 
 	/**
 	 * The regular expression pattern used to match cell references:
 	 * (\\$??)([a-zA-Z]+)(\\$??)(\\d+)$")
 	 */
 	private static final Pattern PATTERN = Pattern.compile(
-		"@[a-zA-Z]([a-zA-Z]|[1-9])*");
+		"@[a-zA-Z]([a-zA-Z]|[1-9])*\\[[1-9][0-9]*\\]");
 
 	/**
 	 * The string used to match the use of absolute references
@@ -58,30 +43,30 @@ public class VariableReference implements Reference {
 	/**
 	 * The cell to which the reference points
 	 */
-	private Variable variable;
+	private Array array;
 
 	private String name;
 
-	private Workbook workbook;
+	private Vector<Value> positions;
+
+	private int actualPosition;
 
 	/**
 	 * Creates a new Variable reference to the given address, using the given
 	 * reference mode.
 	 *
-	 * @param variable
+	 * @param array
 	 */
-	public VariableReference(Variable variable) {
-		this.variable = variable;
-		this.name = variable.getName();
-		this.workbook = variable.getWorkbook();
-	}
+	public ArrayReference(Array array) {
+		this.array = array;
+		this.name = array.getName();
+		this.positions = array.getPositions();
+		this.actualPosition = array.getActualPosition();
 
-	public Workbook getWorkbook() {
-		return workbook;
 	}
 
 	public Value evaluate() {
-		return variable.getValue();
+		return positions.get(actualPosition);
 	}
 
 	public Object accept(ExpressionVisitor visitor) throws ExpressionVisitorException {
@@ -93,8 +78,8 @@ public class VariableReference implements Reference {
 	 *
 	 * @return the Variable to which the reference points
 	 */
-	public Variable getVariable() {
-		return variable;
+	public Array getArray() {
+		return array;
 	}
 
 	/**
@@ -105,7 +90,7 @@ public class VariableReference implements Reference {
 	@Override
 	public SortedSet<Variable> getVariables() {
 		SortedSet<Variable> vars = new TreeSet<Variable>();
-		vars.add(variable);
+		vars.add(array);
 		return vars;
 	}
 
@@ -120,7 +105,7 @@ public class VariableReference implements Reference {
 	@Override
 	public int compareTo(Reference reference) {
 		Variable otherVariable = reference.getVariables().first();
-		int firstDiff = variable.compareTo(otherVariable);
+		int firstDiff = array.compareTo(otherVariable);
 		if (firstDiff != 0) {
 			return firstDiff;
 		} else {
@@ -142,12 +127,11 @@ public class VariableReference implements Reference {
 	public String toString() {
 		// Converts column
 
-		return variable.getName();
+		return array.getName();
 	}
 
 	@Override
 	public SortedSet<Cell> getCells() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-
 }

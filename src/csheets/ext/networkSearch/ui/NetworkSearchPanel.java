@@ -47,7 +47,6 @@ public class NetworkSearchPanel extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent evt) {
 					if (evt.getClickCount() == 2) {
-						Workbook book = new Workbook();
 						CleanSheets app = uiController.getApp();
 						File file = new File(foundWorkbooksList.
 							getSelectedValue().toString());

@@ -109,6 +109,12 @@ public class ReferenceOperation extends BinaryOperation implements Reference {
 				return 1;
 			else
 				return getVariables().last().compareTo(reference.getVariables().last());
+            } else if(reference instanceof ReferenceOperation){
+                ReferenceOperation ref = ((ReferenceOperation)reference);
+                if(!this.getLeftOperand().equals(ref.getLeftOperand())
+                        || !this.getRightOperand().equals(ref.getRightOperand())){
+                    return 1;
+                }
             }
             return 0;
 	}

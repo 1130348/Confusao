@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -149,6 +148,5 @@ public class NetworkSendService {
             Logger.getLogger(NetworkSendService.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-
     }
 }
