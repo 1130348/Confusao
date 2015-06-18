@@ -28,14 +28,18 @@
  *
  * * <h2>3. Tests</h2>
  * To make easier the tests process we will make some funcional test where we
- * will verify if the conditional formating is working according to the guide
+ * will verify if the conditional formating is working according to the guide We
+ * also make one unity test where we show a Cell previous formated with
+ * conditional formating after saved the spreadshet maintain with the previous
+ * format.
  *
  *
  *
  * <br/>
  * <h2>4. Design</h2>
- * To realize this use case we create rwo new mtehods, ConditionalFormatChoser
- * and conditionalFormatAction
+ * To realize this use case we create two new class, ConditionalFormatChoser and
+ * conditionalFormatAction. To the design of the sidebar we create one new class
+ * named ConditionalFormatingPanel and alteredStyleUIExtension
  * <br/>
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.<br/>
@@ -44,14 +48,15 @@
  * <h2>5. Coding</h2>
  * see:<br/>
  * <h3>Created</h3>
- *
+ * <a href="../../../../csheets/ext/style/ui/package-summary.html">csheets.ext.Style.ui.ConditionalFormatAction</a><br/>
+ * <a href="../../../../csheets/ext/style/ui/package-summary.html">csheets.ext.Style.ui.ContionalFormatChooser</a><br/>
+ * <a href="../../../../csheets/ext/style/ui/package-summary.html">csheets.ext.Style.ui.ConditionalFormatingPanel</a>
+ * <br/>
  * <br/>
  *
  * <h3>Modified</h3>
  * <br/>
- * <br/>
- * <br/>
- * <br/>
+ * <a href="../../../../csheets/ext/style/ui/package-summary.html">csheets.ext.Style.ui.StyleUIExtension</a><br/>
  * <br/>
  *
  * @author 1091334
