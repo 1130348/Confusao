@@ -32,6 +32,10 @@ public class SendCellsAction extends FocusOwnerAction {
 	 * The network controller
 	 */
 	private SendCellsController sendCellsController;
+        
+        private boolean flagCrossConnection;
+        
+        private boolean flagSend;
 
 	/**
 	 * Creates a new start sharing action.
@@ -40,6 +44,8 @@ public class SendCellsAction extends FocusOwnerAction {
 	 */
 	public SendCellsAction(UIController uiController) {
 		super.setEnabled(false);
+                this.flagCrossConnection=false;
+                this.flagSend=false;
 		this.uiController = uiController;
 		this.sendCellsController = new SendCellsController();
 	}
@@ -89,5 +95,35 @@ public class SendCellsAction extends FocusOwnerAction {
         public SpreadsheetTable getSpreadsheetTable(){
             return this.focusOwner;
         }
+
+    /**
+     * @return the flagCrossConnection
+     */
+    public boolean isFlagCrossConnection() {
+        return flagCrossConnection;
+    }
+
+    /**
+     * @param flagCrossConnection the flagCrossConnection to set
+     */
+    public void setFlagCrossConnection(boolean flagCrossConnection) {
+        this.flagCrossConnection = flagCrossConnection;
+    }
+
+    /**
+     * @return the flagSend
+     */
+    public boolean isFlagSend() {
+        return flagSend;
+    }
+
+    /**
+     * @param flagSend the flagSend to set
+     */
+    public void setFlagSend(boolean flagSend) {
+        this.flagSend = flagSend;
+    }
+        
+     
 
 }
