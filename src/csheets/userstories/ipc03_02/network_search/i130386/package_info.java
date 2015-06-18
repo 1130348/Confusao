@@ -44,12 +44,6 @@
  * exists as such in the code of the application (at least at the moment that
  * this diagram was created).<br/>
  * <br/>
- * <h3>Sender</h3>
- * <img src="doc-files/draft_search_on_another_instances_sender.png"/>
- * <br/>
- * <h3>Receiver</h3>
- * <img src="doc-files/draft_search_on_another_instances_receivers.png"/>
- * <br/>
  * <br/>
  * <h3>Analysis of Core Technical Problem</h3>
  * Through the diagram above we can see that will have to create a new class
@@ -69,7 +63,7 @@
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
- * see: <code>csheets.ext.search_on_another_instances</code><br/>
+ * see: <code>csheets.ext.network_search</code><br/>
  * <h2>4. Design</h2>
  * To realize this user story we used Observer pattern for alert UI that Server
  * receive a request for search one woorkbook by name or receive one reponse to
@@ -84,14 +78,14 @@
  * <br/>
  * <img src="doc-files/start_server_sequence_diagram.png"/>
  * <br/>
- * <h3>User Send Search Request</h3>
- * The following diagram shows when user send a search request<br/>
+ * <h3>Network Search</h3>
+ * The following diagram shows when we start a Lan network Search<br/>
  * <br/>
- * <img src="doc-files/sequence_diagram.png">
+ * <img src="doc-files/draft_network_search.png">
  * <h3>User Receive Search Request</h3>
  * The following diagram shows when user receive one search request<br/>
  * <br/>
- * <img src="doc-files/sequence_diagram_receiver.png">
+ * <img src="doc-files/sequence_diagram.png">
  * <h2>5. Coding</h2>
  * see:<br/>
  * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.search_on_another_instance</a><br/>

@@ -10,8 +10,6 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +23,7 @@ public class Minverse implements Function {
      */
     public static final FunctionParameter[] parameters = new FunctionParameter[]{
         new FunctionParameter(Value.Type.NUMERIC, "Term", false,
-        "A number to be included in the sum")
+        "A number to be included in the matrix")
     };
 
     public Minverse() {
@@ -38,18 +36,15 @@ public class Minverse implements Function {
 
     @Override
     public Value applyTo(Expression[] args) throws IllegalValueTypeException {
-        Value[][] sum = null;
         Value ret = new Value("#ERROR");
         Value value = args[0].evaluate();
         if (value.getType() == Value.Type.MATRIX
                 && args.length == 1) {
             Value[][] matrix1 = value.toMatrix();
             try {
-                sum = MatrixMathematics.inverse(matrix1);
+                Value[][] sum = MatrixMathematics.inverse(matrix1);
                 ret = new Value(sum);
-            } catch (NoSquareException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-            } catch (MatrixIsNotInvertibleException ex) {
+            } catch (NoSquareException | MatrixIsNotInvertibleException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {

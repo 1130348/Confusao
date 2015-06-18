@@ -9,11 +9,13 @@ import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,6 +63,10 @@ public class ReceiveData implements Runnable {
                 }
 
             }
+        } catch (SocketException ex) {
+            System.out.println("Socket closed...");
+             JOptionPane.showMessageDialog(null, "The other user disconnected...", "Error", JOptionPane.INFORMATION_MESSAGE);
+        
         } catch (IOException ex) {
             Logger.getLogger(ReceiveData.class.getName()).
                     log(Level.SEVERE, null, ex);

@@ -10,8 +10,6 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +23,7 @@ public class Mmult implements Function {
      */
     public static final FunctionParameter[] parameters = new FunctionParameter[]{
         new FunctionParameter(Value.Type.NUMERIC, "Term", false,
-        "A number to be included in the sum")
+        "A number to be included in the matrix")
     };
 
     @Override
