@@ -60,10 +60,13 @@ public class CallFunctionController {
             String formula = func_def.substring(1) + " = " + value;
             FormulasPanel.addFormula(formula);
         } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException ex) {
-            Logger.getLogger(CallFunctionController.class.getName()).
-                log(Level.SEVERE, null, ex);
+            Logger.getLogger(CallFunctionController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return value;
+    }
+
+    public Value callMacroFunction(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
+        return caller.executeFunc(func_def);
     }
 
 }

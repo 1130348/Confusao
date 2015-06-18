@@ -32,8 +32,8 @@ public class CallFunctionUI extends javax.swing.JDialog {
      * @param controller
      */
     private CallFunctionUI(java.awt.Frame parent,
-                           boolean modal,
-                           CallFunctionController controller) {
+            boolean modal,
+            CallFunctionController controller) {
         super(parent, modal);
         this.controller = controller;
         initComponents();
@@ -51,7 +51,7 @@ public class CallFunctionUI extends javax.swing.JDialog {
     }
 
     public static synchronized CallFunctionUI getInstance(
-        java.awt.Frame parent, boolean modal, CallFunctionController controller) {
+            java.awt.Frame parent, boolean modal, CallFunctionController controller) {
         if (instance == null) {
             instance = new CallFunctionUI(parent, modal, controller);
         }
@@ -171,7 +171,7 @@ public class CallFunctionUI extends javax.swing.JDialog {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String item = jComboBox1.getSelectedItem().toString();
-        if (item.compareTo("(None)")==0) {
+        if (item.compareTo("(None)") == 0) {
             jTextField1.setEditable(false);
             jTextField1.setText("");
             jButton1.setEnabled(false);
@@ -184,9 +184,9 @@ public class CallFunctionUI extends javax.swing.JDialog {
                 System.out.println(jComboBox1.getSelectedItem());
                 String func_def = controller.chooseFunction(item);
                 jTextField1.setText(func_def);
-           } catch (UnknownElementException ex) {
+            } catch (UnknownElementException ex) {
                 Logger.getLogger(CallFunctionUI.class.getName()).
-                    log(Level.SEVERE, null, ex);
+                        log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed

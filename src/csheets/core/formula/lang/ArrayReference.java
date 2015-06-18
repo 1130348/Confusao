@@ -5,7 +5,6 @@
  */
 package csheets.core.formula.lang;
 
-import csheets.core.Array;
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.Variable;
@@ -43,7 +42,7 @@ public class ArrayReference implements Reference {
 	/**
 	 * The cell to which the reference points
 	 */
-	private Array array;
+	private Variable array;
 
 	private String name;
 
@@ -57,7 +56,7 @@ public class ArrayReference implements Reference {
 	 *
 	 * @param array
 	 */
-	public ArrayReference(Array array) {
+	public ArrayReference(Variable array) {
 		this.array = array;
 		this.name = array.getName();
 		this.positions = array.getPositions();
@@ -78,7 +77,7 @@ public class ArrayReference implements Reference {
 	 *
 	 * @return the Variable to which the reference points
 	 */
-	public Array getArray() {
+	public Variable getArray() {
 		return array;
 	}
 
