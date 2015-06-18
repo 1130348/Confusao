@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.networkSearch.ui;
+package csheets.ext.searchOnAnotherInstance.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
@@ -79,9 +79,6 @@ public class NetworkSearchPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		String resumo = (String) arg;
-		if (resumo.equalsIgnoreCase("Workbook not found")) {
-			return;
-		}
 		foundWorkBooksNamesList.add(resumo);
 		foundWorkbooksList.setListData(foundWorkBooksNamesList.toArray());
 	}

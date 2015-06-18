@@ -5,11 +5,14 @@
  */
 package csheets.ext.MacrosWindow.ui;
 
+import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.call_function.CallFunctionController;
 import csheets.core.formula.Function;
+import csheets.core.formula.compiler.IllegalFunctionCallException;
 import csheets.core.formula.lang.UnknownElementException;
 import csheets.ext.MacrosWindow.MacrosWindowController;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
@@ -252,31 +255,37 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_addFormulaButtonActionPerformed
 
     private void runMacroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runMacroButtonActionPerformed
+        boolean exception = false;
         if (!currentMacroTextArea.getText().isEmpty()) {
             Value value = new Value();
             String[] aux = currentMacroTextArea.getText().split("\n");
             macroFormulasList.addAll(Arrays.asList(aux));
             for (String formula : macroFormulasList) {
-                if (formula.charAt(0) != ';') {
-                    if (formula.charAt(0) == '=') {
-                        formula = formula.substring(1);
+                try {
+                    if (formula.charAt(0) != ';') {
+                        if (formula.charAt(0) == '=') {
+                            formula = formula.substring(1);
+                        }
                     }
+                    value = callFunctionController.callMacroFunction(formula);
+                } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Some of the functions in the macro are not currently supported!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                } catch (StringIndexOutOfBoundsException e) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Your macro syntax is invalid!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE
+                    );
 
-                    try {
-                        value = callFunctionController.callFunction(formula);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Your macro syntax is invalid!",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                    }
                 }
             }
-
             macroFormulasList.clear();
-
             macroOutputTextField.setText(value.toString());
         } else {
             JOptionPane.showMessageDialog(

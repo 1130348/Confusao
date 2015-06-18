@@ -27,7 +27,7 @@ public class ReceiveMessages implements Runnable {
             datareader = new DataInputStream(socket.getInputStream());
             this.sem = new Semaphore(1);
             this.socket = socket;
-            this.thread = new Thread();
+            this.thread = new Thread(this);
             this.thread.start();
         } catch (IOException ex) {
             ex.printStackTrace();

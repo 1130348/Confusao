@@ -6,7 +6,6 @@
 package csheets.ext.searchOnAnotherInstance.ui;
 
 import csheets.core.Workbook;
-import csheets.ext.networkSearch.ui.NetworkSearchPanel;
 import csheets.ext.searchOnAnotherInstance.NotificationEvent;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceController;
 import csheets.ui.ctrl.UIController;
@@ -62,6 +61,8 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		if (dialog == null) {
 			dialog = new SearchOnAnotherInstanceDialog();
 		}
+
+		dialog.setModal(false);
 		return dialog;
 	}
 
@@ -226,7 +227,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		String workbookToSearch = workbookToSearchText.getText();
 		for (int i = 0; i < listOfAvailableCleanSheetsInstances.size(); i++) {
 			try {
-				if (listOfAvailableCleanSheetsInstances.get(i).
+				if (!listOfAvailableCleanSheetsInstances.get(i).
 					equalsIgnoreCase(InetAddress.getLocalHost().getHostAddress())) {
 
 					String addressToSend = listOfAvailableCleanSheetsInstances.
@@ -234,8 +235,6 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 					controller.
 						sendSearchRequest(addressToSend, workbookToSearch);
 					workbookToSearchText.setText("");
-					this.dispose();
-					return;
 				}
 			} catch (UnknownHostException ex) {
 				System.out.println("UnknownHostException: " + ex);
