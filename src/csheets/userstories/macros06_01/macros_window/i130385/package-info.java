@@ -57,6 +57,36 @@
  * and objective definition and understanding how grammars are stored and
  * compiled inside the CleanSheets application.
  * <br/>
+ * <h2>3. Tests</h2>
+ * Basically, from requirements and also analysis, we see that the core 
+ * functionality of this use case is to create macros.
+ * <br/>
+ * Because we are reusing model classes from previous use cases there is no need
+ * to implement new unit tests. There will be, however, inumerous functional 
+ * tests. These tests consist, mainly, of ensuring that the formulas added to
+ * the macros produce the expected result. For example, adding the following
+ * formula "SUM(5;3)" should produce the output of 8. Functional tests were also
+ * applied to the user interface to make sure that there would be no bugs.
+ * <br/>
+ * <h2>4. Design</h2>
+ * To realize this user story we will be mainly altering ui classes since the
+ * model ones already exist.
+ * <br/>
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.
+ * <br/>
+ * <h3>Create macros</h3>
+ * The following diagram illustrates what happens when the user creates a macro.
+ * On the main application frame under the menu Extensions there is a menu item
+ * "Macro". When clicked this will prompt another menu item called "Create
+ * Macro..." that when clicked will start this use case. The use case starts by
+ * retrieving a list of all available functions. Afterwards, the user customizes
+ * his macro. He can then decide to run it as it is shown in the
+ * runButtonActionPerformed(). This proccess is explained detailedly on the
+ * following sequence diagram.
+ * <br/>
+ * <br/>
+ * <img src="doc-files/macros_window_design_sequence_diagram.png"/>
  */
 
 package csheets.userstories.macros06_01.macros_window.i130385;
