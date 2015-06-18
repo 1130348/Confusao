@@ -8,6 +8,7 @@ package csheets.advanced_functions;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.formula.lang.IllegalDimensionException;
+import csheets.core.formula.lang.MatrixIsNotInvertibleException;
 import csheets.core.formula.lang.MatrixMathematics;
 import csheets.core.formula.lang.NoSquareException;
 import java.util.logging.Level;
@@ -84,7 +85,7 @@ public class AdvancedFunctionsTest {
     }
 
     @Test
-    public void makeSureInverseMatricesAreCorrect() {
+    public void makeSureInverseMatricesAreCorrect() throws MatrixIsNotInvertibleException {
         try {
             Value[][] matrix1 = new Value[2][2];
             Value[][] expresult = new Value[2][2];
@@ -124,7 +125,7 @@ public class AdvancedFunctionsTest {
     }
 
     @Test(expected = NoSquareException.class)
-    public void matrixToInverseIsSquare() throws NoSquareException, IllegalValueTypeException {
+    public void matrixToInverseIsSquare() throws NoSquareException, IllegalValueTypeException, MatrixIsNotInvertibleException {
         Value[][] matrix1 = new Value[3][2];
         Value v1 = new Value(1);
         Value v2 = new Value(2);
@@ -156,5 +157,17 @@ public class AdvancedFunctionsTest {
         matrix2[2][0] = v2;
         matrix2[2][1] = v3;
         MatrixMathematics.multiply(matrix1, matrix2);
+    }
+    
+     @Test(expected = MatrixIsNotInvertibleException.class)
+    public void matrixIsInvertible() throws NoSquareException, IllegalValueTypeException, MatrixIsNotInvertibleException {
+        Value[][] matrix1 = new Value[2][2];
+        Value v1 = new Value(1);
+        Value v2 = new Value(2);
+        matrix1[0][0] = v1;
+        matrix1[0][1] = v2;
+        matrix1[1][0] = v1;
+        matrix1[1][1] = v2;
+        Value[][] result = MatrixMathematics.inverse(matrix1);
     }
 }

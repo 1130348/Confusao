@@ -52,12 +52,16 @@ public class MatrixMathematics {
      * @return
      * @throws NoSquareException
      */
-    public static Value[][] inverse(Value[][] matrix) throws NoSquareException, IllegalValueTypeException {
+    public static Value[][] inverse(Value[][] matrix) throws NoSquareException, IllegalValueTypeException, MatrixIsNotInvertibleException {
         if (matrix[0].length != matrix.length) {
             throw new NoSquareException("Matrix need to be square.");
         }
         Value[][] tempMatrix = transpose(cofactor(matrix));
-        double constant = (1.0 / determinant(matrix).toDouble());
+        double determinant = determinant(matrix).toDouble();
+        if (determinant == 0) {
+            throw new MatrixIsNotInvertibleException("The matrix is not invertible!");
+        }
+        double constant = (1.0 / determinant);
         return multiplyByConstant(tempMatrix, constant);
     }
 
