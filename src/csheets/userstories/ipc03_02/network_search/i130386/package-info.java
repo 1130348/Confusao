@@ -64,7 +64,14 @@
  * with the given name. Furthermore we also have to perform functional tests to
  * see if the client is receiving the prompts to seek the desire workbook.<br/>
  * As usual, in a test driven development approach tests normally fail in the
- * beginning. The idea is that the tests will pass in the end.<br>
+ * beginning. The idea is that the tests will pass in the end.<br/>
+ * Two computers began the application on the same local network via ethernet
+ * cable. On one of the applications was created and recorded a workbook with a
+ * certain name . In the other application's computer was started the network
+ * share, and the search for other instances with active workbooks began using
+ * as parameter the name of the previously defined workbook . During the search
+ * the previously defined instance of the workbook was found. The result also
+ * appears in a list in a sidebar.
  * <br/>
  * see: <code>csheets.ext.search_on_another_instances</code><br/>
  * <h2>4. Design</h2>
