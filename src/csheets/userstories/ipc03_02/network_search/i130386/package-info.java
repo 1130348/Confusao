@@ -41,8 +41,11 @@
  * or early design in order to get a previous approach to the design. For that
  * reason we mark the elements of the diagram with the stereotype "analysis"
  * that states that the element is not a design element and, therefore, does not
- * exists as such in the code of the application (at least at the moment that
+ * exists as * reason we mark the elements of the diagram with the stereotype
+ * "analysis" such in the code of the application (at least at the moment that
  * this diagram was created).<br/>
+ * <br/>
+ * <img src="doc-files/draft_network_search.png"/>
  * <br/>
  * <br/>
  * <h3>Analysis of Core Technical Problem</h3>
@@ -63,7 +66,7 @@
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>
- * see: <code>csheets.ext.network_search</code><br/>
+ * see: <code>csheets.ext.search_on_another_instances</code><br/>
  * <h2>4. Design</h2>
  * To realize this user story we used Observer pattern for alert UI that Server
  * receive a request for search one woorkbook by name or receive one reponse to
@@ -72,20 +75,10 @@
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.<br/>
  *
- * <h3>Start Server</h3>
- * The following diagram shows the setup of the Server after start this use case
- * <br/>
- * <br/>
- * <img src="doc-files/start_server_sequence_diagram.png"/>
- * <br/>
  * <h3>Network Search</h3>
  * The following diagram shows when we start a Lan network Search<br/>
  * <br/>
- * <img src="doc-files/draft_network_search.png">
- * <h3>User Receive Search Request</h3>
- * The following diagram shows when user receive one search request<br/>
- * <br/>
- * <img src="doc-files/sequence_diagram.png">
+ * <img src="doc-files/sequence_diagram.png"/>
  * <h2>5. Coding</h2>
  * see:<br/>
  * <a href="../../../../csheets/ext/comments/package-summary.html">csheets.ext.search_on_another_instance</a><br/>
@@ -104,5 +97,5 @@ package csheets.userstories.ipc03_02.network_search.i130386;
  *
  * @author Luis Mouta (1130386)
  */
-class _NetWorkSearch_ {
+class _NetworkSearch_ {
 }
