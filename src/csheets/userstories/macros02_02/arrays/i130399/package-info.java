@@ -7,10 +7,10 @@
  * It should be added a support for the array variables. Any variable can be an
  * array. When accessing the variable only by name are accessing content from
  * position 1 of the array. To access a position of the array must explicitly
- * use your index in square brackets. For example, the formula "= @ abc [2]: =
- * 123" will place the value 123 in the second position of abc array. Each
- * position of the array may have a different data type. For example, we have in
- * the same array numeric and alphanumeric values.
+ * use your index in square brackets. For example, the formula "=@abc[2]:=123"
+ * will place the value 123 in the second position of abc array. Each position
+ * of the array may have a different data type. For example, we have in the same
+ * array numeric and alphanumeric values.
  * <br/>
  * <br/>
  * <b>Use Case "Workbok's Arrays":</b> The user begins by introducing a variable
@@ -54,9 +54,9 @@
  * As we can see in domain model of the application
  * <a href="../../../../overview-summary.html#modelo_de_dominio">here</a><br/>
  * From the domain model we can see that there is a Variable class. We will need
- * an Array class that will extends the variable, so that can be a support of
- * variables. The workbook has a list of arrays which saves the values of each
- * and a name of the array. <br/>
+ * to change Variable class and add the option to have multiple positions, so a
+ * variable can be an array. The workbook has a list of variables which saves
+ * the values of each and a name of the array. <br/>
  * In {@link csheets.Formula.Formula} code we see that if the variable doesn't
  * exist, the workbook will create a new one.
  * <br/>
@@ -113,7 +113,10 @@
  * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
- *
+ * When the variable is accessed by only the name the first position of the
+ * array will be accessed.
+ * <br/>
+ * In the final of this week the objectives of this use case were reached.
  *
  * <br/>
  * <br/>

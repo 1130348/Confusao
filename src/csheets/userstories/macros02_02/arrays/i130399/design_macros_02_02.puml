@@ -7,7 +7,7 @@
  participant "FormulaCompiler" as formulaCompiler
  participant "Expression" as expression
  participant "ExcelExpressionCompiler" as expressionCompiler
- participant "Array" as array
+ participant "Variable" as array
  participant "WorkBook" as workbook
 
 User -> UI : string
