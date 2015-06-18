@@ -20,12 +20,19 @@
  */
 package csheets.ui.sheet;
 
+import csheets.core.Address;
+import csheets.core.Cell;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.core.formula.lang.UnknownElementException;
+import csheets.ui.ctrl.SelectionEvent;
+import csheets.ui.ctrl.SelectionListener;
+import csheets.ui.ctrl.UIController;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
-
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -38,20 +45,12 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-import csheets.core.Address;
-import csheets.core.Cell;
-import csheets.core.formula.compiler.FormulaCompilationException;
-import csheets.core.formula.lang.UnknownElementException;
-import csheets.ui.ctrl.SelectionEvent;
-import csheets.ui.ctrl.SelectionListener;
-import csheets.ui.ctrl.UIController;
-
 /**
  * The table editor used for editing cells in a spreadsheet.
  * @author Einar Pehrson
  */
 @SuppressWarnings("serial")
-public class CellEditor extends JTextField implements TableCellEditor, SelectionListener {
+public class CellEditor extends JTextField implements TableCellEditor, SelectionListener, ActionListener {
 
 	/** The required number of mouse clicks before editing starts */
 	public static final int CLICK_COUNT_TO_START = 2;
@@ -270,6 +269,11 @@ public class CellEditor extends JTextField implements TableCellEditor, Selection
 				((CellEditorListener)listeners[i+1]).editingCanceled(changeEvent);
 		}
 	}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	/**
 	 * An action for stopping editing of a cell.

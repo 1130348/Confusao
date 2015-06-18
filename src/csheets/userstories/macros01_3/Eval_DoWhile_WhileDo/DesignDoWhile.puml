@@ -1,0 +1,26 @@
+@startuml doc-files/macros0_03_DesignDoWhile.png
+title DoWhile
+
+participant ExcelExpressionCompiler as EEC
+participant "node : Tree" as NT
+participant "args : ArrayList" as AAL
+
+participant "DoWhile" as WD
+
+activate EEC
+EEC--> AAL: [node.getText().equals("DoWhile")]
+
+EEC-> NT: [nChild<node.getChildCount()]
+activate NT
+
+EEC-> NT: [child!=null]
+
+EEC--> AAL: toArray(new Expression[args.size()])
+activate AAL
+
+EEC-> WD: [new DoWhile(args)]
+deactivate WD
+deactivate AAL
+deactivate NT
+deactivate EEC
+@enduml

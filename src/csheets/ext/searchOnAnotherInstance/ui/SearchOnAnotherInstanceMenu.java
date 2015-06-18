@@ -12,13 +12,14 @@ import javax.swing.JMenu;
  *
  * @author Paulo Pereira <1130419@isep.ipp.pt>
  */
-class SearchOnAnotherInstanceMenu extends JMenu{
+class SearchOnAnotherInstanceMenu extends JMenu {
 
-    public SearchOnAnotherInstanceMenu(UIController uiController) {
-        super("Distributed Search of Worbooks");
+	public SearchOnAnotherInstanceMenu(UIController uiController) {
+		super("Distributed Search of Worbooks");
 		//setMnemonic(KeyEvent.);
 
-        // Adds send action
-        add(new SearchOnAnotherInstanceAction(uiController));
-    }
+		// Adds send action
+		add(new SearchOnAnotherInstanceAction(uiController));
+		//add(new NetworkSearchAction(uiController));
+	}
 }

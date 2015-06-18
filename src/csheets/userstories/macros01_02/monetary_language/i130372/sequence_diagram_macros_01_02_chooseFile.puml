@@ -1,0 +1,15 @@
+@startuml doc-files/sequence_diagram_macros_01_02_chooseFile.png
+actor User
+participant "ChooseCurrencyExchangeFileAction" as choose
+participant "fc:FileChooser" as fChooser
+participant "MoneyService" as ms
+ 
+User->choose:start action
+choose->fChooser:fc = create()
+fChooser->User:showFiles()
+User->fChooser:choose file
+choose->fChooser:file = getFile()
+choose->ms:dataList = importCurrencyFromCSV(file)
+ms->ms:fileChoosed(true)
+
+@enduml
