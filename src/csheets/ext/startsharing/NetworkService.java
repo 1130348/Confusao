@@ -122,6 +122,7 @@ public class NetworkService {
         try {
             InetAddress addr;
             for (String address : addresses) {
+                System.out.println("Clientes: "+address);
                 addr = InetAddress.getByName(address);
                 clientConnections.
                         add(new Socket(addr, activeInstances.get(addr)));
@@ -174,6 +175,7 @@ public class NetworkService {
         byte[] data = new byte[300];
         List<Socket> lSend = (List) clientConnections.clone();
         for (Socket clientConnection : lSend) {
+            System.out.println("ENVIAR: "+clientConnection.getInetAddress().getHostName());
             DataOutputStream sOut = null;
             try {
                 sOut = new DataOutputStream(clientConnection.
