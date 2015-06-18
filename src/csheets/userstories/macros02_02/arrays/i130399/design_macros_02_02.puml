@@ -1,4 +1,4 @@
-@startuml doc-files/draft_macros_02_02.png
+@startuml doc-files/design_macros_02_02.png
  actor User
  participant "CellUI" as UI
  participant "CellCtrl" as ctrl
