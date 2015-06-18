@@ -13,6 +13,8 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -65,18 +67,30 @@ public class SSLService {
     }
 
     public static void sendSecureMessages(String str, InetAddress client) {
-        SSLSocket socketClient = connectionsActive.get(client);
+        BufferedWriter bufferedwriter = null;
         try {
-            /*DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
-             byte[] data = new byte[300];
-             data = str.getBytes();
-             sOut.write((byte) str.length());
-             sOut.write(data, 0, str.length());*/
-            BufferedWriter bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
-            bufferedwriter.write(str);
-            bufferedwriter.flush();
+            SSLSocket socketClient = connectionsActive.get(client);
+
+            bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+            try {
+                /*DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
+                 byte[] data = new byte[300];
+                 data = str.getBytes();
+                 sOut.write((byte) str.length());
+                 sOut.write(data, 0, str.length());*/
+                bufferedwriter.write(str);
+                bufferedwriter.flush();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                bufferedwriter.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

@@ -58,34 +58,37 @@ public class ReceiveMessages implements Runnable {
                  getInetAddress().
                  getCanonicalHostName(), JOptionPane.INFORMATION_MESSAGE);
                  }*/
-                msg=bufferedreader.readLine();
-                JOptionPane.showMessageDialog(null, msg, "New Message from " + socket.
-                        getInetAddress().
-                        getCanonicalHostName(), JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("estou sempre a ler!");
+                msg = bufferedreader.readLine();
+                if (msg.equals("")) {
+                    JOptionPane.showMessageDialog(null, msg, socket.
+                            getInetAddress().
+                            getCanonicalHostName() + " Disconnected!", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, msg, "New Message from " + socket.
+                            getInetAddress().
+                            getCanonicalHostName(), JOptionPane.INFORMATION_MESSAGE);
+                }
+                
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
- 
-    }
 
-    
+        }
+
         try {
             socket.close();
-    }
-    catch (IOException ex
-
-    
-        ) {
+        } catch (IOException ex) {
             ex.printStackTrace();
+        }
     }
-}
 
-public void interrupt(){
+    public void interrupt() {
         this.thread.interrupt();
     }
-    
-    public boolean isAlive(){
+
+    public boolean isAlive() {
         return this.thread.isAlive();
     }
 }
