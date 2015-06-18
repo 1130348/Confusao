@@ -1,13 +1,13 @@
 @startuml doc-files/draft_network_search.png
- actor UserSender as User
- participant "<<analysis>>\nNetworkSearchUI" as UI
- participant "<<analysis>>\nNetworkSearchCtrl" as ctrl
- participant "<<analysis>>\nNetwoork" as net
+ actor User as User
+ participant "<<analysis>>\nSearchOnAnotherInstancehUI" as UI
+ participant "<<analysis>>\nSearchOnAnotherInstancehUICtrl" as ctrl
+ participant "<<analysis>>\nNetwork" as net
 User -> UI : searchInstances()
 UI -> ctrl : searchInstances()
 ctrl -> net : searchInstances()
 User -> UI : enterWoorkBookNameToSearch()
-User -> UI : selectInstance()
-UI -> ctrl : sendNotification()
-ctrl -> net : sendNotification()
+UI -> ctrl : searchActiveWorkbook(workBookName)
+ctrl -> net : searchActiveWorkbook(workBookName)
+net --> UI : sendNotification()
 @enduml
