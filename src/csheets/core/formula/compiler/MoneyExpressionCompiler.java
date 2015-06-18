@@ -90,7 +90,7 @@ public class MoneyExpressionCompiler implements ExpressionCompiler {
                 switch (node.getType()) {
                     case FormulaLexer.NUMBER:
                         return new Literal(Value.parseNumericValue(node.
-                                getText()));
+                                getText()));                      
                     case FormulaLexer.DOLLAR:
                         
                         Literal l = new Literal(Value.

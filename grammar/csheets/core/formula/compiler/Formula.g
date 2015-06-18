@@ -43,7 +43,7 @@ package csheets.core.formula.compiler;
 }
 
 expression
-	: EQ! operation EOF! | CA! money EOF!
+	: (EQ! operation EOF!) | (CA! money EOF!)
 	;
 
 operation
