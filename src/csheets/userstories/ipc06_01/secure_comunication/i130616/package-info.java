@@ -19,14 +19,13 @@
  * <br/>
  *
  * <h2>2. Analysis</h2>
- * It will be necessary study how to add a new sidebar to the design.
- * Since the search server protocol (UDP) is already implemented, it's only
- * necessary to study how to send encrypted data using SSL. TCP protocol is
- * already implemented to comunicate between instances so it can be used as
- * example.
+ * It will be necessary study how to add a new sidebar to the design. Since the
+ * search server protocol (UDP) is already implemented, it's only necessary to
+ * study how to send encrypted data using SSL. TCP protocol is already
+ * implemented to comunicate between instances so it can be used as example.
  * <br/>
  * <br>
- * <h3>First "analysis" sequence diagram</h3> 
+ * <h3>First "analysis" sequence diagram</h3>
  * The following diagram depicts a proposal for the realization of the
  * previously described use case. We call this diagram an "analysis" use case
  * realization because it functions like a draft that we can do during analysis
@@ -36,17 +35,33 @@
  * exists as such in the code of the application (at least at the moment that
  * this diagram was created).<br/>
  * <br/>
- * <img src="doc-files/ipc06_01_analysis.png"/>
+ * <img src="doc-files/ipc_06_01_analysis.png"/>
  * <br/>
  * <br/>
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able communicate using SSL connection with other instances
- * of "CleanSheets" and send them a message.<br/>
+ * functionality of this use case is to be able communicate using SSL connection
+ * with other instances of "CleanSheets". </br>
+ * This test is funcional:</br> 
+ * - Enable secure connections in two or more computers (Extensions Menu-> Secure
+ * Comunication -> Start SSLServer </br>
+ * - Then go to sidebar and choose a * instance </br>
+ * - double click on instance and connect </br>
+ * - a message will appear  * on the screen with the information (success or failed)</br>
+ * <br/>
  *
  * <h2>4. Design</h2>
-*/
+ *
+ * Extension Setup </br>
+ * <img src="doc-files/ipc_06_01_extension_setup>
+ *
+ * Menu Setup </br>
+ *
+ * SideBar Setup </br>
+ *
+ *
+ */
 package csheets.userstories.ipc06_01.secure_comunication.i130616;
 
 /**

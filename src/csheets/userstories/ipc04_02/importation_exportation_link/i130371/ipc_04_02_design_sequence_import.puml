@@ -1,0 +1,45 @@
+  @startuml doc-files/ipc_04_02_design_sequence_import.png
+  actor User
+  participant "ImportExportUI" as UI
+  participant "UIController" as UIc
+  participant "ImportationExportationLinkController" as ctrl
+  participant "Import" as import
+  participant "Cell" as cell
+  participant "File" as file
+  participant "FileImporterFirstSheet" as importF
+
+  User -> UI : startImpExpLink()
+  UI -> ctrl : import()
+  ctrl -> ctrl : new Thread(Import)
+  ctrl -> import : start()
+  import -> UIc: setCondImp(true)
+  import -> UIc: setModificationOnCells(false)
+	note right of import
+        To import on the first time
+    end note
+  import -> import: new Thread(FileImporterFirstSheet)
+  import -> importF : start()
+  import -> import : modifications()
+	note right of import
+      Now all the cells has got a CellListener and if any cell change uiController.setModificationOnCells(true)
+    end note
+
+loop ImportExportLink == true
+
+  alt date.before(file.lastModification())
+
+	note right of import
+        If the attribute date is before the date of the last modification the file will be imported and the cells modified
+    end note
+
+  import -> UIc : setCondImp(true)
+  import -> import : new Thread(FileImporterFirstSheet)
+  import -> importF :start()
+	note right of import
+        Cleans all cells and now changes the content
+    end note
+  import -> import : setDate(file.lastModified())
+  import -> UIc: setCondImp(false)
+  end alt
+end
+  @enduml

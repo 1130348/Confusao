@@ -1,10 +1,8 @@
-@startuml doc-files/draft_search_on_another_instances_sender.png
+@startuml doc-files/draft_network_search.png
  actor UserSender as User
  participant "<<analysis>>\nNetworkSearchUI" as UI
  participant "<<analysis>>\nNetworkSearchCtrl" as ctrl
  participant "<<analysis>>\nNetwoork" as net
- participant "<<analysis>>\nCell" as cell
- participant "<<analysis>>\nConnect" as connect
 User -> UI : searchInstances()
 UI -> ctrl : searchInstances()
 ctrl -> net : searchInstances()

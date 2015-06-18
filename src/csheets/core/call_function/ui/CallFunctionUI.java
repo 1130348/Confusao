@@ -74,6 +74,9 @@ public class CallFunctionUI extends javax.swing.JDialog {
             java.awt.Frame parent, boolean modal, CallFunctionController controller, int n, UIController uiController) {
         if (instance == null || uiNumber != n) {
             instance = new CallFunctionUI(parent, modal, controller, n, uiController);
+            java.awt.Frame parent, boolean modal, CallFunctionController controller) {
+        if (instance == null) {
+            instance = new CallFunctionUI(parent, modal, controller);
         }
         return instance;
     }

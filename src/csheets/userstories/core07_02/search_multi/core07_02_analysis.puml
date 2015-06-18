@@ -1,0 +1,18 @@
+@startuml doc-files/core07_02_search_multi.png
+actor user
+ participant "UIController" as UI
+ participant "SearchAction" as sa
+ participant "Search" as s
+
+user -> UI: choose "Edit -> Search and Replace"
+activate UI
+UI -> sa: actionListener()
+deactivate UI
+activate sa
+sa -> user: String or Regular expression to search
+user -> sa: Input
+sa-> s: search(input)
+deactivate sa
+ @enduml
+ *
+ */

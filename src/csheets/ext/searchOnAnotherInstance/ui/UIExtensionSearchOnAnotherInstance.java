@@ -8,39 +8,59 @@ package csheets.ext.searchOnAnotherInstance.ui;
 import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
+import javax.swing.JComponent;
 import javax.swing.JMenu;
 
 /**
  *
  * @author Paulo Pereira <1130419@isep.ipp.pt>
  */
-public class UIExtensionSearchOnAnotherInstance extends UIExtension{
+public class UIExtensionSearchOnAnotherInstance extends UIExtension {
 
-    /**
-     * A menu that provides search woorkbooks on another instances
-     */
-    private SearchOnAnotherInstanceMenu menu;
+	/**
+	 * A menu that provides search woorkbooks on another instances
+	 */
+	private SearchOnAnotherInstanceMenu menu;
 
-    /**
-     * Creates a new user interface extension for search woorkbooks on another instances.
-     *
-     * @param extension the extension for which components are provided
-     * @param uiController the user interface controller
-     */
-    public UIExtensionSearchOnAnotherInstance(Extension extension, UIController uiController) {
-        super(extension, uiController);
-    }
+	/**
+	 * A side bar that provides editing of comments
+	 */
+	private JComponent sideBar;
 
-    /**
-     * Returns a menu that provides search woorkbooks on another instances.
-     *
-     * @return a JMenu component
-     */
-    public JMenu getMenu() {
-        if (menu == null) {
-            menu = new SearchOnAnotherInstanceMenu(uiController);
-        }
-        return menu;
-    }
+	/**
+	 * Creates a new user interface extension for search woorkbooks on another
+	 * instances.
+	 *
+	 * @param extension the extension for which components are provided
+	 * @param uiController the user interface controller
+	 */
+	public UIExtensionSearchOnAnotherInstance(Extension extension,
+											  UIController uiController) {
+		super(extension, uiController);
+	}
+
+	/**
+	 * Returns a menu that provides search woorkbooks on another instances.
+	 *
+	 * @return a JMenu component
+	 */
+	public JMenu getMenu() {
+		if (menu == null) {
+			menu = new SearchOnAnotherInstanceMenu(uiController);
+		}
+		return menu;
+	}
+
+	/**
+	 * Returns a side bar that provides editing of comments.
+	 *
+	 * @return a side bar
+	 */
+	public JComponent getSideBar() {
+		if (sideBar == null) {
+			sideBar = new NetworkSearchPanel(uiController);
+		}
+		return sideBar;
+	}
 
 }

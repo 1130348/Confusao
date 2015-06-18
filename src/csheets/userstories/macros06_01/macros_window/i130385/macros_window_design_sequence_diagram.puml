@@ -1,0 +1,43 @@
+@startuml doc-files/macros_window_design_sequence_diagram.png
+actor user 
+participant "MacrosWindowDialog" as ui
+participant "MacrosWindowController" as controller
+participant "CallFunctionController" as callFunctionController
+participant "l : Language" as language
+participant "FunctionCaller" as functionCaller
+note right of user
+Starts macro creation
+end note
+user  -> ui : create()
+activate functionCaller
+note right of functionCaller
+This object's lifeline starts
+here to represent that this
+object exists prior to this
+use case and is only used 
+and not created by it.
+end note
+activate ui
+ui -> controller : create()
+activate controller
+ui -> callFunctionController : create()
+activate callFunctionController
+user  -> ui : fl : retrieveFunctionsList()
+ui -> controller : fl : retrieveExistingFuntcionsList()
+
+controller -> language : l : getInstance()
+controller -> language : fl : getFunctions()
+user -> user 
+note right of user
+The previous self message
+represents the creation of the
+macro by the user in the ui.
+end note
+user -> ui : runMacroButtonActionPerformed(evt)
+loop for each function in the macro
+ui -> callFunctionController : callFunction(f)
+callFunctionController -> functionCaller : executeFunc(f)
+end loop
+deactivate controller
+deactivate ui
+@enduml

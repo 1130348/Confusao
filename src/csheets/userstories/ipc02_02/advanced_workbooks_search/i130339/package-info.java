@@ -1,5 +1,5 @@
 /**
- * Technical documentation regarding the user story ipc02_02: Advanced WorkBook Seach 
+ * Technical documentation regarding the user story ipc02_02: Advanced WorkBook Search 
  * <br/>
  * <br/>
  *
@@ -17,7 +17,7 @@
  * <h2>2. Analysis</h2>
  * <br/>
  * <br/>
- * <h3>First "analysis" sequence diagram of the Advanced Note Editon</h3>
+ * <h3>First "analysis" sequence diagram of the Advanced WorkBook Search</h3>
  * The following diagram depicts a proposal for the realization of the
  * previously described use case. We call this diagram an "analysis" use case
  * realization because it functions like a draft that we can do during analysis
@@ -59,21 +59,30 @@
  * the window and return to the main window.
  * <br/>
  * <h2>3. Tests</h2>
- * 
+ * For this use case, there will be no additional tests, since all the methods that are used
+ * in this UC were already implemented in the original program, so i assume that the given
+ * code was correct, even without having tests, since who made the program didnt do a approach 
+ * based on tests.
  * <h2>4. Design</h2>
  * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It
  * depicts the objects and classes involved in the scenario and the sequence of
- * messages exchanged betwween the objets needed to carry out the functionality
+ * messages exchanged between the objets needed to carry out the functionality
  * of the scenario.<br/>
  * 
+ * <img src="doc-files/ipc_02_02_sequence_diagram_design.png">
+ * </br>
+ * 
+ * The first approach to this use case was to do a separated window to show the preview
+ * since with the table and the several tabs to show all the sheets it was to much 
+ * information for a sidebar. <br>
+ * But then i was told that it would be important to try to put the "preview" on the sidebar
+ * to try to have all the information in the main window. That was a challenge since the information
+ * doesnt fit all in the sidebar, and the user needs to increase the size of the window to see the
+ * rest of the information, but at least this way its possible to have all on the sidebar. </br>
+ * Then there are 2 buttons, one that allows the user to load more cells to show and one that 
+ * gives the option to open the workbook.
  * <br/><br/>
- * <h2>5. Coding</h2>
- * 
- * <h2>6. Final Remarks</h2>
- * 
- * <br/>
- * <br/>
  *
  */
 

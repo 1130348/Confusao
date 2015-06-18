@@ -33,6 +33,7 @@ import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Literal;
 import csheets.core.formula.Reference;
 import csheets.core.formula.UnaryOperation;
+import csheets.core.formula.lang.ArrayReference;
 import csheets.core.formula.lang.CellReference;
 import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.RangeReference;
@@ -118,7 +119,9 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 	 * @return the result of the conversion
 	 */
 	public Expression convert(Cell cell, Tree node) throws FormulaCompilationException {
-		// System.out.println("Converting node '" + node.getText() + "' of tree '" + node.toStringTree() + "' with " + node.getNumberOfChildren() + " children.");
+		System.out.
+			println("Converting node '" + node.getText() + "' of tree '" + node.
+				toStringTree());
 		if (node.getChildCount() == 0) {
 			try {
 				switch (node.getType()) {
@@ -128,21 +131,68 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 					case FormulaLexer.STRING:
 						return new Literal(Value.
 							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
+					case FormulaLexer.ALPHA:
+						return new Literal(Value.
+							parseValue(node.getText(), Value.Type.BOOLEAN, Value.Type.DATE));
 					case FormulaLexer.CELL_REF:
 						return new CellReference(cell.getSpreadsheet(), node.
 												 getText());
-                                        case FormulaLexer.VARIABLE:
-                                            
-                                            if(cell.getSpreadsheet().getWorkbook().validateVariable(node.getText()))
-                                            {
-                                                return new VariableReference(cell.getSpreadsheet().getWorkbook().getVariable(node.getText()));
-                                            }
-                                            else{
-                                                Variable temp = new Variable(node.getText(),new Value(""),cell.getSpreadsheet().getWorkbook());
-                                                cell.getSpreadsheet().getWorkbook().addVariable(temp);
-                                                return new VariableReference(temp);
-                                            }
-						
+					case FormulaLexer.VARIABLE:
+
+						if (cell.getSpreadsheet().getWorkbook().
+							validateVariable(node.getText())) {
+							return new VariableReference(cell.getSpreadsheet().
+								getWorkbook().getVariable(node.getText()));
+						} else {
+							Variable temp = new Variable(node.getText(), new Value(""), cell.
+														 getSpreadsheet().
+														 getWorkbook(), 0);
+							temp.initializePositions();
+							cell.getSpreadsheet().getWorkbook().
+								addVariable(temp);
+							return new VariableReference(temp);
+						}
+					case FormulaLexer.ARRAY:
+						String name = node.getText().substring(0, node.
+															   getText().
+															   lastIndexOf('['));
+						if (cell.getSpreadsheet().getWorkbook().
+							validateVariable(name)) {
+
+							Variable temp = cell.
+								getSpreadsheet().
+								getWorkbook().getVariable(name);
+							if (name.equals(node.getText())) {
+								temp.setActualPosition(0);
+								temp.setPositionValue(0, new Value(""));
+							} else {
+								int position = Integer.parseInt(node.getText().
+									substring(node.getText().lastIndexOf('[') + 1, node.
+											  getText().lastIndexOf(']')));
+								temp.setActualPosition(position);
+							}
+
+							return new ArrayReference(temp);
+						} else {
+							Variable temp = new Variable(name, new Value(""), cell.
+														 getSpreadsheet().
+														 getWorkbook(), 0);
+							temp.initializePositions();
+							if (!name.equals(node.getText())) {
+								int position = Integer.parseInt(node.getText().
+									substring(node.getText().lastIndexOf('[') + 1, node.
+											  getText().lastIndexOf(']')));
+								temp.setActualPosition(position);
+								temp.setPositionValue(position, new Value(""));
+							} else {
+								temp.setPositionValue(0, new Value(""));
+							}
+
+							cell.getSpreadsheet().getWorkbook().
+								addVariable(temp);
+							return new ArrayReference(temp);
+						}
+
 //					case FormulaParserTokenTypes.NAME:
 						/* return cell.getSpreadsheet().getWorkbook().
 					 getRange(node.getText()) (Reference)*/

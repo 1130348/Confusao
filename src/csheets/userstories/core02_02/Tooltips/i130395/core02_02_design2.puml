@@ -23,7 +23,7 @@
     cp -> cell : activeCell=getExtension(CommentsExtension.NAME)
 
     cp -> ctrl : cellSelected(cell);
-    ctrl -> activeCell : txt = cell.getUserComment()
+    ctrl -> activeCell : txt = cell.getSingleUserComment(index)
     ctrl -> cp : setCommentText(txt)
 
     note right of cp

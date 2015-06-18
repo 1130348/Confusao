@@ -1,0 +1,18 @@
+@startuml doc-files/macros_04_01.1.png
+
+actor User
+
+    participant "FormattingAction" as fact
+    participant "UIController" as UICTR
+    participant "ActiveCell" as ac
+    participant "Cell" as c
+    activate fact
+        User -> fact : Chose "Conditional Formating"
+		User -> fact : Imput Condition
+        fact -> UICTR : getActiveCell()
+        UICTR -> c : getContent()
+        fact -> fact : comparesData()
+        fact -> c : setStyle()
+    deactivate fact
+
+@enduml

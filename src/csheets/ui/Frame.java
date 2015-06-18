@@ -25,6 +25,7 @@ import csheets.core.Cell;
 import csheets.core.Workbook;
 import csheets.core.call_function.CallFunctionController;
 import csheets.core.call_function.ui.CallFunctionAction;
+import csheets.ext.import_export_link.ui.LinkImportExportAction;
 import csheets.ext.import_export_text.ui.ExportAction;
 import csheets.ext.import_export_text.ui.ImportAction;
 import csheets.ui.ctrl.AboutAction;
@@ -117,23 +118,27 @@ public class Frame extends JFrame implements SelectionListener {
         }
         ActionManager actionManager = new ActionManager(app, uiController, chooser);
 
-        // Registers file actions
-        actionManager.registerAction("new", new NewAction(app));
-        actionManager.
-                registerAction("open", new OpenAction(app, uiController, chooser));
-        actionManager.
-                registerAction("close", new CloseAction(app, uiController, chooser));
-        actionManager.
-                registerAction("closeall", new CloseAllAction(app, uiController, chooser));
-        actionManager.
-                registerAction("save", new SaveAction(app, uiController, chooser));
-        actionManager.
-                registerAction("saveas", new SaveAsAction(app, uiController, chooser));
-        actionManager.
-                registerAction("exit", new ExitAction(app, uiController, chooser));
-        actionManager.registerAction("print", new PrintAction());
-        actionManager.registerAction("import", new ImportAction(app, uiController));
-        actionManager.registerAction("export", new ExportAction(app, uiController));
+		// Registers file actions
+		actionManager.registerAction("new", new NewAction(app));
+		actionManager.
+			registerAction("open", new OpenAction(app, uiController, chooser));
+		actionManager.
+			registerAction("close", new CloseAction(app, uiController, chooser));
+		actionManager.
+			registerAction("closeall", new CloseAllAction(app, uiController, chooser));
+		actionManager.
+			registerAction("save", new SaveAction(app, uiController, chooser));
+		actionManager.
+			registerAction("saveas", new SaveAsAction(app, uiController, chooser));
+		actionManager.
+			registerAction("exit", new ExitAction(app, uiController, chooser));
+		actionManager.registerAction("print", new PrintAction());
+		actionManager.
+			registerAction("import", new ImportAction(app, uiController));
+		actionManager.
+			registerAction("export", new ExportAction(app, uiController));
+		actionManager.
+			registerAction("link", new LinkImportExportAction(app, uiController));
 
         // Registers edit actions
         actionManager.registerAction("undo", new UndoAction());

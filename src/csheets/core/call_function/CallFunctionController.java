@@ -65,7 +65,7 @@ public class CallFunctionController {
 
     public String chooseFunction(String identifier) throws UnknownElementException {
         Function func = Language.getInstance().getFunction(identifier);
-        String func_def = "=" + func.getIdentifier() + "(";
+        String func_def = func.getIdentifier() + "(";
         for (FunctionParameter p : func.getParameters()) {
             func_def += p.getName() + ";";
         }
@@ -185,6 +185,10 @@ public class CallFunctionController {
 
     public void addResultToCell(Cell cell, String func_def) throws FormulaCompilationException {
         cell.setContent(func_def);
+    }
+
+    public Value callMacroFunction(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
+        return caller.executeFunc(func_def);
     }
 
 }
