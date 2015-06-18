@@ -25,12 +25,16 @@ public class ReceiveMessages implements Runnable {
     private SSLSocket socket;
     private BufferedReader bufferedreader;
     private Thread thread;
+    private String name;
 
     public ReceiveMessages(SSLSocket socket) {
         try {
             bufferedreader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.sem = new Semaphore(1);
             this.socket = socket;
+            name = this.socket.
+                    getInetAddress().
+                    getCanonicalHostName();
             this.thread = new Thread(this);
             this.thread.start();
         } catch (IOException ex) {
@@ -61,16 +65,10 @@ public class ReceiveMessages implements Runnable {
                 System.out.println("estou sempre a ler!");
                 msg = bufferedreader.readLine();
                 if (msg.equals("")) {
-                    JOptionPane.showMessageDialog(null, msg, socket.
-                            getInetAddress().
-                            getCanonicalHostName() + " Disconnected!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, msg, this.name+" Disconnected!", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, msg, "New Message from " + socket.
-                            getInetAddress().
-                            getCanonicalHostName(), JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, msg, "New Message from " + this.name, JOptionPane.INFORMATION_MESSAGE);
                 }
-                
-
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
