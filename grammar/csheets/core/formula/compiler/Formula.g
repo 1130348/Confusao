@@ -47,7 +47,7 @@ expression
 	;
 
 operation
-	: comparison | forcicle 
+	: comparison | forcicle
 	;
 
 money
@@ -63,7 +63,7 @@ currency
        ;
 
 attribution
-	: ( VARIABLE  | CELL_REF ) ATT^ comparison
+	: ( ARRAY | VARIABLE  | CELL_REF ) ATT^ comparison
 	;
 
 comparison
@@ -100,13 +100,14 @@ arithmetic_highest
 	;
 
 atom
-	:	function_call
+	:	literal
+	|	function_call
 	|	reference
-	|	literal
 	|	LPAR! comparison RPAR!
 	|	bloco
-        |       attribution 
+        |       attribution
         |       variables
+		|		arrays
 	;
 
 function_call
@@ -121,12 +122,17 @@ reference
 	;
 
 variables
-	:  VARIABLE ( ( COLON^ ) VARIABLE )? 
+	:  VARIABLE ( ( COLON^ ) VARIABLE )?
+        ;
+
+arrays
+	:  ARRAY ( ( COLON^ ) ARRAY )?
         ;
 
 literal
 	:	NUMBER
 	|	STRING
+	|	ALPHA
 	;
 
 forcicle
@@ -171,8 +177,17 @@ CELL_REF
 
 VARIABLE
         :
-           VAR LETTER (DIGIT | LETTER)* 
+           VAR LETTER (DIGIT | LETTER)*
         ;
+
+ARRAY
+		:
+		   VARIABLE (LSPAR (DIGIT)+ RSPAR)?
+		;
+
+ALPHA
+		: (LETTER|DIGIT)*(LETTER|DIGIT)(LETTER|DIGIT)*
+		;
 
 /* String literals, i.e. anything inside the delimiters */
 
@@ -228,6 +243,8 @@ LPAR	: '(' ;
 RPAR	: ')' ;
 LCHA	: '{' ;
 RCHA	: '}' ;
+LSPAR   : '[' ;
+RSPAR	: ']' ;
 
 /* White-space (ignored) */
 WS: ( ' '

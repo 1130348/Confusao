@@ -23,6 +23,7 @@ package csheets.core.formula.lang;
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.Variable;
+import csheets.core.Workbook;
 import csheets.core.formula.Reference;
 import csheets.core.formula.util.ExpressionVisitor;
 import csheets.core.formula.util.ExpressionVisitorException;
@@ -61,6 +62,8 @@ public class VariableReference implements Reference {
 
 	private String name;
 
+	private Workbook workbook;
+
 	/**
 	 * Creates a new Variable reference to the given address, using the given
 	 * reference mode.
@@ -70,6 +73,11 @@ public class VariableReference implements Reference {
 	public VariableReference(Variable variable) {
 		this.variable = variable;
 		this.name = variable.getName();
+		this.workbook = variable.getWorkbook();
+	}
+
+	public Workbook getWorkbook() {
+		return workbook;
 	}
 
 	public Value evaluate() {
@@ -137,12 +145,9 @@ public class VariableReference implements Reference {
 		return variable.getName();
 	}
 
-    @Override
-    public SortedSet<Cell> getCells() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-
+	@Override
+	public SortedSet<Cell> getCells() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 
 }

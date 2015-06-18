@@ -93,6 +93,7 @@ public class CommentPanel extends JPanel implements SelectionListener,
             setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));		// width, height
         commentField.addFocusListener(applyAction);
         commentField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        commentField.setLineWrap(true);
 
         // Lays out comment components
         JPanel commentPanel = new JPanel();

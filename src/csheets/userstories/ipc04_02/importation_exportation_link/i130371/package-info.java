@@ -56,10 +56,17 @@
  * <img src = "doc-files/ipc_04_02_analysis_classes.png"/>
  * <br/><br/>
  * Beeing this the second of two use cases in the same sub-area "IPC
- * Import/Export text" some of the code of the first will be used. When it's
- * necessary to import information will be called the Import Process. If it's
- * necessary to export will be called the Export Process that is already done.
- *
+ * Import/Export text" some of the code of the first will be used. If it's
+ * necessary to export will be called the Export Process that is already
+ * done.Although the importation process was already implement was a problem.
+ * The method open a new sheet whenever it imported from the file. The problem
+ * was that the sheet from importation and exportation needs to be the same so
+ * don't make logic to open a new sheet because the sheet was always change. I
+ * decided to create a private class on the class Import that implements
+ * Runnable and has a method that import from the file but writes all the
+ * information on the sheet that was open already. I could refactor the code
+ * that was already done but i prefere this way in order to keep all the code
+ * doing for other person save.
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the ipc
@@ -67,8 +74,23 @@
  * when linked to a text file. From this moment, I don't see the necessity of
  * doing more that the actual tests that are already implemented. Since all the
  * used methods in this use case were made previosly and I assumed they were
- * working. As usual, in a test driven development approach tests normally fail
- * in the beginning. The idea is that the tests will pass in the end.<br>
+ * working. Almost all the methods that I implemented use threads or are methods
+ * from the interface or using it (the class uiController). The controller
+ * (ImportationExportationLinkCOntroller) has got the constructor, two methods
+ * that calls the threads Import and Export, one that sets a variable on the
+ * uiController and another to know if the thread is alive. The class Import and
+ * Export has the abstract methods cause implements Runnable and the class
+ * Import has a private class that was created because the method done on the
+ * CustomImportation was openning a new sheet and I prefere not to change the
+ * code of the person that had implemented because was working too. All this
+ * methods I tested by functional tests and using debugging. The new class I
+ * test the importation seeing the file and that everything was alright. I try
+ * to find some methods to do unitary tests because the teacher said that was
+ * important to do tests and use the test driven development but I don't see the
+ * necessity to do more than the tests that were already implemented so I did
+ * functional tests. As usual, in a test driven development approach tests
+ * normally fail in the beginning. The idea is that the tests will pass in the
+ * end.<br>
  * <br/>
  *
  * * <h2>4. Design</h2>
@@ -110,6 +132,33 @@
  * opted to a division in Importation Link and Exportation Link.
  *
  * <h2>5. Coding</h2>
+ * All the interface was doing on the classes LinkDialog and
+ * LinkImportExportAction. The controller has two methods that calls the threads
+ * Export and Import (two other new classes). I used to the class
+ * CustomExportation but was not created for me I just write a new constructor
+ * and changed a small mistake. see:
+ * <code>csheets.ext.import_export_link.Export</code><br/> (this class will test
+ * if the cells were modifie using the CellListeners and if there were
+ * modifications will Export to the txt file) see:
+ * <code>csheets.ext.import_export_link.Import</code><br/> (the class Import
+ * will confirm if the date_last_update is before the date of the last
+ * modification in the file and will export all the information to the cells)
+ * This two classes (Export and Import) implements Runnable so has got all the
+ * abstract methods <br/>
+ * see:
+ * <code>csheets.ext.import_export_link.ImportationExportationLinkController</code><br/>
+ * The controller is created to call the threads Export and Import.  <br/>
+ * The interface was simple: a new option on the menu that opens a window asking
+ * the separator and the file.<br/>
+ * see: <code>csheets.ext.import_export_link.ui.LinkDialog</code><br/>
+ * see:
+ * <code>csheets.ext.import_export_link.ui.LinkImportExportAction</code><br/>
+ * All the classes has complemented with javadoc documentation and some
+ * important comments on some relevant lines of the code. One thing that is
+ * important to detach is that the threads has got some sleeps. It happens to
+ * the thread not run too fast. It was happen that the thread as running soo
+ * fast that didn't do the if condition and using debbuging I understand that
+ * putting a SystemOutPrintln it doesn't happen.<br/>
  *
  * <h2>6. Final Remarks</h2>
  * This use case is the second and the last of this sub-area "IPC Export/Import

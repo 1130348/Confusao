@@ -50,11 +50,7 @@ public class CommentedCellDecorator extends CellDecorator {
                 Graphics2D g2 = (Graphics2D) g;
                 Color oldPaint = g2.getColor();
                 Font oldFont = g2.getFont();
-                component.addComponentListener(null);
-                System.out.println("ola");
-                    component.setToolTipText(commentableCell.
-                        getAllComments() + "\r\n Edited by: " + commentableCell.
-                        getUser());
+                component.addComponentListener(null);              
                 
 
                 // Prints 'A' using own font, then restores the old font

@@ -23,6 +23,8 @@ package csheets.ui.sheet;
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
+import csheets.ext.comments.CommentableCell;
+import csheets.ext.comments.CommentsExtension;
 import csheets.ext.style.StylableCell;
 import csheets.ext.style.StyleExtension;
 import csheets.ui.ctrl.UIController;
@@ -63,6 +65,7 @@ public class CellRenderer extends DefaultTableCellRenderer {
      * Whether the cell currently being rendered has the focus
      */
     private boolean hasFocus = false;
+    
 
     /**
      * Creates a new cell renderer.
@@ -117,7 +120,13 @@ public class CellRenderer extends DefaultTableCellRenderer {
                 }
             }
 
-
+//                        table = new JTable() {
+//                @Override
+//                public JToolTip createToolTip() {
+//                    
+//                    return new MultiLineToolTip();
+//                }
+//            };
             // Applies tool tip
             if (value.getType() == Value.Type.ERROR) {
                 try {
@@ -126,10 +135,22 @@ public class CellRenderer extends DefaultTableCellRenderer {
                 }
             }
             
-            System.out.println("Render magic");
+            CommentableCell commentableCell = (CommentableCell) cell.
+                getExtension(CommentsExtension.NAME);
+            
+            if( commentableCell.hasComment())
+            {    
+                
+            setToolTipText("<html>" +commentableCell.
+                        getAllComments() +"<br>"+ "Edited by: " + commentableCell.getUser()+ "</html>");
+            } else
+            {
+                setToolTipText(null);
+            }
         }
         return this;
     }
+    
 
     /**
      * Overridden to delegate painting to decorators.

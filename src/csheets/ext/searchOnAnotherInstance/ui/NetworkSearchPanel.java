@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csheets.ext.networkSearch.ui;
+package csheets.ext.searchOnAnotherInstance.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
@@ -13,6 +13,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,11 +25,13 @@ import javax.swing.JScrollPane;
  *
  * @author Luis
  */
-public class NetworkSearchPanel extends JPanel {
+public class NetworkSearchPanel extends JPanel implements Observer {
 
 	public static JList foundWorkbooksList = new JList();
 
 	private UIController uiController;
+
+	private ArrayList<String> foundWorkBooksNamesList = new ArrayList<String>();
 
 	public NetworkSearchPanel(UIController uiController) {
 		super(new BorderLayout());
@@ -69,5 +74,12 @@ public class NetworkSearchPanel extends JPanel {
 				}
 			});
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		String resumo = (String) arg;
+		foundWorkBooksNamesList.add(resumo);
+		foundWorkbooksList.setListData(foundWorkBooksNamesList.toArray());
 	}
 }

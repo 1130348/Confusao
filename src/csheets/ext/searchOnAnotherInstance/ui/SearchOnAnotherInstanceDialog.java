@@ -9,6 +9,7 @@ import csheets.core.Workbook;
 import csheets.ext.searchOnAnotherInstance.NotificationEvent;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceController;
 import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		if (dialog == null) {
 			dialog = new SearchOnAnotherInstanceDialog();
 		}
+
+		dialog.setModal(false);
 		return dialog;
 	}
 
@@ -132,19 +135,16 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(refreshButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchLan)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(searchLan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(workbookToSearchText, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(workbookToSearchText)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(45, 45, 45))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,17 +208,29 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void searchLanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLanActionPerformed
-		if (instancesList.isSelectionEmpty()) {
+//		if (instancesList.isSelectionEmpty()) {
+//			JOptionPane.
+//				showMessageDialog(null, "Please select an instance to start the Lan Search", "Warning", JOptionPane.WARNING_MESSAGE);
+//			return;
+//		}
+		if (instancesList.getModel().getSize() == 0) {
 			JOptionPane.
-				showMessageDialog(null, "Please select an instance to send search request", "Warning", JOptionPane.WARNING_MESSAGE);
+				showMessageDialog(null, "No instances have been found!", "Warning", JOptionPane.WARNING_MESSAGE);
 			return;
+		}
+		for (UIExtension ext : uiController.getExtensions()) {
+			if (ext instanceof UIExtensionSearchOnAnotherInstance) {
+				controller.addObserverWatch((NetworkSearchPanel) ext.
+					getSideBar());
+			}
 		}
 		String workbookToSearch = workbookToSearchText.getText();
 		for (int i = 0; i < listOfAvailableCleanSheetsInstances.size(); i++) {
 			try {
-				if (listOfAvailableCleanSheetsInstances.get(i).
+				if (!listOfAvailableCleanSheetsInstances.get(i).
 					equalsIgnoreCase(InetAddress.getLocalHost().getHostAddress())) {
-					String addressToSend = (String) listOfAvailableCleanSheetsInstances.
+
+					String addressToSend = listOfAvailableCleanSheetsInstances.
 						get(i);
 					controller.
 						sendSearchRequest(addressToSend, workbookToSearch);
@@ -255,7 +267,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		for (Map.Entry<InetAddress, Integer> activeInstance : activeInstances.
 			entrySet()) {
 			listOfAvailableCleanSheetsInstances.add(activeInstance.getKey().
-				getHostName());
+				getHostAddress());
 		}
 
 		instancesList.

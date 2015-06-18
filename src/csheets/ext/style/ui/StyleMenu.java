@@ -57,7 +57,6 @@ public class StyleMenu extends JMenu {
 		add(new ForegroundAction(uiController));
 		add(new BackgroundAction(uiController));
 		addSeparator();
-
 		// Adds alignment actions
 		add(new AlignLeftAction(uiController));
 		add(new AlignCenterAction(uiController));

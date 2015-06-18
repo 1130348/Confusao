@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -28,105 +27,104 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class NetworkSendService {
 
-	public static Socket cliente;
+    public static Socket cliente;
 
-	public static boolean connectionState = false;
+    public static boolean connectionState = false;
 
-	public static final int TIMEOUT = 3;
+    public static final int TIMEOUT = 3;
 
-	public NetworkSendService() {
-	}
+    public NetworkSendService() {
+    }
 
-	public static Map<InetAddress, Integer> searchActiveInstances(int portUDP,
-																  int portTCP) {
+    public static Map<InetAddress, Integer> searchActiveInstances(int portUDP,
+            int portTCP) {
 
-		Map<InetAddress, Integer> activeInstances = new HashMap<InetAddress, Integer>();
+        Map<InetAddress, Integer> activeInstances = new HashMap<InetAddress, Integer>();
 
-		try {
+        try {
 
-			DatagramSocket socket = new DatagramSocket();
-			socket.setBroadcast(true);
-			socket.setSoTimeout(1000 * TIMEOUT);
-			InetAddress destinationIP = InetAddress.getByName("10.8.255.255");
+            DatagramSocket socket = new DatagramSocket();
+            socket.setBroadcast(true);
+            socket.setSoTimeout(1000 * TIMEOUT);
+            InetAddress destinationIP = InetAddress.getByName("10.8.255.255");
+            byte[] data = new byte[300];
+            String message = String.format("%d", portTCP);
+            data = message.getBytes("ISO-8859-1");
+            DatagramPacket request = new DatagramPacket(data, message.
+                    length(), destinationIP, portUDP);
 
-			byte[] data = new byte[300];
-			String message = String.format("%d", portTCP);
-			data = message.getBytes("ISO-8859-1");
-			DatagramPacket request = new DatagramPacket(data, message.
-														length(), destinationIP, portUDP);
+            socket.send(request);
+            DatagramPacket reply;
 
-			socket.send(request);
-			DatagramPacket reply;
+            long startTime = 0;
+            long endTime = 0;
+            long time = 0;
 
-			long startTime = 0;
-			long endTime = 0;
-			long time = 0;
+            while (time < 15000) {
+                try {
+                    startTime = System.currentTimeMillis();
 
-			while (time < 15000) {
-				try {
-					startTime = System.currentTimeMillis();
+                    reply = new DatagramPacket(data, data.length);
+                    socket.receive(reply);
+                    System.out.println("ADDRESS: " + reply.getPort());
+                    message = new String(reply.getData(), 0, reply.getLength());
+                    System.out.println(message);
 
-					reply = new DatagramPacket(data, data.length);
-					socket.receive(reply);
-					System.out.println("ADDRESS: " + reply.getPort());
-					message = new String(reply.getData(), 0, reply.getLength());
-					System.out.println(message);
+                    NetworkService.
+                            addClientToMap(Integer.parseInt(message), reply.
+                                    getAddress());
 
-					NetworkService.
-						addClientToMap(Integer.parseInt(message), reply.
-									   getAddress());
+                    activeInstances.put(reply.getAddress(), Integer.
+                            parseInt(message));
 
-					activeInstances.put(reply.getAddress(), Integer.
-										parseInt(message));
+                    endTime += System.currentTimeMillis();
+                    time += endTime - startTime;
+                    System.out.println(time);
+                } catch (SocketTimeoutException ex) {
+                    endTime += System.currentTimeMillis();
+                    time += endTime - startTime;
+                    System.out.println(time);
+                    System.out.println("Instance did not respond!");
+                }
+            }
 
-					endTime += System.currentTimeMillis();
-					time += endTime - startTime;
-					System.out.println(time);
-				} catch (SocketTimeoutException ex) {
-					endTime += System.currentTimeMillis();
-					time += endTime - startTime;
-					System.out.println(time);
-					System.out.println("Instance did not respond!");
-				}
-			}
+            socket.close();
 
-			socket.close();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (SocketException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(NetworkService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+        return activeInstances;
+    }
 
-		} catch (UnknownHostException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		} catch (SocketException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(NetworkService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
-		return activeInstances;
-	}
+    public static void sendObject(Object object,
+            ObjectOutputStream sOut) {
+        try {
+            sOut.writeObject(object);
+        } catch (IOException ex) {
+            Logger.getLogger(NetworkSendService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
 
-	public static void sendObject(Object object,
-								  ObjectOutputStream sOut) {
-		try {
-			sOut.writeObject(object);
-		} catch (IOException ex) {
-			Logger.getLogger(NetworkSendService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
-	}
-
-	public static void sendString(String message,
-								  DataOutputStream sOut) {
-		try {
-			byte[] data = new byte[300];
-			data = message.getBytes();
-			sOut.write((byte) message.length());
-			sOut.write(data, 0, message.length());
-		} catch (IOException ex) {
-			Logger.getLogger(NetworkSendService.class.getName()).
-				log(Level.SEVERE, null, ex);
-		}
-	}
+    public static void sendString(String message,
+            DataOutputStream sOut) {
+        try {
+            byte[] data = new byte[300];
+            data = message.getBytes();
+            sOut.write((byte) message.length());
+            sOut.write(data, 0, message.length());
+        } catch (IOException ex) {
+            Logger.getLogger(NetworkSendService.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+    }
 
 	public static void establishConnectionToUser(InetAddress address) {
 		try {
@@ -150,26 +148,6 @@ public class NetworkSendService {
 				log(Level.SEVERE, null, ex);
 		}
 
-	}
-
-	/**
-	 * Connection using SSL
-	 *
-	 * @param address
-	 * @return
-	 */
-	public static boolean establishSecureConnectionToUser(InetAddress address) {
-		try {
-			SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.
-				getDefault();
-			cliente = sslsocketfactory.createSocket(address, 1337);
-			connectionState = true;
-			System.out.println("O cliente conectou-se ao servidor SSL!");
-			return true;
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return false;
-		}
 	}
 
 }
