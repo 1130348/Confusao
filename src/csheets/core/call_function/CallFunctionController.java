@@ -92,8 +92,8 @@ public class CallFunctionController {
         Value value = new Value();
         try {
             value = caller.executeFunc(func_def);
-            String formula = func_def.substring(1) + " = " + value;
-            FormulasPanel.addFormula(formula);
+            String formula = func_def.substring(0) + " = " + value;
+            //FormulasPanel.addFormula(formula);
         } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException ex) {
             Logger.getLogger(CallFunctionController.class.getName()).
                     log(Level.SEVERE, null, ex);
