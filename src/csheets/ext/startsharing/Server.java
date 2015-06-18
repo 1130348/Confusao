@@ -5,6 +5,7 @@
  */
 package csheets.ext.startsharing;
 
+import csheets.ext.startsharing.ui.ChooseCleanSheetsInstanceToConnect;
 import csheets.ext.startsharing.ui.SendCellsAction;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -59,15 +60,25 @@ public class Server implements Runnable {
                             put(client, new DataOutputStream(client.
                                             getOutputStream()));
 
-                    NetworkService.addClientToMap(port + 1, client.getInetAddress());
+                    //NetworkService.addClientToMap(port + 1, client.getInetAddress());
                     StartSharingController controller = new StartSharingController();
-                    controller.setSendPort(port+1);
+                    ChooseCleanSheetsInstanceToConnect sa = ChooseCleanSheetsInstanceToConnect.getInstance(null, true, controller, sendCells);
+                    sa.setVisible(true);
 
                     List<String> cli = new ArrayList<>();
                     cli.add(client.getInetAddress().getHostName());
-                    controller.establishConnection(cli, sendCells);
+                    //controller.establishConnection(cli, sendCells);
+
+                    controller.
+                            establishConnection(cli, sendCells);
 
                     sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());
+
+                    /*  List<String> cli = new ArrayList<>();
+                     cli.add(client.getInetAddress().getHostName());
+                     controller.establishConnection(cli, sendCells);
+
+                     sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());*/
                     new Thread(new ReceiveData(client, sendCells)).start();
                 } else {
                     client.close();
@@ -77,8 +88,10 @@ public class Server implements Runnable {
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+
         } catch (InterruptedException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Server.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
