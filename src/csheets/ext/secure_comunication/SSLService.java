@@ -37,6 +37,7 @@ public class SSLService {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.
                     getDefault();
             SSLSocket newSocket;
+            System.out.println(address.getHostName());
             newSocket = (SSLSocket) sslsocketfactory.createSocket(address, portSSL);
             System.out.println("O cliente se conectou ao servidor SSL!");
             connectionsActive.put(address, newSocket);
