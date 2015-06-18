@@ -5,7 +5,6 @@
  */
 package csheets.core.formula.lang;
 
-import csheets.core.Array;
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Spreadsheet;
@@ -81,16 +80,14 @@ public class Attribution implements BinaryOperator {
 				return new Value(e);
 			}
 			value = rightOperand.evaluate();
-			if (variable instanceof Array) {
-				Array temp = (Array) ref1.getWorkbook().getVariable(leftOperand.
-					toString());
-				temp.setPositionValue(0, value);
-			}
+			Variable temp = ref1.getWorkbook().getVariable(leftOperand.
+				toString());
+			temp.setPositionValue(0, value);
 			variable.setValue(value);
 		} else if (leftOperand instanceof ArrayReference) {
 			ArrayReference ref1 = (ArrayReference) leftOperand;
 
-			Array array;
+			Variable array;
 			try {
 
 				array = ref1.getArray();

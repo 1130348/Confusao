@@ -1,5 +1,4 @@
 @startuml doc-files/ipc_02_02_sequence_diagram_design.png
-@startuml
 
 actor user
 

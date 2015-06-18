@@ -22,7 +22,6 @@
  */
 package csheets.core.formula.compiler;
 
-import csheets.core.Array;
 import csheets.core.Cell;
 import csheets.core.Value;
 import csheets.core.Variable;
@@ -147,7 +146,8 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 						} else {
 							Variable temp = new Variable(node.getText(), new Value(""), cell.
 														 getSpreadsheet().
-														 getWorkbook());
+														 getWorkbook(), 0);
+							temp.initializePositions();
 							cell.getSpreadsheet().getWorkbook().
 								addVariable(temp);
 							return new VariableReference(temp);
@@ -159,7 +159,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 						if (cell.getSpreadsheet().getWorkbook().
 							validateVariable(name)) {
 
-							Array temp = (Array) cell.
+							Variable temp = cell.
 								getSpreadsheet().
 								getWorkbook().getVariable(name);
 							if (name.equals(node.getText())) {
@@ -174,9 +174,9 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
 							return new ArrayReference(temp);
 						} else {
-							Array temp = new Array(name, new Value(""), cell.
-												   getSpreadsheet().
-												   getWorkbook(), 0);
+							Variable temp = new Variable(name, new Value(""), cell.
+														 getSpreadsheet().
+														 getWorkbook(), 0);
 							temp.initializePositions();
 							if (!name.equals(node.getText())) {
 								int position = Integer.parseInt(node.getText().

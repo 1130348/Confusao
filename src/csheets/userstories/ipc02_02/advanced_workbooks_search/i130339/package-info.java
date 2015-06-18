@@ -1,5 +1,5 @@
 /**
- * Technical documentation regarding the user story ipc02_02: Advanced WorkBook Seach 
+ * Technical documentation regarding the user story ipc02_02: Advanced WorkBook Search 
  * <br/>
  * <br/>
  *
@@ -17,7 +17,7 @@
  * <h2>2. Analysis</h2>
  * <br/>
  * <br/>
- * <h3>First "analysis" sequence diagram of the Advanced Note Editon</h3>
+ * <h3>First "analysis" sequence diagram of the Advanced WorkBook Search</h3>
  * The following diagram depicts a proposal for the realization of the
  * previously described use case. We call this diagram an "analysis" use case
  * realization because it functions like a draft that we can do during analysis
@@ -67,8 +67,9 @@
  * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It
  * depicts the objects and classes involved in the scenario and the sequence of
- * messages exchanged betwween the objets needed to carry out the functionality
+ * messages exchanged between the objets needed to carry out the functionality
  * of the scenario.<br/>
+ * 
  * <img src="doc-files/ipc_02_02_sequence_diagram_design.png">
  * </br>
  * 
@@ -82,12 +83,6 @@
  * Then there are 2 buttons, one that allows the user to load more cells to show and one that 
  * gives the option to open the workbook.
  * <br/><br/>
- * <h2>5. Coding</h2>
- * 
- * <h2>6. Final Remarks</h2>
- * 
- * <br/>
- * <br/>
  *
  */
 
