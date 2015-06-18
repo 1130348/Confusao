@@ -269,6 +269,9 @@ public class MenuBar extends JMenuBar {
 			}
 
 		}
+                
+                JMenu money = addMenu("Money", KeyEvent.VK_M);
+                money.add(actionManager.getAction("chooseCurrencyExchangesFile"));
 
 		// Creates the window menu
 		add(

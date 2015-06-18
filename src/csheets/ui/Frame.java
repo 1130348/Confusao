@@ -28,6 +28,7 @@ import csheets.ext.import_export_text.ui.ImportAction;
 import csheets.ui.ctrl.AboutAction;
 import csheets.ui.ctrl.ActionManager;
 import csheets.ui.ctrl.AddSpreadsheetAction;
+import csheets.ui.ctrl.ChooseCurrencyExchangeFileAction;
 import csheets.ui.ctrl.ClearAction;
 import csheets.ui.ctrl.CloseAction;
 import csheets.ui.ctrl.CloseAllAction;
@@ -145,6 +146,8 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.registerAction("search", new SearchAction(uiController));
 		actionManager.registerAction("prefs", new PreferencesAction());
 
+                actionManager.registerAction("chooseCurrencyExchangesFile", new ChooseCurrencyExchangeFileAction());
+                
 		// Registers spreadsheet actions
 		actionManager.
 			registerAction("addsheet", new AddSpreadsheetAction(uiController));
