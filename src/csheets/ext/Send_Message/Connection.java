@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author DMMCA
  */
-public class Connection extends Thread {
+public class Connection{
 
 
 

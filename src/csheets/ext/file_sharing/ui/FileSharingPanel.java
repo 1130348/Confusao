@@ -66,7 +66,5 @@ class FileSharingPanel extends JPanel {
 
         add(myLabel);
         add(fs);
-
     }
-
 }
