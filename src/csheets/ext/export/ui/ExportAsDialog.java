@@ -13,7 +13,6 @@ import csheets.ui.ctrl.UIController;
 import csheets.ui.sheet.SpreadsheetTable;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -72,7 +71,7 @@ public class ExportAsDialog extends javax.swing.JDialog {
             }
         });
 
-        Cancel.setText("Cancel");
+        Cancel.setText("Close");
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);
@@ -100,7 +99,7 @@ public class ExportAsDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(SelectTags)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,30 +142,13 @@ public class ExportAsDialog extends javax.swing.JDialog {
                     if (jChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
                             String expType = getFileExtension();
                             ieController.newProcess(expType);
-                            file = ieController.export(tags,selectedCells,jChooser.getSelectedFile().getName());
+                            file = ieController.export(tags,selectedCells,jChooser.getSelectedFile().getAbsolutePath());
                     }
                     
 			if (file != null) {
-				if (file.exists() && (oldFile == null || !file.equals(oldFile))) {
-					// Prompt to overwrite the file
-					int option = JOptionPane.showConfirmDialog(
-						null,
-						"The chosen file " + file + " already exists\n" +
-						"Do you want to overwrite it?",
-						"Replace existing file?",
-						JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.WARNING_MESSAGE
-					);
-
-					if (option == JOptionPane.YES_OPTION)
-						promptForFile = false;
-					else if (option == JOptionPane.CANCEL_OPTION
-						  || option == JOptionPane.CLOSED_OPTION)
-						return;
-				} else
+				
 					promptForFile = false;
-			} else
-				return;
+			} 
 		}
             
     }//GEN-LAST:event_ExportAsActionPerformed
