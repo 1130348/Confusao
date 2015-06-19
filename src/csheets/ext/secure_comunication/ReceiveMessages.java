@@ -65,7 +65,7 @@ public class ReceiveMessages implements Runnable {
             ex.printStackTrace();
         }
         System.out.println(
-                "fechei esta merda toda");
+                "fechei o receive messages");
         interrupt();
     }
 
