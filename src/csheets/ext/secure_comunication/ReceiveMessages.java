@@ -70,6 +70,7 @@ public class ReceiveMessages implements Runnable {
                 sIn.read(data, 0, nChars);
                 msg = new String(data, 0, nChars);
                              JOptionPane.showMessageDialog(null, msg, "New Message from " + this.name, JOptionPane.INFORMATION_MESSAGE);
+                
             }
 
         } catch (IOException ex) {
