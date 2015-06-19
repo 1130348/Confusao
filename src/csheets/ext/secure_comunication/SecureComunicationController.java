@@ -80,6 +80,8 @@ public class SecureComunicationController {
             connectedIPs.remove(ssl);
         }
         SSLService.stopServer();
+        activeIPs.clear();
+        connectedIPs.clear();
     }
 
 }

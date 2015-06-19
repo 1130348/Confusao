@@ -69,15 +69,16 @@ public class SSLService {
             SSLSocket socketClient = connectionsActive.get(client);
 
             //bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
-
             DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
-             byte[] data = new byte[300];
-             data = str.getBytes();
-              System.out.println("vou enviar: " + str);
-             sOut.write((byte) str.length());
-             sOut.write(data, 0, str.length());
+            byte[] data = new byte[300];
+            data = str.getBytes();
+            System.out.println("vou enviar: " + str);
+            sOut.write((byte) str.length());
+            if (!str.equals("")) {
+                sOut.write(data, 0, str.length());
+            }
             /*bufferedwriter.write(str);
-            bufferedwriter.flush();*/
+             bufferedwriter.flush();*/
             System.out.println("enviei");
 
         } catch (IOException ex) {
