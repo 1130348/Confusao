@@ -5,10 +5,13 @@
  */
 package csheets.ext.file_sharing.ui;
 
-import csheets.ext.Send_Message.UI.SendMessageController;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,11 +30,9 @@ import javax.swing.ListSelectionModel;
  */
 public class FileSharingUI extends JFrame {
 
-    /* Under TESTs */
     private JList filesList;
 
-    /* WORKING */
-    private DefaultListModel fileList, ConList;
+    private DefaultListModel fileList, ConList,outlistS;
 
     private String selectedCon;
 
@@ -64,7 +65,7 @@ public class FileSharingUI extends JFrame {
                     int index = list.locationToIndex(evt.getPoint());
                     selectedCon = ConList.get(index).toString();
                     try {
-                        SendMessageController.StartCon();
+                        FileSharingController.StartCon();
                     } catch (IOException ex) {
                         Logger.getLogger(FileSharingUI.class.getName()).
                                 log(Level.SEVERE, null, ex);
@@ -78,9 +79,31 @@ public class FileSharingUI extends JFrame {
 
         myinbox.setText("<html><center>My</center>InBox</hmtl>");
         myinbox.setBounds(10, 10, 85, 50);
+        myinbox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().open(new File(FileSharingController.getInBox()));
+                } catch (IOException ex) {
+                    
+                }
+            }
+        });
         add(myinbox);
         myoutbox.setText("<html><center>My</center>OutBox</hmtl>");
         myoutbox.setBounds(105, 10, 85, 50);
+        myoutbox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().open(new File(FileSharingController.getOutBox()));
+                } catch (IOException ex) {
+                    
+                }
+            }
+        });
         add(myoutbox);
 
         JScrollPane listScroller = new JScrollPane(InstancesList);
@@ -124,11 +147,23 @@ public class FileSharingUI extends JFrame {
 
     public void fillList(List l) {
         for (Object x : l) {
-            fileList.addElement(x.toString());
+            outlistS.addElement(x.toString());
         }
     }
 
     public String getSelectedCon() {
         return selectedCon;
     }
+
+    public void setMsg(String msg) {
+        if (!msg.equals("")) {
+                String[] ar = msg.split(",");
+                for (int i = 0; i < ar.length; i++) {
+                    System.out.println(ar[i]);
+                    fileList.addElement(ar[i]);
+                }
+        }
+    }
+    
+    
 }
