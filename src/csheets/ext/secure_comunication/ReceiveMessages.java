@@ -30,8 +30,8 @@ public class ReceiveMessages implements Runnable {
 
     public ReceiveMessages(SSLSocket socket) {
         try {
-            //bufferedreader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            datareader = new DataReader(socket.getInputStream());
+            bufferedreader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            //datareader = new DataReader(socket.getInputStream());
             this.sem = new Semaphore(1);
             this.socket = socket;
             name = this.socket.
@@ -49,35 +49,35 @@ public class ReceiveMessages implements Runnable {
         String msg;
 
         try {
-            while (true) {
-                /*  System.out.println("estou sempre a ler!");
-                 while ((msg = bufferedreader.readLine()) != null) {
-                 /* JOptionPane.showMessageDialog(null, msg, "New Message from " + socket.
+            System.out.println("estou sempre a ler!");
+            while ((msg = bufferedreader.readLine()) != "") {
+                /* JOptionPane.showMessageDialog(null, msg, "New Message from " + socket.
                  getInetAddress().
                  getCanonicalHostName(), JOptionPane.INFORMATION_MESSAGE);*/
                 // msg = bufferedreader.readLine();
-                System.out.println("tentar ler");
-                msg = datareader.readString();
                 System.out.println("li algo");
-                if (msg.equals("")) {
-                    JOptionPane.showMessageDialog(null, msg, this.name + " Disconnected!", JOptionPane.INFORMATION_MESSAGE);
-                    SSLService.disconnectSecureConnectionToUser(socket.getInetAddress());
-                    break;
-                } else {
-                    JOptionPane.showMessageDialog(null, msg, "New Message from " + this.name, JOptionPane.INFORMATION_MESSAGE);
-                }
+
+                JOptionPane.showMessageDialog(null, msg, "New Message from " + this.name, JOptionPane.INFORMATION_MESSAGE);
             }
+            JOptionPane.showMessageDialog(null, msg, this.name + " Disconnected!", JOptionPane.INFORMATION_MESSAGE);
+            SSLService.disconnectSecureConnectionToUser(socket.getInetAddress());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         System.out.println(
                 "fechei esta merda toda");
+        interrupt();
     }
 
     public void interrupt() {
         try {
             socket.close();
 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            bufferedreader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
