@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
@@ -25,7 +27,8 @@ public class SSLServer implements Runnable {
     Map<InetAddress, ReceiveMessages> clientConnections;
     SSLServerSocket serverSocket;
     Semaphore sem;
-    Thread thread;
+    public Thread thread;
+    boolean join=false;
 
     public SSLServer(int port) {
         this.port = port;
@@ -42,7 +45,7 @@ public class SSLServer implements Runnable {
             SSLServerSocketFactory sslserversocketfactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             serverSocket = (SSLServerSocket) sslserversocketfactory.createServerSocket(port);
             SSLSocket client;
-            while (!thread.isInterrupted()) {
+            while (true) {
                 sem.acquire();
                 client = (SSLSocket) serverSocket.accept();
                 if (SSLService.getConnectionsActive().contains(client.getInetAddress())) {
@@ -64,20 +67,40 @@ public class SSLServer implements Runnable {
                 }
                 sem.release();
             }
+            
         } catch (InterruptedException | IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public void interrupt() {
-        for (ReceiveMessages receive : clientConnections.values()) {
-            receive.interrupt();
+        /*for (InetAddress i : clientConnections.keySet()) {
+            SSLService.disconnectSecureConnectionToUser(i);
+        }*/
+        for(ReceiveMessages rm:clientConnections.values()){
+            rm.thread.interrupt();
         }
-        thread.interrupt();
+        try {       
+            serverSocket.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            this.thread.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeConnection(InetAddress address) {
-        this.clientConnections.get(address).interrupt();
-        this.clientConnections.remove(address);
+        if (this.clientConnections.containsKey(address)) {
+            try {
+                this.clientConnections.get(address).thread.stop();
+                this.clientConnections.get(address).thread.join();
+                this.clientConnections.remove(address);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

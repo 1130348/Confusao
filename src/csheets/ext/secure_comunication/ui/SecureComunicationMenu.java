@@ -5,6 +5,8 @@
  */
 package csheets.ext.secure_comunication.ui;
 
+import csheets.ext.secure_comunication.SecureComunicationController;
+import csheets.ui.ctrl.BaseAction;
 import csheets.ui.ctrl.UIController;
 import javax.swing.JMenu;
 
@@ -18,7 +20,12 @@ public class SecureComunicationMenu extends JMenu {
 
     public SecureComunicationMenu(UIController uIController) {
         super("Secure Comunication");
-        add(new SecureComunicationAction(uiController));
+        //add(new SecureComunicationActionOff(uiController));
+        SecureComunicationController secureComunicationController = new SecureComunicationController();
+        BaseAction sa = new SecureComunicationActionOn(uIController,secureComunicationController);
+        add(sa);
+        sa = new SecureComunicationActionOff(uIController,secureComunicationController);
+        add(sa);
     }
 
 }

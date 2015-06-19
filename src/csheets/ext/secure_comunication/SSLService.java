@@ -6,7 +6,6 @@
 package csheets.ext.secure_comunication;
 
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
@@ -32,10 +31,6 @@ public class SSLService {
         sslServer = new SSLServer(portSSL);
     }
 
-    public static void interruptSSLConnection() {
-        sslServer.interrupt();
-    }
-
     public static boolean establishSecureConnectionToUser(InetAddress address) {
         try {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.
@@ -43,11 +38,12 @@ public class SSLService {
             SSLSocket newSocket;
             System.out.println(address.getHostName());
             newSocket = (SSLSocket) sslsocketfactory.createSocket(address, portSSL);
+            connectionsActive.put(address, newSocket);
             newSocket.startHandshake();
             System.out.println("O cliente se conectou ao servidor SSL!");
-            connectionsActive.put(address, newSocket);
             return true;
         } catch (IOException ex) {
+            connectionsActive.remove(address);
             ex.printStackTrace();
             return false;
         }
@@ -78,6 +74,7 @@ public class SSLService {
              data = str.getBytes();
              sOut.write((byte) str.length());
              sOut.write(data, 0, str.length());*/
+            System.out.println("vou enviar: " + str);
             bufferedwriter.write(str);
             bufferedwriter.flush();
 
@@ -88,5 +85,9 @@ public class SSLService {
 
     public static Set<InetAddress> getConnectionsActive() {
         return connectionsActive.keySet();
+    }
+
+    static void stopServer() {
+        sslServer.interrupt();
     }
 }
