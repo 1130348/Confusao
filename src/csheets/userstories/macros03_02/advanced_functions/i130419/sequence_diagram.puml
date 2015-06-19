@@ -35,7 +35,8 @@ cell -> cell : reevaluate()
 cell -> formula : evaluate()
 formula -> expression : evaluate()
 expression -> func : applyTo(args)
-func -> expression : Value
-expression -> formula : Value
-formula -> cell : Value
+func --> expression : Value
+expression --> formula : Value
+formula --> cell : Value
+cell -> cell : printMatrix()
 @enduml
