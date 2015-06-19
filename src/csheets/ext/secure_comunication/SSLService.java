@@ -6,6 +6,7 @@
 package csheets.ext.secure_comunication;
 
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
@@ -63,20 +64,21 @@ public class SSLService {
     }
 
     public static void sendSecureMessages(String str, InetAddress client) {
-        BufferedWriter bufferedwriter = null;
+        //BufferedWriter bufferedwriter = null;
         try {
             SSLSocket socketClient = connectionsActive.get(client);
 
-            bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+            //bufferedwriter = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
 
-            /*DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
+            DataOutputStream sOut = new DataOutputStream(socketClient.getOutputStream());
              byte[] data = new byte[300];
              data = str.getBytes();
+              System.out.println("vou enviar: " + str);
              sOut.write((byte) str.length());
-             sOut.write(data, 0, str.length());*/
-            System.out.println("vou enviar: " + str);
-            bufferedwriter.write(str);
-            bufferedwriter.flush();
+             sOut.write(data, 0, str.length());
+            /*bufferedwriter.write(str);
+            bufferedwriter.flush();*/
+            System.out.println("enviei");
 
         } catch (IOException ex) {
             ex.printStackTrace();
