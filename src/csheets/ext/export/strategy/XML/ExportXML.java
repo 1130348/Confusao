@@ -9,8 +9,6 @@ import csheets.core.Cell;
 import csheets.ext.export.strategy.ExportProcess;
 import csheets.ext.export.strategy.ExportStrategy;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -46,6 +45,7 @@ public class ExportXML implements ExportStrategy{
     @Override
     public File export(ExportProcess eProcess,Cell[][] cells,boolean tags,String filename)  {
         Document doc =null;
+        File f = null;
        try {
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -78,20 +78,21 @@ public class ExportXML implements ExportStrategy{
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new FileOutputStream(filename));
+            f = new File(filename+".xml");
+            StreamResult result = new StreamResult(f);
+            
+            transformer.transform(source, result);
             
 
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(ExportXML.class.getName()).
-				log(Level.SEVERE, null, ex);
 		} catch (TransformerConfigurationException ex) {
 			Logger.getLogger(ExportXML.class.getName()).
 				log(Level.SEVERE, null, ex);
-		}
-      String uri= doc.getDocumentURI();
-      File f = new File(uri);
+		} catch (TransformerException ex) {
+            Logger.getLogger(ExportXML.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
       JOptionPane.showMessageDialog(null, "File Saved");
       return f;
     }
