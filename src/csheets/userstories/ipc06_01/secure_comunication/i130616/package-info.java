@@ -43,12 +43,13 @@
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able communicate using SSL connection
  * with other instances of "CleanSheets". </br>
- * This test is funcional:</br> 
- * - Enable secure connections in two or more computers (Extensions Menu-> Secure
- * Comunication -> Start SSLServer </br>
+ * This test is funcional:</br>
+ * - Enable secure connections in two or more computers (Extensions Menu->
+ * Secure Comunication -> Start SSLServer </br>
  * - Then go to sidebar and choose a * instance </br>
  * - double click on instance and connect </br>
- * - a message will appear  * on the screen with the information (success or failed)</br>
+ * - a message will appear * on the screen with the information (success or
+ * failed)</br>
  * <br/>
  *
  * <h2>4. Design</h2>
@@ -57,8 +58,10 @@
  * <img src="doc-files/ipc_06_01_extension_setup>
  *
  * Menu Setup </br>
+ * <img src="doc-files/ipc_06_01_menu_setup>
  *
- * SideBar Setup </br>
+ * </br>SideBar Setup </br>
+ * <img src="doc-files/ipc_06_01_sidebar_setup>
  *
  *
  */
