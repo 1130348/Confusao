@@ -18,6 +18,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Implements Runnable and has a method that will verifie if the date of
+ * modification of the file is after the date save on the variable
+ * date_last_update. If positive will import the information from the file to
+ * the cells.
  *
  * @author Cristina
  */
@@ -302,15 +306,15 @@ public class Import implements Runnable {
 		 */
 		private void clearAllCells() throws FormulaCompilationException {
 			// Number of columns
-			int columns = this.uiController.getActiveSpreadsheet().
+			int columns = uiController.getActiveSpreadsheet().
 				getColumnCount();
 			// Number of rows
-			int rows = this.uiController.getActiveSpreadsheet().getRowCount();
+			int rows = uiController.getActiveSpreadsheet().getRowCount();
 
 			// Fill all the cells with ""
 			for (int i = 0; i < rows + 1; i++) {
 				for (int j = 0; j < columns + 1; j++) {
-					this.uiController.getActiveSpreadsheet().getCell(i, j).
+					uiController.getActiveSpreadsheet().getCell(i, j).
 						setContent("");
 				}
 			}
