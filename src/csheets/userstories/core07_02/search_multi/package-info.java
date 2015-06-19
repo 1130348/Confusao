@@ -37,11 +37,12 @@
  * * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able to search for words or regular
- * expressinons. We need to be able to get value of the cells.<br/>
- * Following this approach we can start by coding a unit test that uses the
+ * expressions. <br/>
+ * Following this approach we can start by implement a unit test that uses the
  * class <code>Search</code> that returns a list of matches, that is empty if no
- * matches found. A simple test can be to set this attribute with a simple
- * boolean and to verify if the get method returns the same boolean.<br/>
+ * matches found. Another test can be to test if the system recognize an regular
+ * expression. Finally we must test if the system gives a warning when no
+ * matches found.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * <br/>

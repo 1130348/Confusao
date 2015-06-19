@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class MoneyService {
 
-    private static Map<String, Double> currencyExchanges = new HashMap<>();
+    public static Map<String, Double> currencyExchanges = new HashMap<>();
     private static boolean currenciesLoaded = false;
 
     public MoneyService() {
@@ -58,7 +58,7 @@ public class MoneyService {
 
                 if (currencies != null && exchangeValues != null) {
                     fileChoosed(true);
-                    loadCurrentExchangesToMap(currencies, exchangeValues);
+                    loadCurrencyExchangesToMap(currencies, exchangeValues);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -68,12 +68,16 @@ public class MoneyService {
         }
     }
 
+    public static boolean checkFileImported() {
+        return currenciesLoaded;
+    }
+
     public static double searchCurrencyExchangeValue(String currency) {
 
         switch (currency) {
             case "$":
                 for (String curr : currencyExchanges.keySet()) {
-                    if (curr.contains("dollar")) {
+                    if (curr.contains("dollar") || curr.contains("Dollar")) {
                         if (currencyExchanges.get(curr) != null) {
                             return currencyExchanges.get(curr);
                         }
@@ -84,7 +88,7 @@ public class MoneyService {
                 break;
             case "£":
                 for (String curr : currencyExchanges.keySet()) {
-                    if (curr.contains("pound")) {
+                    if (curr.contains("pound") || curr.contains("Pound")) {
                         if (currencyExchanges.get(curr) != null) {
                             return currencyExchanges.get(curr);
                         }
@@ -94,7 +98,7 @@ public class MoneyService {
 
             case "¥":
                 for (String curr : currencyExchanges.keySet()) {
-                    if (curr.contains("yen")) {
+                    if (curr.contains("yen") || curr.contains("Yen")) {
                         if (currencyExchanges.get(curr) != null) {
                             return currencyExchanges.get(curr);
                         }
@@ -104,7 +108,7 @@ public class MoneyService {
 
             case "₩":
                 for (String curr : currencyExchanges.keySet()) {
-                    if (curr.contains("won")) {
+                    if (curr.contains("won") || curr.contains("Won")) {
                         if (currencyExchanges.get(curr) != null) {
                             return currencyExchanges.get(curr);
                         }
@@ -114,7 +118,7 @@ public class MoneyService {
 
             case "₹":
                 for (String curr : currencyExchanges.keySet()) {
-                    if (curr.contains("rupee")) {
+                    if (curr.contains("rupee") || curr.contains("Rupee")) {
                         if (currencyExchanges.get(curr) != null) {
                             return currencyExchanges.get(curr);
                         }
@@ -129,14 +133,18 @@ public class MoneyService {
 
     }
 
-    private static void loadCurrentExchangesToMap(String[] currencies, String[] exchangeValues) {
+    private static void loadCurrencyExchangesToMap(String[] currencies, String[] exchangeValues) {
         for (int i = 0; i < currencies.length; i++) {
+            if (exchangeValues[i].equals("-")) {
+                currencyExchanges.put(currencies[i], null);
+            }
+
+            exchangeValues[i] = exchangeValues[i].trim();
             if (exchangeValues[i].contains(",")) {
                 exchangeValues[i] = exchangeValues[i].replace(",", ".");
                 currencyExchanges.put(currencies[i], Double.parseDouble(exchangeValues[i]));
-            }
-            if (exchangeValues[i].equals("-")) {
-                currencyExchanges.put(currencies[i], null);
+            } else {
+                currencyExchanges.put(currencies[i], Double.parseDouble(exchangeValues[i]));
             }
         }
     }

@@ -16,8 +16,9 @@ import javax.swing.JOptionPane;
  *
  * @author rddm
  */
-public class SecureComunicationAction extends FocusOwnerAction{
-        /**
+public class SecureComunicationActionOn extends FocusOwnerAction {
+
+    /**
      * The user interface controller
      */
     private final UIController uiController;
@@ -28,22 +29,23 @@ public class SecureComunicationAction extends FocusOwnerAction{
     private final SecureComunicationController secureComunicationController;
 
     /**
-     * 
+     *
      *
      * @param uiController the user interface controller
      */
-    public SecureComunicationAction(UIController uiController) {
+    public SecureComunicationActionOn(UIController uiController,SecureComunicationController ctrl) {
         this.uiController = uiController;
-        this.secureComunicationController = new SecureComunicationController();
+        this.secureComunicationController = ctrl;
     }
 
     @Override
     protected String getName() {
-       return "Enable SSL Server";
+        return "Enable SSL";
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         JOptionPane.showMessageDialog(
                 null,
                 "Client search has started!\n"
@@ -53,6 +55,7 @@ public class SecureComunicationAction extends FocusOwnerAction{
                 JOptionPane.INFORMATION_MESSAGE
         );
         secureComunicationController.starSSL();
+
     }
-    
+
 }

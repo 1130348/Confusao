@@ -18,12 +18,13 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author DMMCA
  */
-public class Connection extends Thread {
+public class Connection{
 
 
 
@@ -126,6 +127,10 @@ public class Connection extends Thread {
                             System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
                             String msg = new String(arrayBytes, "ISO-8859-1");
                             ui.setMsg(SOCKET.getInetAddress().getHostName()+" says: " + msg);
+                            if(!ui.isFocused()){
+                                JOptionPane.showMessageDialog(null,"Message Received!!!!\n from: " +SOCKET.getInetAddress().getHostName() );
+                            }
+                            
                         } 
                     } catch (SocketException se) {
                     } catch (IOException i) {

@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Implements Runnable and has a method that is always checking if are
+ * modifications on the cells. If positive then will export to a txt file.
  *
  * @author Cristina
  */
@@ -79,6 +81,7 @@ public class Export implements Runnable {
 						log(Level.SEVERE, null, ex);
 				}
 				uiController.setModificationOnCells(false);
+				// Changes the date that is in the class Import
 				i.setDate(file.lastModified());
 				uiController.setCondExp(false);
 			}
