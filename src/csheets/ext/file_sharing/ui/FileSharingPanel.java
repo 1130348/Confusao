@@ -5,9 +5,11 @@
  */
 package csheets.ext.file_sharing.ui;
 
+import static csheets.ext.file_sharing.ui.FileSharingController.readconfigfile;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -21,8 +23,8 @@ import javax.swing.JTextField;
 class FileSharingPanel extends JPanel {
 
     private JCheckBox fs;
-    private JTextField in;
-    private JTextField out;
+    private static JTextField in;
+    private static JTextField out;
     private FileSharingController controller;
     private FileSharingUI fsui;
 
@@ -41,6 +43,7 @@ class FileSharingPanel extends JPanel {
         out = new JTextField();
         out.setText("Insert Outbox Path");
         out.setBounds(20, 75, 125, 20);
+        controller.readconfigfile(File.listRoots()[0] + "/CleanSheet FileSharingConfig/csheets.config");
         add(out);
 
         controller = new FileSharingController(uiController, this);
@@ -67,4 +70,13 @@ class FileSharingPanel extends JPanel {
         add(myLabel);
         add(fs);
     }
+    public static JTextField In(){
+        return in;
+    }
+    
+    public static JTextField Out(){
+        return out;
+    }
+    
+    
 }
