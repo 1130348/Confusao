@@ -1,0 +1,52 @@
+@startuml doc-files/ipc_06_01_sidebar_setup.png
+  actor User
+  participant "SecureComunicationUI" as UI
+  participant "SecureComunicationCtrl" as ctrl
+  participant "SSLService" as net
+  participant "SSLSocketFactory" as ssl
+  participant "SSLServer" as server
+  participant "ReceiveMessages" as receive
+  User -> UI : Double Click on Item from Instance List
+  activate UI
+  alt OPTION=Not Connected
+  UI -> ctrl : newSSLConnection(item)
+  activate ctrl
+  deactivate UI
+  ctrl -> net : establishSSLConnectionToUser(item)
+  net -> ssl :createSocket(ip,port)
+  deactivate net
+  deactivate ctrl
+  end alt
+  alt OPTION=Already Connected
+  activate UI
+  UI -> ctrl : removeConnection(item)
+  deactivate UI
+  activate ctrl
+  ctrl -> net : disconnectSecureConnectionToUser(item)
+  activate net
+  net -> server: removeConnection()
+  activate server
+  server->receive:interrupt()
+  deactivate server
+  deactivate net
+  deactivate ctrl
+  end alt
+  User->UI: Double Click on Item from connected List
+  activate UI
+  UI->ctrl: sendMessage(item,message)
+  activate ctrl
+  deactivate UI
+  ctrl->net:sendSecureMessages(item,message)
+  deactivate ctrl
+  User->UI: Click on Refresh Button
+  activate UI
+  UI->ctrl: refreshInstances()
+  activate ctrl
+  ctrl->NetworkService: refreshInstances()
+  deactivate ctrl
+  UI->ctrl: refreshConnections()
+  activate ctrl
+  ctrl->net: getConnectionsAlive()
+  deactivate ctrl
+  deactivate UI
+  @enduml

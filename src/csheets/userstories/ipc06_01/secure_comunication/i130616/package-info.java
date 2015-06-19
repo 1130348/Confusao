@@ -11,6 +11,7 @@
  * address).
  * <br/>
  * <br/>
+ * 
  * <b>Use Case "Secure Comunication":</b>
  * The user selects the sidebar. Then begins the process of searching other
  * online user. The system displays a list of users to which it can connect. The
