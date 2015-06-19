@@ -13,7 +13,7 @@ package csheets.userstories.macros01_3.Eval_DoWhile_WhileDo;
  * following formula-> =2+3 the result shown in the cell will be 2+3. However if
  * we write =eval("2+3") in cell the result will be 5. And Implement the cycle
  * formulas: "DoWhile" and "WhileDo". The "DoWhile" must perform an
- * expression/block and then test an expression that indicates whether to
+ * block/Expression and then test an expression that indicates whether to
  * continue or not. <br/>
  * The "WhileDo" should test an expression/block that indicates whether to
  * execute a second expression/block or not. Example: "={
@@ -27,12 +27,12 @@ package csheets.userstories.macros01_3.Eval_DoWhile_WhileDo;
  * <br/>
  *
  * <h2>2. Analysis</h2>
- * In this enhancement we need to answer the following requirements: The user
- * needs to obtain the expression value; The cell must be verified for syntax
- * errors This enhancement is only activated when the cell text starts with
- * =eval( It's important to pay attention to the operator priority The grammar
- * should be edited, in order to recognize the functions to be created (WhileDo
- * and DoWhile).
+ * In this use case we need to answer the following requirements: The user needs
+ * to obtain the expression value; The cell must be verified for syntax errors
+ * This use case is only activated when the cell text starts with =eval( It's
+ * important to pay attention to the operator priority. In DoWhile and WhileDo
+ * we need to alter a class ExcellExpressionCompiler to recognize whileDo and
+ * Dowhile.
  *
  *
  * <br/>
@@ -47,9 +47,8 @@ package csheets.userstories.macros01_3.Eval_DoWhile_WhileDo;
  * <h2>4. Design</h2>
  *
  * To implement this improvement it will be needed to edit the proprieties file
- * that contains the functions to load. It will be needed to implement the
- * Function interface.<br/>
- * The function will only accept one text parameter<br/>
+ * that contains the functions to load. The function will only accept one text
+ * parameter<br/>
  * The method applyTo will strip down the argument so it will parse the
  * mathematical expression and give the result. This function is already
  * implemented. DoWhile and WhileDo After the entered expression is evaluated it
@@ -60,16 +59,28 @@ package csheets.userstories.macros01_3.Eval_DoWhile_WhileDo;
  * </br>
  *
  * <h2>5. Coding</h2>
- * see:<br/>
+ * see:
+ * <a href="../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
+ * <a href="../../../csheets/core/formula/compiler/package-summary.html">csheets.core.formula.compiler</a><br/>
+ *
+ * <br/>
  *
  * <br/>
  * <br/>
- *
+ * <h2> 6. Functional Tests</h2>
+ * </b><br/>
+ * To test Function Eval in a cell write "=eval(A1+A1)" or "=eval("2+3") in the
+ * cell selected the expected result should be 5 To test While in a cell write
+ * for example "=WhileDo(A1=1; B1:=1+1)" in the cell B1 the expected result
+ * should be 2 And to test de DoWhile in a cell write "=DoWhile(A1:=1+A1;A1=1)"
+ * in the cell A1 the result expected should be 2
+ * <br/>
+ * <br/>
  *
  *
  * /**
  * This class is only here so that javadoc includes the documentation about this
  * EMPTY package! Do not remove this class!
  */
-class _macros01_3_EvalDoWhile_WhileDo_ {
+class _macros01_3_Eval_DoWhile_WhileDo_ {
 }
