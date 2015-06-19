@@ -43,17 +43,14 @@
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able to communicate with other
- * instances of "CleanSheets" and sharing the list of file available in a
- * folder.<br/>
- * Following this approach we can start by coding a unit test that uses the
- * class <code>Connect</code> and tests its attribute port. Furthermore we also
- * have to perform functional tests to see if the client is properly receiving
- * the information.<br/>
+ * instances of "CleanSheets" and share files.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
- * <br/>
- * see: <code>csheets.ext.file_sharing</code><br/>
- *
+ * In the end this use case requires only Functional Tests:
+ *  #Send Outbox folder;
+ *  #See if files in folder reached its destination;
+ *  #See if can receive the files from other CleanSheets;
+ * 
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
  * will also need to create a subclass of UIExtension. For the sidebar we need
