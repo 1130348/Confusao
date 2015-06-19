@@ -6,20 +6,13 @@
 package csheets.ext.file_sharing.ui;
 
 import csheets.ui.ctrl.UIController;
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
 /**
  *
@@ -51,7 +44,7 @@ class FileSharingPanel extends JPanel {
         add(out);
 
         controller = new FileSharingController(uiController, this);
-
+        
         fs.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -61,7 +54,7 @@ class FileSharingPanel extends JPanel {
                     try {
                         controller.setFileSharingUI(fsui);
                         controller.setInBox(in.getText());
-                        controller.setOutBox(out.getText());
+                        controller.setOutBox(out.getText());     
                     } catch (IOException ex) {
 
                     }

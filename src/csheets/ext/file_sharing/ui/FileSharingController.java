@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,9 +44,11 @@ public class FileSharingController {
 
     private static Connection activeCon = null;
 
-    private static Connection SERVER = null;
+    private static Connection server = null;
 
     private String inboxPath = "", outboxPath = "";
+
+    private List inlist = new ArrayList(), outlist = new ArrayList();
 
     /**
      * Creates a new File Sharing controller.
@@ -55,11 +59,14 @@ public class FileSharingController {
     public FileSharingController(UIController uiController, FileSharingPanel uiPanel) {
         this.uiController = uiController;
         this.FSPanel = uiPanel;
-        CheckConfigFolder();
     }
 
     public void setOutBox(String outboxPath) {
         this.outboxPath = outboxPath;
+        CheckConfigFolder();
+        FSUI.fillList(outlist);
+        createFileList(true);
+        createFileList(false);
     }
 
     public void setInBox(String inboxPath) {
@@ -79,7 +86,7 @@ public class FileSharingController {
     }
 
     public void CheckConfigFolder() {
-        File d = new File(File.listRoots()[0] + "/CleanSheet Config");
+        File d = new File(File.listRoots()[0] + "/CleanSheet FileSharingConfig");
         if (!d.exists()) {
             d.mkdir();
         }
@@ -102,4 +109,27 @@ public class FileSharingController {
         }
     }
 
+    private void createFileList(boolean opc) {
+        File folder;
+        if (opc) {
+            folder = new File(outboxPath);
+        } else {
+            folder = new File(inboxPath);
+        }
+        try {
+            File[] listOfFiles = folder.listFiles();
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.isFile()) {
+                    if (opc) {
+                        outlist.add(listOfFile.getName() + ":" + listOfFile.length());
+                    } else {
+                        inlist.add(listOfFile.getName() + ":" + listOfFile.length());
+                    }
+                }
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Insert Path's.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
 }
