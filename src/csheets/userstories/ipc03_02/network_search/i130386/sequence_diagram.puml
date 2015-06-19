@@ -1,15 +1,16 @@
 @startuml doc-files/sequence_diagram.png
-actor Sender as user
-participant "dialog : NetworkSearchDialog" as nsd
-participant "NetworkSearchController" as nscc
+actor User as user
+participant "dialog : SearchOnAnotherInstanceDialog" as said
+participant "SearchOnAnotherInstanceController" as saic
 participant "<<Service>>\nNetworkService" as net
-participant "NetworkSearchClient" as nsc
-user -> nsd : searchActionPerformed()
-nsd -> nscc : searchActionPerformed()
-nscc -> net : NetworkSearchRequest(workbookName)
+participant "SearchInstanceClient" as nic
+participant "Servi" as said
+user -> saic : searchActionPerformed()
+saic -> net : searchActionPerformed()
+saic -> net : NetworkSearchRequest(workbookName)
 net -> said : NetworkSearchRequest(workbookName)
-said -> nscc : NetworkSearchRequest(workbookName)
+said --> saic : NetworkSearchRequest(workbookName)
 
-net -> nsc : create()
-net -> nsc : sendWorkbookName(workbookName)
+net -> nic : create()
+net -> nic : sendWorkbookName(workbookName)
 @enduml

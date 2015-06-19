@@ -5,9 +5,20 @@
  */
 package csheets.core.call_function;
 
+import csheets.CleanSheets;
+import csheets.core.Address;
+import csheets.core.Cell;
+import csheets.core.CellImpl;
+import csheets.core.IllegalValueTypeException;
+import csheets.core.SpreadsheetImpl;
 import csheets.core.Value;
+import csheets.core.Workbook;
 import csheets.core.call_function.ui.CallFunctionUI;
+import csheets.core.call_function.ui.FormulasPanel;
+import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.lang.UnknownElementException;
+import csheets.ui.ctrl.UIController;
+import java.text.ParseException;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -61,7 +72,7 @@ public class CallFunctionTest {
     @Test
     public void testchooseFunction() throws UnknownElementException {
         System.out.println("chooseFunction");
-        String expResult= "=SUM(Term;...)";
+        String expResult= "SUM(Term;...)";
         String identifier = "SUM";
         CallFunctionUI ui = new CallFunctionUI();
         CallFunctionController ctrl = new CallFunctionController();
@@ -75,19 +86,36 @@ public class CallFunctionTest {
     @Test
     public void testcallFunction() {
         System.out.println("callFunction");
-        String func_def= "=SUM(2;3)";
-        Value expResult = new Value(5);
+        String func_def= "MAX(3;2)";
+        String expResult = new Value(3).toString();
         CallFunctionController ctrl = new CallFunctionController();
-        CallFunctionUI.getInstance(null, true, ctrl);
-        Value result = ctrl.callFunction(func_def);
+        String result = ctrl.callFunction(func_def).toString();
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testSetCellContent() {
+    public void testAddResultToCell() throws FormulaCompilationException {
+        System.out.println("addresultcell");
+        String func_def = "=ABS(-3)";
+        CallFunctionController ctrl = new CallFunctionController();
+        Workbook wb = new Workbook();
+        wb.addSpreadsheet();
+        String expResult = "3";
+        ctrl.addResultToCell(wb.getSpreadsheet(0).getCell(0, 0), func_def);
+        String result = wb.getSpreadsheet(0).getCell(0, 0).getValue().toString();
+        assertEquals(expResult, result);
         
     }
     
+    @Test
+    public void testCallBinaryOperation() throws IllegalValueTypeException, ParseException{
+        System.out.println("callbinaryoperation");
+        String func_def = "=3+2";
+        CallFunctionController ctrl = new CallFunctionController();
+        String result = ctrl.callBinaryOperation("+", "3", "2").toString();
+        String expResult = "5";
+        assertEquals(expResult, result);
+    }
     
 }
 

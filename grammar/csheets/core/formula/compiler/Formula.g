@@ -43,12 +43,24 @@ package csheets.core.formula.compiler;
 }
 
 expression
-	: EQ! operation EOF!
+	: (EQ! operation EOF!) | (CA! money EOF!)
 	;
 
 operation
 	: comparison | forcicle
 	;
+
+money
+    : (DOLLAR_WORD | EURO_WORD | POUND_WORD | YEN_WORD | WON_WORD | RUPEE_WORD)^ LCHA! money_value (PLUS | MINUS | MULTI | DIV) money_value RCHA!
+    ;
+
+money_value
+          : NUMBER currency
+          ;
+
+currency
+       : DOLLAR | EURO | POUND | YEN | WON | RUPEE
+       ;
 
 attribution
 	: ( ARRAY | VARIABLE  | CELL_REF ) ATT^ comparison
@@ -131,6 +143,22 @@ bloco
 	:	LCHA! operation ( SEMI^ operation )* RCHA!
 	;
 
+/* Currencies */
+DOLLAR  : '$' ;
+EURO    : '€' ;
+POUND   : '£' ;
+YEN     : '¥' ;
+WON     : '₩' ; 
+RUPEE   : '₹' ;
+
+/* Currencies in words */
+DOLLAR_WORD : 'dollar'  ;
+EURO_WORD   : 'euro'    ;
+POUND_WORD  : 'pound'   ;
+YEN_WORD    : 'yen'     ;
+WON_WORD    : 'won'     ;
+RUPEE_WORD  : 'ruppe'   ;
+
 /* FOR operators */
 FOR		: 'FOR' ;
 
@@ -185,6 +213,7 @@ VAR		: '@' ;
 
 /* Comparison operators */
 EQ		: '=' ;
+CA              : '#' ;
 NEQ		: '<>' ;
 LTEQ	: '<=' ;
 GTEQ	: '>=' ;
@@ -198,7 +227,7 @@ AMP		: '&' ;
 PLUS	: '+' ;
 MINUS	: '-' ;
 MULTI	: '*' ;
-DIV		: '/' ;
+DIV	: '/' ;
 POWER	: '^' ;
 PERCENT : '%' ;
 
@@ -224,5 +253,3 @@ WS: ( ' '
 	| '\t'
 	) {$channel=HIDDEN;}
 	;
-
-

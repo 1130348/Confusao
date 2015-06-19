@@ -2,17 +2,18 @@ package csheets.ext.style.ui;
 
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
-import csheets.core.Value;
 import csheets.ext.style.StylableCell;
 import csheets.ext.style.StyleExtension;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.SelectionEvent;
 import csheets.ui.ctrl.SelectionListener;
 import csheets.ui.ctrl.UIController;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
-import java.text.Format;
 import java.text.NumberFormat;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,7 @@ import java.text.NumberFormat;
 @SuppressWarnings("serial")
 public class ConditionalFormatAction extends FocusOwnerAction implements SelectionListener {
 
+	static String[] teste = new String[3];
 	/**
 	 * The user interface controller
 	 */
@@ -30,6 +32,7 @@ public class ConditionalFormatAction extends FocusOwnerAction implements Selecti
 	 * The cell being styled
 	 */
 	private StylableCell cell;
+	private JComponent sideBar;
 
 	/**
 	 * Creates a new format action.
@@ -73,41 +76,78 @@ public class ConditionalFormatAction extends FocusOwnerAction implements Selecti
 		if (focusOwner == null) {
 			return;
 		}
+
 		// Lets user select a format
-		Format format = null;
+		ConditionalFormatChooser conditionalFormat = null;
+
+		Color color1 = JColorChooser.showDialog(
+			null,
+			"Choose Background Color for true",
+			((StylableCell) focusOwner.getSelectedCell().
+			getExtension(StyleExtension.NAME)).getBackgroundColor());
+
+		Color color2 = JColorChooser.showDialog(
+			null,
+			"Choose Background Color for false",
+			((StylableCell) focusOwner.getSelectedCell().
+			getExtension(StyleExtension.NAME)).getBackgroundColor());
 		try {
-			if (cell.getValue().getType() == Value.Type.NUMERIC) {
-				format = new ConditionalFormatChooser(
-					(NumberFormat) cell.getFormat().clone(), cell.getValue().
-					toNumber()
-				).showDialog(null, "Conditional Format");
-			} else if (cell.getValue().getType() == Value.Type.DATE) {
-				format = new ConditionalFormatChooser(
-					(DateFormat) cell.getFormat().clone(), cell.getValue().
-					toDate()
-				).showDialog(null, "Conditional Format");
-			}
+			conditionalFormat = new ConditionalFormatChooser(
+				(NumberFormat) cell.getFormat().clone(), cell.getValue().
+				toNumber()
+			).showDialog(null, "Choose Conditional Format");
+
 		} catch (IllegalValueTypeException e) {
 		}
 
-		if (format != null) {
-			// Changes the format of each selected cell
-			for (Cell[] row : focusOwner.getSelectedCells()) {
-				for (Cell cell : row) {
-//					if (cell.getValue() <) {
-//
-//					}
-					StylableCell stylableCell = (StylableCell) cell.
-						getExtension(
-							StyleExtension.NAME);
-					stylableCell.setFormat(
-						stylableCell.isFormattable() ? format : null);
+		Cell cell = focusOwner.getSelectedCell();
+		StylableCell stylableCell = (StylableCell) cell.
+			getExtension(
+				StyleExtension.NAME);
+		try {
+			if (conditionalFormat.getChoiseText().equals("<")) {
+				if (cell.getValue().toDouble() < Double.
+					parseDouble(conditionalFormat.getTextFieldText())) {
+					stylableCell.setBackgroundColor(color1);
+					teste[0] = cell.getAddress().toString();
+					teste[1] = conditionalFormat.getChoiseText() + conditionalFormat.
+						getTextFieldText();
+					teste[2] = color1.toString();
+				} else {
+					stylableCell.setBackgroundColor(color2);
 				}
 			}
 
-			uiController.setWorkbookModified(focusOwner.getSpreadsheet().
-				getWorkbook());
-			focusOwner.repaint();
+			if (conditionalFormat.getChoiseText().equals(">")) {
+				if (cell.getValue().toDouble() > Double.
+					parseDouble(conditionalFormat.getTextFieldText())) {
+					stylableCell.setBackgroundColor(color1);
+				} else {
+					stylableCell.setBackgroundColor(color2);
+				}
+			}
+
+			if (conditionalFormat.getChoiseText().equals("=")) {
+				if (cell.getValue().toDouble() == Double.
+					parseDouble(conditionalFormat.getTextFieldText())) {
+					stylableCell.setBackgroundColor(color1);
+				} else {
+					stylableCell.setBackgroundColor(color2);
+				}
+			}
+		} catch (Exception ex) {
+//			Logger.getLogger(ConditionalFormatAction.class.getName()).
+//				log(Level.SEVERE, null, ex);
+			JOptionPane.
+				showMessageDialog(null, "Must imput a number to compare");
 		}
+
+		uiController.setWorkbookModified(focusOwner.getSpreadsheet().
+			getWorkbook());
+		focusOwner.repaint();
+	}
+
+	public static String[] valores() {
+		return teste;
 	}
 }

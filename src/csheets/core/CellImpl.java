@@ -171,31 +171,40 @@ public class CellImpl implements Cell {
 
         // Stores value
         value = newValue;
-        try {
-            if (value.getType() == Value.Type.MATRIX) {
-                int actualColumn = this.address.getColumn();
-                int actualRow = this.address.getRow();
-
-                Value[][] matrix = value.toMatrix();
-                for (int i = 0; i < matrix.length; i++) {
-                    for (int j = 0; j < matrix[0].length; j++) {
-                        if (i == 0 && j == 0) {
-                            this.value = matrix[0][0];
-                        } else {
-                            String content = matrix[i][j].toString().replace(".", ",");
-                            spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
-                        }
-                    }
-                }
-
-            }
-        } catch (FormulaCompilationException | IllegalValueTypeException ex) {
-            Logger.getLogger(CellImpl.class.getName()).log(Level.SEVERE, null, ex);
+        
+        //If new Value is a matrix is necessary a special print
+        if (value.getType() == Value.Type.MATRIX) {
+            printMatrix();
         }
 
         // Checks for change
         if (!newValue.equals(oldValue)) {
             fireValueChanged();
+        }
+    }
+
+    /*
+     * Print a matrix in spreadsheet 
+     * Formula appear in top left cell
+     */
+    private void printMatrix() {
+        try {
+            int actualColumn = this.address.getColumn();
+            int actualRow = this.address.getRow();
+
+            Value[][] matrix = value.toMatrix();
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (i == 0 && j == 0) {
+                        this.value = matrix[0][0];
+                    } else {
+                        String content = matrix[i][j].toString().replace(".", ",");
+                        spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
+                    }
+                }
+            }
+        } catch (IllegalValueTypeException | FormulaCompilationException ex) {
+            Logger.getLogger(CellImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

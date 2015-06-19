@@ -232,6 +232,7 @@ public class ChooseCleanSheetsInstanceToConnect extends javax.swing.JDialog {
             }
         }
         sendCellAction.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());
+        sendCellAction.setFlagSend(true);
     }//GEN-LAST:event_connectDisconnectToggleButtonActionPerformed
 
     /**

@@ -56,29 +56,35 @@ public class Server implements Runnable {
                         getCanonicalHostName() + " wants to establish a remote connection to your computer, do you accept it?", "Remote connection request", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (option == 0) {
-                    clientConnections.
-                            put(client, new DataOutputStream(client.
-                                            getOutputStream()));
 
-                    //NetworkService.addClientToMap(port + 1, client.getInetAddress());
-                    StartSharingController controller = new StartSharingController();
-                    ChooseCleanSheetsInstanceToConnect sa = ChooseCleanSheetsInstanceToConnect.getInstance(null, true, controller, sendCells);
-                    sa.setVisible(true);
+                    if (!sendCells.isFlagSend()) {
+                        if (!sendCells.isFlagCrossConnection()) {
+                            clientConnections.
+                                    put(client, new DataOutputStream(client.
+                                                    getOutputStream()));
 
-                    List<String> cli = new ArrayList<>();
-                    cli.add(client.getInetAddress().getHostName());
-                    //controller.establishConnection(cli, sendCells);
+                            //NetworkService.addClientToMap(port + 1, client.getInetAddress());
+                            StartSharingController controller = new StartSharingController();
+                            ChooseCleanSheetsInstanceToConnect sa = ChooseCleanSheetsInstanceToConnect.getInstance(null, true, controller, sendCells);
+                            sa.setVisible(true);
 
-                    controller.
-                            establishConnection(cli, sendCells);
+                            List<String> cli = new ArrayList<>();
+                            cli.add(client.getInetAddress().getHostName());
+                            //controller.establishConnection(cli, sendCells);
 
-                    sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());
+                            controller.
+                                    establishConnection(cli, sendCells);
 
-                    /*  List<String> cli = new ArrayList<>();
-                     cli.add(client.getInetAddress().getHostName());
-                     controller.establishConnection(cli, sendCells);
+                            sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());
 
-                     sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());*/
+                            /*  List<String> cli = new ArrayList<>();
+                             cli.add(client.getInetAddress().getHostName());
+                             controller.establishConnection(cli, sendCells);
+
+                             sendCells.getSpreadsheetTable().getSpreadsheet().addCellListener(new AutomaticCellListener());*/
+                            sendCells.setFlagCrossConnection(true);
+                        }
+                    }
                     new Thread(new ReceiveData(client, sendCells)).start();
                 } else {
                     client.close();

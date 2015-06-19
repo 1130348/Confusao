@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author João Paiva da Costa Pinto <1130385@isep.ipp.pt>
+ * @author João Paiva and António Pinheiro
  */
 public class FindWorkbooksPanel extends JPanel {
 
@@ -44,10 +44,22 @@ public class FindWorkbooksPanel extends JPanel {
 
     private UIController uiController;
 
+    /**
+     * This list gathers the amount of cells that are shown for each table
+     * for example: for the first table the respective number will be in
+     * list.get(0)
+     */
     List<Integer> listInt = new ArrayList<>();
     
+    /**
+     * This is the list of all the tables created to show the preview of
+     * a workbook
+     */
     List<JTable> listTable = new ArrayList<>();
     
+    /**
+     * Column Names for the Tables.
+     */
     private Object columnNames[] = { "Row", "Column", "Content"};
     
     private JTabbedPane tabbedPane;
@@ -145,7 +157,12 @@ public class FindWorkbooksPanel extends JPanel {
         }
     }
     
-    
+    /**
+     * This method creates a table for each sheet of the workbook, where it shows the content
+     * of at least 4 cells.
+     * @param numSheets
+     * @param w 
+     */
      protected void makeTables (int numSheets, Workbook w)
     {
      listInt.clear();
@@ -212,6 +229,10 @@ public class FindWorkbooksPanel extends JPanel {
         }
  }
  
+ /**
+  * This method updates the table that is currently selected by the user and adds to it
+  * the content of 4 more cells or less if there are less than 4 cells remaining.
+  */
  protected void updateTable(){
      int i = tabbedPane.getSelectedIndex();
      int var = listInt.get(i);

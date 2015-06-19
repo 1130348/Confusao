@@ -63,6 +63,8 @@
  * in this UC were already implemented in the original program, so i assume that the given
  * code was correct, even without having tests, since who made the program didnt do a approach 
  * based on tests.
+ * <br/>
+ * This decision was taken after a talk with our organizer and with his approval.
  * <h2>4. Design</h2>
  * <br/>
  * A sequence diagram shows object interactions arranged in time sequence. It

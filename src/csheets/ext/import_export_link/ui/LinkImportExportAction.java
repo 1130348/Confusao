@@ -36,7 +36,7 @@ public class LinkImportExportAction extends BaseAction {
 	public LinkImportExportAction(CleanSheets a, UIController tmp) {
 		this.app = a;
 		this.uiController = tmp;
-		ieController = new ImportationExportationLinkController(tmp);
+		this.ieController = new ImportationExportationLinkController(tmp);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class LinkImportExportAction extends BaseAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		LinkDialog dialog = new LinkDialog(null, true, uiController, ieController);
+		LinkDialog dialog = new LinkDialog(null, true, this.uiController, this.ieController);
 		dialog.setVisible(true);
 
 	}

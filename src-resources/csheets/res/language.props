@@ -43,6 +43,14 @@ If
 Do
 For
 
+# Money 
+Dollar
+Euro
+Pound
+Yen
+Won
+Rupee
+
 # # # Numeric functions reflected from java.lang.Math
 #
 # # Trigonometry

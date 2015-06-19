@@ -5,12 +5,24 @@
  */
 package csheets.core.call_function.ui;
 
+import csheets.core.Cell;
+import csheets.core.IllegalValueTypeException;
+import csheets.core.Value;
 import csheets.core.call_function.CallFunctionController;
+import csheets.core.formula.BinaryOperation;
+import csheets.core.formula.BinaryOperator;
+import csheets.core.formula.Function;
+import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.UnknownElementException;
+import csheets.ui.ctrl.UIController;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,6 +33,8 @@ public class CallFunctionUI extends javax.swing.JDialog {
     private static CallFunctionUI instance;
     private CallFunctionController controller;
     private List<String> func_names_list;
+    private UIController uiController;
+    private static int uiNumber;
 
     /**
      * This JDialog gives the user the option to choose and execute a function
@@ -33,12 +47,18 @@ public class CallFunctionUI extends javax.swing.JDialog {
      */
     private CallFunctionUI(java.awt.Frame parent,
             boolean modal,
-            CallFunctionController controller) {
+            CallFunctionController controller, int n, UIController uiController) {
         super(parent, modal);
         this.controller = controller;
+        this.uiNumber = n;
+        this.uiController = uiController;
         initComponents();
         fillFunctionsList();
         jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
+        jTextField3.setEditable(false);
+        jTextField4.setEditable(false);
+        jTextField5.setEditable(false);
         jButton1.setEnabled(false);
         jButton1.setText("Execute");
         jButton2.setEnabled(false);
@@ -51,9 +71,9 @@ public class CallFunctionUI extends javax.swing.JDialog {
     }
 
     public static synchronized CallFunctionUI getInstance(
-            java.awt.Frame parent, boolean modal, CallFunctionController controller) {
-        if (instance == null) {
-            instance = new CallFunctionUI(parent, modal, controller);
+            java.awt.Frame parent, boolean modal, CallFunctionController controller, int n, UIController uiController) {
+        if (instance == null || uiNumber != n) {
+            instance = new CallFunctionUI(parent, modal, controller, n, uiController);
         }
         return instance;
     }
@@ -70,10 +90,18 @@ public class CallFunctionUI extends javax.swing.JDialog {
         callFunctionSeparator = new javax.swing.JSeparator();
         jComboBox1 = new javax.swing.JComboBox();
         chooseFunctionLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         enterValuesLabel = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Start Sharing");
@@ -90,6 +118,12 @@ public class CallFunctionUI extends javax.swing.JDialog {
 
         chooseFunctionLabel.setText("Select a Function from the list:");
 
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,36 +138,88 @@ public class CallFunctionUI extends javax.swing.JDialog {
             }
         });
 
-        enterValuesLabel.setText("Enter Parameter Values:");
+        enterValuesLabel.setText("Result:");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Parameter 2:");
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Parameter 3:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Parameter 1:");
+
+        jLabel4.setText("Various Parameters: ");
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chooseFunctionLabel)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(57, 57, 57)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(enterValuesLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(callFunctionSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(enterValuesLabel)))
-                        .addGap(0, 14, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(callFunctionSeparator)
-                            .addComponent(jTextField1))))
-                .addContainerGap())
+                                .addGap(72, 72, 72)
+                                .addComponent(chooseFunctionLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,17 +228,33 @@ public class CallFunctionUI extends javax.swing.JDialog {
                 .addComponent(chooseFunctionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(callFunctionSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(enterValuesLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(callFunctionSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterValuesLabel)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -160,9 +262,21 @@ public class CallFunctionUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String func_def = jTextField1.getText();
-        controller.callFunction(func_def);
-        JOptionPane.showMessageDialog(this, "Function was added to Formulas Register");
+        String func_def = jTextField4.getText();
+        if (uiNumber == 1) {
+            controller.addFunctionToFormulasPanel(func_def);
+            JOptionPane.showMessageDialog(this, "Function was added to Formulas Register");
+        } else {
+            try {
+                int index = func_def.indexOf("=");
+                func_def = func_def.substring(0, index - 1);
+                controller.addResultToCell(uiController.getActiveCell(), "=" + func_def);
+                JOptionPane.showMessageDialog(this, "Function result was added to the active cell");
+            } catch (FormulaCompilationException ex) {
+                Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -173,23 +287,386 @@ public class CallFunctionUI extends javax.swing.JDialog {
         String item = jComboBox1.getSelectedItem().toString();
         if (item.compareTo("(None)") == 0) {
             jTextField1.setEditable(false);
+            jTextField2.setEditable(false);
+            jTextField3.setEditable(false);
+            jTextField4.setEditable(false);
+            jTextField5.setEditable(false);
             jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+        } else if (item.compareTo("+") == 0 || item.compareTo("-") == 0 || item.compareTo("*") == 0 || item.compareTo("/") == 0) {
+            jTextField1.setEditable(true);
+            jTextField2.setEditable(true);
+            jTextField3.setEditable(false);
+            jTextField4.setEditable(false);
+            jTextField5.setEditable(false);
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
             jButton1.setEnabled(false);
             jButton2.setEnabled(false);
         } else {
             try {
-                jTextField1.setEditable(true);
-                jButton1.setEnabled(true);
-                jButton2.setEnabled(true);
-                System.out.println(jComboBox1.getSelectedItem());
-                String func_def = controller.chooseFunction(item);
-                jTextField1.setText(func_def);
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jButton1.setEnabled(false);
+                jButton2.setEnabled(false);
+                Function func = Language.getInstance().getFunction(item);
+                int size = func.getParameters().length;
+                if (!func.getIdentifier().equals("RANDOM") && !func.getIdentifier().equals("FALSE")) {
+                    if (!func.getIdentifier().equals("SUM") && !func.getIdentifier().equals("AVERAGE")) {
+                        jTextField5.setEditable(false);
+                        if (size == 1) {
+                            jTextField1.setEditable(true);
+                            jTextField2.setEditable(false);
+                            jTextField3.setEditable(false);
+                        }
+                        if (size == 2) {
+                            jTextField1.setEditable(true);
+                            jTextField2.setEditable(true);
+                            jTextField3.setEditable(false);
+                        }
+                        if (size == 3) {
+                            jTextField1.setEditable(true);
+                            jTextField2.setEditable(true);
+                            jTextField3.setEditable(true);
+                        }
+                    } else {
+                        jTextField1.setEditable(false);
+                        jTextField2.setEditable(false);
+                        jTextField3.setEditable(false);
+                        jTextField4.setEditable(false);
+                        jTextField5.setEditable(true);
+                        jTextField5.setText("Parameter 1; Parameter 2; ...");
+                    }
+                } else {
+                    String func_def = item += "()";
+                    jTextField4.setText(controller.showResult(func_def));
+                    jTextField1.setEditable(false);
+                    jTextField2.setEditable(false);
+                    jTextField3.setEditable(false);
+                    jTextField4.setEditable(false);
+                    jTextField5.setEditable(false);
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
             } catch (UnknownElementException ex) {
                 Logger.getLogger(CallFunctionUI.class.getName()).
                         log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        try {
+            List<String> ls = new ArrayList<>();
+            String item = jComboBox1.getSelectedItem().toString();
+
+            if (item.compareTo("+") != 0 && item.compareTo("-") != 0 && item.compareTo("*") != 0 && item.compareTo("/") != 0) {
+                Function func = Language.getInstance().getFunction(item);
+                int size = func.getParameters().length;
+                if (size == 1) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                }
+                if (size == 2) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                }
+                if (size == 3) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                    if (!jTextField3.getText().isEmpty()) {
+                        ls.add(jTextField3.getText().replace(".", ","));
+                    }
+                }
+                if (controller.validateParameters(ls, func) == 4) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 3) {
+                    jTextField4.setText("Parameter 3 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 0) {
+                    String func_def = controller.newChooseFunction(item, ls);
+                    jTextField4.setText(controller.showResult(func_def));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+            } else {
+                ls.add(jTextField1.getText().replace(".", ","));
+                ls.add(jTextField2.getText().replace(".", ","));
+                if (controller.validateOperatorsParameters(ls) == 0) {
+                    Value value = controller.callBinaryOperation(item, jTextField1.getText().replace(".", ","), jTextField2.getText().replace(".", ","));
+                    jTextField4.setText(jTextField1.getText().replace(".", ",") + item + jTextField2.getText().replace(".", ",") + " = " + value.toString().replace(".", ","));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+                if (controller.validateOperatorsParameters(ls) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 3) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+            }
+        } catch (UnknownElementException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalValueTypeException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        try {
+            List<String> ls = new ArrayList<>();
+            String item = jComboBox1.getSelectedItem().toString();
+            if (item.compareTo("+") != 0 && item.compareTo("-") != 0 && item.compareTo("*") != 0 && item.compareTo("/") != 0) {
+                Function func = Language.getInstance().getFunction(item);
+                int size = func.getParameters().length;
+                if (size == 1) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                }
+                if (size == 2) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                }
+                if (size == 3) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                    if (!jTextField3.getText().isEmpty()) {
+                        ls.add(jTextField3.getText().replace(".", ","));
+                    }
+                }
+                if (controller.validateParameters(ls, func) == 4) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 3) {
+                    jTextField4.setText("Parameter 3 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 0) {
+                    String func_def = controller.newChooseFunction(item, ls);
+                    jTextField4.setText(controller.showResult(func_def));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+            } else {
+                ls.add(jTextField1.getText().replace(".", ","));
+                ls.add(jTextField2.getText().replace(".", ","));
+                if (controller.validateOperatorsParameters(ls) == 0) {
+                    Value value = controller.callBinaryOperation(item, jTextField1.getText().replace(".", ","), jTextField2.getText().replace(".", ","));
+                    jTextField4.setText(jTextField1.getText().replace(".", ",") + item + jTextField2.getText().replace(".", ",") + " = " + value.toString().replace(".", ","));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+                if (controller.validateOperatorsParameters(ls) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 3) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+            }
+        } catch (UnknownElementException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalValueTypeException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        try {
+            List<String> ls = new ArrayList<>();
+            String item = jComboBox1.getSelectedItem().toString();
+            if (item.compareTo("+") != 0 && item.compareTo("-") != 0 && item.compareTo("*") != 0 && item.compareTo("/") != 0) {
+                Function func = Language.getInstance().getFunction(item);
+                int size = func.getParameters().length;
+                if (size == 1) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                }
+                if (size == 2) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                }
+                if (size == 3) {
+                    if (!jTextField1.getText().isEmpty()) {
+                        ls.add(jTextField1.getText().replace(".", ","));
+                    }
+                    if (!jTextField2.getText().isEmpty()) {
+                        ls.add(jTextField2.getText().replace(".", ","));
+                    }
+                    if (!jTextField3.getText().isEmpty()) {
+                        ls.add(jTextField3.getText().replace(".", ","));
+                    }
+                }
+                if (controller.validateParameters(ls, func) == 4) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 3) {
+                    jTextField4.setText("Parameter 3 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateParameters(ls, func) == 0) {
+                    String func_def = controller.newChooseFunction(item, ls);
+                    jTextField4.setText(controller.showResult(func_def));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+            } else {
+                ls.add(jTextField1.getText().replace(".", ","));
+                ls.add(jTextField2.getText().replace(".", ","));
+                if (controller.validateOperatorsParameters(ls) == 0) {
+                    Value value = controller.callBinaryOperation(item, jTextField1.getText().replace(".", ","), jTextField2.getText().replace(".", ","));
+                    jTextField4.setText(jTextField1.getText().replace(".", ",") + item + jTextField2.getText().replace(".", ",") + " = " + value.toString().replace(".", ","));
+                    jButton1.setEnabled(true);
+                    jButton2.setEnabled(true);
+                }
+                if (controller.validateOperatorsParameters(ls) == 1) {
+                    jTextField4.setText("Parameter 1 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 2) {
+                    jTextField4.setText("Parameter 2 must be a numeric number");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+                if (controller.validateOperatorsParameters(ls) == 3) {
+                    jTextField4.setText("The data that you entered is still incomplete");
+                    jButton1.setEnabled(false);
+                    jButton2.setEnabled(false);
+                }
+            }
+        } catch (UnknownElementException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalValueTypeException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        try {
+            String item = jComboBox1.getSelectedItem().toString();
+            Function func = Language.getInstance().getFunction(item);
+            String func_def = func.getIdentifier() + "(" + jTextField5.getText() + ")";
+            if (func_def.contains(";)")) { //checks if the user entered a ";" character before the ")", if so, it is removed
+                func_def = func_def.substring(0, func_def.length() - 2);
+                func_def += ")";
+            }
+            if (controller.validateSpecialParameters(func_def)) {
+                jTextField4.setText(controller.showResult(func_def));
+                jButton1.setEnabled(true);
+                jButton2.setEnabled(true);
+            } else {
+                jTextField4.setText("Enter numeric numbers separated by ';'");
+                jButton1.setEnabled(false);
+                jButton2.setEnabled(false);
+            }
+
+        } catch (UnknownElementException ex) {
+            Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * This method retrieves a list of all the available functions.
@@ -198,6 +675,7 @@ public class CallFunctionUI extends javax.swing.JDialog {
         jComboBox1.removeAllItems();
         jComboBox1.addItem("(None)");
         func_names_list = controller.fillList();
+        func_names_list = controller.fillListOperators(func_names_list);
         for (String s : func_names_list) {
             jComboBox1.addItem(s);
         }
@@ -210,6 +688,14 @@ public class CallFunctionUI extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
