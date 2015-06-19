@@ -44,7 +44,7 @@ class FileSharingPanel extends JPanel {
         add(out);
 
         controller = new FileSharingController(uiController, this);
-        
+
         fs.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -54,11 +54,9 @@ class FileSharingPanel extends JPanel {
                     try {
                         controller.setFileSharingUI(fsui);
                         controller.setInBox(in.getText());
-                        controller.setOutBox(out.getText());     
+                        controller.setOutBox(out.getText());
                     } catch (IOException ex) {
-
                     }
-
                 } else {
                     fs.setText("Activate");
                     fsui.dispose();

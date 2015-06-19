@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +34,8 @@ public class FileSharingUI extends JFrame {
     private DefaultListModel fileList, ConList;
 
     private String selectedCon;
+
+    private JButton myinbox = new JButton(), myoutbox = new JButton();
 
     public FileSharingUI() {
 
@@ -74,12 +75,10 @@ public class FileSharingUI extends JFrame {
                 }
             }
         });
-        
-        JButton myinbox = new JButton();
+
         myinbox.setText("<html><center>My</center>InBox</hmtl>");
         myinbox.setBounds(10, 10, 85, 50);
         add(myinbox);
-        JButton myoutbox = new JButton();
         myoutbox.setText("<html><center>My</center>OutBox</hmtl>");
         myoutbox.setBounds(105, 10, 85, 50);
         add(myoutbox);
@@ -107,18 +106,24 @@ public class FileSharingUI extends JFrame {
 
     }
 
+    public JButton getMyInbox() {
+        return myinbox;
+    }
+
+    public JButton getMyOutbox() {
+        return myoutbox;
+    }
+
     public void SetConnection(String msg) {
         if (!msg.equals("")) {
             if (!ConList.contains(msg)) {
                 ConList.addElement(msg);
             }
         }
-
     }
-    
-    public void fillList(List l){
+
+    public void fillList(List l) {
         for (Object x : l) {
-            System.out.println(x.toString());
             fileList.addElement(x.toString());
         }
     }

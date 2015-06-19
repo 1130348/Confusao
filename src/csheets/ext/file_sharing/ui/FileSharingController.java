@@ -5,11 +5,10 @@
  */
 package csheets.ext.file_sharing.ui;
 
-import csheets.ext.Send_Message.Connection;
+import csheets.ext.file_sharing.Connection;
 import csheets.ui.ctrl.UIController;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -40,8 +39,6 @@ public class FileSharingController {
      */
     private static FileSharingUI FSUI;
 
-    private ArrayList<Connection> connections;
-
     private static Connection activeCon = null;
 
     private static Connection server = null;
@@ -64,9 +61,9 @@ public class FileSharingController {
     public void setOutBox(String outboxPath) {
         this.outboxPath = outboxPath;
         CheckConfigFolder();
-        FSUI.fillList(outlist);
         createFileList(true);
         createFileList(false);
+        FSUI.fillList(outlist);
     }
 
     public void setInBox(String inboxPath) {
@@ -121,9 +118,9 @@ public class FileSharingController {
             for (File listOfFile : listOfFiles) {
                 if (listOfFile.isFile()) {
                     if (opc) {
-                        outlist.add(listOfFile.getName() + ":" + listOfFile.length());
+                        outlist.add(listOfFile.getName() + "   Size: " + listOfFile.length() + "B");
                     } else {
-                        inlist.add(listOfFile.getName() + ":" + listOfFile.length());
+                        inlist.add(listOfFile.getName() + "   Size: " + listOfFile.length() + "B");
                     }
                 }
             }
@@ -131,5 +128,32 @@ public class FileSharingController {
             JOptionPane.showMessageDialog(null, "Insert Path's.", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
+    }
+
+    public static void StartCon() throws IOException {
+        activeCon = new Connection(FSUI.getSelectedCon(), 3439);
+        activeCon.setUI(FSUI);
+        activeCon.createThreads();
+        
+    }
+    
+     private void createServer() {
+        Thread Server = new Thread(){
+            @Override
+            public void run(){
+                try {
+                    if(server == null){
+                        server = new Connection(3439);
+                    }
+                server.createThreads();
+                server.setUI(FSUI);
+                FSUI.SetConnection(server.getConSocket().getInetAddress().toString().substring(1,server.getConSocket().getInetAddress().toString().length()));
+                    
+            } catch (IOException ex) {
+                
+            }
+            }
+        };
+           Server.start();
     }
 }
