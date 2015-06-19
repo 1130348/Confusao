@@ -73,7 +73,7 @@ package csheets.userstories.macros01_3.Eval_DoWhile_WhileDo;
  * cell selected the expected result should be 5 To test While in a cell write
  * for example "=WhileDo(A1=1; B1:=1+1)" in the cell B1 the expected result
  * should be 2 And to test de DoWhile in a cell write "=DoWhile(A1:=1+A1;A1=1)"
- * in the cell A1 the result expected should be 2
+ * in the cell A1 the result expected should be 2.
  * <br/>
  * <br/>
  *
