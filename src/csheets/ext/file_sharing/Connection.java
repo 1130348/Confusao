@@ -104,7 +104,6 @@ public class Connection {
     }
 
     public void setUI(FileSharingUI ui) {
-        System.out.println(ui.getName());
         Connection.ui = ui;
     }
 
