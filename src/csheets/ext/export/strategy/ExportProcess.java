@@ -20,7 +20,7 @@ public class ExportProcess {
 		strategy = ExportStrategyFactory.getInstance().getExportStrategy(type);
 	}
     
-    public File export(boolean tags, Cell[][] cells,String filename) {	
-        return strategy.export(this,cells,tags,filename);
+    public File export(boolean tags, Cell[][] cells,String filename,String[]strings) {	
+        return strategy.export(this,cells,tags,filename,strings);
 	}
 }

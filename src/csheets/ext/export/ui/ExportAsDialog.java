@@ -28,6 +28,7 @@ public class ExportAsDialog extends javax.swing.JDialog {
     private JFileChooser jChooser;
     private SpreadsheetTable table;
     private Cell[][] selectedCells;
+    private String[] strings = new String[2];
 
     /**
      * 
@@ -44,6 +45,8 @@ public class ExportAsDialog extends javax.swing.JDialog {
         this.ieController = new ExportController(uiController);
         this.jChooser = new JFileChooser();
         this.selectedCells = selectedCells;
+        strings[0] = "Cleanshets";
+        strings[1] = "Cell";
         initComponents();
         setLocationRelativeTo(null);
         
@@ -118,7 +121,8 @@ public class ExportAsDialog extends javax.swing.JDialog {
 
     private void SelectTagsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectTagsActionPerformed
         // TODO add your handling code here:
-        //new window, choose all tags
+        XMLTags window = new XMLTags(this,true);
+        window.setVisible(true);
         // change boolean tags to true or false
     }//GEN-LAST:event_SelectTagsActionPerformed
 
@@ -126,7 +130,6 @@ public class ExportAsDialog extends javax.swing.JDialog {
         //janela de escolha
        // get selected cells
         Workbook workbook = uiController.getActiveWorkbook();
-        File oldFile = app.getFile(workbook);
         File file = null;
 
         String xmldesc = "XML File";
@@ -142,7 +145,7 @@ public class ExportAsDialog extends javax.swing.JDialog {
                     if (jChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
                             String expType = getFileExtension();
                             ieController.newProcess(expType);
-                            file = ieController.export(tags,selectedCells,jChooser.getSelectedFile().getAbsolutePath());
+                            file = ieController.export(tags,selectedCells,jChooser.getSelectedFile().getAbsolutePath(),strings);
                     }
                     
 			if (file != null) {
@@ -150,14 +153,18 @@ public class ExportAsDialog extends javax.swing.JDialog {
 					promptForFile = false;
 			} 
 		}
-            
+            dispose();
     }//GEN-LAST:event_ExportAsActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
         dispose();
     }//GEN-LAST:event_CancelActionPerformed
 
-
+    public void setTags(boolean tag,String[] strings){
+        this.tags = tag;
+        this.strings = strings;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
     private javax.swing.JButton ExportAs;
