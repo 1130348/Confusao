@@ -44,13 +44,14 @@ public class SendMessageController {
 		this.uiController = uiController;
                 this.SMMPanel = SMMPanel;
                 
-                createServer();
+                
                 
             
                 
 	}
         
         public void setChatUI(ChatUI SMB) throws IOException{
+            createServer();
             CUI = SMB;  
         }
         
