@@ -28,7 +28,7 @@ public class SSLServer implements Runnable {
     SSLServerSocket serverSocket;
     Semaphore sem;
     public Thread thread;
-    boolean join=false;
+    boolean join = false;
 
     public SSLServer(int port) {
         this.port = port;
@@ -67,7 +67,7 @@ public class SSLServer implements Runnable {
                 }
                 sem.release();
             }
-            
+
         } catch (InterruptedException | IOException ex) {
             ex.printStackTrace();
         }
@@ -75,12 +75,12 @@ public class SSLServer implements Runnable {
 
     public void interrupt() {
         /*for (InetAddress i : clientConnections.keySet()) {
-            SSLService.disconnectSecureConnectionToUser(i);
-        }*/
-        for(ReceiveMessages rm:clientConnections.values()){
-            rm.thread.interrupt();
+         SSLService.disconnectSecureConnectionToUser(i);
+         }*/
+        for (ReceiveMessages rm : clientConnections.values()) {
+            rm.interrupt();
         }
-        try {       
+        try {
             serverSocket.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -94,13 +94,8 @@ public class SSLServer implements Runnable {
 
     public void removeConnection(InetAddress address) {
         if (this.clientConnections.containsKey(address)) {
-            try {
-                this.clientConnections.get(address).thread.stop();
-                this.clientConnections.get(address).thread.join();
-                this.clientConnections.remove(address);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
+            this.clientConnections.get(address).interrupt();
+            this.clientConnections.remove(address);
         }
     }
 }
