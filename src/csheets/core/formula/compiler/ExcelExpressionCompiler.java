@@ -35,11 +35,13 @@ import csheets.core.formula.Reference;
 import csheets.core.formula.UnaryOperation;
 import csheets.core.formula.lang.ArrayReference;
 import csheets.core.formula.lang.CellReference;
+import csheets.core.formula.lang.DoWhile;
 import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.RangeReference;
 import csheets.core.formula.lang.ReferenceOperation;
 import csheets.core.formula.lang.UnknownElementException;
 import csheets.core.formula.lang.VariableReference;
+import csheets.core.formula.lang.WhileDo;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -209,7 +211,8 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 		} catch (UnknownElementException e) {
 		}
 
-		if (function != null) {
+		if (function != null || node.getText().equalsIgnoreCase("DoWhile") || node.
+			getText().equalsIgnoreCase("WhileDo")) {
 			List<Expression> args = new ArrayList<Expression>();
 			Tree child = node.getChild(0);
 			if (child != null) {
@@ -219,7 +222,15 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 				}
 			}
 			Expression[] argArray = args.toArray(new Expression[args.size()]);
-			return new FunctionCall(function, argArray);
+			if (function != null) {
+				return new FunctionCall(function, argArray);
+			}
+			if (node.getText().equalsIgnoreCase("DoWhile")) {
+				return new DoWhile(argArray);
+			}
+			if (node.getText().equalsIgnoreCase("WhileDo")) {
+				return new WhileDo(argArray);
+			}
 		}
 
 		if (node.getChildCount() == 1) // Convert unary operation
