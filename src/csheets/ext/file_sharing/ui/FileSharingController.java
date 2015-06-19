@@ -24,28 +24,19 @@ import javax.swing.JOptionPane;
  */
 public class FileSharingController {
 
-    /**
-     * The user interface controller
-     */
     private UIController uiController;
 
-    /**
-     * User interface panel *
-     */
     private FileSharingPanel FSPanel;
 
-    /**
-     * ChatUI User Interface *
-     */
     private static FileSharingUI FSUI;
 
     private static Connection activeCon = null;
 
     private static Connection server = null;
 
-    private String inboxPath = "", outboxPath = "";
+    private static String inboxPath = "", outboxPath = "";
 
-    private List inlist = new ArrayList(), outlist = new ArrayList();
+    private static List inlist = new ArrayList(), outlist = new ArrayList();
 
     /**
      * Creates a new File Sharing controller.
@@ -53,9 +44,11 @@ public class FileSharingController {
      * @param uiController the user interface controller
      * @param uiPanel the user interface panel
      */
-    public FileSharingController(UIController uiController, FileSharingPanel uiPanel) {
+    public FileSharingController(UIController uiController,
+            FileSharingPanel uiPanel) {
         this.uiController = uiController;
         this.FSPanel = uiPanel;
+
     }
 
     public void setOutBox(String outboxPath) {
@@ -63,18 +56,18 @@ public class FileSharingController {
         CheckConfigFolder();
         createFileList(true);
         createFileList(false);
-        FSUI.fillList(outlist);
+        createServer();
     }
 
     public void setInBox(String inboxPath) {
         this.inboxPath = inboxPath;
     }
 
-    public String getOutBox() {
+    public static String getOutBox() {
         return outboxPath;
     }
 
-    public String getInBox() {
+    public static String getInBox() {
         return inboxPath;
     }
 
@@ -102,7 +95,8 @@ public class FileSharingController {
 
             x.close();
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-            Logger.getLogger(FileSharingController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileSharingController.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
     }
 
@@ -118,15 +112,19 @@ public class FileSharingController {
             for (File listOfFile : listOfFiles) {
                 if (listOfFile.isFile()) {
                     if (opc) {
-                        outlist.add(listOfFile.getName() + "   Size: " + listOfFile.length() + "B");
+                        outlist.
+                                add(listOfFile.getName() + "   Size: " + listOfFile.
+                                        length() + "B");
                     } else {
-                        inlist.add(listOfFile.getName() + "   Size: " + listOfFile.length() + "B");
+                        inlist.
+                                add(listOfFile.getName() + "   Size: " + listOfFile.
+                                        length() + "B");
                     }
                 }
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Insert Path's.", "Error", JOptionPane.ERROR_MESSAGE);
-
+            JOptionPane.
+                    showMessageDialog(null, "Insert Path's.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -134,26 +132,35 @@ public class FileSharingController {
         activeCon = new Connection(FSUI.getSelectedCon(), 3439);
         activeCon.setUI(FSUI);
         activeCon.createThreads();
-        
     }
-    
-     private void createServer() {
-        Thread Server = new Thread(){
+
+    private void createServer() {
+        Thread Server = new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 try {
-                    if(server == null){
+                    if (server == null) {
                         server = new Connection(3439);
+                        System.out.println(server.getConServerSocket());
                     }
-                server.createThreads();
-                server.setUI(FSUI);
-                FSUI.SetConnection(server.getConSocket().getInetAddress().toString().substring(1,server.getConSocket().getInetAddress().toString().length()));
-                    
-            } catch (IOException ex) {
-                
-            }
+                    Connection.setListenner();
+                    Connection.searchActiveInstances();
+                    server.setUI(FSUI);
+
+                    server.createThreads();
+                    FSUI.SetConnection(server.getConSocket().getInetAddress().
+                            toString().substring(1, server.getConSocket().
+                                    getInetAddress().toString().
+                                    length()));
+                } catch (IOException ex) {
+
+                }
             }
         };
-           Server.start();
+        Server.start();
+    }
+
+    public static String Lists() {
+        return outlist.toString();
     }
 }
