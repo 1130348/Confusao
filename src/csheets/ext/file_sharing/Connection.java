@@ -146,8 +146,7 @@ public class Connection {
                         if (!map.containsKey(pack.getAddress().toString())) {
                             map.put(pack.getAddress().toString(), "");
                             if (!InetAddress.getLocalHost().getHostAddress().equalsIgnoreCase(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()))) {
-                                System.out.println(Arrays.toString(InetAddress.getLocalHost().getAddress()));
-                                System.out.println(">" + InetAddress.getLocalHost().getHostAddress());
+                                
                                 if (!InetAddress.getLocalHost().getHostAddress().equalsIgnoreCase(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()))) {
                                     Connection n = new Connection(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()), 3439);
                                     n.createThreads();
@@ -175,7 +174,7 @@ public class Connection {
     }
 
     public static void setListenner() {
-        System.out.println("starting listenner");
+ 
         Thread f = new Thread() {
             public void run() {
                 try {

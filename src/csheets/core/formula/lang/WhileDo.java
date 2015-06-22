@@ -10,10 +10,6 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.util.ExpressionVisitor;
 
-/**
- *
- * @author Big-D2xl
- */
 public class WhileDo implements Expression {
 
 	/**

@@ -43,24 +43,24 @@ public class ExportXML implements ExportStrategy{
      * @return
      */
     @Override
-    public File export(ExportProcess eProcess,Cell[][] cells,boolean tags,String filename)  {
+    public File export(ExportProcess eProcess,Cell[][] cells,boolean tags,String filename,String[]strings)  {
         Document doc =null;
         File f = null;
-       try {
+        try {
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 			// root elements
             doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("CleanSheets");
+            Element rootElement = doc.createElement(strings[0]);
             doc.appendChild(rootElement);
             int tamanho = cells.length;
 
             for (int i = 0; i < tamanho; i++) {
                    for (int j = 0; j < cells[i].length; j++) {
                        
-                       Element cell =  doc.createElement("Cell");
+                       Element cell =  doc.createElement(strings[1]);
                        rootElement.appendChild(cell);
                        
                        Attr attr = doc.createAttribute("id");

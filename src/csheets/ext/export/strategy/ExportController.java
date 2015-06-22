@@ -27,8 +27,8 @@ public class ExportController {
 		return true;
 	}
     
-    public File export(boolean tags, Cell[][] cells, String filename) {
-		File f =ep.export(tags, cells,filename);
+    public File export(boolean tags, Cell[][] cells, String filename,String[]strings) {
+		File f =ep.export(tags, cells,filename,strings);
 		return f;
 	}
 }

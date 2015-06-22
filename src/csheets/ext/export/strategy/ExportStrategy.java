@@ -14,5 +14,5 @@ import java.io.File;
  */
 public interface ExportStrategy  {
     
-    public File export(ExportProcess eProcess,Cell [][] cells,boolean tags,String filename);
+    public File export(ExportProcess eProcess,Cell [][] cells,boolean tags,String filename,String[]strings);
 }

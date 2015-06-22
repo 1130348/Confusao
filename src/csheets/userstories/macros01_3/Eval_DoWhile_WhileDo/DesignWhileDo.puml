@@ -8,7 +8,7 @@ participant "args : ArrayList" as AAL
 participant "WhileDo" as WD
 
 activate EEC
-EEC--> AAL: [node.getText().equals("WhileDo")]
+EEC--> AAL: [node.getText().equalsIgnoreCase("WhileDo")]
 
 EEC-> NT: [nChild<node.getChildCount()]
 activate NT
