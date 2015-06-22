@@ -1,0 +1,22 @@
+@startuml doc-files/macros_09_01_analysis_classes.png
+
+    class "<<analysis>> UIExtensionButtons" as UI{
+    }
+
+	class "<<analysis>> ButtonsController" as ctrl{
+		+getAllActionButtons()
+		+buttonInfo(tooltip, icon, Action, activate)
+		+editButton(tooltip, icon, Action, activate)
+		+removeButton(button)
+}
+
+	class "<<analysis>> nActionButtonToolBar" as toolbar{
+		+addButton(button)
+		+editButton(tooltip, icon, Action, activate)
+		+removeButton(button)
+    }
+
+	ctrl <|-- UI
+	toolbar <|-- ctrl
+
+@enduml
