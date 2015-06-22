@@ -30,7 +30,8 @@
  * <img src="doc-files/macros_08_01_analysis>
  *
  * <h2>3. Tests</h2>
- *
+ * This use case don't need unit tests, only funcional.
+ * All the unit tests is already done in BeanShell libraries (.jar)
  * <br/>
  *
  * <h2>4. Design</h2>
