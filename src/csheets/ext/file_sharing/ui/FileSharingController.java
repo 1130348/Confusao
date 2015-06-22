@@ -168,7 +168,6 @@ public class FileSharingController {
     
      public static void readconfigfile(String path) {
         try {
-            System.out.println("entered");
             File d = new File(File.listRoots()[0] + "/CleanSheet FileSharingConfig");
            if (d.exists()) {
             File file = new File(path);
