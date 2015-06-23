@@ -75,27 +75,15 @@
  * <h3>Extension Setup</h3>
  * The following diagram shows the setup of the "Sort" extension when
  * cleansheets is run.<br/><br/>
- * <img src="doc-files/core03_01_design.png">
+ * <img src="doc-files/extension_start_design.png">
  * <br/>
  *
- * <h3>User Selects Cell and Selects Sort Ascending/Descending</h3>
- * The following diagram illustrates what happens when the user updates the text
- * of the comment of the current cell. To be noticed that this diagram does not
- * depict the actual selection of a cell (that is illustrated in the previous
- * diagram).<br/>
- * The following diagram illustrates what happens when the user selects the sort
- * he wants.<br/>
+ * <h3>The User selects a range of cells and selects Sort Ascending/Descending</h3>
+ * The following diagram illustrates what happens when the user select a range of cells
+ * and a type of sort for one of the selected columns.<br/>
  * <br/>
- * <img src="doc-files/core03_01_design2.png">
+ * <img src="doc-files/design_core_03_02.png">
  *
- * <br/>
- * <br/>
- *
- * <h2>5. Coding</h2>
- * see:<br/>
- * <h3>Created</h3>
- *
- * <h3>Modified</h3>
  * <br/>
  * <br/>
  *
