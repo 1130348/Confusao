@@ -1,0 +1,29 @@
+@startuml doc-files/draft_search_by_content.png
+ actor User as User
+ participant "<<analysis>>\nSearchOnAnotherInstancehUI" as UI
+ participant "<<analysis>>\nSearchOnAnotherInstancehUICtrl" as ctrl
+ participant "<<analysis>>\nNetwork" as net
+User -> UI : searchInstances()
+activate User
+deactivate User
+activate UI
+UI -> ctrl : searchInstances()
+activate ctrl
+deactivate UI
+ctrl -> net : searchInstances()
+activate net
+deactivate ctrl
+User -> UI : enterWoorkBookNameToSearch()
+activate User
+deactivate net
+UI -> ctrl : searchActiveWorkbook(workBookName)
+activate ctrl
+deactivate User
+ctrl -> net : searchActiveWorkbook(workBookName)
+activate net
+deactivate ctrl
+net --> UI : sendNotification()
+activate UI
+deactivate net
+deactivate UI
+@enduml
