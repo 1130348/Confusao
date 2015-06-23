@@ -1,4 +1,4 @@
-  @startuml doc-files/ipc06_01_analysis.png
+  @startuml doc-files/ipc_06_01_analysis.png
   actor User
   participant "<<analysis>>\nSecureComunicationUI" as UI
   participant "<<analysis>>\nSecureComunicationCtrl" as ctrl

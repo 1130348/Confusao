@@ -1,0 +1,15 @@
+@startuml doc-files/draft_send_email.png
+participant User as usr
+participant "<<Analysis>>\nSendEmailUI" as seui
+participant "<<Analysis>>\nSendEmailAction" as sea
+participant "<<Analysis>>\nEmailController" as emc
+participant "<<Analysis>>\ne: Email" as em
+participant "<<Analysis>>\n<<Service>>\nEmailSender" as emse
+usr -> seui : enterData(receiver, subject, message)
+usr -> seui : send()
+seui -> sea : String content = getSelectCellsContent()
+seui -> emc : e = createEmail(receiver, subject, mensagem , content)
+emc -> em : e = create(receiver, subject, mensagem)
+seui -> emc : sendEmail(e)
+emc -> emse : sendEmail(e)
+@enduml

@@ -27,7 +27,9 @@ public class ChooseCurrencyExchangeFileAction extends BaseAction{
         fileChooser.showOpenDialog(null);
         File choosedFile = fileChooser.getSelectedFile();
         
-        MoneyService.importCurrenciesFromCSVFile(choosedFile);
+        if (choosedFile != null) {
+              MoneyService.importCurrenciesFromCSVFile(choosedFile);
+        }      
     }
     
 }

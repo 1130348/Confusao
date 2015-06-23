@@ -5,8 +5,7 @@
  */
 package csheets.ext.file_sharing.ui;
 
-import csheets.ext.Send_Message.UI.SendMessageController;
-import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,21 +13,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystem;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -36,17 +30,13 @@ import javax.swing.filechooser.FileSystemView;
  */
 public class FileSharingUI extends JFrame {
 
-    /* Under TESTs */
-    private JList MessagesList;
+    private JList filesList;
 
-    private JTextField txt, addnewTT;
-
-    private JButton send, addnewTB;
-
-    /* WORKING */
-    private DefaultListModel MsgList, ConList;
+    private DefaultListModel fileList, ConList,outlistS;
 
     private String selectedCon;
+
+    private JButton myinbox = new JButton(), myoutbox = new JButton();
 
     public FileSharingUI() {
 
@@ -75,7 +65,7 @@ public class FileSharingUI extends JFrame {
                     int index = list.locationToIndex(evt.getPoint());
                     selectedCon = ConList.get(index).toString();
                     try {
-                        SendMessageController.StartCon();
+                        FileSharingController.StartCon();
                     } catch (IOException ex) {
                         Logger.getLogger(FileSharingUI.class.getName()).
                                 log(Level.SEVERE, null, ex);
@@ -86,14 +76,34 @@ public class FileSharingUI extends JFrame {
                 }
             }
         });
-        
-        JButton myinbox = new JButton();
+
         myinbox.setText("<html><center>My</center>InBox</hmtl>");
         myinbox.setBounds(10, 10, 85, 50);
+        myinbox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().open(new File(FileSharingController.getInBox()));
+                } catch (IOException ex) {
+                    
+                }
+            }
+        });
         add(myinbox);
-        JButton myoutbox = new JButton();
         myoutbox.setText("<html><center>My</center>OutBox</hmtl>");
         myoutbox.setBounds(105, 10, 85, 50);
+        myoutbox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().open(new File(FileSharingController.getOutBox()));
+                } catch (IOException ex) {
+                    
+                }
+            }
+        });
         add(myoutbox);
 
         JScrollPane listScroller = new JScrollPane(InstancesList);
@@ -101,17 +111,16 @@ public class FileSharingUI extends JFrame {
         listScroller.setOpaque(false);
         add(listScroller);
 
-        MsgList = new DefaultListModel();
-        MessagesList = new JList(MsgList);
-        MessagesList.
-                setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        MessagesList.setLayoutOrientation(JList.VERTICAL);
-        MessagesList.setVisibleRowCount(-1);
-        MessagesList.setOpaque(false);
-        JScrollPane MsglistScroller = new JScrollPane(MessagesList);
-        MsglistScroller.setBounds(200, 10, 380, 350);
-        MsglistScroller.setOpaque(false);
-        add(MsglistScroller);
+        fileList = new DefaultListModel();
+        filesList = new JList(fileList);
+        filesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        filesList.setLayoutOrientation(JList.VERTICAL);
+        filesList.setVisibleRowCount(-1);
+        filesList.setOpaque(false);
+        JScrollPane FilelistScroller = new JScrollPane(filesList);
+        FilelistScroller.setBounds(200, 10, 380, 350);
+        FilelistScroller.setOpaque(false);
+        add(FilelistScroller);
 
         add(jp);
         setUndecorated(true);
@@ -120,16 +129,41 @@ public class FileSharingUI extends JFrame {
 
     }
 
+    public JButton getMyInbox() {
+        return myinbox;
+    }
+
+    public JButton getMyOutbox() {
+        return myoutbox;
+    }
+
     public void SetConnection(String msg) {
         if (!msg.equals("")) {
             if (!ConList.contains(msg)) {
                 ConList.addElement(msg);
             }
         }
+    }
 
+    public void fillList(List l) {
+        for (Object x : l) {
+            outlistS.addElement(x.toString());
+        }
     }
 
     public String getSelectedCon() {
         return selectedCon;
     }
+
+    public void setMsg(String msg) {
+        if (!msg.equals("")) {
+                String[] ar = msg.split(",");
+                for (int i = 0; i < ar.length; i++) {
+                    System.out.println(ar[i]);
+                    fileList.addElement(ar[i]);
+                }
+        }
+    }
+    
+    
 }

@@ -19,52 +19,53 @@ import org.junit.Test;
  */
 public class NetworkTest {
 
-	public NetworkTest() {
-	}
+    public NetworkTest() {
+    }
 
-	@BeforeClass
-	public static void setUpClass() {
-	}
+    @BeforeClass
+    public static void setUpClass() {
+    }
 
-	@AfterClass
-	public static void tearDownClass() {
-	}
+    @AfterClass
+    public static void tearDownClass() {
+    }
 
-	@Before
-	public void setUp() {
-	}
+    @Before
+    public void setUp() {
+    }
 
-	@After
-	public void tearDown() {
-	}
+    @After
+    public void tearDown() {
+    }
 
-	/**
-	 * Test of getPort method, of class Network.
-	 */
-	@Test
-	public void testGetPort() {
-		System.out.println("getPort");
-		int expResult = 0;
-		int result = NetworkService.getPort();
-		assertEquals(expResult, result);
-	}
+    /**
+     * Test of getPort method, of class Network.
+     */
+    @Test
+    public void testGetPort() {
+        System.out.println("getPort");
+        NetworkService.setPort(8888);
+        int expResult = 8888;
+        int result = NetworkService.getPort();
+        assertEquals(expResult, result);
+    }
 
-	/**
-	 * Test of setPort method, of class Network.
-	 */
-	@Test
-	public void testSetPort() {
-		System.out.println("setPort");
-		int newPort = 9009;
-		NetworkService.setPort(newPort);
-		assertEquals(9009, NetworkService.getPort());
-	}
+    /**
+     * Test of setPort method, of class Network.
+     */
+    @Test
+    public void testSetPort() {
+        System.out.println("setPort");
+        int newPort = 9009;
+        NetworkService.setPort(newPort);
+        assertEquals(9009, NetworkService.getPort());
+    }
 
-	/**
-	 * Test of sendData method, of class Network.
-	 */
-	@Test
-	public void testSendData() throws IOException {
+    /**
+     * Test of sendData method, of class Network.
+     */
+    @Test
+    public void testSendData() throws IOException {
 //        System.out.println("sendData");
 //        Object object = null;
 //        boolean expResult = false;
@@ -72,19 +73,19 @@ public class NetworkTest {
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-	}
+    }
 
-	/**
-	 * Test of receiveData method, of class Network.
-	 */
-	@Test
-	public void testReceiveData() {
+    /**
+     * Test of receiveData method, of class Network.
+     */
+    @Test
+    public void testReceiveData() {
 //        System.out.println("receiveData");
 //        Object expResult = null;
 //        Object result = NetworkService.receiveData();
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-	}
+    }
 
 }

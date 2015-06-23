@@ -270,7 +270,7 @@ public class CallFunctionUI extends javax.swing.JDialog {
             try {
                 int index = func_def.indexOf("=");
                 func_def = func_def.substring(0, index - 1);
-                controller.addResultToCell(uiController.getActiveCell(), "=" + func_def);
+                controller.addResultToCell(controller.getActiveCell(uiController), "=" + func_def);
                 JOptionPane.showMessageDialog(this, "Function result was added to the active cell");
             } catch (FormulaCompilationException ex) {
                 Logger.getLogger(CallFunctionUI.class.getName()).log(Level.SEVERE, null, ex);

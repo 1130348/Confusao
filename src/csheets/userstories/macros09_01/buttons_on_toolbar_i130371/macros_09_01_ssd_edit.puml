@@ -1,0 +1,18 @@
+  @startuml doc-files/macros_09_01_ssd_edit.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Buttons on Toolbar
+    s -> User: Show the new window
+	User -> s: Selects one button to edit
+	s -> User: Show all the information
+	User -> s: Edit what he wants
+   note right of User
+        The main objetive of this window
+		is to the user select if wants the
+		button active or disable.
+    end note
+	s -> User: Asks confirmation
+	User -> s: Confirm
+	s -> User: Success of the use case
+  @enduml

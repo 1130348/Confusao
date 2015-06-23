@@ -1,85 +1,83 @@
 /**
- * Technical documentation regarding the user story macros03.02: Advanced Functions.
+ * Technical documentation regarding the user story macros03.02: Advanced
+ * Functions.
  * <br/>
  * <br/>
  *
  * <h2>1. Requirement</h2>
- * The user should be able to use advanced function like MINVERSE(Matrix Inverse)
- * and MMULT(Matrix Product).
+ * The user should be able to use advanced function like MINVERSE(Matrix
+ * Inverse) and MMULT(Matrix Product).
  *
  * <br/>
  * <br/>
  * <b>Use Case "Advanced Functions":</b>
  * The user selects the cells that he/she wants to see presented the results and
- * introduces the function followed by the address of the cells where he/she 
+ * introduces the function followed by the address of the cells where he/she
  * wants to apply the function.
  * <br/>
  * <br/>
  *
  * <h2>2. Analysis</h2>
- * To solve this use case will be necessary to understand how is done the 
- * recognition of functions and how they are treated by ANTLR and also realize 
+ * To solve this use case will be necessary to understand how is done the
+ * recognition of functions and how they are treated by ANTLR and also realize
  * the mathematics inherent to MINVERSE and MMULT functions.
  * <br/>
  * <br/>
  * After analyzing the documentation made by 1130386 in use case Macros:03_01
- * base operator we think there is no need to add more information to the 
- * analysis diagram, so the next reflections on possible solutions to problems 
+ * base operator we think there is no need to add more information to the
+ * analysis diagram, so the next reflections on possible solutions to problems
  * will be based on the diagram mentioned above.<br/>
  * <h3>Analysis of Core Technical Problem</h3>
- * First we have to create the MINVERSE and MMULT classes that will extend the 
- * class Function, so the program will recognize these new functions.
- * After that we need to edit the language.props file that has all the function
- * and operator in the application.
- * The class FormulaCompiler will attempt to create a formula from a string. The
- * setContent method will validate the formula throwing an exception if it
- * detects an error. The formula class implements the expression interface which
- * is responsible for parsing the expression and as such validating it. The
- * Expressions in the present moment are represented as abstract syntax trees
- * and can hold literals, references, operations.
- * 
+ * First we have to create the MINVERSE and MMULT classes that will extend the
+ * class Function, so the program will recognize these new functions. After that
+ * we need to edit the language.props file that has all the function and
+ * operator in the application. The class FormulaCompiler will attempt to create
+ * a formula from a string. The setContent method will validate the formula
+ * throwing an exception if it detects an error. The formula class implements
+ * the expression interface which is responsible for parsing the expression and
+ * as such validating it. The Expressions in the present moment are represented
+ * as abstract syntax trees and can hold literals, references, operations.
+ *
  * <h4>Matrix Product</h4>
  * Its only possible to multiply two matrixes if number of columns of the first
- * matrix is equal to the number of lines of the second matrix. Knowing this we 
- * will have to do this validation and ensure that the user obeys to this 
+ * matrix is equal to the number of lines of the second matrix. Knowing this we
+ * will have to do this validation and ensure that the user obeys to this
  * condition.
  * <br/>
  * <h4>Matrix Inverse</h4>
- * Its only possible to invert a square matrix. Knowing this we 
- * will have to do this validation and ensure that the user obeys to this 
- * condition.
+ * Its only possible to invert a square matrix. Knowing this we will have to do
+ * this validation and ensure that the user obeys to this condition.
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to ensure that mathematical calculations 
+ * functionality of this use case is to ensure that mathematical calculations
  * are correct. So in order to test whether the calculations are correct we will
- * have to perform unitary tests to the methods responsible for making the 
- * calculations both in the multiply matrices and inverting matrices.
- * In addition we must ensure that the restrictions to inverse matrix and 
- * multiply matrix are met and that if not met exceptions will be released.
- * As usual, in a test driven development approach tests normally fail in the 
- * beginning. The idea is that the tests will pass in the end.
+ * have to perform unitary tests to the methods responsible for making the
+ * calculations both in the multiply matrices and inverting matrices. In
+ * addition we must ensure that the restrictions to inverse matrix and multiply
+ * matrix are met and that if not met exceptions will be released. As usual, in
+ * a test driven development approach tests normally fail in the beginning. The
+ * idea is that the tests will pass in the end.
  * <br/>
  * <br/>
- * see: <code>csheets.userstories.macros03_02.advanced_functions.AdvancedFunctionsTest</code><br/>
+ * see:
+ * <code>csheets.userstories.macros03_02.advanced_functions.AdvancedFunctionsTest</code><br/>
  *
  * <h2>4. Design</h2>
- * When user enter the cell content he/she activate the method actionPerformed 
- * of Class CellEditor.
- * This User Story uses mostly intefaces and has the particularity of having 2
- * classes that are automatically generated by the respective intefaces, those
- * classes are FormulaLexer and FormulaParser and there are specific Java
- * classes (Lexer and Parser) that generated depending on the grammar
- * created.<br/>
+ * When user enter the cell content he/she activate the method actionPerformed
+ * of Class CellEditor. This User Story uses mostly intefaces and has the
+ * particularity of having 2 classes that are automatically generated by the
+ * respective intefaces, those classes are FormulaLexer and FormulaParser and
+ * there are specific Java classes (Lexer and Parser) that generated depending
+ * on the grammar created.<br/>
  * For the development of the base operator we dont have to define it in the
  * grammar because we did it in the previous use case so now we just have to
  * implement the behavior of said rule in the respective class.<br/>
  * The class ExpressionCompiler during runtime will identify and decide what
  * type of command is written and choose the correct behavior.<br/>
  * The interface Function will decide wich function will apply, in this use case
- * will use the class Minverse and Mmult.
- * The following diagram illustrate the approach used in the design of the
- * solution for this use case.<br/>
+ * will use the class Minverse and Mmult. The following diagram illustrate the
+ * approach used in the design of the solution for this use case.<br/>
  * <img src="doc-files/sequence_diagram.png"/>
  * </br>
  *
@@ -88,6 +86,11 @@
  * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
  * <br/>
  * <br/>
+ *
+ * <h2>6. Final Remarks</h2>
+ * We achieve the objectives and in our point of view all requirements have been
+ * accomplished. In addition we can do extra work implementing some features 
+ * of macros 03 03.<br/>
  *
  * @author 1130419
  */

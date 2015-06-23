@@ -1,0 +1,43 @@
+@startuml doc-files/core03_02_draft_core_03_02.png
+
+actor User
+participant "<<<analysis\nFrame>>" as fr
+participant "<<analysis>>\nSortUI" as UI
+participant "<<analysis>>\nChooseColumnUI" as colUI
+participant "<<analysis>>\nSortCtrl" as ctrl
+participant "<<analysis>>\nSpreadsheet" as sheet
+participant "<<analysis>>\nCell" as cell
+
+User->fr:select a range of cells
+User->UI:choose the type of sort
+activate UI
+UI->ctrl:verifyNumberOfColumns()
+UI->UI:getSelectedColumns()
+UI->sheet:getSelectedColumns()
+alt if number of selected columns > 1
+    UI->colUI:create(controller)
+    deactivate UI
+    User->colUI:choose column
+    activate colUI
+    colUI->ctrl:sortCells(column)
+    deactivate colUI
+    loop for each cell of the column
+    ctrl->cell:getContent()
+    activate ctrl
+    ctrl->ctrl:compareContentValue()
+    deactivate ctrl
+    end loop
+    
+end alt
+alt if the number of selected columns == 1
+    UI->ctrl:sortCells()
+    ctrl->ctrl:getColumnOfSelectedCell()
+    activate ctrl 
+    loop for each cell of the column
+    ctrl->cell:getContent()
+    ctrl->ctrl:compareContentValue()
+    deactivate ctrl
+    end loop
+end alt
+    
+@enduml

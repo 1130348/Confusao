@@ -18,6 +18,7 @@ import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.compiler.IllegalFunctionCallException;
 import csheets.core.formula.lang.Language;
 import csheets.core.formula.lang.UnknownElementException;
+import csheets.ui.ctrl.UIController;
 import java.beans.Expression;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -189,6 +190,10 @@ public class CallFunctionController {
 
     public Value callMacroFunction(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
         return caller.executeFunc(func_def);
+    }
+
+    public Cell getActiveCell(UIController uiCtrl) {
+        return uiCtrl.getActiveCell();
     }
 
 }

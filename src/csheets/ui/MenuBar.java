@@ -115,6 +115,7 @@ public class MenuBar extends JMenuBar {
 		fileMenu.add(actionManager.getAction("print"));
 		fileMenu.add(actionManager.getAction("import"));
 		fileMenu.add(actionManager.getAction("export"));
+                fileMenu.add(actionManager.getAction("exportas"));
 		fileMenu.add(actionManager.getAction("link"));
 		fileMenu.addSeparator();
 		fileMenu.add(actionManager.getAction("close"));
