@@ -56,14 +56,14 @@
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to send email. The most appropriate test
- * type for this use case is the functional type. To test the correct sending
- * email we will send test emails and verify that these emails will be received.
- * In addition to the functional tests will be some functional testing to verify
- * that the information is being properly allocated will MimoMessag class.
+ * functionality of this use case is to send emails. The most appropriate test
+ * type for this use case is the functional type. To test the correct email
+ * sending we will send emails tests and verify that these emails will be
+ * received. In addition to the functional tests will be some unitary testing to
+ * verify that the information is being properly allocated in MimoMessage class.
  * <br/>
  * <br/>
- * see: <code>csheets.userstories.core05_02.send_email.SendEmailTest</code><br/>
+ * see: <code>csheets.ext.sendEmail.SendEmailTest</code><br/>
  *
  * <h2>4. Design</h2>
  * When user enter the cell content he/she activate the method actionPerformed
