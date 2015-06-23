@@ -1,27 +1,30 @@
 /**
- * Technical documentation regarding the user story core03_2: Sort a column of cells from a 
- * selected range of cells.
+ * Technical documentation regarding the user story core03_2: Sort a column of
+ * cells from a selected range of cells.
  * <br/>
  * <br/>
  *
  * <h2>1. Requirements</h2>
- * The user selects a range of cells and choose if he wants to sort ascending or descending.
- * After that the user should be able to choose the column from the current selection
- * that he wants to sort.
+ * The user selects a range of cells and choose if he wants to sort ascending or
+ * descending. After that the user should be able to choose the column from the
+ * current selection that he wants to sort.
  * <br/>
- * <b>Sort the contents of cells:</b> The user selects a range of cells, then he goes to 
- * "Extensions" -> "Sort" and chooses between * ascending and descending. A new window pops up
- * asking for the column of the current selection that he wants to sort<br/>
+ * <b>Sort the contents of cells:</b> The user selects a range of cells, then he
+ * goes to "Extensions" -> "Sort" and chooses between * ascending and
+ * descending. A new window pops up asking for the column of the current
+ * selection that he wants to sort<br/>
  * <br/>
  * <br/>
  *
  * <h2>2. Analysis</h2>
- * From the previous use case the sort mechanism was implemented but it only works for one column
- * of the sheet, not for a range of cells that can include more than one column. For this use case
- * we need to change the already implemented metods to accept the range selection without forcing
- * the user to make that selection. It should remain possible to simply select a cell and sort the
- * column of that cell. A new window should pop up if more than one column are selected. This new
- * window should let the user choose the column from the selection that he wants to sort.
+ * From the previous use case the sort mechanism was implemented but it only
+ * works for one column of the sheet, not for a range of cells that can include
+ * more than one column. For this use case we need to change the already
+ * implemented metods to accept the range selection without forcing the user to
+ * make that selection. It should remain possible to simply select a cell and
+ * sort the column of that cell. A new window should pop up if more than one
+ * column are selected. This new window should let the user choose the column
+ * from the selection that he wants to sort.
  *
  * <br/>
  * <h2>a) First "Analysis" Sequence Diagram</h2>
@@ -36,14 +39,18 @@
  * <br/>
  * <img src="doc-files/core03_02_draft_core_03_02.png">
  * <br/>
-  * <br/>
-* <h2>3. Tests</h2>
-* 
-* Basically, from requirements and also analysis, we see that the core functionality of this use case is to be able to sort an column based on the content of the cells. We need to be able to get the contents of the cells of the desired column we want to sort.<br/>
-* Following this aproach we can start by coding a unit test that uses the classes <code>Cell</code>, <code>Spreadsheet</code> to allow us to retrive the contents of the active spreadsheet and the contents of the column selected. A test that will be performed will be setting some values in the cells and sort them and see if the cells at "first position" has the "lowest" value and the "last position" has the highest value.
-* 
- * As usual, in a test driven development approach tests normally fail in the beginning. The idea is that the tests will pass in the end.<br> 
+ * <br/>
+ * <h2>3. Tests</h2>
+ * From the analysis we can see that we need to test if the sort methods work properly.
+ * For that we need to check if the method <code> cellContents() </code> its able to get 
+ * the cells content correctly. We also need to test if the method <code> sort() </code>
+ * is able to sort the cells content correcly in booth ascending and descendig order.
+ * Finally we need to test if the method <code> fillSorted() </code> is able to update the 
+ * cells content in the right order.
  * 
+ * As usual, in a test driven development approach tests normally fail in the
+ * beginning. The idea is that the tests will pass in the end.<br>
+ *
  * <h3 style="font-size:14px;">Functional Tests</h3>
  * To test this use case, the user must follow these steps:
  * <ul>
@@ -55,27 +62,35 @@
  * Doing all these steps will order the column
  *
  * <br/>
-  * <br/>
-  * 
+ * <br/>
+ *
  * <h2>4. Design</h2>
- * To realize this user story we will need to create a subclass of Extension. We will also need to create a subclass of UIExtension. 
- * In the code of the extension <code>csheets.ext.style</code> we can find examples that illustrate how to implement these technical requirements.<br/>
- * The following diagrams illustrate core aspects of the design of the solution for this use case.<br/>
- * 
+ * To realize this user story we will need to create a subclass of Extension. We
+ * will also need to create a subclass of UIExtension. In the code of the
+ * extension <code>csheets.ext.style</code> we can find examples that illustrate
+ * how to implement these technical requirements.<br/>
+ * The following diagrams illustrate core aspects of the design of the solution
+ * for this use case.<br/>
+ *
  * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "Sort" extension when cleansheets is run.<br/><br/>
+ * The following diagram shows the setup of the "Sort" extension when
+ * cleansheets is run.<br/><br/>
  * <img src="doc-files/core03_01_design.png">
  * <br/>
  *
  * <h3>User Selects Cell and Selects Sort Ascending/Descending</h3>
- * The following diagram illustrates what happens when the user updates the text of the comment of the current cell. To be noticed that this diagram does not depict the actual selection of a cell (that is illustrated in the previous diagram).<br/>
- * The following diagram illustrates what happens when the user selects the sort he wants.<br/>
+ * The following diagram illustrates what happens when the user updates the text
+ * of the comment of the current cell. To be noticed that this diagram does not
+ * depict the actual selection of a cell (that is illustrated in the previous
+ * diagram).<br/>
+ * The following diagram illustrates what happens when the user selects the sort
+ * he wants.<br/>
  * <br/>
  * <img src="doc-files/core03_01_design2.png">
- * 
+ *
  * <br/>
  * <br/>
- 
+ *
  * <h2>5. Coding</h2>
  * see:<br/>
  * <h3>Created</h3>
