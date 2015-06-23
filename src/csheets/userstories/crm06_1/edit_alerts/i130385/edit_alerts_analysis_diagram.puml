@@ -1,0 +1,17 @@
+@startuml doc-files/find_workbooks_analysis_diagram.png
+actor user 
+participant "<<analysis>>\nEditAlertsUI" as ui
+participant "<<analysis>>\nEditAlertsController" as controller
+participant "<<analysis>>\nAlertsList" as alertsList
+participant "<<analysis>>\nAlert" as alert
+activate ui
+activate controller
+activate alertsList
+activate alert
+user  -> ui : buttonCreateAlertActionPerformed() 
+ui -> controller : addAlert()
+controller -> alertsList : addAlert()
+alertsList -> alert : create()
+deactivate controller
+deactivate ui
+@enduml
