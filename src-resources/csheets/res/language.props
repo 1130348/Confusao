@@ -37,11 +37,14 @@ Average
 Factorial
 Minverse
 Mmult
+Eval
 
 # Pseudo-statements
 If
 Do
 For
+DoWhile
+WhileDo
 
 # Money 
 Dollar

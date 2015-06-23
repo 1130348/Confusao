@@ -2,8 +2,10 @@ package csheets.ext.Email;
 
 import csheets.core.Cell;
 import csheets.ext.Email.UI.EmailMenu;
-import csheets.ext.contact.Email;
 import csheets.ui.ctrl.UIController;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -11,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
@@ -35,7 +38,8 @@ public class EmailController {
 	public static void setMailSettings(String mail, String host,
 									   String password, Cell cell) {
 
-		mailSettings = new Email(mail);//, password, host);
+		mailSettings = new Email(mail, password, new SmtpConfig(host));
+		saveEmail(mailSettings);
 		flagEmail = true;
 		JOptionPane.
 			showMessageDialog(null, "Email set successfuly", "Email set", JOptionPane.INFORMATION_MESSAGE);
@@ -62,15 +66,15 @@ public class EmailController {
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
-			//props.put("mail.smtp.host", mailSettings.getSmtp().getService());
-			//props.put("mail.smtp.port", mailSettings.getSmtp().getPort());
+			props.put("mail.smtp.host", mailSettings.getSmtp().getService());
+			props.put("mail.smtp.port", mailSettings.getSmtp().getPort());
 
 			Session session = Session.
 				getInstance(props, new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						/*return new PasswordAuthentication(mailSettings.
-							getEmail(), mailSettings.getPassword());*/
-                                            return null;
+						return new PasswordAuthentication(mailSettings.
+							getEmail(), mailSettings.getPassword());
+
 					}
 				});
 
@@ -78,12 +82,10 @@ public class EmailController {
 			try {
 				Message message = new MimeMessage(session);
 
-				//message.setFrom(new InternetAddress(mailSettings.getEmail()));
-
-				//message.setRecipients(Message.RecipientType.TO,
-									//  InternetAddress.parse(mailSettings.
-										//  getEmail()));
-
+				message.setFrom(new InternetAddress(mailSettings.getEmail()));
+				message.setRecipients(Message.RecipientType.TO,
+									  InternetAddress.parse(mailSettings.
+										  getEmail()));
 				message.setSubject("Test");
 				message.setText(cell.getContent());
 
@@ -107,6 +109,32 @@ public class EmailController {
 
 	public static Email getMailSettings() {
 		return mailSettings;
+	}
+
+	public static void saveEmail(Email em) {
+
+		try {
+
+			String content = "This is the content to write into file";
+
+			File file = new File("EmailTeste.txt");
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			} else {
+				FileOutputStream fou = new FileOutputStream(file, true);
+				byte[] mybytes = (mailSettings.toString() + "\n").getBytes();
+				fou.write(mybytes);
+				fou.close();
+//				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//				BufferedWriter bw = new BufferedWriter(fw);
+//				bw.write();
+//				bw.close();
+			}
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
 	}
 
 }
