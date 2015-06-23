@@ -7,7 +7,6 @@ package csheets.core.formula.lang;
 
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
-import csheets.core.formula.BinaryOperation;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
@@ -41,53 +40,22 @@ public class For implements Function {
     }
 
     public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
-        //Pior solução temporária de sempre
-        int cont = 0;
-        BinaryOperation atributionOne = (BinaryOperation) arguments[0];
-        BinaryOperation atribuitionTwo = (BinaryOperation) arguments[1];
 
-        Value valStartingPoint = atributionOne.getRightOperand().evaluate();
-        Value valEndingPoint = atribuitionTwo.getRightOperand().evaluate();
-
-        Double doubleStartingPoint = valStartingPoint.toDouble();
-        Double doubleEndingPoint = valEndingPoint.toDouble();
-
-        int startingPoint = doubleStartingPoint.intValue();
-        int endingPoint = doubleEndingPoint.intValue();
-
-        System.out.println(startingPoint);
-        System.out.println(endingPoint);
-
+        int i;
         //aqui temos de dividir a formula que vai estar presente na celula a fazer o evaluate
-        for (int i = startingPoint; i < endingPoint; i++) {
+        arguments[0].evaluate();
 
-            for (Expression expression : arguments) {
-                if (cont++ > 1) {
-                    //aqui temos de dividir a formula que vai estar presente na celula a fazer o evaluate
-                    Value valorCS = expression.evaluate();
-                }
+        while (arguments[1].evaluate().toBoolean()) {
+
+            for ( i = 2; i < arguments.length; i++) {
+
+                arguments[i].evaluate();
             }
         }
 
-        Value v = new Value();
+        Value v = new Value("FOR");
         return v;
-        
-        /*
-        arguments[0].evaluate();
 
-		System.out.println(arguments[1].evaluate().toBoolean());
-
-		while (arguments[1].evaluate().toBoolean()) {
-
-			for (int i = 3; i < arguments.length; i++) {
-
-				arguments[i].accept(null);
-			}
-		}
-
-		Value v = new Value("");
-		return v;
-        */
     }
 
     public FunctionParameter[] getParameters() {

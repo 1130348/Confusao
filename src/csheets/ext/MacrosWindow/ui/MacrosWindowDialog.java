@@ -12,6 +12,8 @@ import csheets.core.formula.Function;
 import csheets.core.formula.compiler.IllegalFunctionCallException;
 import csheets.core.formula.lang.UnknownElementException;
 import csheets.ext.MacrosWindow.MacrosWindowController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +50,17 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
         initComponents();
         setDefaultComponentsSettings();
         retrieveFunctionsList();
+        exitWindow();
+    }
+
+    private void exitWindow() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                clearMacroNameActionPerformed(null);
+                dispose();
+            }
+        });
     }
 
     public static synchronized MacrosWindowDialog getInstance(java.awt.Frame parent, boolean modal) {
@@ -266,8 +279,8 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
                         if (formula.charAt(0) == '=') {
                             formula = formula.substring(1);
                         }
+                        value = callFunctionController.callMacroFunction(formula);
                     }
-                    value = callFunctionController.callMacroFunction(formula);
                 } catch (ParseException | IllegalFunctionCallException | UnknownElementException | IllegalValueTypeException e) {
                     JOptionPane.showMessageDialog(
                             null,
@@ -275,6 +288,7 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
                             "Error",
                             JOptionPane.ERROR_MESSAGE
                     );
+                    break;
                 } catch (StringIndexOutOfBoundsException e) {
                     JOptionPane.showMessageDialog(
                             null,
@@ -282,7 +296,7 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
                             "Error",
                             JOptionPane.ERROR_MESSAGE
                     );
-
+                    break;
                 }
             }
             macroFormulasList.clear();
