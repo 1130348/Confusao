@@ -1,0 +1,32 @@
+  @startuml doc-files/macros07_01_analysis.png
+
+ actor User
+ participant "FormsExtension" as MBE
+ participant "UIFormsExtension" as UIEMB
+ participant "NewFormWindow" as NFW
+ participant "Form" as MB
+ participant "FormDisplay" as FD
+  
+
+ User -> MBE: Create Form
+MBE -> UIEMB: Create Form
+ activate UIEMB
+ UIEMB -> NFW: create()
+ UIEMB -> NFW: run()
+ activate NFW
+ MB<- NFW: createForm()
+ activate MB
+ loop
+ MB <- NFW: addLine()
+ deactivate MB
+ end
+ NFW -> FD: showForm()
+ activate FD
+ deactivate FD
+ deactivate NFW
+ deactivate UIEMB
+ deactivate MBE
+
+
+
+@enduml
