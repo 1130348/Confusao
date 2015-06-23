@@ -7,7 +7,7 @@ package csheets.ext.MacrosWindow.ui;
 
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
-import csheets.core.call_function.CallFunctionController;
+import csheets.ext.call_function.CallFunctionController;
 import csheets.core.formula.Function;
 import csheets.core.formula.compiler.IllegalFunctionCallException;
 import csheets.core.formula.lang.UnknownElementException;

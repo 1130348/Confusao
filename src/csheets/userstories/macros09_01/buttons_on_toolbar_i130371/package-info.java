@@ -80,10 +80,27 @@
  * <br/><br/>
  *
  * <h2>3. Tests</h2>
- *
+ *  * Basically, from requirements and also analysis, we see that the MACRO
+ * functionality of this use case is to be able to add buttons with some action
+ * (macros, beansheel scripts or forms) to the toolbar. This use case is more
+ * about GUI interface and because of that there aren't the necessity of doing
+ * more than the actual tests that are already implemented. Since almost all the
+ * methods in this use case were made previosly I assumed that them unitary
+ * tests were working. On this use case, I created a lot of new classes but all
+ * of them implemented or extends a class that was already implemented in this
+ * cleansheets projet. All the classes that will be created: to add the new
+ * buttons (the add and to edit - active or disable), the windows that will open
+ * (Add: insert tooltip, the name of the icon and the chosen action; Edit: edit
+ * a button or remove it). The controller class that will be created
+ * (ButtonsController) will exist because of the differents action that will be
+ * created. From this moment, I just can add an action of a macro to the button
+ * because beanshell scripts and forms are not implemented yet. All the methods
+ * of all the classes created I will test by functional tests and usind
+ * debugging. As usual, in a test driven development approach tests normally
+ * fail in the beginning. The idea is that the tests will pass in the end.
  * <br/>
  *
- * * <h2>4. Design</h2>
+ * <h2>4. Design</h2>
  *
  * <h2>5. Coding</h2>
  *

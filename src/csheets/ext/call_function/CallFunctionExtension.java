@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package csheets.core.call_function;
+package csheets.ext.call_function;
 
-import csheets.core.call_function.ui.UIExtensionCallFunction;
+import csheets.ext.call_function.ui.UIExtensionCallFunction;
 import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;

@@ -22,7 +22,7 @@ package csheets.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
-import csheets.core.call_function.ui.CallFunctionAction;
+import csheets.ext.call_function.ui.CallFunctionAction;
 import csheets.ext.export.ui.ExportAsAction;
 import csheets.ext.import_export_link.ui.LinkImportExportAction;
 import csheets.ext.import_export_text.ui.ExportAction;
