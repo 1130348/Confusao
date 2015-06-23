@@ -23,47 +23,29 @@
  * <br/>
  * <br/>
  * <h2>2. Analysis</h2>
- * The user will need to add, edit or remove the buttons that will appear on the
- * toolbar. From this moment, the ideia is to make an option on the menu with
- * the name "add button" or "edit button". When the user clicks on that option
- * will open a new window that allows the user to add, edit or remove a button.
- * On the top of the window has the list of action buttons already created. If
- * the user opted for creating a new one just need to select the button "Add
- * Button". On the otherside, if opted to edit a button (to change the tooltip,
- * the action and the active or disable just need to click two times on the name
- * of the button on the list. To remove just need to select one name of button
- * and select the button "Remove Button". After that the name of the button will
- * be deleted from the list.<br/><br/>
- * For now, let's see the ssd for the adding option. Like I said, the user
- * select the option on menu and the clicks on "Add Button". Then, will open a
- * new window in order to the user select the tooltip, the icon and the action
- * that is associated to that button. Also have the possibility to select if it
- * is active or not.
+ * The user will need to add a button that will appear on the toolbar. From this
+ * moment, the ideia is to make an option on the menu with the name "add
+ * button". When the user clicks on that option will open a new window that
+ * allows the user to add a button. On the top of the window has the list of
+ * action buttons already created. The user just need to insert the name of the
+ * button (represented by a number), the tooltip, the icon and the
+ * action.<br/><br/>
+ * Let's see the ssd for the adding option. Like I said, the user select the
+ * option on menu and the clicks on "Add Button". Then, will open a new window
+ * in order to the user select the number, tooltip, the icon and the action that
+ * is associated to that button.
  * <br/><br/>
  * <img src = "doc-files/macros_09_01_ssd_add.png"/>
  * <br/><br/>
- * <img src = "doc-files/macros_09_01_analysis_sequence_add.png"/>
+ * <img src = "doc-files/macros_09_01_analysis_sequence.png"/>
  * <br/><br/>
- * Now for the edition of the buttons. The user just need to select one button
- * and then a new window will open with all the information that was already
- * choosen. The user has no the possibility to change the information. This
- * edition was most create to the user can change if the button is active or
- * disable. If it is disable any action will be done when clicking on the button
- * on the toolbar.
- * <br/><br/>
- * <img src = "doc-files/macros_09_01_ssd_edit.png"/>
- * <br/><br/>
- * <img src = "doc-files/macros_09_01_analysis_sequence_edit.png"/>
- * <br/><br/>
- * To remove a button from the toolbar is very easy. The user just need to
- * select one button on the list and then click on the option "Remove Button".
- * After that the name of the button will disappear from the list and from the
- * toolbar.
- * <br/><br/>
- * <img src = "doc-files/macros_09_01_ssd_remove.png"/>
- * <br/><br/>
- * <img src = "doc-files/macros_09_01_analysis_sequence_remove.png"/>
- * <br/><br/>
+ * To edit if the button is active or not I will need to create two function one
+ * ATIVE_BUTTON and DISACTIVE_BUTTON passing by parameter the name of the
+ * button. This is just an idea but it is the possibility how this will be
+ * implemented. The main problem is the class that implements Function don't
+ * have a method or the class UIController to get the components of the toolbar.
+ * And because of that, I can't disable the button or activate. But this is a
+ * problem that I want to resolve.<br/>
  * From this point, I just understand how it will be done because of the package
  * csheets.ext.style.ui that creats a toolbar and buttons. The main problem I
  * believe that is to know how the buttons will be save and the action ill be
@@ -80,7 +62,7 @@
  * <br/><br/>
  *
  * <h2>3. Tests</h2>
- *  * Basically, from requirements and also analysis, we see that the MACRO
+ * Basically, from requirements and also analysis, we see that the MACRO
  * functionality of this use case is to be able to add buttons with some action
  * (macros, beansheel scripts or forms) to the toolbar. This use case is more
  * about GUI interface and because of that there aren't the necessity of doing
@@ -101,6 +83,29 @@
  * <br/>
  *
  * <h2>4. Design</h2>
+ * When the cleansheets project open will be a button that allows the user to
+ * create action buttons. When the user clicks on the button a new window will
+ * be open and asks the user to fill all the information: the number of the
+ * button (represents the name), the tooltip that wants to see when pass by the
+ * button with the mouse and the action that is assigned. The action that is on
+ * the button just can be a Macro because at this point scripts beanshell and
+ * forms are not available and not implemented.<br/>
+ * A sequence diagram shows object interactions arranged in time sequence. It
+ * depicts the objects and classes involved in the scenario and the sequence of
+ * messages exchanged betwween the objets needed to carry out the functionality
+ * of the scenario.<br/>
+ * Let's now see the sequence diagram at this point of the documentation of this
+ * use case.
+ * <br/><br/>
+ * <img src = "doc-files/macros_09_01_design_sequence.png"/>
+ * <br/><br/>
+ * The other part of this use case is to create functions on macros and
+ * beansheel (at this point of the implementation just the macros exists so the
+ * button just can have assigned a macro). The idea is to create two classes
+ * that implements Function and when the user selects the function
+ * ACTIVATE_BUTTON(name) the button with the chosen name stays active and if the
+ * function is DISACTIVATE_BUTTON(name) the button will have the action
+ * associated but nothing will be done when clicking.
  *
  * <h2>5. Coding</h2>
  *

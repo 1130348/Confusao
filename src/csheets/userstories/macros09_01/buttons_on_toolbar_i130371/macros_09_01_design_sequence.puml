@@ -1,0 +1,38 @@
+@startuml doc-files/macros_09_01_design_sequence.png
+
+  actor User
+
+  participant "<<analysis>>\nUIController" as UIctrl
+  participant "<<analysis>>\nButtonsUIExtension" as UI
+  participant "<<analysis>>\nButtonsController" as ctrl
+  participant "<<analysis>>\nButtonToolBar" as buttons
+  participant "<<analysis>>\nAddWindow" as window
+  participant "<<analysis>>\nDefaultAction" as action
+
+	User -> UI: Buttons on Toolbar
+	User -> UI: select "Add Button"
+	UI -> window: create()
+	window -> window: initComponents()
+	window -> UIctrl: getMacrosName()
+	window -> window: retrieveMacrosList()
+	window -> User: Asks Information
+	User -> window: inserts number (the name), tooltip, icon and action
+	window -> ctrl: validateIcon()
+	window -> User: Asks confirmation
+	User -> window: OK
+	window -> buttons: addButton(String name, String toolTip, String icon, String action)
+	buttons -> action: new DefaultAction(uiController, tooltip, icon, action)
+    buttons -> buttons: addToogleButton()
+	alt
+	note right of buttons
+        When the user select the button the
+		active cell with change the content
+		to the macro on the button.
+    end note
+	action -> UIctrl: c = getActiveCell()
+	action -> action: c.setContent("="+macro)
+	end alt;
+
+	UI -> User: success of the use case
+
+@enduml
