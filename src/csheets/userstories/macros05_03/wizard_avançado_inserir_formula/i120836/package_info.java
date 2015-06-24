@@ -68,15 +68,19 @@
  * <br/>
  *
  * <h3>User "click" to show the Tree </h3>
- * 
+ * The following diagram illustrates what happens when the user "click" to show
+ * the generated tree from the inserted function. The idea is that when this
+ * happens the extension must display a tree in the Jlabel, and have a button
+ * that disable and enable this "extension".
  * <br/>
  * <br/>
- * <img src="">
+ * <img src="doc-files/marcos05_03_design2.png">
+ * <br/>
  * <br/>
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/file_sharing/package-summary.html">csheets.ext.file_sharing</a><br/>
- * <a href="../../../../csheets/ext/file_sharing/ui/package-summary.html">csheets.ext.file_sharing.ui</a><br/>
+ * <a href="../../../../csheets/ext/call_function/package-summary.html">csheets.ext.call_function</a><br/>
+ * <a href="../../../../csheets/ext/call_function/ui/package-summary.html">csheets.ext.call_function.ui</a><br/>
  * <br/>
  * <br/>
  * <br/>

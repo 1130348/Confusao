@@ -1,9 +1,10 @@
-  @startuml doc-files/macros05_3_analysis.png
+@startuml doc-files/macros05_3_analysis.png
 actor User
  participant "<<analysis>>\nCallFunctionUI" as UI
  participant "<<analysis>>\nCallFunctionCtrl" as ctrl
  participant "<<analysis>>\nLanguage" as language
-User -> UI : show
+ participant "<<analysis>>\nTree" as tree
+User -> UI : show()
 activate UI
 UI -> ctrl : lf = fillList()
 activate ctrl
@@ -25,5 +26,7 @@ activate ctrl
 UI -> ctrl : callFunction(func_def)
 deactivate UI
 deactivate ctrl
-
+ctrl -> tree : getTree()
+tree --> ctrl : 
+ctrl -> UI : showTree()
 @enduml
