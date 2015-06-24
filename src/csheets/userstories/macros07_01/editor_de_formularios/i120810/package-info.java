@@ -25,18 +25,17 @@
  *
  * <h2>2. Analysis</h2>
  *
- * Analyzing this in a coding way it necessary an ArrayList to store the
- * content of the selected column, to facilitate the treatment of the
- * information in this particular case sorting the column with the "sort()" and
- * "reverse()" methods provided by ArrayList.
+ * Analyzing this in a coding way it necessary an ArrayList to store the content
+ * of the selected column, to facilitate the treatment of the information in
+ * this particular case sorting the column with the "sort()" and "reverse()"
+ * methods provided by ArrayList.
  *
  * Macros07_01: Form Editor objective is to allow the user to create Forms using
  * a Editor.<br />
  * Analyzing this in a graphical way, it will be required to set an "Forms" Menu
  * on "Extensions" Menu to give the user the following options: "Create Form",
  * "Edit Form", "Display Form". The Editor Frame will have all the components
- * allowed to be used.
- * Now in coding its necessary to create an List of forms to
+ * allowed to be used. Now in coding its necessary to create an List of forms to
  * store all the forms created, each form will belong to one spreadsheet.
  *
  *
@@ -56,44 +55,55 @@
  * <img src="doc-files/macros07_01_analysis.png">
  *
  * * <h2>3. Tests</h2>
- *  Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able to create Forms using the Editor<br/>
+ * Basically, from requirements and also analysis, we see that the core
+ * functionality of this use case is to be able to create Forms using the
+ * Editor<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * It will not be necessary to make unitary tests since I worked with Graphical
- * components JSwing. 
- * In the end this use case requires only Functional Tests:
- * #Cannot create a form without "Lines"; 
- * #Each line must have exactly 2 Components and each components must have an name;
-
+ * components JSwing. In the end this use case requires only Functional Tests:
+ * #Cannot create a form without "Lines"; #Each line must have exactly 2
+ * Components and each components must have an name;
+ *
  * <br/>
  * see: <code>csheets.ext.FormEditorTests</code><br/>
  *
  * <h2>4. Design</h2>
- * 
+ *
  * To realize this user story we will need to create a subclass of Extension. We
  * will also need to create a subclass of UIExtension. For the MenuBar we need
  * to implement a JMenu. In the code of the extension
- * <code>csheets.ext.Form_Editor</code> we can find examples that illustrate
- * how to implement these technical requirements.<br/>
+ * <code>csheets.ext.Form_Editor</code> we can find examples that illustrate how
+ * to implement these technical requirements.<br/>
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.<br/>
- * 
+ *
  * <h3>Extension Setup</h3>
  * The following diagram shows the setup of the "Form Editor" extension when
  * cleansheets is run.<br/><br/>
- * 
+ * <img src="doc-files/macros07_01_design.png">
  * <br/>
-
+ * <h3>User Create Form </h3>
+ * The following diagram illustrates what happens when the user Selects "Create
+ * Form" to create and preview the desired form. The Sequence diagram about
+ * using an function to display the form was already created in a generic way in
+ * other use case.
+ * <br/>
+ * <br/>
+ * <img src="doc-files/macros07_01_design2.png">
+ * <br/>
+ * <br/>
+ *
+ *
  * <h2>5. Coding</h2>
  * see:<br/>
- * <h3>Created</h3>
+ * <a href="../../../../csheets/ext/Form_Editor/package-summary.html">csheets.ext.Form_Editor</a><br/>
+ * <a href="../../../../csheets/ext/Form_Editor/ui/package-summary.html">csheets.ext.Form_Editor.ui</a><br/>
+ * <br/>
+ * <br/>
+ * <br/>
  *
- * <br/>
- * <br/>
- * <br/>
- * <br/>
- * <br/>
+
  *
  * @author 1120810
  *
@@ -107,5 +117,5 @@ package csheets.userstories.macros07_01.editor_de_formularios.i120810;
  * @author 1120810
  *
  */
-class macros07_01_FormEditor {
+class FormEditor {
 }
