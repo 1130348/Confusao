@@ -17,11 +17,12 @@
 	window -> window: retrieveMacrosList()
 	window -> User: Asks Information
 	User -> window: inserts number (the name), tooltip, icon and action
-	window -> ctrl: validateIcon()
+	window -> ctrl: verificationIcon(iconName)
 	window -> User: Asks confirmation
 	User -> window: OK
 	window -> buttons: addButton(String name, String toolTip, String icon, String action)
 	buttons -> action: new DefaultAction(uiController, tooltip, icon, action)
+	window -> window: dispose()
     buttons -> buttons: addToogleButton()
 	alt
 	note right of buttons

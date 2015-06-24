@@ -40,7 +40,7 @@
  * <img src = "doc-files/macros_09_01_analysis_sequence.png"/>
  * <br/><br/>
  * To edit if the button is active or not I will need to create two function one
- * ATIVE_BUTTON and DISACTIVE_BUTTON passing by parameter the name of the
+ * ATIVATE_BUTTON and DISACTIVE_BUTTON passing by parameter the name of the
  * button. This is just an idea but it is the possibility how this will be
  * implemented. The main problem is the class that implements Function don't
  * have a method or the class UIController to get the components of the toolbar.
@@ -65,19 +65,25 @@
  * Basically, from requirements and also analysis, we see that the MACRO
  * functionality of this use case is to be able to add buttons with some action
  * (macros, beansheel scripts or forms) to the toolbar. This use case is more
- * about GUI interface and because of that there aren't the necessity of doing
- * more than the actual tests that are already implemented. Since almost all the
- * methods in this use case were made previosly I assumed that them unitary
- * tests were working. On this use case, I created a lot of new classes but all
- * of them implemented or extends a class that was already implemented in this
- * cleansheets projet. All the classes that will be created: to add the new
- * buttons (the add and to edit - active or disable), the windows that will open
- * (Add: insert tooltip, the name of the icon and the chosen action; Edit: edit
- * a button or remove it). The controller class that will be created
- * (ButtonsController) will exist because of the differents action that will be
- * created. From this moment, I just can add an action of a macro to the button
- * because beanshell scripts and forms are not implemented yet. All the methods
- * of all the classes created I will test by functional tests and usind
+ * about GUI interface and because of that there are few tests to do. The class
+ * ButtonsController is the only class where is necessary to do tests. I have 4
+ * tests: two for know if the method verificationNames() is working (one with a
+ * valid name and other without), other that tests if the method names() that
+ * will add all the names of the icons to the ArrayList iconNames is working and
+ * another is a get/set test of the variable iconNames that is an
+ * ArrayList.<br/>
+ * see: <code>csheets.ext.toolbar_buttons.ButtonsControllerTest</code><br/>
+ * Since almost all the methods in this use case were made previosly I assumed
+ * that them unitary tests were working. On this use case, I created a lot of
+ * new classes but all of them implemented or extends a class that was already
+ * implemented in this cleansheets projet. All the classes that will be created:
+ * to add the new buttons (the add and to edit - active or disable), the windows
+ * that will open (Add: insert tooltip, the name of the icon and the chosen
+ * action; Edit: edit a button or remove it). The controller class that will be
+ * created (ButtonsController) will exist because of the differents action that
+ * will be created. From this moment, I just can add an action of a macro to the
+ * button because beanshell scripts and forms are not implemented yet. All the
+ * methods of all the classes created I will test by functional tests and usind
  * debugging. As usual, in a test driven development approach tests normally
  * fail in the beginning. The idea is that the tests will pass in the end.
  * <br/>
@@ -106,10 +112,24 @@
  * ACTIVATE_BUTTON(name) the button with the chosen name stays active and if the
  * function is DISACTIVATE_BUTTON(name) the button will have the action
  * associated but nothing will be done when clicking.
+ * <br/>
+ * But there is a problem. When I create a class on the package
+ * csheets.core.formula.lang and implements Function I can't have access to the
+ * components of the toolbar. I just have the methods of the interface Function
+ * and I cant have access to the method getComponents() that returns all the
+ * components of the toolbar in order for the function able or disable the
+ * button choosed by the user.
  *
  * <h2>5. Coding</h2>
  *
  * <h2>6. Final Remarks</h2>
+ * This use case is the first this sub-area "Buttons, Menus and Events". The
+ * main problem I believe was the understanding of the code that was already
+ * done about the macros implementation. Was the most difficult use case that I
+ * implemented in LAPR4 because has a lot of thing to be done: The interface
+ * about creating a button, add a button to the toolbar, add action to the
+ * button and set the content to the active cell and create two function to
+ * active or disable some button of the toolbar.
  * <br/>
  *
  */
