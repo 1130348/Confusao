@@ -37,7 +37,7 @@
  * code was correct, even without having tests, since who made the program didnt do a approach 
  * based on tests.
  * <br/>
- * The method that needs to have an unitary test is getAddress() to test if the looking for the references of the variables is correct.
+ * The method that needs to have an unitary test is getAddressVariable() to test if the looking for the references of the variables is correct.
  * see: <code>csheets.ext.macros02_03.edit_variables.EditVariablesControllerTest</code><br/>
  * 
  * <h2>4. Design</h2>
