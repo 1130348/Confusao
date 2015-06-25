@@ -16,35 +16,35 @@ import java.awt.event.ActionEvent;
  */
 public class MacrosWindowAction extends FocusOwnerAction {
 
-	/**
-	 * The user interface controller
-	 */
-	private final UIController uiController;
+    /**
+     * The user interface controller
+     */
+    private final UIController uiController;
 
-	/**
-	 * The network controller
-	 */
-	private final FindWorkbooksController findWorkBooksController;
+    /**
+     * The network controller
+     */
+    private final FindWorkbooksController findWorkBooksController;
 
-	/**
-	 * Creates a new start sharing action.
-	 *
-	 * @param uiController the user interface controller
-	 */
-	public MacrosWindowAction(UIController uiController) {
-		this.uiController = uiController;
-		this.findWorkBooksController = new FindWorkbooksController();
-	}
-
-	@Override
-	protected String getName() {
-		return "Create Macro...";
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		MacrosWindowDialog macrosWindowDialog = MacrosWindowDialog.
-			getInstance(null, enabled, this.uiController);
-		macrosWindowDialog.setVisible(true);
-	}
+    /**
+     * Creates a new start sharing action.
+     *
+     * @param uiController the user interface controller
+     */
+    public MacrosWindowAction(UIController uiController) {
+        this.uiController = uiController;
+        this.findWorkBooksController = new FindWorkbooksController();
+    }
+    
+    @Override
+    protected String getName() {
+        return "New Macro...";
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        ChooseMacroTypeDialog dialog = new ChooseMacroTypeDialog(null, true, uiController);
+        dialog.setVisible(true);
+        
+    }
 }
