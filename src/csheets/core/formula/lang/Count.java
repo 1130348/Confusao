@@ -25,26 +25,31 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that counts those of its arguments that yield numeric values.
+ *
  * @author Einar Pehrson
  */
 public class Count implements Function {
 
-	/** The function's parameters */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The function's parameters
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-			"An expression whose value is checked for type compliance")
-		/* new FunctionParameter(Value.Type.TEXT, "Type", true,
-			'The type to look for. Accepted values are "NUMERIC" (default),'
-			+ '"TEXT", "BOOLEAN", "DATE", "MATRIX" and "ERROR".'); */
+							  "An expression whose value is checked for type compliance")
+	/* new FunctionParameter(Value.Type.TEXT, "Type", true,
+	 'The type to look for. Accepted values are "NUMERIC" (default),'
+	 + '"TEXT", "BOOLEAN", "DATE", "MATRIX" and "ERROR".'); */
 	};
 
 	/**
 	 * Creates a new instance of the COUNT function.
 	 */
-	public Count() {}
+	public Count() {
+	}
 
 	public String getIdentifier() {
 		return "COUNT";
@@ -54,8 +59,9 @@ public class Count implements Function {
 		double count = 0;
 		for (Expression expression : arguments) {
 			Value value = expression.evaluate();
-			if (value.getType() == Value.Type.NUMERIC)
-			 	count++;
+			if (value.getType() == Value.Type.NUMERIC) {
+				count++;
+			}
 		}
 		return new Value(count);
 	}
@@ -66,5 +72,9 @@ public class Count implements Function {
 
 	public boolean isVarArg() {
 		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

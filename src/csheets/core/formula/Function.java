@@ -22,34 +22,47 @@ package csheets.core.formula;
 
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that can be used in a formula.
+ *
  * @author Einar Pehrson
  */
 public interface Function {
 
 	/**
 	 * Returns the operator's string identirifer.
+	 *
 	 * @return a string representation of the operator.
 	 */
 	public String getIdentifier();
 
 	/**
 	 * Invokes the function using the given arguments and returns the result.
+	 *
 	 * @return the result of the operation
 	 */
 	public Value applyTo(Expression[] args) throws IllegalValueTypeException;
 
 	/**
 	 * Returns the parameters of the function.
+	 *
 	 * @return the parameters of the function
 	 */
 	public FunctionParameter[] getParameters();
 
 	/**
-	 * Returns whether the function accepts a variable number of arguments,
-	 * i.e. whether the function's parameter list is unbounded.
+	 * Sets the content of UIController
+	 *
+	 * @param ui
+	 */
+	public void setUIController(UIController ui);
+
+	/**
+	 * Returns whether the function accepts a variable number of arguments, i.e.
+	 * whether the function's parameter list is unbounded.
+	 *
 	 * @return true if the function accepts a variable number of arguments
 	 */
 	public boolean isVarArg();
