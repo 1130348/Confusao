@@ -21,3 +21,5 @@ csheets.ext.file_sharing.FileSharingExtension
 csheets.ext.beanshell.BeanShellExtension
 csheets.ext.toolbar_buttons.ButtonsExtension
 csheets.core.navigation_window.NavigationFunctionExtension
+csheets.ext.edit_variables.EditVariablesExtension
+csheets.ext.searchOnAnotherInstance.SearchByContentExtension
