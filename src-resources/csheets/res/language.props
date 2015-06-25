@@ -37,19 +37,25 @@ Average
 Factorial
 Minverse
 Mmult
+Eval
 
 # Pseudo-statements
 If
 Do
 For
+DoWhile
+WhileDo
 
-# Money 
+# Money
 Dollar
 Euro
 Pound
 Yen
 Won
 Rupee
+
+# ToolBar Functions
+ActivateToolBarButton
 
 # # # Numeric functions reflected from java.lang.Math
 #

@@ -1,0 +1,33 @@
+  @startuml doc-files/ipc08_02_analysis.png
+  actor User
+  participant "<<analysis>>\nDownloadFileUI" as UI
+  participant "<<analysis>>\nDownloadFileCtrl" as ctrl
+  participant "<<analysis>>\nConnection" as connect
+  User -> UI : startDownload()
+  activate UI
+  UI -> User : request file
+  User -> UI : select file
+  UI -> ctrl : selectFile(file)
+  User -> UI : chooseOptions()
+  UI -> ctrl : chooseOptions(options)
+  User -> UI : downloadFile()
+  UI -> ctrl : downloadFile()
+  deactivate UI
+  activate ctrl
+  activate connect
+  ctrl -> connect : downloadFile(file_name, options)
+  connect --> ctrl 
+  ctrl --> UI
+  deactivate ctrl
+  deactivate connect
+  activate UI
+  alt Auto Update Enabled
+
+    UI -> ctrl : checkFileUpdate()
+    activate ctrl
+    loop 
+       ctrl -> connect : checkFileUpdate()
+    end
+
+  end
+  @enduml

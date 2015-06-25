@@ -1,0 +1,18 @@
+@startuml doc-files/macros02_03_ssd.png
+actor user
+participant "<<analysis>>\nSystem" as s
+user -> s: consult/edit variables
+s -> user: variable?
+user -> s: select the variable
+user -> s: select the button view
+s -> user: show all the cells where the variable is used and the value
+alt If the user wants to change the value
+user -> s: change value
+s -> user: confirm?
+user -> s: confirm
+note right of user
+        All the cells with the variable will be update
+    end note
+end alt
+s -> user: sucess of the use case
+@enduml
