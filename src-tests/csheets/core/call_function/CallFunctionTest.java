@@ -5,6 +5,7 @@
  */
 package csheets.core.call_function;
 
+import csheets.ext.call_function.CallFunctionController;
 import csheets.CleanSheets;
 import csheets.core.Address;
 import csheets.core.Cell;
@@ -13,8 +14,8 @@ import csheets.core.IllegalValueTypeException;
 import csheets.core.SpreadsheetImpl;
 import csheets.core.Value;
 import csheets.core.Workbook;
-import csheets.core.call_function.ui.CallFunctionUI;
-import csheets.core.call_function.ui.FormulasPanel;
+import csheets.ext.call_function.ui.CallFunctionUI;
+import csheets.ext.call_function.ui.FormulasPanel;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.lang.UnknownElementException;
 import csheets.ui.ctrl.UIController;

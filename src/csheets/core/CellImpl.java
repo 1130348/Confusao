@@ -21,6 +21,7 @@
 package csheets.core;
 
 import csheets.core.formula.Formula;
+import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Reference;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.compiler.FormulaCompiler;
@@ -291,7 +292,12 @@ public class CellImpl implements Cell {
                     for (Cell precedent : reference.getCells()) {
                         if (!this.equals(precedent)) {
                             precedents.add(precedent);
+                            FunctionCall fu = (FunctionCall) formula.getExpression();
+
+                            if(!fu.getFunction().getIdentifier().equalsIgnoreCase("FOR"))
+                            {
                             ((CellImpl) precedent).addDependent(this);
+                            }
                         }
                     }
                 } else if (reference instanceof VariableReference) {
@@ -306,41 +312,6 @@ public class CellImpl implements Cell {
                 }
             }
         }
-
-        /*
-                                                  
-         Expression expressao = this.getFormula().getExpression();
-                                    
-         if (expressao instanceof BinaryOperation) {
-                                        
-         BinaryOperation atributionOne = (BinaryOperation) expressao;
-         String operator = atributionOne.getOperator().getIdentifier();
-                                        
-         if ((operator.equalsIgnoreCase(":="))) {
-                                            
-         Cell leftCell = (((CellReference)atributionOne.getLeftOperand()).getCell());
-         Cell rightCell = (((CellReference)atributionOne.getRightOperand()).getCell());
-                                           
-         if (!this.equals(precedent)) {
-         precedents.add(precedent);  
-                                            
-         if (!(leftCell.equals(this))) {
-                                               
-         ((CellImpl)precedent).addDependent(((CellReference)atributionOne.getRightOperand()).getCell());
-         }
-                                            
-         }
-         }
-         }
-                                    
-                                    
-                                   	
-         if (!this.equals(precedent)) {
-         precedents.add(precedent);
-         ((CellImpl)precedent).addDependent(this);
-         }  
-                                    
-         }*/
     }
 
     /**

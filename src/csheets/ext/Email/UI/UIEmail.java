@@ -18,10 +18,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 
-/**
- *
- * @author DMMCA
- */
 public class UIEmail extends UIExtension {
 
 	/**

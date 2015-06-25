@@ -1,0 +1,29 @@
+@startuml doc-files/macros07_01_design2.png
+
+actor User
+participant "UIFormEditor" as UIFE
+participant "FormEditorController" as FEC
+participant "Form" as F
+  
+
+ User -> UIFE: Create Form
+activate UIFE
+UIFE -> FEC: create()
+FEC -> F : create(activeSpreadSheet, nome, desc)
+F --> FEC
+FEC -> FEC : add to Form to FormList
+
+loop
+
+alt [if Preview.isSelected() && !FormList.isEmpty()]
+UIFE -> FEC : PreviewForm
+FEC -> FEC : display()
+end
+
+UIFE -> FEC: addElement(numLines)
+FEC -> F : addElement(numLines)
+
+
+end
+
+@enduml

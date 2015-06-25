@@ -5,17 +5,10 @@
  */
 package csheets.ext.findworkbooks.ui;
 
-import csheets.core.Cell;
 import csheets.ext.findworkbooks.FindWorkbooksController;
-import csheets.ext.startsharing.StartSharingController;
-import csheets.ext.startsharing.ui.ChooseCleanSheetsInstanceToConnect;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +43,10 @@ public class FindWorkbooksAction extends FocusOwnerAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(
+        
+        FindWorkbookUI dialog = new FindWorkbookUI(null, enabled, findWorkBooksController);
+        dialog.setVisible(true);
+        /*JOptionPane.showMessageDialog(
                 null,
                 "Workbook search has started!\n"
                 + "You can track the progress of your search "
@@ -62,6 +58,6 @@ public class FindWorkbooksAction extends FocusOwnerAction {
             findWorkBooksController.startWorkbooksSearch();
         } catch (InterruptedException ex) {
             System.out.println("Error");
-        }
+        }*/
     }
 }
