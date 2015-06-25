@@ -107,12 +107,6 @@ public final class ButtonsToolBar extends JToolBar implements SelectionListener 
 	public JToggleButton addToggleButton(Action action, String name,
 										 String toolTip,
 										 ButtonGroup... groups) {
-		Component[] l = super.getComponents();
-		for (Component l1 : l) {
-			if (l1.getClass() == JToggleButton.class) {
-				System.out.println(l1.getName());
-			}
-		}
 		JToggleButton button = new JToggleButton(action);
 		button.setSelected(false);
 		button.setName(name);
