@@ -59,7 +59,7 @@ public class AlertsListTest {
     @Test(expected = IllegalArgumentException.class)
     public void testValidateCalendarSmallerThanCurrentYear() {
         Calendar currentDate = Calendar.getInstance();
-        String year = String.valueOf(currentDate.get(Calendar.YEAR - 1));
+        String year = String.valueOf(currentDate.get(Calendar.YEAR) - 1);
         String month = String.valueOf(currentDate.get(Calendar.MONTH));
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
@@ -92,7 +92,7 @@ public class AlertsListTest {
     public void testValidateCalendarSmallerThanCurrentMonth() {
         Calendar currentDate = Calendar.getInstance();
         String year = String.valueOf(currentDate.get(Calendar.YEAR));
-        String month = String.valueOf(currentDate.get(Calendar.MONTH - 1));
+        String month = String.valueOf(currentDate.get(Calendar.MONTH) - 1);
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
@@ -124,7 +124,7 @@ public class AlertsListTest {
     public void testValidateCalendarOutOfUpperBoundsMonth() {
         Calendar currentDate = Calendar.getInstance();
         String year = String.valueOf(currentDate.get(Calendar.YEAR));
-        String month = "13";
+        String month = "14";
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
@@ -157,7 +157,7 @@ public class AlertsListTest {
         Calendar currentDate = Calendar.getInstance();
         String year = String.valueOf(currentDate.get(Calendar.YEAR));
         String month = String.valueOf(currentDate.get(Calendar.MONTH));
-        String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH - 1));
+        String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH) - 1);
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
         String seconds = String.valueOf(currentDate.get(Calendar.SECOND));
@@ -221,7 +221,7 @@ public class AlertsListTest {
         Calendar currentDate = Calendar.getInstance();
         String year = "2015";
         String month = "2";
-        String day = "30";
+        String day = "29";
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
         String seconds = String.valueOf(currentDate.get(Calendar.SECOND));
@@ -236,8 +236,8 @@ public class AlertsListTest {
     public void testValidateCalendarOutOfUpperBoundsDayFebruaryLeapYear() {
         Calendar currentDate = Calendar.getInstance();
         String year = "2016";
-        String month = "2";
-        String day = "29";
+        String month = "3";
+        String day = "30";
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
         String seconds = String.valueOf(currentDate.get(Calendar.SECOND));
@@ -270,7 +270,7 @@ public class AlertsListTest {
         String year = String.valueOf(currentDate.get(Calendar.YEAR));
         String month = String.valueOf(currentDate.get(Calendar.MONTH));
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
-        String hours = String.valueOf(currentDate.get(Calendar.HOUR - 1));
+        String hours = String.valueOf(currentDate.get(Calendar.HOUR) - 1);
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
         String seconds = String.valueOf(currentDate.get(Calendar.SECOND));
         AlertsList instance = new AlertsList();
@@ -335,7 +335,7 @@ public class AlertsListTest {
         String month = String.valueOf(currentDate.get(Calendar.MONTH));
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
-        String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
+        String minutes = String.valueOf(currentDate.get(Calendar.MINUTE) - 1);
         String seconds = String.valueOf(currentDate.get(Calendar.SECOND));
         AlertsList instance = new AlertsList();
         instance.validateCalendar(year, month, day, hours, minutes, seconds);
@@ -400,7 +400,7 @@ public class AlertsListTest {
         String day = String.valueOf(currentDate.get(Calendar.DAY_OF_MONTH));
         String hours = String.valueOf(currentDate.get(Calendar.HOUR));
         String minutes = String.valueOf(currentDate.get(Calendar.MINUTE));
-        String seconds = String.valueOf(currentDate.get(Calendar.SECOND - 1));
+        String seconds = String.valueOf(currentDate.get(Calendar.SECOND) - 1);
         AlertsList instance = new AlertsList();
         instance.validateCalendar(year, month, day, hours, minutes, seconds);
     }
