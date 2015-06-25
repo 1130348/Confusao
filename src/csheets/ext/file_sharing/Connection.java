@@ -5,12 +5,19 @@
  */
 package csheets.ext.file_sharing;
 
+import csheets.ext.auto_download.FileEvent;
 import csheets.ext.file_sharing.ui.FileSharingController;
 import csheets.ext.file_sharing.ui.FileSharingUI;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -30,16 +37,24 @@ import java.util.logging.Logger;
 public class Connection {
 
     private Socket clientsocket;
-    private ServerSocket serverscocket;
+    private ServerSocket serversocket;
     private InputStream inStream = null;
     private static OutputStream outStream = null;
+    private ObjectInputStream inputStream = null;
+    private ObjectOutputStream outputStream = null;
+    private String sourceFilePath = "";
+    private String destinationPath = "";
+    private FileEvent fileEvent;
+    private File dstFile = null;
+    private FileOutputStream fileOutputStream = null;
     private Thread receive, send;
     private static FileSharingUI ui;
-    private static HashMap<String, String> map = new HashMap<String, String>();
+    private static HashMap<String, String> map = new HashMap<>();
 
     public Connection(String ip, int port) {
         try {
             this.clientsocket = new Socket(ip, port);
+            //outputStream = new ObjectOutputStream(clientsocket.getOutputStream());
         } catch (IOException ex) {
             System.out.println("Could not connect");
         }
@@ -47,7 +62,8 @@ public class Connection {
 
     public Connection(int port) {
         try {
-            this.serverscocket = new ServerSocket(port);
+            this.serversocket = new ServerSocket(port);
+            //inputStream = new ObjectInputStream(clientsocket.getInputStream());
         } catch (IOException ex) {
             System.out.println("Could not connect");
         }
@@ -58,18 +74,20 @@ public class Connection {
     }
 
     public ServerSocket getConServerSocket() {
-        return serverscocket;
+        return serversocket;
     }
 
     public void createThreads() throws IOException {
         if (clientsocket == null) {
             try {
-                clientsocket = serverscocket.accept();
+                clientsocket = serversocket.accept();
             } catch (IOException ex) {
             }
         }
         inStream = clientsocket.getInputStream();
         outStream = clientsocket.getOutputStream();
+        inputStream = new ObjectInputStream(clientsocket.getInputStream());
+        outputStream = new ObjectOutputStream(clientsocket.getOutputStream());
         receive = receive();
         receive.setPriority(Thread.MAX_PRIORITY);
         receive.start();
@@ -77,6 +95,87 @@ public class Connection {
         send = send();
         send.setPriority(Thread.MAX_PRIORITY);
         send.start();
+    }
+
+    /**
+     *   Reading the FileEvent object and copying the file to disk.  
+     */
+    public void downloadFile() {
+        try {
+            fileEvent = (FileEvent) inputStream.readObject();
+            if (fileEvent.getStatus().equalsIgnoreCase("Error")) {
+                System.out.println("Error occurred ..So exiting");
+                System.exit(0);
+            }
+            String outputFile = fileEvent.getDestinationDirectory() + fileEvent.
+                getFilename();
+            if (!new File(fileEvent.getDestinationDirectory()).exists()) {
+                new File(fileEvent.getDestinationDirectory()).mkdirs();
+            }
+            dstFile = new File(outputFile);
+            fileOutputStream = new FileOutputStream(dstFile);
+            fileOutputStream.write(fileEvent.getFileData());
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            System.out.
+                println("Output file : " + outputFile + " is successfully saved ");
+            Thread.sleep(3000);
+            System.exit(0);
+
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *   Sending FileEvent object.  
+     * @param file_p
+     * @param out
+     */
+    public void sendFile(String file_p, String out) {
+        sourceFilePath = file_p;
+        destinationPath = out;
+        fileEvent = new FileEvent();
+        String fileName = sourceFilePath.substring(sourceFilePath.
+            lastIndexOf("/") + 1, sourceFilePath.length());
+        String path = sourceFilePath.substring(0, sourceFilePath.
+            lastIndexOf("/") + 1);
+        fileEvent.setDestinationDirectory(destinationPath);
+        fileEvent.setFilename(fileName);
+        fileEvent.setSourceDirectory(sourceFilePath);
+        File file = new File(sourceFilePath);
+        if (file.isFile()) {
+            try {
+                DataInputStream diStream = new DataInputStream(new FileInputStream(file));
+                long len = (int) file.length();
+                byte[] fileBytes = new byte[(int) len];
+                int read = 0;
+                int numRead = 0;
+                while (read < fileBytes.length && (numRead = diStream.
+                    read(fileBytes, read,
+                         fileBytes.length - read)) >= 0) {
+                    read = read + numRead;
+                }
+                fileEvent.setFileSize(len);
+                fileEvent.setFileData(fileBytes);
+                fileEvent.setStatus("Success");
+            } catch (Exception e) {
+                e.printStackTrace();
+                fileEvent.setStatus("Error");
+            }
+        } else {
+            System.out.println("path specified is not pointing to a file");
+            fileEvent.setStatus("Error");
+        }
+        //Now writing the FileEvent object to socket
+        try {
+            outputStream.writeObject(fileEvent);
+            System.out.println("Done...Going to exit");
+            Thread.sleep(3000);
+            System.exit(0);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private Thread send() {
@@ -145,12 +244,23 @@ public class Connection {
                         s.receive(pack);
                         if (!map.containsKey(pack.getAddress().toString())) {
                             map.put(pack.getAddress().toString(), "");
-                            if (!InetAddress.getLocalHost().getHostAddress().equalsIgnoreCase(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()))) {
-                                
-                                if (!InetAddress.getLocalHost().getHostAddress().equalsIgnoreCase(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()))) {
-                                    Connection n = new Connection(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()), 3439);
+                            if (!InetAddress.getLocalHost().getHostAddress().
+                                equalsIgnoreCase(pack.getAddress().toString().
+                                    substring(1, pack.getAddress().toString().
+                                        length()))) {
+
+                                if (!InetAddress.getLocalHost().getHostAddress().
+                                    equalsIgnoreCase(pack.getAddress().
+                                        toString().substring(1, pack.
+                                            getAddress().toString().length()))) {
+                                    Connection n = new Connection(pack.
+                                        getAddress().toString().
+                                        substring(1, pack.getAddress().
+                                            toString().length()), 3439);
                                     n.createThreads();
-                                    ui.SetConnection(pack.getAddress().toString().substring(1, pack.getAddress().toString().length()));
+                                    ui.SetConnection(pack.getAddress().
+                                        toString().substring(1, pack.
+                                            getAddress().toString().length()));
                                     n.send(FileSharingController.Lists());
 
                                 }
@@ -161,12 +271,9 @@ public class Connection {
                         s.close();
                         Thread.sleep(1500);
                     }
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     Logger.getLogger(Connection.class.getName()).
-                            log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Connection.class.getName()).
-                            log(Level.SEVERE, null, ex);
+                        log(Level.SEVERE, null, ex);
                 }
             }
         };
@@ -174,7 +281,7 @@ public class Connection {
     }
 
     public static void setListenner() {
- 
+
         Thread f = new Thread() {
             public void run() {
                 try {
@@ -189,17 +296,15 @@ public class Connection {
                         }
 
                         DatagramPacket pack = new DatagramPacket(buf, buf.length,
-                                InetAddress.getByName(group), port);
+                                                                 InetAddress.
+                            getByName(group), port);
                         s.send(pack);
                         s.close();
                         Thread.sleep(5000);
                     }
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     Logger.getLogger(Connection.class.getName()).
-                            log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Connection.class.getName()).
-                            log(Level.SEVERE, null, ex);
+                        log(Level.SEVERE, null, ex);
                 }
             }
         };

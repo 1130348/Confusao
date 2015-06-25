@@ -156,13 +156,13 @@ public class CellRenderer extends DefaultTableCellRenderer {
             if (!commentableCell.hasComment()) {
 
                 if (imageCell.hasImage()) {
-                    setToolTipText("<html><img src=\"file://" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
                 } else {
                     setToolTipText(null);
                 }
             } else {
                 if (imageCell.hasImage()) {
-                    setToolTipText("<html><img src=\"file://" + imageCell.getImage() + "\"width=\"64\" height=\"64\"><br>"
+                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"><br>"
                             + commentableCell.getAllComments() + "<br>" + "Edited by: " + commentableCell.getUser() + "</html>");
                 }
             }
