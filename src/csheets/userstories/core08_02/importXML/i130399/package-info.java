@@ -49,12 +49,20 @@
  *
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
- * functionality of this use case is to be able to import or export data from a
- * text file.<br/>
- * I have to perform functional tests to see if the file is being created when
- * doing an exportation. I also need to test if the data from the text file is
- * being imported correctly. Furthermore I also have to test if the file created
- * by the exportation has the correct data.<br/>
+ * functionality of this use case is to be able to import data from a XML
+ * file.<br/>
+ * We can by implement a unit test that verifies if the value of a cell when
+ * exported will be in the same cell on another spreadsheet when imported.
+ * Another unit test is needed to check if the XML tag for the cells is passed
+ * correctly to import XML method when changed in export XML. Finally in terms
+ * of unit tests we can test if the spreadsheet that user will import the data
+ * is valid and also if the file is valid.<br/>
+ * We have to perform functional tests to guarantee that the data previously
+ * exported to XML file is now imported in the same cells with the same values.
+ * We also need to test if the data is imported in the right spreadsheet, once
+ * user can choose it. Furthermore we also have to test to export cells changing
+ * the tags of xml, once user can do it in export use case, and verify if the
+ * data is still being imported correctly.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.
  * <br/>
@@ -64,18 +72,32 @@
  * The following diagrams illustrate core aspects of the design of the solution
  * for this use case.
  * <br/>
- * <img src="doc-files/core08_01_design.png"/>
+ *
+ * <h3>Import from a XML file</h3>
+ * The following diagram illustrates what happens when the user wants to import
+ * data from a XML file. When the user selects the option to import, the
+ * ImportAsAction has the access to SpreedSheat, through the UIController, who
+ * has access to all cells. To realize this use case a strategy pattern was
+ * needed in order to support a structure to other types of importation, as we
+ * envolve the CleanSheets. We can see how the strategy is implemented on this
+ * digram. In order to import the XML file correctly, a class XMLTag was
+ * created, this class implements a singleton because we want to instantiate it
+ * only once and call it later, this class is needed to get the cell tags when
+ * the data is exported so that we can get in XML import method the tags that
+ * are needed to get the cells value.<br/><br/>
+ * <img src="doc-files/core08_02_design.png"/>
  * <br/>
  * </br>
  *
  * <h2>5. Coding</h2>
  * see:<br/>
- * insert href to code later here<br/>
+ * <a href="../../../../csheets/ext/importXML/package-summary.html">csheets.ext.importXML</a><br/>
+ * <a href="../../../../csheets/ext/importXML/ui/package-summary.html">csheets.ext.importXML.ui</a><br/>
  * <br/>
  * <h2>6. Final Remarks</h2>
  * The Strategy pattern as described in Design Patterns: Elements of Reusable
- * Object-Oriented Software is one of the most important points of this Use
- * Case.
+ * Object-Oriented Software is one of the most important points of this Use Case
+ * as well as Singleton implented on XMLTag class.
  * <br/>
  * <br/>
  * <br/>
