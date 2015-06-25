@@ -14,6 +14,7 @@ public class NavigationFunctionController {
 	private NavigationWindow caller;
 
 	public NavigationFunctionController() {
+
 	}
 
 }
