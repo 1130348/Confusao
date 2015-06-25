@@ -1,0 +1,42 @@
+@startuml doc-files/core08_02_design.png
+
+ actor User
+ participant "ImportAsDialog" as UI
+ participant "ImportCtrl" as ctrl
+ participant "ImportProcess" as process
+ participant "XMLTag" as tag
+ participant "ImportStrategyFactory" as strategyFactory
+ participant "<<interface>>\nImportXML" as strategy
+ participant "Workbook" as Workbook
+ participant "SpreadSheet" as spreadsheet
+ participant "Cell" as cell
+
+User -> UI : startImportAsProcess
+UI -> ctrl : importXML(file,strategy,sheet,workbook)
+create process
+ctrl -> process : create(strategy)
+create strategyFactory
+process -> strategyFactory : getInstance()
+process -> strategyFactory : getImportStrategy(strategy)
+create strategy
+strategyFactory -> strategy : create()
+ctrl -> process : setActiveWorkBook(workbook)
+create tag
+ctrl -> tag : create()
+ctrl -> tag : getInstance()
+ctrl -> tag : getCellTag()
+ctrl -> process : setCellTag(tag)
+ctrl -> process : setFileName(fileName)
+ctrl -> process : setSpreadSheet(sheet)
+ctrl -> process : importXML()
+process -> strategy : importXML(importProcess)
+loop
+alt case sheet null
+strategy -> Workbook : addSpreadSheet()
+strategy -> process : setSpreadSheet(sheet)
+end
+strategy -> spreadsheet : getCell(column,row)
+spreadsheet -> cell : setContent(data)
+end loop
+
+@enduml
