@@ -83,6 +83,7 @@
  * for this use case.<br/> 
  * <img src="doc-files/design_search_by_content.png"/>
  * <br/>
+ * 
  * <h2>5. Coding</h2>
  * see:<br/>
  * <br/>
