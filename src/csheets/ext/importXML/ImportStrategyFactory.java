@@ -24,7 +24,7 @@ public class ImportStrategyFactory {
 	}
 
 	public ImportStrategy getImportStrategy(String type) {
-		if ("XML".equalsIgnoreCase(type)) {
+		if (".xml".equalsIgnoreCase(type)) {
 			return new ImportXML();
 		}
 		return null;

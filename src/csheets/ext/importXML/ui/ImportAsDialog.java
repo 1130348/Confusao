@@ -48,7 +48,6 @@ public class ImportAsDialog extends javax.swing.JDialog {
 				getSpreadsheet(i).getTitle());
 		}
 		sheetComboBox.addItem("New SpreadSheet");
-		strategyComboBox.addItem("XML");
 		fileChooserButton.setEnabled(false);
 		jLabel1.setEnabled(false);
 		fileLabbel.setEnabled(false);
@@ -72,8 +71,6 @@ public class ImportAsDialog extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         fileLabbel = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        strategyComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -115,10 +112,6 @@ public class ImportAsDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Choose file type:");
-
-        strategyComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,22 +131,15 @@ public class ImportAsDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fileLabbel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(strategyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sheetComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(strategyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sheetComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +157,7 @@ public class ImportAsDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importAsButton)
                     .addComponent(cancelButton))
-                .addGap(12, 12, 12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,9 +176,11 @@ public class ImportAsDialog extends javax.swing.JDialog {
 			JOptionPane.
 				showMessageDialog(null, "Choose a file to import first!", "Alert", JOptionPane.ERROR_MESSAGE);
 		} else {
-			importController.importXML(file.getAbsolutePath(), strategyComboBox.
-									   getSelectedItem().toString(), sheet, uiController.
-									   getActiveWorkbook());
+			String fileExtension = file.getAbsolutePath().substring(file.
+				getAbsolutePath().lastIndexOf('.'));
+			importController.
+				importXML(file.getAbsolutePath(), fileExtension, sheet, uiController.
+						  getActiveWorkbook());
 			dispose();
 			JOptionPane.
 				showMessageDialog(null, "File imported with success!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -225,10 +213,8 @@ public class ImportAsDialog extends javax.swing.JDialog {
     private javax.swing.JButton importAsButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JComboBox sheetComboBox;
-    private javax.swing.JComboBox strategyComboBox;
     // End of variables declaration//GEN-END:variables
 }
