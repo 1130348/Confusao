@@ -1,4 +1,4 @@
-@startuml doc-files/find_workbooks_analysis_diagram.png
+@startuml doc-files/edit_alerts_analysis_diagram.png
 actor user 
 participant "<<analysis>>\nEditAlertsUI" as ui
 participant "<<analysis>>\nEditAlertsController" as controller
