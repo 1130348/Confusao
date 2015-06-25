@@ -50,10 +50,36 @@
  * It needs to show an image floating, when the cursor is on top of the cell, and 
  * later I need to export the image to a file. 
  * I have to perform tests to see if the the icon is being placed on the cell
- * when it has an imagem, I also need to test if the exportation is being done.
+ * when it has an image, I also need to test if the exportation is being done.
  * <br/>
  * <br/>
- * <h2>3. Tests</h2>
+ * <h2>4. Design</h2>
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.<br/>
+ * 
+ * <h3>Export the image</h3>
+ * The following diagram illustrates what happens when the user wants to export
+ * an image.
+ * When the user selects the option to export, the UI has access to the image stored
+ * on the cell and has the absolute path from the image. I just call the controlller
+ * that calls the exportImage class. Then the exportation is done.<br/><br/>
+ * <img src="doc-files/core06_02_design_export.png"/>
+ * <br/>
+ * 
+ * <h3>Tooltip and signal</h3>
+ * To realize this part of the use case, I need to implement a method on CellRenderer
+ * that checks if a cell has an image, if it has an image the class just adds a 
+ * tooltip to the cell. To place a signal on the cell, the class InsertImageCellDecorator
+ * has a method decorate, that draws a string on a cell, if it has an it displays 
+ * the choosen a signal.
+ * 
+ * <h2>5. Coding</h2>
+ * see:<br/>
+ * <a href="../../../../csheets/ext/insert_image/package-summary.html">csheets.ext.insert_image</a><br/>
+ * <a href="../../../../csheets/ext/insert_image/ui/package-summary.html">csheets.ext.insert_image.ui</a><br/>
+ * <a href="../../../../csheets/ext/insert_image/ui/package-summary.html">csheets.ui.sheet</a><br/>
+ * <br/>
+ * <br/>
  * 
  * 
  * @author Carlos Silva (1130664)
