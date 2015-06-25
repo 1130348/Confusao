@@ -1,0 +1,18 @@
+@startuml doc-files/macros02_03_sequence_diagram_design_getValueandCellsfromVar.png
+
+    actor user
+
+    participant "EditVariablesPanel" as editvariablespanel
+    participant "EditVariablesController" as controller
+    participant "Variable" as variable
+    participant "Value" as value
+
+    user -> editvariablespanel: Chooses a variable
+
+    editvariablespanel -> variable: getValue()
+    editvariablespanel -> value: toString()
+
+    editvariablespanel -> controller: getAddressVariable(varName)
+    
+
+@enduml
