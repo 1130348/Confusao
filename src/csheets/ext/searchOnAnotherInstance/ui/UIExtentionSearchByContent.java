@@ -9,7 +9,6 @@ import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
 
 /**
  *
@@ -38,17 +37,17 @@ public class UIExtentionSearchByContent extends UIExtension {
 		super(extension, uiController);
 	}
 
-	/**
-	 * Returns a menu that provides search woorkbooks on another instances.
-	 *
-	 * @return a JMenu component
-	 */
-	public JMenu getMenu() {
-		if (menu == null) {
-			menu = new SearchOnAnotherInstanceMenu(uiController);
-		}
-		return menu;
-	}
+//	/**
+//	 * Returns a menu that provides search woorkbooks on another instances.
+//	 *
+//	 * @return a JMenu component
+//	 */
+//	public JMenu getMenu() {
+//		if (menu == null) {
+//			menu = new SearchOnAnotherInstanceMenu(uiController);
+//		}
+//		return menu;
+//	}
 
 	/**
 	 * Returns a side bar that provides editing of comments.
