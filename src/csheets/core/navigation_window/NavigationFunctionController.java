@@ -11,10 +11,16 @@ package csheets.core.navigation_window;
  */
 public class NavigationFunctionController {
 
-	private NavigationWindow caller;
+	private NavigationWindow ui;
 
 	public NavigationFunctionController() {
+		ui = new NavigationWindow();
+	}
 
+	public String[] getWorkbookInfo() {
+		int a = 2;
+		int b = 3;
+		return ui.getWorkbookInfo();
 	}
 
 }
