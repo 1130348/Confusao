@@ -25,39 +25,45 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that emulates the if-then-else statement.
+ *
  * @author Einar Pehrson
  */
 public class If implements Function {
 
-	/** The function's three parameters: condition, result and alternative */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The function's three parameters: condition, result and alternative
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.BOOLEAN, "Condition", false,
-			"A condition to evaluate before proceeding"),
+							  "A condition to evaluate before proceeding"),
 		new FunctionParameter(Value.Type.UNDEFINED, "Then", false,
-			"A value to return if the condition was met"),
+							  "A value to return if the condition was met"),
 		new FunctionParameter(Value.Type.UNDEFINED, "Else", true,
-			"A value to return otherwise")
+							  "A value to return otherwise")
 	};
 
 	/**
 	 * Creates a new instance of the IF function.
 	 */
-	public If() {}
+	public If() {
+	}
 
 	public String getIdentifier() {
 		return "IF";
 	}
 
 	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
-		if (arguments[0].evaluate().toBoolean())
+		if (arguments[0].evaluate().toBoolean()) {
 			return arguments[1].evaluate();
-		else if (arguments.length == 3)
+		} else if (arguments.length == 3) {
 			return arguments[2].evaluate();
-		else
+		} else {
 			return new Value();
+		}
 	}
 
 	public FunctionParameter[] getParameters() {
@@ -66,5 +72,9 @@ public class If implements Function {
 
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

@@ -25,23 +25,28 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns the factorial of its argument.
+ *
  * @author Einar Pehrson
  */
 public class Factorial implements Function {
 
-	/** The only parameter: a numeric term */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The only parameter: a numeric term
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.NUMERIC, "Number", false,
-			"The positive integer for which to calculate the factorial")
+							  "The positive integer for which to calculate the factorial")
 	};
 
 	/**
 	 * Creates a new instance of the FACT function.
 	 */
-	public Factorial() {}
+	public Factorial() {
+	}
 
 	public String getIdentifier() {
 		return "FACT";
@@ -51,11 +56,13 @@ public class Factorial implements Function {
 		double number = arguments[0].evaluate().toDouble();
 		if (number >= 1 && number == Math.round(number)) {
 			int factorial = 1;
-			for (int i = 2; i <= number; i++)
+			for (int i = 2; i <= number; i++) {
 				factorial *= i;
+			}
 			return new Value(factorial);
-		} else
+		} else {
 			return new Value(new IllegalArgumentException("Argument must be a positive integer"));
+		}
 	}
 
 	public FunctionParameter[] getParameters() {
@@ -64,5 +71,9 @@ public class Factorial implements Function {
 
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

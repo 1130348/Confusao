@@ -10,6 +10,7 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,49 +19,54 @@ import javax.swing.JOptionPane;
  */
 public class Minverse implements Function {
 
-    /**
-     * The only (but repeatable) parameter: a numeric term
-     */
-    public static final FunctionParameter[] parameters = new FunctionParameter[]{
-        new FunctionParameter(Value.Type.NUMERIC, "Term", false,
-        "A number to be included in the matrix")
-    };
+	/**
+	 * The only (but repeatable) parameter: a numeric term
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
+		new FunctionParameter(Value.Type.NUMERIC, "Term", false,
+							  "A number to be included in the matrix")
+	};
 
-    public Minverse() {
-    }
+	public Minverse() {
+	}
 
-    @Override
-    public String getIdentifier() {
-        return "MINVERSE";
-    }
+	@Override
+	public String getIdentifier() {
+		return "MINVERSE";
+	}
 
-    @Override
-    public Value applyTo(Expression[] args) throws IllegalValueTypeException {
-        Value ret = new Value("#ERROR");
-        Value value = args[0].evaluate();
-        if (value.getType() == Value.Type.MATRIX
-                && args.length == 1) {
-            Value[][] matrix1 = value.toMatrix();
-            try {
-                Value[][] sum = MatrixMathematics.inverse(matrix1);
-                ret = new Value(sum);
-            } catch (NoSquareException | MatrixIsNotInvertibleException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            throw new IllegalValueTypeException(args[0].evaluate(), Value.Type.NUMERIC);
-        }
-        return ret;
-    }
+	@Override
+	public Value applyTo(Expression[] args) throws IllegalValueTypeException {
+		Value ret = new Value("#ERROR");
+		Value value = args[0].evaluate();
+		if (value.getType() == Value.Type.MATRIX
+			&& args.length == 1) {
+			Value[][] matrix1 = value.toMatrix();
+			try {
+				Value[][] sum = MatrixMathematics.inverse(matrix1);
+				ret = new Value(sum);
+			} catch (NoSquareException | MatrixIsNotInvertibleException ex) {
+				JOptionPane.
+					showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			throw new IllegalValueTypeException(args[0].evaluate(), Value.Type.NUMERIC);
+		}
+		return ret;
+	}
 
-    @Override
-    public FunctionParameter[] getParameters() {
-        return parameters;
-    }
+	@Override
+	public FunctionParameter[] getParameters() {
+		return parameters;
+	}
 
-    @Override
-    public boolean isVarArg() {
-        return true;
-    }
+	@Override
+	public boolean isVarArg() {
+		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
+	}
 
 }

@@ -1,0 +1,43 @@
+@startuml doc-files/core06_02_design_export.png
+    participant "uic: UIController" as uic
+    participant "uiExtension : UIExtensionInsertImage" as UIExt
+    participant "InsertImagePanel : JPanel" as cp
+    participant "InsertImageController" as ctrl
+    participant "event: SelectionEvent" as event
+    participant "cell: Cell" as cell
+    participant "activeCell: ImageCell" as activeCell
+    participant "ExportImage" as expImage
+    
+    create cp
+    UIExt -> cp :  new(uic) 
+    
+    create ctrl
+    cp -> ctrl : new(uic) 
+    cp -> uic : addSelectionListener(this)
+
+    note right of uic
+        The user selects a cell.
+        Then the user selects the Image using the file chooser
+    end note
+
+    uic -> cp : selectionChanged(SelectionEvent event)
+    cp -> event : getCell()
+    cp -> cell : activeCell=getExtension(InsertImageExtension.NAME)
+
+    cp -> ctrl : cellSelected();
+    ctrl -> activeCell : path = getImage()
+    ctrl -> cp : setImage(path)
+
+    note right of cp
+        ... the InsertImagePanel displays the Image of the current cell.
+    end note
+
+     note right of cp
+        ... the User wants to export the image.
+    end note
+    cp -> cp : icon = getIcon()
+    cp -> ctrl : exportImage(icon, path)
+    ctrl -> expImage : export(icon, path)
+    
+
+@enduml
