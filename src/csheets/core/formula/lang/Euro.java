@@ -12,94 +12,99 @@ import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
 import csheets.core.formula.Literal;
 import csheets.core.formula.util.MoneyService;
+import csheets.ui.ctrl.UIController;
 
 /**
  *
  * @author joaomonteiro
  */
-public class Euro implements Function{
-    /**
-     * The function's parameters
-     */
-    public static final FunctionParameter[] parameters = new FunctionParameter[]{
-        new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-        "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-        "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-        "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-        "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
-        "An expression whose value is checked for type compliance")
-    /* new FunctionParameter(Value.Type.TEXT, "Type", true,
-     'The type to look for. Accepted values are "NUMERIC" (default),'
-     + '"TEXT", "BOOLEAN", "DATE", "MATRIX" and "ERROR".'); */
-    };
+public class Euro implements Function {
 
-    @Override
-    public String getIdentifier() {
-        return "euro";
-    }
+	/**
+	 * The function's parameters
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
+		new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
+							  "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
+																												 "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
+																																																	"An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
+																																																																					   "An expression whose value is checked for type compliance"), new FunctionParameter(Value.Type.UNDEFINED, "Expression", false,
+																																																																																										  "An expression whose value is checked for type compliance")
+	/* new FunctionParameter(Value.Type.TEXT, "Type", true,
+	 'The type to look for. Accepted values are "NUMERIC" (default),'
+	 + '"TEXT", "BOOLEAN", "DATE", "MATRIX" and "ERROR".'); */
+	};
 
-    @Override
-    public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
+	@Override
+	public String getIdentifier() {
+		return "euro";
+	}
 
-        Expression[] exp = new Expression[3];
-        exp[0] = arguments[2];
-        exp[1] = arguments[0];
-        exp[2] = arguments[3];
+	@Override
+	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
 
-        Value op1 = ((Literal) exp[1]).getValue();
-        Value op2 = ((Literal) exp[2]).getValue();
+		Expression[] exp = new Expression[3];
+		exp[0] = arguments[2];
+		exp[1] = arguments[0];
+		exp[2] = arguments[3];
 
-        Double d1 = op1.toDouble();
-        Double d2 = op2.toDouble();
+		Value op1 = ((Literal) exp[1]).getValue();
+		Value op2 = ((Literal) exp[2]).getValue();
 
-        double operator1 = d1;
-        double operator2 = d2;
+		Double d1 = op1.toDouble();
+		Double d2 = op2.toDouble();
 
-        Value currency1 = ((Literal) arguments[1]).getValue();
-        Value currency2 = ((Literal) arguments[4]).getValue();
-        Value operator = ((Literal) exp[0]).getValue();
+		double operator1 = d1;
+		double operator2 = d2;
 
-        String s1 = currency1.toString();
-        String s2 = currency2.toString();
-        String s3 = operator.toString();
+		Value currency1 = ((Literal) arguments[1]).getValue();
+		Value currency2 = ((Literal) arguments[4]).getValue();
+		Value operator = ((Literal) exp[0]).getValue();
 
-        double exchange;
-        if (!s1.equals("€")) {
-            exchange = MoneyService.searchCurrencyExchangeValue(s1);
-            d1 /= exchange;
-        }
+		String s1 = currency1.toString();
+		String s2 = currency2.toString();
+		String s3 = operator.toString();
 
-        if (!s2.equals("€")) {
-            exchange = MoneyService.searchCurrencyExchangeValue(s2);
-            d2 /= exchange;
-        }
+		double exchange;
+		if (!s1.equals("€")) {
+			exchange = MoneyService.searchCurrencyExchangeValue(s1);
+			d1 /= exchange;
+		}
 
-       
-        switch (s3) {
-            case "+":
-                return new Value(d1 + d2);
-                
-            case "-":
-                return new Value(d1 - d2);
+		if (!s2.equals("€")) {
+			exchange = MoneyService.searchCurrencyExchangeValue(s2);
+			d2 /= exchange;
+		}
 
-            case "/":
-                return new Value(d1 / d2);
+		switch (s3) {
+			case "+":
+				return new Value(d1 + d2);
 
-            case "*":
-                return new Value(d1 * d2);
-                
-            default:
-                throw new AssertionError();
-        }
-    }
+			case "-":
+				return new Value(d1 - d2);
 
-    @Override
-    public FunctionParameter[] getParameters() {
-        return parameters;
-    }
+			case "/":
+				return new Value(d1 / d2);
 
-    @Override
-    public boolean isVarArg() {
-        return false;
-    }
+			case "*":
+				return new Value(d1 * d2);
+
+			default:
+				throw new AssertionError();
+		}
+	}
+
+	@Override
+	public FunctionParameter[] getParameters() {
+		return parameters;
+	}
+
+	@Override
+	public boolean isVarArg() {
+		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
+	}
 }

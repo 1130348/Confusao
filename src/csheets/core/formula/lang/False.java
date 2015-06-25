@@ -25,20 +25,25 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns the boolean value false.
+ *
  * @author Einar Pehrson
  */
 public class False implements Function {
 
-	/** The empty parameter list */
+	/**
+	 * The empty parameter list
+	 */
 	public static final FunctionParameter[] parameters = new FunctionParameter[]{};
 
 	/**
 	 * Creates a new instance of the FALSE function.
 	 */
-	public False() {}
+	public False() {
+	}
 
 	public String getIdentifier() {
 		return "FALSE";
@@ -54,5 +59,9 @@ public class False implements Function {
 
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

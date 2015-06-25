@@ -25,23 +25,28 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns the boolean opposite of its argument.
+ *
  * @author Einar Pehrson
  */
 public class Not implements Function {
 
-	/** The only parameter: a boolean expression */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The only parameter: a boolean expression
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.BOOLEAN, "Boolean expression", false,
-			"A boolean expression to invert")
+							  "A boolean expression to invert")
 	};
 
 	/**
 	 * Creates a new instance of the NOT function.
 	 */
-	public Not() {}
+	public Not() {
+	}
 
 	public String getIdentifier() {
 		return "NOT";
@@ -57,5 +62,9 @@ public class Not implements Function {
 
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

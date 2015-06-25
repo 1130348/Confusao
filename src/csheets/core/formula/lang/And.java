@@ -25,32 +25,39 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns true if and only if all of its arguments are true.
+ *
  * @author Einar Pehrson
  */
 public class And implements Function {
 
-	/** The only (but repeatable) parameter: a boolean expression */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The only (but repeatable) parameter: a boolean expression
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.BOOLEAN, "Boolean expression", false,
-			"A boolean expression to include")
+							  "A boolean expression to include")
 	};
 
 	/**
 	 * Creates a new instance of the AND function.
 	 */
-	public And() {}
+	public And() {
+	}
 
 	public String getIdentifier() {
 		return "AND";
 	}
 
 	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
-		for (Expression argument : arguments)
-			if (!argument.evaluate().toBoolean())
+		for (Expression argument : arguments) {
+			if (!argument.evaluate().toBoolean()) {
 				return new Value(false);
+			}
+		}
 		return new Value(true);
 	}
 
@@ -60,5 +67,9 @@ public class And implements Function {
 
 	public boolean isVarArg() {
 		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }
