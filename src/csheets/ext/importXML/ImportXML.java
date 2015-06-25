@@ -28,8 +28,15 @@ public class ImportXML implements ImportStrategy {
 			Document doc = dBuilder.parse(iProcess.getFilename());
 
 			doc.getDocumentElement().normalize();
+			String tagName = doc.getFirstChild().
+				getFirstChild().getNodeName();
+			NodeList nList;
 
-			NodeList nList = doc.getElementsByTagName(iProcess.getCellTag());
+			if (tagName.equals(iProcess.getCellTag())) {
+				nList = doc.getElementsByTagName(iProcess.getCellTag());
+			} else {
+				nList = doc.getElementsByTagName(tagName);
+			}
 
 			for (int i = 0; i < nList.getLength(); i++) {
 

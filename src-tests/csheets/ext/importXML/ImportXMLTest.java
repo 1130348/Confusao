@@ -70,7 +70,7 @@ public class ImportXMLTest {
 		cells[0][0] = book.getSpreadsheet(0).getCell(0, 0);
 		cells[0][1] = book.getSpreadsheet(0).getCell(0, 1);
 		file = eProcess.export(true, cells, fileName, strings);
-		ImportProcess iProcess = new ImportProcess("XML");
+		ImportProcess iProcess = new ImportProcess(".xml");
 		iProcess.setActiveWorkbook(book);
 		iProcess.setFilename(file.getAbsolutePath());
 		iProcess.setSpreadSheet(book.getSpreadsheet(2));
@@ -107,7 +107,7 @@ public class ImportXMLTest {
 		cells[0][1] = book.getSpreadsheet(0).getCell(0, 1);
 		file = eProcess.export(true, cells, fileName, result);
 		ImportController controller = new ImportController(uiController);
-		controller.importXML(file.getAbsolutePath(), "XML", book.
+		controller.importXML(file.getAbsolutePath(), ".xml", book.
 							 getSpreadsheet(2), book);
 		expResult = XMLTag.getInstance().getCellTag();
 		assertEquals(result[1], expResult);
@@ -137,7 +137,7 @@ public class ImportXMLTest {
 		cells[0][0] = book.getSpreadsheet(0).getCell(0, 0);
 		cells[0][1] = book.getSpreadsheet(0).getCell(0, 1);
 		file = eProcess.export(true, cells, fileName, strings);
-		ImportProcess iProcess = new ImportProcess("XML");
+		ImportProcess iProcess = new ImportProcess(".xml");
 		result = book.getSpreadsheet(index);
 		iProcess.setActiveWorkbook(book);
 		iProcess.setFilename(file.getAbsolutePath());
@@ -171,7 +171,7 @@ public class ImportXMLTest {
 		cells[0][0] = book.getSpreadsheet(0).getCell(0, 0);
 		cells[0][1] = book.getSpreadsheet(0).getCell(0, 1);
 		result = eProcess.export(true, cells, fileName, strings);
-		ImportProcess iProcess = new ImportProcess("XML");
+		ImportProcess iProcess = new ImportProcess(".xml");
 		iProcess.setActiveWorkbook(book);
 		iProcess.setFilename(result.getAbsolutePath());
 		iProcess.setSpreadSheet(book.getSpreadsheet(2));
