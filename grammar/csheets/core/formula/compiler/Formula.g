@@ -43,7 +43,7 @@ package csheets.core.formula.compiler;
 }
 
 expression
-	: (EQ! operation EOF!) | (CA! money EOF!)
+	: (EQ! operation EOF!) | (CA! money EOF!) | (LCHA! EQ! function_call RCHA! EOF!)
 	;
 
 operation
@@ -115,6 +115,7 @@ function_call
 		( comparison ( SEMI! comparison )* )?
 		RPAR!
 	;
+        
 
 reference
 	:	CELL_REF
