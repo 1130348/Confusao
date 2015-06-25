@@ -25,23 +25,28 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns the numeric average of its arguments.
+ *
  * @author Einar Pehrson
  */
 public class Average implements Function {
 
-	/** The only (but repeatable) parameter: a numeric term */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The only (but repeatable) parameter: a numeric term
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.NUMERIC, "Term", false,
-			"A number to be included in the average")
+							  "A number to be included in the average")
 	};
 
 	/**
 	 * Creates a new instance of the AVERAGE function.
 	 */
-	public Average() {}
+	public Average() {
+	}
 
 	public String getIdentifier() {
 		return "AVERAGE";
@@ -55,16 +60,20 @@ public class Average implements Function {
 			if (value.getType() == Value.Type.NUMERIC) {
 				count++;
 				sum += value.toDouble();
-			} else if (value.getType() == Value.Type.MATRIX)
+			} else if (value.getType() == Value.Type.MATRIX) {
 				for (Value[] vector : value.toMatrix()) {
-					for (Value item : vector)
+					for (Value item : vector) {
 						if (item.getType() == Value.Type.NUMERIC) {
 							count++;
-						 	sum += item.toDouble();
-						} else
-						 	throw new IllegalValueTypeException(item, Value.Type.NUMERIC);
-			} else
+							sum += item.toDouble();
+						} else {
+							throw new IllegalValueTypeException(item, Value.Type.NUMERIC);
+						}
+					}
+				}
+			} else {
 				throw new IllegalValueTypeException(value, Value.Type.NUMERIC);
+			}
 		}
 		return new Value(sum / count);
 	}
@@ -75,5 +84,9 @@ public class Average implements Function {
 
 	public boolean isVarArg() {
 		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

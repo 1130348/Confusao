@@ -56,6 +56,7 @@ Rupee
 
 # ToolBar Functions
 ActivateToolBarButton
+DeactivateToolBarButton
 
 # # # Numeric functions reflected from java.lang.Math
 #

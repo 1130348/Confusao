@@ -160,4 +160,6 @@ public abstract class CellExtension implements Cell, CellListener {
 	public void cellCleared(Cell cell) {}
 
 	public void cellCopied(Cell cell, Cell source) {}
+        
+        public void formulaChanged(){}
 }

@@ -1,0 +1,10 @@
+@startuml doc-files/core04_01_navigation_window_design_analysis.png
+actor User
+
+User -> NavigationFunctionUI : getCleansheetsInformation()
+NavigationFunctionUI -> NavigationFunctionController : getCleansheetsInformation()
+NavigationFunctionController --> Cleansheets : getCurrentInformation()
+Cleansheets --> Workbook : getCurrentInformation()
+Cleansheets --> User : mostra info
+
+@enduml

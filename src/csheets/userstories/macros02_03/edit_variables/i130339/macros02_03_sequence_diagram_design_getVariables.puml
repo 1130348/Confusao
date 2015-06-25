@@ -1,0 +1,24 @@
+@startuml doc-files/macros02_03_sequence_diagram_design_getVariables.png
+
+    actor user
+
+    participant "EditVariablesPanel" as editvariablespanel
+    participant "EditVariablesController" as controller
+    participant "UIController" as uicontroller
+    participant "WorkBook" as workbook
+    participant "List<Variable> list" as variable
+    
+    user -> editvariablespanel: Choose to Edit Variables
+
+    editvariablespanel -> controller: modifications()
+
+    editvariablespanel -> uicontroller: getActiveWorkbook()
+
+    editvariablespanel -> workbook: list = getVariables()
+
+    loop
+        variable -> editvariablespanel: var = get()
+        editvariablespanel -> editvariablespanel: jcombobox.addItem(var)
+    end loop
+
+@enduml

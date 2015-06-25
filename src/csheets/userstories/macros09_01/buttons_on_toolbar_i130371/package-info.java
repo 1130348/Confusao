@@ -121,6 +121,40 @@
  * button choosed by the user.
  *
  * <h2>5. Coding</h2>
+ * It is important to refer that this use case is to macros, scripts beanshell
+ * and to forms but beansheel and forms weren't implemented. This use case is
+ * implemented just for Macros but it's simple to run with the scripts and
+ * forms. It is just necessary to change small things. <br/>
+ * see: <code>csheets.ext.toolbar_buttons.ButtonsCell</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ButtonsExtension</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ButtonsSpreadsheet</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.AddAction</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.AddWindow</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.ButtonsAction</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.ButtonsController</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.ButtonsMenu</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.ButtonsToolBar</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.ButtonsUIExtension</code><br/>
+ * see: <code>csheets.ext.toolbar_buttons.ui.DefaultAction</code><br/>
+ * I create two functions that activate or deactivate a button. The user just
+ * need to create the button first and then call the function passing the
+ * name/number of the button. To do this, like it was said, were a few problems
+ * because I hadn't access to the uiController to get the Extension and then the
+ * Components of the toolbar in order to use the method setEnabled(true or
+ * false) to the button that the user chose. The solution was to create a method
+ * in the interface Function: setUIController() that allows that the classes
+ * ActivateToolBarButton and DeactivateToolBarButton get access to it.<br/>
+ * see: <code>csheets.core.formula.ActivateToolBarButton</code><br/>
+ * see: <code>csheets.core.formula.DeactivateToolBarButton</code><br/>
+ * To know the number of the button in order to activate or deactivate the user
+ * can keep the mouse over the button and the tooltip will happen with the
+ * number of the button and the tooltip text that the user choose. For example:
+ * Number: 1, Tooltip Text: test and the finish tooltip will stay "1 -
+ * Test".<br/>
+ * Other thing that as important too on this coding part is that I had changed
+ * the class MacrosWindowController and MacrosWindowDialog in order to keep
+ * variables on the UIController. On the UIController I created two variables
+ * and 4 methods (savedMacros, savedMacrosName -> gets e sets).<br/>
  *
  * <h2>6. Final Remarks</h2>
  * This use case is the first this sub-area "Buttons, Menus and Events". The
@@ -129,8 +163,15 @@
  * implemented in LAPR4 because has a lot of thing to be done: The interface
  * about creating a button, add a button to the toolbar, add action to the
  * button and set the content to the active cell and create two function to
- * active or disable some button of the toolbar.
- * <br/>
+ * active or disable some button of the toolbar.<br/><br/>
+ * STEPS TO RUN THIS USE CASE: <br/>
+ * 1 - Create a macro (Extensions -> Macros -> Create Macro) <br/>
+ * 2 - Click on the green plus button and create an action button <br/>
+ * 3 - Verifie if it's working selecting a cell and see that the action is the
+ * new content <br/>
+ * 4 - One option: To activate or deactivate the button: Functions -> Execute
+ * Function -> ACTIVATE_BUTTON or DEACTIVATE_BUTTON with the number of the
+ * button <br/>
  *
  */
 package csheets.userstories.macros09_01.buttons_on_toolbar_i130371;

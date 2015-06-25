@@ -103,12 +103,12 @@ public class UIController implements SpreadsheetAppListener {
 	/**
 	 * The code of the macros
 	 */
-	private ArrayList<String> macros;
+	private ArrayList<String> macros = new ArrayList<>();
 
 	/**
 	 * Name of the macros of the vector macros (in order)
 	 */
-	private ArrayList<String> macrosName;
+	private ArrayList<String> macrosName = new ArrayList<>();
 
 	/**
 	 * To know if the workbook is linked to a file

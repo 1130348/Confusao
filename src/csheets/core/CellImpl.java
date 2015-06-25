@@ -249,9 +249,21 @@ public class CellImpl implements Cell {
 
     public void setContent(String content) throws FormulaCompilationException {
         if (!this.content.equals(content)) {
-            storeContent(content);
-            fireContentChanged();
-            reevaluate();
+            if(getFormula()!=null)
+            {
+               storeContent(content);
+               fireContentChanged();
+               reevaluate();
+               if(getFormula()==null)
+               {
+                   fireFormulaChanged();
+               }
+            } else {
+                storeContent(content);
+                fireContentChanged();
+                reevaluate();
+                fireFormulaChanged();
+            }
         }
     }
 
@@ -534,6 +546,15 @@ public class CellImpl implements Cell {
         stream.writeInt(extensions.size());
         for (CellExtension extension : extensions.values()) {
             stream.writeObject(extension);
+        }
+    }
+    
+    private void fireFormulaChanged() {
+        for (CellListener listener : listeners) {
+            listener.formulaChanged();
+        }
+        for (CellExtension extension : extensions.values()) {
+            extension.formulaChanged();
         }
     }
 
