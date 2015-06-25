@@ -47,5 +47,9 @@ public class NetworkSearchTest {
 	public void makeSureMoreThanOneUserFoundInformationWrittenSideBar() {
 
 	}
+        
+        public void makeSureTheRightEventsAreCreated(){
+            
+        }
 
 }

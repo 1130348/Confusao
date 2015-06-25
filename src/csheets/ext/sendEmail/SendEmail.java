@@ -72,12 +72,14 @@ public class SendEmail {
 	public boolean sendEmail(String[] allReceivers, String subject,
 							 String message, Cell[][] cells) throws MessagingException {
 		boolean ret = false;
-		message += "\n\n";
-		for (Cell[] cell : cells) {
-			for (Cell cell1 : cell) {
-				message += cell1.getContent() + ";";
+		if (cells != null) {
+			message += "\n\n";
+			for (Cell[] cell : cells) {
+				for (Cell cell1 : cell) {
+					message += cell1.getContent() + ";";
+				}
+				message += "\n";
 			}
-			message += "\n";
 		}
 
 		for (String receiver : allReceivers) {
