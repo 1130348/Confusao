@@ -101,6 +101,16 @@ public class UIController implements SpreadsheetAppListener {
 	private List<EditListener> editListeners = new ArrayList<EditListener>();
 
 	/**
+	 * The code of the macros
+	 */
+	private ArrayList<String> macros;
+
+	/**
+	 * Name of the macros of the vector macros (in order)
+	 */
+	private ArrayList<String> macrosName;
+
+	/**
 	 * To know if the workbook is linked to a file
 	 */
 	private boolean importExportLink;
@@ -196,6 +206,42 @@ public class UIController implements SpreadsheetAppListener {
 	 */
 	public boolean getImportExportLink() {
 		return this.importExportLink;
+	}
+
+	/**
+	 * Returns a vector with the macros
+	 *
+	 * @return macros
+	 */
+	public ArrayList<String> getMacros() {
+		return this.macros;
+	}
+
+	/**
+	 * Returns a vector with the names of the macros
+	 *
+	 * @return macrosName
+	 */
+	public ArrayList<String> getMacrosName() {
+		return this.macrosName;
+	}
+
+	/**
+	 * Changes the content of importExportLink
+	 *
+	 * @param t
+	 */
+	public void setMacros(ArrayList<String> t) {
+		this.macros = t;
+	}
+
+	/**
+	 * Changes the content of importExportLink
+	 *
+	 * @param t
+	 */
+	public void setMacrosName(ArrayList<String> t) {
+		this.macrosName = t;
 	}
 
 	/**

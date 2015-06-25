@@ -40,7 +40,7 @@
  * <img src = "doc-files/macros_09_01_analysis_sequence.png"/>
  * <br/><br/>
  * To edit if the button is active or not I will need to create two function one
- * ATIVATE_BUTTON and DISACTIVE_BUTTON passing by parameter the name of the
+ * ACTIVATE_BUTTON and DEACTIVE_BUTTON passing by parameter the name of the
  * button. This is just an idea but it is the possibility how this will be
  * implemented. The main problem is the class that implements Function don't
  * have a method or the class UIController to get the components of the toolbar.
@@ -110,7 +110,7 @@
  * button just can have assigned a macro). The idea is to create two classes
  * that implements Function and when the user selects the function
  * ACTIVATE_BUTTON(name) the button with the chosen name stays active and if the
- * function is DISACTIVATE_BUTTON(name) the button will have the action
+ * function is DEACTIVATE_BUTTON(name) the button will have the action
  * associated but nothing will be done when clicking.
  * <br/>
  * But there is a problem. When I create a class on the package
