@@ -18,3 +18,4 @@ csheets.ext.search.SearchExtension
 csheets.ext.MacrosWindow.MacrosWindowExtension
 csheets.ext.Send_Message.SendMessageExtension
 csheets.ext.file_sharing.FileSharingExtension
+csheets.ext.beanshell.BeanShellExtension
