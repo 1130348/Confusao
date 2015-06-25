@@ -40,13 +40,13 @@
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able to communicate with other
- * instances of "CleanSheets" and share files.<br/>
+ * instances of "CleanSheets" and download files.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
  * In the end this use case requires only Functional Tests:
- *  #Send Outbox folder;
- *  #See if files in folder reached its destination;
- *  #See if can receive the files from other CleanSheets;
+ *  #Send File to another Cleansheet instance;
+ *  #Download File from another Cleansheet instance;
+ *  #Check if the downloaded file is equal to the selected file;
  * 
  * <h2>4. Design</h2>
  * To realize this user story we will need to create a subclass of Extension. We
