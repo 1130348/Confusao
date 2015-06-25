@@ -18,5 +18,5 @@ em -> mm : setFrom(userMail)
 em -> mm : setRecipients(rec)
 em -> mm : setDate(date)
 em -> mm : setText(message)
-em -> tra : send(msg, userMail, userPassword)
+em -> tra : send(msg)
 @enduml
