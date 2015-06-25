@@ -9,7 +9,7 @@
  * window that allows writing the script and run it. This option should be
  * integrated with other macros. A macro editing window should be the same. You
  * should you can select which language to write the macro: beanshell or
- * cleannsheets macros. to test the integration of beanshell this stage should
+ * cleansheets macros. to test the integration of beanshell this stage should
  * be possible to write on the macro editing window, a script beanshell that
  * opens a new workbook, create a macro (macros cleansheets), run this macro and
  * a window shows the result of this macro invocation.
