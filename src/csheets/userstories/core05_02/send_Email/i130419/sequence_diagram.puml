@@ -1,4 +1,4 @@
-@startuml doc-files/draft_send_email.png
+@startuml doc-files/sequence_diagram.png
 participant User as usr
 participant "SendEmailAction" as sea
 participant "SendEmailDialog" as sed
