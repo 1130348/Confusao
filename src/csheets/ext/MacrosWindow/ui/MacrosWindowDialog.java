@@ -327,6 +327,7 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
 			availableMacrosComboBox.setEnabled(true);
 			loadMacroButton.setEnabled(true);
 			ui.setMacros(savedMacros);
+                        macrosWindowController.addMacro(MacroName, currentMacroTextArea.getText());
 			ui.setMacrosName(savedMacrosNames);
 		}
     }//GEN-LAST:event_saveMacroButtonActionPerformed
