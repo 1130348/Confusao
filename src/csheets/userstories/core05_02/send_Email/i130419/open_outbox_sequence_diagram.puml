@@ -1,0 +1,19 @@
+@startuml doc-files/open_outbox_sequence_diagram.png
+participant User as usr
+participant "SendEmailSideBar" as sesb
+participant "EmailController" as emc
+participant "Email" as em
+participant "SendEmailDialog" as sed
+participant "mm : MimoMessage" as mm
+usr -> sesb : openEmailActionPerformed()
+sesb -> emc : getEmail(index)
+emc -> em : getEmail(index)
+sesb -> sed : create(mm)
+sed -> mm : getRecipients()
+sed -> sed : setReceiver(rec)
+sed -> mm : getSubject()
+sed -> sed : setSubject(subject)
+sed -> mm : getMessage()
+sed -> sed : setMessage(message)
+sed --> usr : show
+@enduml

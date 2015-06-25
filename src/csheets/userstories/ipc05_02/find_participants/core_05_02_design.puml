@@ -1,0 +1,17 @@
+@startuml doc-files/ipc_05.2_design.png
+
+actor User
+participant "TalkSideBarUI" as TSB
+participant "FinderUI" as FUI
+participant "TalkController" as TC
+participant "CSheetFinderController" as FIC
+participant "Finder" as FI
+
+User -> TSB: Find Participants
+TSB -> FUI : new CSheetFinderTestUI()
+TSB -> TC: getParticipants(ISheetFinderUI)
+TC -> FIC : new CSheetFinderController(FinderUI)
+TC -> FI : new CSheetFinder(CSheetFinderController)
+TC -> FI : updateLocalSpreadSheets()
+FI -> User: Show Participants()
+@enduml

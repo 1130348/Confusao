@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -82,6 +83,7 @@ public class FindWorkbooksPanel extends JPanel {
         
         JScrollPane scrollPane = new JScrollPane();        
         scrollPane.setViewportView(foundWorkbooksList);  
+        foundWorkbooksList.setModel(new DefaultListModel());
         scrollPane.setPreferredSize(new Dimension(300,100));
         add(scrollPane,BorderLayout.NORTH);
         
