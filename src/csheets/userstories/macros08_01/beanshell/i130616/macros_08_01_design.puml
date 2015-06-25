@@ -1,0 +1,34 @@
+ @startuml doc-files/macros_08_01_design.png
+  actor User
+  participant "Menu" as UI
+  participant "BeanShellInterface" as console
+  participant "BeanShellController" as ctrl
+  participant "BeanShellInterpreter" as interpreter
+  User -> UI : Selects BeanShell extension
+  activate UI
+  create console
+  UI -> console : create()
+  deactivate UI
+  activate console
+  create ctrl
+  console -> ctrl: create()
+  deactivate console
+  activate ctrl
+  create interpreter
+  ctrl->interpreter: create(console)
+  note left
+        bsh interpreter is create with GUI as parameter
+        interperter works in a new thread and do all the process
+  end note
+  ctrl->interpreter: set(uiController)
+  ctrl->interpreter: set(macrosController)
+  deactivate ctrl
+  User -> interpreter: write script and when press enter
+ 
+  activate interpreter
+
+  interpreter->interpreter:eval()
+  interpreter->interpreter:displayResults();
+  deactivate interpreter
+
+  @enduml

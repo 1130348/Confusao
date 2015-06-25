@@ -19,7 +19,6 @@
  * should be possible to add a button and to choose the tooltip text and the
  * action that is associated. Then to activate the button that will be a
  * different window.
- *
  * <br/>
  * <br/>
  * <h2>2. Analysis</h2>
@@ -163,7 +162,7 @@
  * implemented in LAPR4 because has a lot of thing to be done: The interface
  * about creating a button, add a button to the toolbar, add action to the
  * button and set the content to the active cell and create two function to
- * active or disable some button of the toolbar.<br/><br/>
+ * activate or disable some button of the toolbar.<br/><br/>
  * STEPS TO RUN THIS USE CASE: <br/>
  * 1 - Create a macro (Extensions -> Macros -> Create Macro) <br/>
  * 2 - Click on the green plus button and create an action button <br/>

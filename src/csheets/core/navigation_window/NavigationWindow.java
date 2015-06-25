@@ -5,17 +5,7 @@
  */
 package csheets.core.navigation_window;
 
-import csheets.core.IllegalValueTypeException;
-import csheets.core.Value;
-import csheets.core.formula.Expression;
-import csheets.core.formula.Function;
-import csheets.core.formula.Literal;
-import csheets.core.formula.compiler.IllegalFunctionCallException;
-import csheets.core.formula.lang.Language;
-import csheets.core.formula.lang.UnknownElementException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import csheets.core.Workbook;
 
 /**
  *
@@ -24,37 +14,25 @@ import java.util.List;
 public class NavigationWindow {
 
 	private NavigationFunctionController nav_contrl;
+	private Workbook workbook;
 
 	public NavigationWindow(
 		NavigationFunctionController navigationFunctionController) {
 		this.nav_contrl = navigationFunctionController;
+		this.workbook = new Workbook();
 	}
 
 	public NavigationWindow() {
+		this.workbook = new Workbook();
 	}
 
-	public int executeFunc(String func_def) throws ParseException, IllegalFunctionCallException, UnknownElementException, IllegalValueTypeException {
-		Expression[] argArray;
-		String identifier = func_def.substring(0, func_def.
-											   indexOf("("));
-		Function function = Language.getInstance().getFunction(identifier);
-		if (!identifier.equals("RANDOM") && !identifier.equals("FALSE")) {
-			List<Expression> args = new ArrayList<>();
-			String temp = func_def.
-				substring(func_def.indexOf("(") + 1, func_def.
-						  lastIndexOf(")"));
-			String[] params = temp.split(";");
-			for (String s : params) {
-				args.add(new Literal(Value.parseNumericValue(s)));
-			}
-			argArray = args.toArray(new Expression[args.size()]);
-			//func_call = new FunctionCall(function, argArray);
-		} else {
-			argArray = new Expression[0];
-			//func_call = new FunctionCall(function, argArray);
+	public String[] getWorkbookInfo() {
+		String[] info = null;
+		int tamanho = workbook.getSpreadsheetCount();
+		for (int i = 0; i < tamanho; i++) {
+			info[i] = workbook.getSpreadsheet(i).getTitle();
 		}
-		//return func_call.evaluate();
-		return 0;
+		return info;
 	}
 
 }

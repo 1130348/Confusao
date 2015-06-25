@@ -35,6 +35,7 @@
  * <br/>
  *
  * <h2>4. Design</h2>
+ * <img src="doc-files/macros_08_01_design>
  *
  *
  *
