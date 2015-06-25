@@ -154,7 +154,7 @@ public class SendEmailDialog extends javax.swing.JDialog {
 			String message = messageTxt.getText();
 			messageTxt.setText("");
 			if (SendEmailController.getInstance().
-				sendEmail(allReceivers, subject, message)) {
+				sendEmail(allReceivers, subject, message, selectCells)) {
 				JOptionPane.
 					showMessageDialog(null, "Email successfully sent!", message, WIDTH);
 				dispose();

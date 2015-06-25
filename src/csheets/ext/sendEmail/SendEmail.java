@@ -5,6 +5,7 @@
  */
 package csheets.ext.sendEmail;
 
+import csheets.core.Cell;
 import csheets.ext.sendEmail.UI.OutBoxPanel;
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,6 +52,8 @@ public class SendEmail {
 			} catch (IOException ex) {
 				throw new IOException("Error reading mail configuration file!");
 			}
+		} else {
+			throw new FileNotFoundException("Set up your email first!");
 		}
 		Properties props = new Properties();
 		props.setProperty("mail.smtp.ssl.trust", smtpService);
@@ -67,8 +70,16 @@ public class SendEmail {
 	}
 
 	public boolean sendEmail(String[] allReceivers, String subject,
-							 String message) throws MessagingException {
+							 String message, Cell[][] cells) throws MessagingException {
 		boolean ret = false;
+		message += "\n\n";
+		for (Cell[] cell : cells) {
+			for (Cell cell1 : cell) {
+				message += cell1.getContent() + ";";
+			}
+			message += "\n";
+		}
+
 		for (String receiver : allReceivers) {
 			try {
 				Message mailToSend = new MimeMessage(session);

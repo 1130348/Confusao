@@ -5,6 +5,7 @@
  */
 package csheets.ext.sendEmail;
 
+import csheets.core.Cell;
 import java.io.IOException;
 import javax.mail.MessagingException;
 
@@ -34,8 +35,8 @@ public class SendEmailController {
 	}
 
 	public boolean sendEmail(String[] allReceivers, String subject,
-							 String message) throws MessagingException {
-		return sendEmail.sendEmail(allReceivers, subject, message);
+							 String message, Cell[][] cells) throws MessagingException {
+		return sendEmail.sendEmail(allReceivers, subject, message, cells);
 	}
 
 }

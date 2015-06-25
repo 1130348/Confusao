@@ -54,5 +54,9 @@ public class SendEmailTest {
 
 	@Test
 	public void FunctionalTestSendEmail() {
+		/*
+		 *It has been tested that by sending the email, it reaches the
+		 *receveirs without any problems.
+		 */
 	}
 }
