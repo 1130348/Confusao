@@ -123,4 +123,5 @@ public class InsertImageCell extends CellExtension {
         stream.defaultReadObject();
         listeners = new ArrayList<InsertImageCellListener>();
     }
+    
 }

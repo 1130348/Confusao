@@ -8,8 +8,14 @@ package csheets.ext.Insert_Image;
 import csheets.core.Cell;
 import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
+import java.io.File;
+import javax.swing.ImageIcon;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -74,6 +80,30 @@ public class InsertImageCellTest {
         // modify the cell... this should create an event
         iic.setImagePath("c:\\3D.jpg");
         assertTrue(isNotified);
+    }
+    
+    /**
+     * A method that tests if the image is being exported to a file
+     *
+     */
+    @Test
+    public void testExportImage() {
+        ExportImage expImage = new ExportImage();
+        // create a workbook with 2 sheets
+        Workbook wb = new Workbook(2);
+        Spreadsheet s = wb.getSpreadsheet(0);
+        // get the first cell
+        Cell c = s.getCell(0, 0);
+        
+        InsertImageCell iic = new InsertImageCell(c);
+        File f = new File("image.jpg");
+        iic.setImagePath(f.getAbsolutePath());
+        ImageIcon icon = new ImageIcon(iic.getImage());
+        File outputfile = new File("exported.jpg");
+        expImage.export(icon, outputfile);
+        boolean expResult = true;
+        boolean result = outputfile.canRead();
+        assertEquals(expResult, result);
     }
 
     /**

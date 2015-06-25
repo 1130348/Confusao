@@ -5,9 +5,12 @@
  */
 package csheets.ext.Insert_Image.ui;
 
+import csheets.ext.Insert_Image.ExportImage;
 import csheets.ext.Insert_Image.InsertImageCell;
 import csheets.ui.ctrl.UIController;
+import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -16,7 +19,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Marcos
  */
-
 /**
  *
  *
@@ -83,6 +85,7 @@ public class InsertImageController {
 
     /**
      * A FileChooser to load the image.
+     *
      * @return String path
      */
     public String ChooserIMG() {
@@ -96,5 +99,40 @@ public class InsertImageController {
             return fc.getSelectedFile().getAbsolutePath();
         }
         return null;
+    }
+
+    public void exportImage(Icon icon, File f) {
+        ExportImage expImage = new ExportImage();
+        expImage.export(icon, f);
+    }
+
+    /**
+     * Converts the file choosed to a jpg File
+     *
+     * @param f
+     * @return
+     */
+    public File getFileName(File f) {
+        String path = f.getAbsolutePath();
+        int sep = path.lastIndexOf("/");
+        String pathWithoutName = path.substring(0, sep + 1);
+        String name = f.getName();
+        String newName;
+        String extension;
+        int index = name.lastIndexOf(".");
+
+        if (index == -1) {
+            newName = path.substring(sep + 1) + ".jpg";
+            return new File(pathWithoutName + newName);
+        } else {
+            extension = name.substring(index);
+            if (extension.compareTo(".jpg") == 0) {
+                return new File(pathWithoutName + name);
+            }else {
+                newName = f.getName().substring(0, index);
+                newName += ".jpg";
+                return new File(pathWithoutName + newName);
+            }
+        }
     }
 }
