@@ -31,9 +31,9 @@ public class SendMessageController {
         
         private ArrayList<Connection> connections;
         
-        private static Connection activeCon;
+        private static Connection activeCon  = null;
         
-        private static Connection SERVER;
+        private static Connection SERVER = null;
         
 	/**
 	 * Creates a new SendMessage controller.
@@ -44,13 +44,14 @@ public class SendMessageController {
 		this.uiController = uiController;
                 this.SMMPanel = SMMPanel;
                 
-                createServer();
+                
                 
             
                 
 	}
         
         public void setChatUI(ChatUI SMB) throws IOException{
+            createServer();
             CUI = SMB;  
         }
         
@@ -66,7 +67,9 @@ public class SendMessageController {
             @Override
             public void run(){
                 try {
-                SERVER = new Connection(3339);
+                    if(SERVER == null){
+                        SERVER = new Connection(3339);
+                    }
                 SERVER.createThreads();
                 SERVER.setUI(CUI);
                 CUI.SetConnection(SERVER.getConSocket().getInetAddress().toString().substring(1,SERVER.getConSocket().getInetAddress().toString().length()));

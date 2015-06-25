@@ -1,0 +1,31 @@
+@startuml doc-files/design_core_03_02.png
+actor "User"
+participant "SpreedSheetTable" as sst
+participant "MenuBar" as mb
+participant "SortAction" as sa
+participant "SortController" as sc
+participant "ccUI:ChooseColumnUI" as ccUI
+
+User->sst:select a range of cells
+User->mb:select the type of sort
+mb->sa:actionPerformed()
+sst<-sa:getSelectedColumnCount()
+alt count == 1
+    sa->sc:sortCells(typeOfSort, -1)
+    sc->sc:cellsContent(column)
+    sc->sc:sort(typeOfSort)
+    sc->sc:fillSorted(column)
+end alt
+alt count > 1
+    sa->ccUI: ccUI = create(null, enabled, uiController, typeOfSort, focusOwner)
+    ccUI->sst: selectedColumns = getSelectedcColumns()
+    ccUI->ccUI: getColumnNames(selectedColumns)
+    sa->ccUI: setVisible(true)
+    User->ccUI: choose column to sort
+    ccUI->ccUI: column = checkColumnNumber()
+    ccUI->sc: sortCells(typeOfSort, column)
+    sc->sc:cellsContent(column)
+    sc->sc:sort(typeOfSort)
+    sc->sc:fillSorted(column)
+end alt 
+@enduml

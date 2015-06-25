@@ -21,10 +21,9 @@
 package csheets.ui;
 
 import csheets.CleanSheets;
-import csheets.core.Cell;
 import csheets.core.Workbook;
-import csheets.core.call_function.CallFunctionController;
-import csheets.core.call_function.ui.CallFunctionAction;
+import csheets.ext.call_function.ui.CallFunctionAction;
+import csheets.ext.export.ui.ExportAsAction;
 import csheets.ext.import_export_link.ui.LinkImportExportAction;
 import csheets.ext.import_export_text.ui.ExportAction;
 import csheets.ext.import_export_text.ui.ImportAction;
@@ -72,8 +71,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -138,6 +135,7 @@ public class Frame extends JFrame implements SelectionListener {
 			registerAction("import", new ImportAction(app, uiController));
 		actionManager.
 			registerAction("export", new ExportAction(app, uiController));
+                actionManager.registerAction("exportas", new ExportAsAction(app, uiController));
 		actionManager.
 			registerAction("link", new LinkImportExportAction(app, uiController));
 

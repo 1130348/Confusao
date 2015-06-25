@@ -1,0 +1,16 @@
+@startuml doc-files/design_search_by_content.png
+actor User as user
+participant "dialog : SearchOnAnotherInstanceDialog" as said
+participant "SearchOnAnotherInstanceController" as saic
+participant "<<Service>>\nNetworkService" as net
+participant "SearchInstanceClient" as nic
+participant "Servi" as said
+user -> saic : searchActionPerformed()
+saic -> net : searchActionPerformed()
+saic -> net : NetworkSearchRequest(workbookName)
+net -> said : NetworkSearchRequest(workbookName)
+said --> saic : NetworkSearchRequest(workbookName)
+
+net -> nic : create()
+net -> nic : sendWorkbookName(workbookName)
+@enduml

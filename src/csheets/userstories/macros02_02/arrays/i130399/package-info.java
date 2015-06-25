@@ -1,5 +1,5 @@
 /**
- * Technical documentation regarding the user story macros02.01: Variable
+ * Technical documentation regarding the user story macros02.02: Arrays
  * <br/>
  * <br/>
  *

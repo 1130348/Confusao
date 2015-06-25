@@ -21,6 +21,7 @@
 package csheets.core;
 
 import csheets.core.formula.Formula;
+import csheets.core.formula.FunctionCall;
 import csheets.core.formula.Reference;
 import csheets.core.formula.compiler.FormulaCompilationException;
 import csheets.core.formula.compiler.FormulaCompiler;
@@ -171,31 +172,40 @@ public class CellImpl implements Cell {
 
         // Stores value
         value = newValue;
-        try {
-            if (value.getType() == Value.Type.MATRIX) {
-                int actualColumn = this.address.getColumn();
-                int actualRow = this.address.getRow();
-
-                Value[][] matrix = value.toMatrix();
-                for (int i = 0; i < matrix.length; i++) {
-                    for (int j = 0; j < matrix[0].length; j++) {
-                        if (i == 0 && j == 0) {
-                            this.value = matrix[0][0];
-                        } else {
-                            String content = matrix[i][j].toString().replace(".", ",");
-                            spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
-                        }
-                    }
-                }
-
-            }
-        } catch (FormulaCompilationException | IllegalValueTypeException ex) {
-            Logger.getLogger(CellImpl.class.getName()).log(Level.SEVERE, null, ex);
+        
+        //If new Value is a matrix is necessary a special print
+        if (value.getType() == Value.Type.MATRIX) {
+            printMatrix();
         }
 
         // Checks for change
         if (!newValue.equals(oldValue)) {
             fireValueChanged();
+        }
+    }
+
+    /*
+     * Print a matrix in spreadsheet 
+     * Formula appear in top left cell
+     */
+    private void printMatrix() {
+        try {
+            int actualColumn = this.address.getColumn();
+            int actualRow = this.address.getRow();
+
+            Value[][] matrix = value.toMatrix();
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (i == 0 && j == 0) {
+                        this.value = matrix[0][0];
+                    } else {
+                        String content = matrix[i][j].toString().replace(".", ",");
+                        spreadsheet.getCell(actualColumn + j, actualRow + i).setContent(content);
+                    }
+                }
+            }
+        } catch (IllegalValueTypeException | FormulaCompilationException ex) {
+            Logger.getLogger(CellImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -282,7 +292,12 @@ public class CellImpl implements Cell {
                     for (Cell precedent : reference.getCells()) {
                         if (!this.equals(precedent)) {
                             precedents.add(precedent);
+                            FunctionCall fu = (FunctionCall) formula.getExpression();
+
+                            if(!fu.getFunction().getIdentifier().equalsIgnoreCase("FOR"))
+                            {
                             ((CellImpl) precedent).addDependent(this);
+                            }
                         }
                     }
                 } else if (reference instanceof VariableReference) {
@@ -297,41 +312,6 @@ public class CellImpl implements Cell {
                 }
             }
         }
-
-        /*
-                                                  
-         Expression expressao = this.getFormula().getExpression();
-                                    
-         if (expressao instanceof BinaryOperation) {
-                                        
-         BinaryOperation atributionOne = (BinaryOperation) expressao;
-         String operator = atributionOne.getOperator().getIdentifier();
-                                        
-         if ((operator.equalsIgnoreCase(":="))) {
-                                            
-         Cell leftCell = (((CellReference)atributionOne.getLeftOperand()).getCell());
-         Cell rightCell = (((CellReference)atributionOne.getRightOperand()).getCell());
-                                           
-         if (!this.equals(precedent)) {
-         precedents.add(precedent);  
-                                            
-         if (!(leftCell.equals(this))) {
-                                               
-         ((CellImpl)precedent).addDependent(((CellReference)atributionOne.getRightOperand()).getCell());
-         }
-                                            
-         }
-         }
-         }
-                                    
-                                    
-                                   	
-         if (!this.equals(precedent)) {
-         precedents.add(precedent);
-         ((CellImpl)precedent).addDependent(this);
-         }  
-                                    
-         }*/
     }
 
     /**

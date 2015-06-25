@@ -30,6 +30,8 @@ import csheets.CleanSheets;
 import csheets.core.Cell;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Formula;
+import csheets.core.formula.util.MoneyService;
+import javax.swing.JOptionPane;
 
 /**
  * A compiler that generates formulas from strings.
@@ -109,8 +111,17 @@ public class FormulaCompiler {
 	public Formula compile(Cell cell, String source) throws FormulaCompilationException {
 		for (ExpressionCompiler compiler : compilers)
 			if (source.charAt(0) == compiler.getStarter()) {
-				Expression expression = compiler.compile(cell, source);
-				return new Formula(cell, expression);
+                            if (compiler.getStarter() == '#') {
+                                if (MoneyService.checkFileImported()) {
+                                    Expression expression = compiler.compile(cell, source);
+                                    return new Formula(cell, expression);
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "ERROR - You must choose the file that contains the currency exchanges!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                                    break;
+                                }
+                            }
+                            Expression expression = compiler.compile(cell, source);
+                            return new Formula(cell, expression);
 			}
 		return null;
 	}

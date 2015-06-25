@@ -6,15 +6,13 @@
 package csheets.ext.findworkbooks;
 
 import csheets.ext.findworkbooks.ui.FindWorkbooksPanel;
-import static java.nio.file.FileVisitResult.*;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
+import static java.nio.file.FileVisitResult.CONTINUE;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -39,9 +37,14 @@ public class FindWorkbooks extends SimpleFileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) throws IOException {
         if (attrs.isRegularFile()) {
-            if (path.toString().endsWith(".cls")) {
+            if (path.toString().endsWith(".cls") ) {
+                
+                if(!workBooksFoundList.contains(path))
+                {
                 workBooksFoundList.add(path);
+                
                 FindWorkbooksPanel.foundWorkbooksList.setListData(workBooksFoundList.toArray());
+                }
             }
         }
         return CONTINUE;

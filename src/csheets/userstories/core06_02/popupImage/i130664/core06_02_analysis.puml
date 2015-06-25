@@ -1,0 +1,32 @@
+ @startuml doc-files/popup_image_analysis.png
+  actor User
+  participant "<<analysis>>\nImageUI" as UI
+  participant "<<analysis>>\nImageCtrl" as ctrl
+  participant "<<analysis>>\nUIController" as uiCtrl
+  participant "<<analysis>>\nCell" as cell
+  participant "<<analysis>>\nExportImage" as exp
+  User -> UI : selects cell
+  activate UI
+  UI -> ctrl : getActiveCell()
+  activate ctrl
+  deactivate UI
+  ctrl -> uiCtrl : getActiveCell()
+  User -> UI : chooses image
+  deactivate ctrl
+  activate UI
+  UI -> ctrl : setImageCell()
+  activate ctrl
+  deactivate UI
+  ctrl -> cell : setImage()
+  ctrl -> cell : setIcon()
+  deactivate ctrl
+  User -> UI : places the mouse cursor \non the cell with the image
+  activate UI
+  UI -> UI : showFloatingImage()
+  deactivate UI
+  User -> UI : user wants to export
+  activate UI
+  UI -> ctrl : exportImage()
+  ctrl -> exp : export()
+  deactivate UI
+  @enduml

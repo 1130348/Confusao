@@ -3,7 +3,7 @@ csheets.ext.deptree.DependencyTreeExtension
 csheets.ext.simple.ExtensionExample
 csheets.ext.comments.CommentsExtension
 csheets.ext.startsharing.StartSharingExtension
-csheets.core.call_function.CallFunctionExtension
+csheets.ext.call_function.CallFunctionExtension
 csheets.ext.contact.ExtensionContact
 csheets.ext.Enable_Disable.EnableDisableExtension
 csheets.ext.address.ExtensionAddress
@@ -17,3 +17,6 @@ csheets.ext.secure_comunication.SecureComunicationExtension
 csheets.ext.search.SearchExtension
 csheets.ext.MacrosWindow.MacrosWindowExtension
 csheets.ext.Send_Message.SendMessageExtension
+csheets.ext.file_sharing.FileSharingExtension
+csheets.ext.beanshell.BeanShellExtension
+csheets.ext.toolbar_buttons.ButtonsExtension

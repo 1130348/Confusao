@@ -1,0 +1,21 @@
+  @startuml doc-files/macros_09_01_ssd_add.png
+  actor User
+  participant "<<analysis>>\nSystem" as s
+
+	User -> s : Buttons on Toolbar
+    s -> User: Show the new window
+	User -> s: Selects the option "Add Button"
+	s -> User: Ask for the number of the button (the name)
+	User -> s: Inserts the number
+	s -> User: Ask for the tooltip text
+	User -> s: Inserts the text
+	s -> User: Ask for the icon
+	User -> s: Selects an icon
+	s -> User: Ask for an action
+	User -> s: Choose one action to the button
+	s -> User: active or not?
+	User -> s: Selects the option
+	s -> User: Asks confirmation
+	User -> s: Confirm
+	s -> User: Success of the use case
+  @enduml

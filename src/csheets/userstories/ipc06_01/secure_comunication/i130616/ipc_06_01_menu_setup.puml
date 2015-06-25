@@ -1,0 +1,44 @@
+@startuml doc-files/ipc_06_01_menu_setup.png
+  actor User
+  participant "SecureComunicationUI" as UI
+  participant "SecureComunicationCtrl" as ctrl
+  participant "SSLService" as ssls
+  participant "NetworkService" as net
+  participant "NetworkReceiveService" as receive
+  participant "SSLServer" as ssl
+  User -> UI : Extensions Menu-> Secure Comunication -> Start/Stop SSLServer
+  activate UI
+  alt OPTION=START
+  UI -> ctrl : startSSL()
+  activate ctrl
+  deactivate UI
+  ctrl -> net : isVisibleToOthers(true);
+  activate net
+  net -> receive : startReceivingUDPDatagrams()
+  deactivate net
+  activate ssls
+  ctrl -> ssls : startServer()
+  create ssl
+  ssls -> ssl:create()
+  deactivate ssls
+  deactivate ctrl
+  end alt
+  alt OPTION=STOP
+  activate UI
+  UI -> ctrl : stopSSL()
+  deactivate UI
+  activate ctrl
+  ctrl -> net : isVisibleToOthers(false);
+  activate net
+  net -> receive : stopReceivingUDPDatagrams()
+  deactivate net
+  loop for each connection
+  ctrl -> ssls: SSLService.disconnectSecureConnectionToUser(inet)
+  end loop
+  ctrl -> ssls: stopServer()
+  activate ssls
+  ssls->ssl: interrupt()
+  deactivate ssls
+  deactivate ctrl
+  end alt    
+  @enduml

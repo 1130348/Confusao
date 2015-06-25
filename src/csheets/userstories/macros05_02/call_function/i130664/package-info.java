@@ -23,8 +23,8 @@
  * <h2>2. Analysis</h2>
  * This use case I think it is better to split it in two parts.
  * The first part, since the window to call functions is already done, I just 
- * need to add some specific changes to that. On the first part, I need also 
- * to understand how the values of the edit box are assigned to the cell, so I 
+ * need to add some specific changes to that. On the second part, I need to 
+ * understand how the values of the edit box are assigned to the cell, so I 
  * can introduce the new button that will do the same as the edit box, but in 
  * this case, the result will be stored in the selected cell.
  * <br/>
@@ -46,21 +46,28 @@
  * After that, it's possible to fill the selection list on the User Interface.<br/>
  * <br/>
  * <br/>
- * Then, after selected a function from the list, the system must get the 
- * function call definition (ex: sum(Number)). Then it should appear the text boxes
- * as the number of parameters of the function. The user enters all the parameters
- * needed and then, the system, executes the selected function with the parameter values 
- * and adds it to the formulas bar in the wizard. 
+ * Then, after selected a function from the list, the system shows the text boxes
+ * as the number of parameters of the function, for functions that can have 
+ * an infinite number of parameters, it shows a different text field.
+ * The user enters the parameters needed and while all the parameters are not filled
+ * the system informs the user. If there is a wrong parameter, the system informs 
+ * the user too. If all parameters are valid, the system executes the selected 
+ * function with the parameter values and adds it to the formulas bar in the wizard. 
  * If the user selects the button between the edit box and the cell identifier,
  * is supposed to show the same window, with the only difference being that, the 
  * result of the function, is supposed to be placed on the identified cell, instead
  * of the formulas bar.
  *
  * <h2>3. Tests</h2>
- * I just need to test the second part of the use case since the previous use case
- * already has significant tests. 
- * The test that I need to do is if the button that I'll add to the application, 
- * is storing the right result on the right cell.
+ * Basically, from requirements and also analysis, we see that the core
+ * functionality of this use case is to ensure that the functions or the operations
+ * are being executed correctly and if the results are being placed in the right cell. 
+ * So in order to test whether the calculations are correct I will
+ * have to perform unitary tests to the methods responsible for execute the functions
+ * and the operations.
+ * In addition I must ensure that the restrictions to the function's parameters
+ * are being done, I need to ensure that the parameters are not empty and are 
+ * numeric numbers.
  * <br/>
  * <br/>
  *
@@ -69,8 +76,15 @@
  * In the first part of this case use, as the changes relating to the prior use case 
  * are just graphic level and system changes, so the sequence diagram won't suffer 
  * any changes.
+ * <h3>Part1 - Add formula to FormulasPanel</h3>
  * <br/>
- * <img src="doc-files/design_macros_05_02.png"/>
+ * <img src="doc-files/design_macros_05_02_part1.png"/>
+ * </br>
+ * </br>
+ * <h3>Part2 - Add result to cell</h3>
+ * </br>
+ * <img src="doc-files/design_macros_05_02_part2.png"/>
+ * </br>
  * </br>
  * On the second part of this use case, I need to create a button that will set a content 
  * in a cell selected previously, since the change is very small to use case, i just need 
@@ -79,9 +93,8 @@
  * 
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a
- * href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
- * <br/>
+ * 
+ * csheets.core.formula.lang
  *
  * @author i130664
  */

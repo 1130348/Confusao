@@ -1,0 +1,41 @@
+@startuml doc-files/macros_09_01_analysis_classes.png
+
+    class "<<analysis>> UIExtensionButtons" as UI{
+    }
+
+	class "<<analysis>> ButtonsController" as ctrl{
+		+validateIcon()
+	}
+
+	class "<<analysis>> nButtonToolBar" as toolbar{
+	+addButton(String name, String toolTip, String icon, String action)
+	+addToogleButton()
+	}
+
+	class "<<analysis>> UIController" as uicontroller{
+		+getMacrosName()
+		+getActiveCell()
+	}
+
+	class "<<analysis>> AddWindow" as window{
+		+initComponents()
+		+retrieveMacrosList()
+	  }
+
+	class "<<analysis>> DefaultAction" as action{
+		+DefaultAction(uiController, tooltip, icon, action)
+		+c.setContent("="+macro)
+	  }
+
+	class "<<analysis>> AddAction" as aaction{
+		+actionPerformed(ActionEvent event)
+	  }
+
+	UI <|-- uicontroller
+	ctrl <|-- UI
+	toolbar <|-- ctrl
+	action <|-- toolbar
+	aaction <|-- toolbar
+	window <|-- aaction
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml doc-files/draft_core08_02.png
+
+ actor User
+ participant "<<analysis>>\nImportUI" as UI
+ participant "<<analysis>>\nImportCtrl" as ctrl
+ participant "<<analysis>>\nImportProcess" as process
+ participant "<<analysis>>\nImportStrategyFactory" as strategyFactory
+ participant "<<interface>>\n<<analysis>>\nImportStrategy" as strategy
+ participant "<<analysis>>\nImportXML" as import
+ participant "<<analysis>>\nSpreadsheet" as Spreadsheet
+User -> UI : import XML file
+UI -> ctrl : importData(XML)
+create process
+ctrl -> process : create()
+ctrl -> process : setFile()
+ctrl -> process : setSpreadSheet()
+create strategyFactory
+ctrl -> strategyFactory : create()
+ctrl -> strategyFactory : getInstance()
+ctrl -> strategyFactory : getStrategy(XML)
+create import
+strategyFactory -> import : create()
+ctrl -> process : importXML()
+process -> strategy : importXML(this)
+strategy -> import : importXML(process)
+loop
+import -> Spreadsheet : setCellContent(data)
+end loop
+
+@enduml

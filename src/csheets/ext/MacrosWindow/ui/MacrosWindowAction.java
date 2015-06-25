@@ -5,17 +5,10 @@
  */
 package csheets.ext.MacrosWindow.ui;
 
-import csheets.core.Cell;
 import csheets.ext.findworkbooks.FindWorkbooksController;
-import csheets.ext.startsharing.StartSharingController;
-import csheets.ext.startsharing.ui.ChooseCleanSheetsInstanceToConnect;
 import csheets.ui.ctrl.FocusOwnerAction;
 import csheets.ui.ctrl.UIController;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,34 +16,35 @@ import javax.swing.JOptionPane;
  */
 public class MacrosWindowAction extends FocusOwnerAction {
 
-    /**
-     * The user interface controller
-     */
-    private final UIController uiController;
+	/**
+	 * The user interface controller
+	 */
+	private final UIController uiController;
 
-    /**
-     * The network controller
-     */
-    private final FindWorkbooksController findWorkBooksController;
+	/**
+	 * The network controller
+	 */
+	private final FindWorkbooksController findWorkBooksController;
 
-    /**
-     * Creates a new start sharing action.
-     *
-     * @param uiController the user interface controller
-     */
-    public MacrosWindowAction(UIController uiController) {
-        this.uiController = uiController;
-        this.findWorkBooksController = new FindWorkbooksController();
-    }
+	/**
+	 * Creates a new start sharing action.
+	 *
+	 * @param uiController the user interface controller
+	 */
+	public MacrosWindowAction(UIController uiController) {
+		this.uiController = uiController;
+		this.findWorkBooksController = new FindWorkbooksController();
+	}
 
-    @Override
-    protected String getName() {
-        return "Create Macro...";
-    }
+	@Override
+	protected String getName() {
+		return "Create Macro...";
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      MacrosWindowDialog macrosWindowDialog = MacrosWindowDialog.getInstance(null, enabled);
-      macrosWindowDialog.setVisible(true);
-    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		MacrosWindowDialog macrosWindowDialog = MacrosWindowDialog.
+			getInstance(null, enabled, this.uiController);
+		macrosWindowDialog.setVisible(true);
+	}
 }

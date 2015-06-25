@@ -1,0 +1,21 @@
+@startuml doc-files/macros02_03_analysis_sequence.png
+
+  actor User
+  participant "<<analysis>>\nEditVariablesUI" as UI
+  participant "<<analysis>>\nUIController" as uicontroller
+  participant "<<analysis>>\nw: Workbook" as workbook
+  participant "<<analysis>>\nlist: List<Variable>" as lvariable
+  participant "<<analysis>>\nVariable" as variable
+
+    User -> UI: Edit variables
+    UI -> uicontroller: w = getActiveWorkbook()
+    UI -> workbook: list = getVariables()
+    loop
+        lvariable -> UI: addItem(Variable)
+    end loop
+
+    User -> UI: Selects a variable and \n changes the value
+    UI -> variable: setValue(newValue)
+    
+
+@enduml

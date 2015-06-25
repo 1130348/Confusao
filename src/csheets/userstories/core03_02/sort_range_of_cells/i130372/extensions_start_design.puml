@@ -1,0 +1,15 @@
+  @startuml doc-files/extension_start_design.png
+  participant "uic : UIController" as UIC
+  participant ExtensionManager as ExtM
+  participant "extension : SortExtension" as EExample
+  participant "uiExtension : UIExtensionSort" as UIExt
+  UIC -> ExtM : extensions=getExtensions();
+  loop for Extension ext : extensions
+  	UIC -> EExample : uiExtension=getUIExtension(this);
+  	activate EExample
+  	create UIExt
+  	EExample -> UIExt : new(extension, uic)
+  	deactivate EExample
+  	UIC -> UIC : uiExtensions.add(uiExtension);
+  end
+  @enduml

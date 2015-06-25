@@ -1,0 +1,51 @@
+@startuml doc-files/design_macros_05_02_part2.png
+actor User
+
+ participant "CallFunctionAction" as act
+ 
+ participant "CallFunctionUI" as UI
+ participant "CallFunctionCtrl" as ctrl
+ participant "Language" as language
+ participant "BinaryOperation" as bo
+ participant "UIcontroller" as uiCtrl
+
+create act
+User -> act : new(n, uiController)
+create UI
+act -> UI : new(null, enabled, controller, uiNumber, uiController)
+User -> UI : show
+activate UI
+UI -> ctrl : lf = fillList()
+deactivate UI
+activate ctrl
+ctrl -> language : lf = getFunctions()
+deactivate ctrl
+activate UI
+UI ->ctrl : lf = fillListOperators(lf)
+activate ctrl
+ctrl -> language : lf = getOpertions()
+deactivate ctrl
+UI -> UI : fillFunctionsList(lf)
+User -> UI : choose function
+UI -> ctrl : func_def = newChooseFunction(f)
+deactivate UI
+activate ctrl
+ctrl -> language : func = getFunction(f)
+deactivate ctrl
+activate UI
+User -> UI : Fill Data and Enter
+UI -> ctrl : validateOperatorsParameters(lp, func_def)
+UI -> ctrl : value = callBinaryOperator(func_def, parameter1, parameter2)
+activate ctrl
+ctrl -> language : bo = getBinaryOperator(func_def)
+create bo
+ctrl -> bo : new(bo, parameter1, parameter2)
+ctrl -> bo : value = evaluate()
+deactivate ctrl
+UI -> UI : setText(value)
+UI -> uiController : activeCell = getActiveCell(uiCtrl)
+UI -> ctrl : addResultToCell(activeCell, func_def)
+participant "Cell" as cell
+ctrl -> cell : setContent(func_def)
+
+@enduml
