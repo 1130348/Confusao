@@ -145,5 +145,6 @@ public class SpreadsheetTableModel extends AbstractTableModel {
 		public void dependentsChanged(Cell cell) {}
 		public void cellCleared(Cell cell) {}
 		public void cellCopied(Cell cell, Cell source) {}
+                public void formulaChanged() {}
 	}
 }

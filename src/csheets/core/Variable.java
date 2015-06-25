@@ -88,5 +88,10 @@ public class Variable implements Comparable<Variable>, Serializable {
 
 		return -1;
 	}
-
+        
+        @Override
+        public String toString()
+        {
+            return name;
+        }
 }
