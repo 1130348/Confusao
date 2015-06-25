@@ -109,6 +109,11 @@ public class Import implements Runnable {
 					public void cellCopied(Cell cell, Cell source) {
 						uiController.setModificationOnCells(true);
 					}
+
+                                        @Override
+                                        public void formulaChanged() {
+                                                uiController.setModificationOnCells(true);
+                                        }
 				});
 			}
 		}

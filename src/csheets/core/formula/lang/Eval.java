@@ -8,6 +8,7 @@ import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
 import csheets.core.formula.compiler.ExcelExpressionCompiler;
 import csheets.core.formula.compiler.FormulaCompilationException;
+import csheets.ui.ctrl.UIController;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,6 +94,10 @@ public class Eval implements Function {
 	@Override
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 
 }

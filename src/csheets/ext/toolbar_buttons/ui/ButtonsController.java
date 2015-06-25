@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public class ButtonsController {
 
 	/**
+	 * The UIController
+	 */
+	private UIController uictrl;
+
+	/**
 	 * The names of the icons that are on the file
 	 */
 	private ArrayList<String> iconNames;
@@ -28,7 +33,9 @@ public class ButtonsController {
 	 * @param ui
 	 */
 	public ButtonsController(UIController ui) {
-		iconNames = new ArrayList<String>();
+		this.uictrl = ui;
+		this.iconNames = new ArrayList<String>();
+
 		names();
 	}
 
@@ -83,4 +90,5 @@ public class ButtonsController {
 	public void setIconNames(ArrayList<String> tmp) {
 		this.iconNames = tmp;
 	}
+
 }

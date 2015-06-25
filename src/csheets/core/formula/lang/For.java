@@ -10,6 +10,7 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  *
@@ -17,52 +18,56 @@ import csheets.core.formula.FunctionParameter;
  */
 public class For implements Function {
 
-    /**
-     * Parameters: function, function range, condition and condition range
-     */
-    public static final FunctionParameter[] parameters = new FunctionParameter[]{
-        new FunctionParameter(Value.Type.TEXT, "Starting Point", false,
-                              "Atribution to a cell where the FOR cicle will begin"),
-        new FunctionParameter(Value.Type.NUMERIC, "Ending Point", false,
-                              "A value where the FOR cicle will end when the condition is met"),
-        new FunctionParameter(Value.Type.UNDEFINED, "Operation", false,
-                              "Obligatory operation to be executed inside the FOR cicle")
-    };
+	/**
+	 * Parameters: function, function range, condition and condition range
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
+		new FunctionParameter(Value.Type.TEXT, "Starting Point", false,
+							  "Atribution to a cell where the FOR cicle will begin"),
+		new FunctionParameter(Value.Type.NUMERIC, "Ending Point", false,
+							  "A value where the FOR cicle will end when the condition is met"),
+		new FunctionParameter(Value.Type.UNDEFINED, "Operation", false,
+							  "Obligatory operation to be executed inside the FOR cicle")
+	};
 
-    /**
-     * Creates a new instance of the FOR function.
-     */
-    public For() {
-    }
+	/**
+	 * Creates a new instance of the FOR function.
+	 */
+	public For() {
+	}
 
-    public String getIdentifier() {
-        return "FOR";
-    }
+	public String getIdentifier() {
+		return "FOR";
+	}
 
-    public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
+	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
 
-        int i;
-        //aqui temos de dividir a formula que vai estar presente na celula a fazer o evaluate
-        arguments[0].evaluate();
+		int i;
+		//aqui temos de dividir a formula que vai estar presente na celula a fazer o evaluate
+		arguments[0].evaluate();
 
-        while (arguments[1].evaluate().toBoolean()) {
+		while (arguments[1].evaluate().toBoolean()) {
 
-            for ( i = 2; i < arguments.length; i++) {
+			for (i = 2; i < arguments.length; i++) {
 
-                arguments[i].evaluate();
-            }
-        }
+				arguments[i].evaluate();
+			}
+		}
 
-        Value v = new Value("FOR");
-        return v;
+		Value v = new Value("FOR");
+		return v;
 
-    }
+	}
 
-    public FunctionParameter[] getParameters() {
-        return parameters;
-    }
+	public FunctionParameter[] getParameters() {
+		return parameters;
+	}
 
-    public boolean isVarArg() {
-        return true;
-    }
+	public boolean isVarArg() {
+		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
+	}
 }

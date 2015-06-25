@@ -80,6 +80,7 @@ public class MacrosWindowDialog extends javax.swing.JDialog {
 	private void retrieveFunctionsList() {
 		functions = macrosWindowController.retrieveFunctionsList();
 		for (int i = 0; i < functions.length; i++) {
+			functions[i].setUIController(ui);
 			formulaComboBox.addItem(functions[i].getIdentifier());
 		}
 	}

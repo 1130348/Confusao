@@ -3,9 +3,9 @@ package csheets.ext.Email;
 import csheets.core.Cell;
 import csheets.ext.Email.UI.EmailMenu;
 import csheets.ui.ctrl.UIController;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -38,13 +38,11 @@ public class EmailController {
 	public static void setMailSettings(String mail, String host,
 									   String password, Cell cell) {
 
-		mailSettings = new Email(mail, password, new SmtpConfig(host));
-		saveEmail(mailSettings);
+		mailSettings = new Email(mail, password, host);
 		flagEmail = true;
 		JOptionPane.
 			showMessageDialog(null, "Email set successfuly", "Email set", JOptionPane.INFORMATION_MESSAGE);
 		sendTestEmail(cell);
-
 	}
 
 	/**
@@ -64,6 +62,8 @@ public class EmailController {
 		} else {
 
 			Properties props = new Properties();
+			props.setProperty("mail.smtp.ssl.trust", mailSettings.getSmtp().
+							  getService());
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", mailSettings.getSmtp().getService());
@@ -74,7 +74,6 @@ public class EmailController {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(mailSettings.
 							getEmail(), mailSettings.getPassword());
-
 					}
 				});
 
@@ -88,9 +87,16 @@ public class EmailController {
 										  getEmail()));
 				message.setSubject("Test");
 				message.setText(cell.getContent());
-
+				System.out.println("SEND");
 				Transport.send(message);
+				System.out.println("SENDED");
 				JOptionPane.showMessageDialog(null, "Email sent");
+				PrintWriter pw = new PrintWriter(new FileWriter("mailConfig.txt"));
+				pw.println(mailSettings.getEmail());
+				pw.println(mailSettings.getPassword());
+				pw.println(mailSettings.getSmtp().getService());
+				pw.println(mailSettings.getSmtp().getPort());
+				pw.close();
 				return true;
 			} catch (AuthenticationFailedException aex) {
 				JOptionPane.
@@ -103,38 +109,17 @@ public class EmailController {
 									  JOptionPane.WARNING_MESSAGE);
 				mex.printStackTrace();
 				return false;
+			} catch (IOException ex) {
+				JOptionPane.
+					showMessageDialog(null, "Error creating mail configuration file!", "ERROR",
+									  JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 		}
 	}
 
 	public static Email getMailSettings() {
 		return mailSettings;
-	}
-
-	public static void saveEmail(Email em) {
-
-		try {
-
-			String content = "This is the content to write into file";
-
-			File file = new File("EmailTeste.txt");
-
-			// if file doesnt exists, then create it
-			if (!file.exists()) {
-				file.createNewFile();
-			} else {
-				FileOutputStream fou = new FileOutputStream(file, true);
-				byte[] mybytes = (mailSettings.toString() + "\n").getBytes();
-				fou.write(mybytes);
-				fou.close();
-//				FileWriter fw = new FileWriter(file.getAbsoluteFile());
-//				BufferedWriter bw = new BufferedWriter(fw);
-//				bw.write();
-//				bw.close();
-			}
-		} catch (IOException e) {
-			//e.printStackTrace();
-		}
 	}
 
 }

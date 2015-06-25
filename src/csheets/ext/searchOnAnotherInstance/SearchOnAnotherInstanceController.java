@@ -6,6 +6,7 @@
 package csheets.ext.searchOnAnotherInstance;
 
 import csheets.core.Workbook;
+import csheets.ext.searchOnAnotherInstance.ui.NetworkSearchContentPanel;
 import csheets.ext.searchOnAnotherInstance.ui.NetworkSearchPanel;
 import csheets.ext.searchOnAnotherInstance.ui.SearchOnAnotherInstanceDialog;
 import csheets.ext.startsharing.NetworkReceiveService;
@@ -34,6 +35,10 @@ public class SearchOnAnotherInstanceController {
 	}
 
 	public void addObserverWatch(NetworkSearchPanel panel) {
+		report.addObserver(panel);
+	}
+        
+        public void addObserverWatchForContent(NetworkSearchContentPanel panel) {
 		report.addObserver(panel);
 	}
 

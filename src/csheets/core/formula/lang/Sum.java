@@ -25,23 +25,28 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
 
 /**
  * A function that returns the numeric sum of its arguments.
+ *
  * @author Einar Pehrson
  */
 public class Sum implements Function {
 
-	/** The only (but repeatable) parameter: a numeric term */
-	public static final FunctionParameter[] parameters = new FunctionParameter[] {
+	/**
+	 * The only (but repeatable) parameter: a numeric term
+	 */
+	public static final FunctionParameter[] parameters = new FunctionParameter[]{
 		new FunctionParameter(Value.Type.NUMERIC, "Term", false,
-			"A number to be included in the sum")
+							  "A number to be included in the sum")
 	};
 
 	/**
 	 * Creates a new instance of the SUM function.
 	 */
-	public Sum() {}
+	public Sum() {
+	}
 
 	public String getIdentifier() {
 		return "SUM";
@@ -51,17 +56,21 @@ public class Sum implements Function {
 		double sum = 0;
 		for (Expression expression : arguments) {
 			Value value = expression.evaluate();
-			if (value.getType() == Value.Type.NUMERIC)
-			 	sum += value.toDouble();
-			else if (value.getType() == Value.Type.MATRIX)
+			if (value.getType() == Value.Type.NUMERIC) {
+				sum += value.toDouble();
+			} else if (value.getType() == Value.Type.MATRIX) {
 				for (Value[] vector : value.toMatrix()) {
-					for (Value item : vector)
-						if (item.getType() == Value.Type.NUMERIC)
-						 	sum += item.toDouble();
-						 else
-						 	throw new IllegalValueTypeException(item, Value.Type.NUMERIC);
-			} else
+					for (Value item : vector) {
+						if (item.getType() == Value.Type.NUMERIC) {
+							sum += item.toDouble();
+						} else {
+							throw new IllegalValueTypeException(item, Value.Type.NUMERIC);
+						}
+					}
+				}
+			} else {
 				throw new IllegalValueTypeException(value, Value.Type.NUMERIC);
+			}
 		}
 		return new Value(sum);
 	}
@@ -72,5 +81,9 @@ public class Sum implements Function {
 
 	public boolean isVarArg() {
 		return true;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }
