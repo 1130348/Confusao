@@ -250,6 +250,11 @@ public class SpreadsheetImpl implements Spreadsheet {
 			for (CellListener listener : cellListeners)
 				listener.cellCopied(cell, source);
 		}
+
+                public void formulaChanged() {
+                        for (CellListener listener : cellListeners)
+				listener.formulaChanged();
+                }
 	}
 
 /*

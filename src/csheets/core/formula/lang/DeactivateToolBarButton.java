@@ -5,6 +5,12 @@ import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ext.toolbar_buttons.ui.ButtonsToolBar;
+import csheets.ext.toolbar_buttons.ui.ButtonsUIExtension;
+import csheets.ui.ctrl.UIController;
+import csheets.ui.ext.UIExtension;
+import java.awt.Component;
+import javax.swing.JToggleButton;
 
 /**
  * Creates a new Function DEACTIVATE_BUTTON that can deactivate the button that
@@ -13,6 +19,8 @@ import csheets.core.formula.FunctionParameter;
  * @author Cristina
  */
 public class DeactivateToolBarButton implements Function {
+
+	private UIController uicontroller;
 
 	/**
 	 * The function's parameters
@@ -50,14 +58,24 @@ public class DeactivateToolBarButton implements Function {
 	@Override
 	public Value applyTo(Expression[] args) throws IllegalValueTypeException {
 		String button = args[0].evaluate().toString();
-//		for (Component l1 : l) {
-//			if (l1.getClass() == JToggleButton.class) {
-//				if (l1.getName().equals(button)) {
-//					l1.setEnabled(false);
-//					return new Value(true);
-//				}
-//			}
-//		}
+		UIExtension[] uie = uicontroller.getExtensions();
+		ButtonsToolBar b = null;
+		for (UIExtension uie1 : uie) {
+			if (uie1.getExtension().getName().equals("Buttons")) {
+				b = ((ButtonsUIExtension) uie1).getActualToolBar();
+				Component[] c = b.getComponents();
+				for (Component c1 : c) {
+					if (c1.getClass() == JToggleButton.class) {
+						if (c1.getName().equals(button)) {
+							c1.setEnabled(false);
+							return new Value(true);
+						}
+					}
+
+				}
+
+			}
+		}
 		return new Value(false);
 	}
 
@@ -74,6 +92,11 @@ public class DeactivateToolBarButton implements Function {
 	@Override
 	public boolean isVarArg() {
 		return false;
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
+		this.uicontroller = ui;
 	}
 
 }

@@ -20,22 +20,25 @@
  */
 package csheets.core.formula.lang;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
 import csheets.core.formula.Expression;
 import csheets.core.formula.Function;
 import csheets.core.formula.FunctionParameter;
+import csheets.ui.ctrl.UIController;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * A numeric function that invokes a method object.
+ *
  * @author Einar Pehrson
  */
 public class NumericFunction implements Function {
 
-	/** The method that the function invokes */
+	/**
+	 * The method that the function invokes
+	 */
 	private Method method;
 
 	/**
@@ -52,19 +55,23 @@ public class NumericFunction implements Function {
 	public Value applyTo(Expression[] arguments) throws IllegalValueTypeException {
 		// Fetches values
 		double[] values = new double[arguments.length];
-		for (int i = 0; i < arguments.length; i++)
+		for (int i = 0; i < arguments.length; i++) {
 			values[i] = arguments[i].evaluate().toDouble();
+		}
 
 		// Invokes method
 		try {
-			if (values.length == 0)
-				return new Value((Number)method.invoke(null));
-			else if (values.length == 1)
-				return new Value((Number)method.invoke(null, values[0]));
-			else if (values.length == 2)
-				return new Value((Number)method.invoke(null, values[0], values[1]));
-			else
-				return new Value((Number)method.invoke(null, values[0], values[1], values[2]));
+			if (values.length == 0) {
+				return new Value((Number) method.invoke(null));
+			} else if (values.length == 1) {
+				return new Value((Number) method.invoke(null, values[0]));
+			} else if (values.length == 2) {
+				return new Value((Number) method.
+					invoke(null, values[0], values[1]));
+			} else {
+				return new Value((Number) method.
+					invoke(null, values[0], values[1], values[2]));
+			}
 		} catch (IllegalAccessException e) {
 			return new Value(e);
 		} catch (IllegalArgumentException e) {
@@ -77,12 +84,17 @@ public class NumericFunction implements Function {
 	public FunctionParameter[] getParameters() {
 		Class[] paramTypes = method.getParameterTypes();
 		FunctionParameter[] params = new FunctionParameter[paramTypes.length];
-		for (int i = 0; i < paramTypes.length; i++)
+		for (int i = 0; i < paramTypes.length; i++) {
 			params[i] = new FunctionParameter(Value.Type.NUMERIC, "Parameter " + i, false, "Unknown");
+		}
 		return params;
 	}
 
 	public boolean isVarArg() {
 		return method.isVarArgs();
+	}
+
+	@Override
+	public void setUIController(UIController ui) {
 	}
 }

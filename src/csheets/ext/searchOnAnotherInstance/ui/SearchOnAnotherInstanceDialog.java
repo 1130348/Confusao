@@ -45,6 +45,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		refreshButton.setEnabled(true);
 		searchButton.setEnabled(true);
 		searchLan.setEnabled(true);
+                SearchByContent.setEnabled(true);
 	}
 
 	private void deactivatePanel() {
@@ -53,6 +54,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 		refreshButton.setEnabled(false);
 		searchButton.setEnabled(false);
 		searchLan.setEnabled(false);
+                SearchByContent.setEnabled(false);
 	}
 
 	public static SearchOnAnotherInstanceDialog getInstance(
@@ -83,6 +85,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
         refreshButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         searchLan = new javax.swing.JButton();
+        SearchByContent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -125,26 +128,35 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
             }
         });
 
+        SearchByContent.setText("Search By Content");
+        SearchByContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchByContentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchLan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(workbookToSearchText, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchLan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SearchByContent, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(workbookToSearchText)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,12 +170,13 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
                 .addGap(27, 27, 27)
                 .addComponent(workbookToSearchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                        .addContainerGap(23, Short.MAX_VALUE))
-                    .addComponent(searchLan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SearchByContent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchLan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,6 +247,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 						get(i);
 					controller.
 						sendSearchRequest(addressToSend, workbookToSearch);
+                                        controller.sendSearchRequest(addressToSend,workbookToSearch);
 					workbookToSearchText.setText("");
 				}
 			} catch (UnknownHostException ex) {
@@ -241,6 +255,36 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 			}
 		}
     }//GEN-LAST:event_searchLanActionPerformed
+
+    private void SearchByContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchByContentActionPerformed
+        		if (instancesList.getModel().getSize() == 0) {
+			JOptionPane.
+				showMessageDialog(null, "No instances have been found!", "Warning", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		for (UIExtension ext : uiController.getExtensions()) {
+			if (ext instanceof UIExtentionSearchByContent) {
+				controller.addObserverWatchForContent((NetworkSearchContentPanel) ext.
+					getSideBar());
+			}
+		}
+		String workbookToSearch = workbookToSearchText.getText();
+		for (int i = 0; i < listOfAvailableCleanSheetsInstances.size(); i++) {
+			try {
+				if (!listOfAvailableCleanSheetsInstances.get(i).
+					equalsIgnoreCase(InetAddress.getLocalHost().getHostAddress())) {
+
+					String addressToSend = listOfAvailableCleanSheetsInstances.
+						get(i);
+					controller.
+						sendSearchRequest(addressToSend, workbookToSearch);
+					workbookToSearchText.setText("");
+				}
+			} catch (UnknownHostException ex) {
+				System.out.println("UnknownHostException: " + ex);
+			}
+		}
+    }//GEN-LAST:event_SearchByContentActionPerformed
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -326,6 +370,7 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SearchByContent;
     private javax.swing.JList instancesList;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;

@@ -8,6 +8,7 @@ package csheets.ext.Email.UI;
 import csheets.ext.Email.EmailController;
 import csheets.ext.Email.ExtensionEmail;
 import csheets.ext.Email.SmtpConfig;
+import csheets.ext.sendEmail.UI.OutBoxPanel;
 import csheets.ui.ctrl.UIController;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -47,7 +48,6 @@ public class EmailMenu extends JPanel {
 		//Creates controller
 
 		controller = new EmailController(uiController, this);
-
 		JPanel EmailPanel = new JPanel();
 		EmailPanel.setLayout(new GridLayout(5, 5));
 		label = new JLabel(" Email ");
@@ -120,9 +120,9 @@ public class EmailMenu extends JPanel {
 				}
 			}
 		});
+		northPanel.add(bt, BorderLayout.SOUTH);
 		add(northPanel, BorderLayout.NORTH);
-		add(bt, BorderLayout.SOUTH);
-
+		add(OutBoxPanel.getInstance(), BorderLayout.CENTER);
 	}
 
 }

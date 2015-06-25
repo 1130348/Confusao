@@ -58,7 +58,11 @@ public class AddWindow extends javax.swing.JFrame {
 						b = ((ButtonsUIExtension) uie1).getActualToolBar();
 					}
 				}
-
+				if (jComboBox1.getSelectedItem().toString().equals("Empty")) {
+					JOptionPane.
+						showMessageDialog(null, "Please create an action first");
+					return;
+				}
 				b.
 					addButton(jTextField1.getText(), jTextField3.getText(), jTextField2.
 							  getText(), uicontroller.getMacros().

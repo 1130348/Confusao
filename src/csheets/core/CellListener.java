@@ -62,4 +62,9 @@ public interface CellListener extends EventListener {
 	 * @param source the cell from which data was copied
 	 */
 	public void cellCopied(Cell cell, Cell source);
+        
+        /**
+         * Invoked when the formula is changed
+         */
+        public void formulaChanged();
 }

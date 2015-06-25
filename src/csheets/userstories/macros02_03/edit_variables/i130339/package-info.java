@@ -42,6 +42,24 @@
  * 
  * <h2>4. Design</h2>
  *
+ * Here we can see the sequence diagram to go get the variables
+ * <br/><br/>
+ * <img src = "doc-files/macros02_03_sequence_diagram_design_getVariables.png"/>
+ * <br/><br/>
+ * 
+ * After that if the user chooses a variable, it will be necessary to go get the value and the cells where the
+ * variable is used.
+ * 
+ * <br/><br/>
+ * <img src = "doc-files/macros02_03_sequence_diagram_design_getValueandCellsfromVar.png"/>
+ * <br/><br/>
+ * 
+ * Here is the diagram for the method getAddressVariable 
+ * 
+ * <br/><br/>
+ * <img src = "doc-files/macros02_03_sequence_diagram_design_getAddressVariable.png"/>
+ * <br/><br/>
+ * 
  * <h2>5. Coding</h2>
 
  * <h2>6. Final Remarks</h2>
