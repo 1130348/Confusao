@@ -1,0 +1,33 @@
+@startuml doc-files/macros02_03_class_diagram_analysis.png
+
+  
+    class "<<analysis>> EditVariablesController" as controller{
+		-UIController uicontroller
+    }
+
+    class "<<analysis>> EditVariablesUI" as ui{
+		+initComponentes()
+                +update()
+                +modifications()
+    }
+
+    class "<<analysis>> UIController" as uicontroller{
+		+getActiveWorkbook()
+    }
+
+    class "<<analysis>> WorkBook" as w{
+            +getVariables()
+    }
+
+    class "<<analysis>> Variable" as v{
+            +setValue();
+    }
+
+    controller <|-- ui
+    uicontroller <|-- controller
+    w <|-- uicontroller
+    v <|-- w
+    
+
+@enduml
+

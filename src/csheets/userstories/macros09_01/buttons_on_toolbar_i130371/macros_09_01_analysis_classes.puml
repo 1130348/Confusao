@@ -4,19 +4,38 @@
     }
 
 	class "<<analysis>> ButtonsController" as ctrl{
-		+getAllActionButtons()
-		+buttonInfo(tooltip, icon, Action, activate)
-		+editButton(tooltip, icon, Action, activate)
-		+removeButton(button)
-}
+		+validateIcon()
+	}
 
-	class "<<analysis>> nActionButtonToolBar" as toolbar{
-		+addButton(button)
-		+editButton(tooltip, icon, Action, activate)
-		+removeButton(button)
-    }
+	class "<<analysis>> nButtonToolBar" as toolbar{
+	+addButton(String name, String toolTip, String icon, String action)
+	+addToogleButton()
+	}
 
+	class "<<analysis>> UIController" as uicontroller{
+		+getMacrosName()
+		+getActiveCell()
+	}
+
+	class "<<analysis>> AddWindow" as window{
+		+initComponents()
+		+retrieveMacrosList()
+	  }
+
+	class "<<analysis>> DefaultAction" as action{
+		+DefaultAction(uiController, tooltip, icon, action)
+		+c.setContent("="+macro)
+	  }
+
+	class "<<analysis>> AddAction" as aaction{
+		+actionPerformed(ActionEvent event)
+	  }
+
+	UI <|-- uicontroller
 	ctrl <|-- UI
 	toolbar <|-- ctrl
+	action <|-- toolbar
+	aaction <|-- toolbar
+	window <|-- aaction
 
 @enduml

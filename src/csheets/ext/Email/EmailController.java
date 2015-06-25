@@ -2,8 +2,10 @@ package csheets.ext.Email;
 
 import csheets.core.Cell;
 import csheets.ext.Email.UI.EmailMenu;
-import csheets.ext.contact.Email;
 import csheets.ui.ctrl.UIController;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -11,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
@@ -35,12 +38,11 @@ public class EmailController {
 	public static void setMailSettings(String mail, String host,
 									   String password, Cell cell) {
 
-		mailSettings = new Email(mail);//, password, host);
+		mailSettings = new Email(mail, password, host);
 		flagEmail = true;
 		JOptionPane.
 			showMessageDialog(null, "Email set successfuly", "Email set", JOptionPane.INFORMATION_MESSAGE);
 		sendTestEmail(cell);
-
 	}
 
 	/**
@@ -60,17 +62,18 @@ public class EmailController {
 		} else {
 
 			Properties props = new Properties();
+			props.setProperty("mail.smtp.ssl.trust", mailSettings.getSmtp().
+							  getService());
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
-			//props.put("mail.smtp.host", mailSettings.getSmtp().getService());
-			//props.put("mail.smtp.port", mailSettings.getSmtp().getPort());
+			props.put("mail.smtp.host", mailSettings.getSmtp().getService());
+			props.put("mail.smtp.port", mailSettings.getSmtp().getPort());
 
 			Session session = Session.
 				getInstance(props, new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						/*return new PasswordAuthentication(mailSettings.
-							getEmail(), mailSettings.getPassword());*/
-                                            return null;
+						return new PasswordAuthentication(mailSettings.
+							getEmail(), mailSettings.getPassword());
 					}
 				});
 
@@ -78,17 +81,22 @@ public class EmailController {
 			try {
 				Message message = new MimeMessage(session);
 
-				//message.setFrom(new InternetAddress(mailSettings.getEmail()));
-
-				//message.setRecipients(Message.RecipientType.TO,
-									//  InternetAddress.parse(mailSettings.
-										//  getEmail()));
-
+				message.setFrom(new InternetAddress(mailSettings.getEmail()));
+				message.setRecipients(Message.RecipientType.TO,
+									  InternetAddress.parse(mailSettings.
+										  getEmail()));
 				message.setSubject("Test");
 				message.setText(cell.getContent());
-
+				System.out.println("SEND");
 				Transport.send(message);
+				System.out.println("SENDED");
 				JOptionPane.showMessageDialog(null, "Email sent");
+				PrintWriter pw = new PrintWriter(new FileWriter("mailConfig.txt"));
+				pw.println(mailSettings.getEmail());
+				pw.println(mailSettings.getPassword());
+				pw.println(mailSettings.getSmtp().getService());
+				pw.println(mailSettings.getSmtp().getPort());
+				pw.close();
 				return true;
 			} catch (AuthenticationFailedException aex) {
 				JOptionPane.
@@ -100,6 +108,11 @@ public class EmailController {
 					showMessageDialog(null, "Something went wrong!", "Warning",
 									  JOptionPane.WARNING_MESSAGE);
 				mex.printStackTrace();
+				return false;
+			} catch (IOException ex) {
+				JOptionPane.
+					showMessageDialog(null, "Error creating mail configuration file!", "ERROR",
+									  JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 		}

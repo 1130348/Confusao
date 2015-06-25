@@ -1,0 +1,16 @@
+ @startuml doc-files/macros_08_01_analysis.png
+  actor User
+  participant "<<analysis>>\nBeanShellUI" as UI
+  participant "<<analysis>>\nBeanShellConsole" as ctrl
+  participant "<<analysis>>\nBeanShellInterpreter" as interpreter
+  User -> UI : Selects BeanShell extension
+  activate UI
+  UI -> ctrl : open()
+  deactivate UI
+  User -> ctrl: write script
+  activate ctrl
+  ctrl -> interpreter:processScript(text)
+  interpreter -> ctrl:results()
+  ctrl -> ctrl: displayResults()
+  deactivate ctrl
+  @enduml

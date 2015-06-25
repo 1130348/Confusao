@@ -10,10 +10,6 @@ import csheets.ext.Extension;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.UIExtension;
 
-/**
- *
- * @author Marcos
- */
 public class ExtensionEmail extends Extension {
 
 	/**

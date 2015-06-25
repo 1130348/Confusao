@@ -135,6 +135,11 @@ public class FileSharingController {
         activeCon.setUI(FSUI);
         activeCon.createThreads();
     }
+    
+    public static void download(String file_p, String out) throws IOException {
+        activeCon.sendFile(file_p, out);
+        activeCon.downloadFile();
+    }
 
     private void createServer() {
         Thread Server = new Thread() {

@@ -22,8 +22,9 @@ package csheets.ui;
 
 import csheets.CleanSheets;
 import csheets.core.Workbook;
-import csheets.core.call_function.ui.CallFunctionAction;
+import csheets.ext.call_function.ui.CallFunctionAction;
 import csheets.ext.export.ui.ExportAsAction;
+import csheets.ext.importXML.ui.ImportAsAction;
 import csheets.ext.import_export_link.ui.LinkImportExportAction;
 import csheets.ext.import_export_text.ui.ExportAction;
 import csheets.ext.import_export_text.ui.ImportAction;
@@ -88,33 +89,33 @@ import javax.swing.JToolBar;
 @SuppressWarnings("serial")
 public class Frame extends JFrame implements SelectionListener {
 
-    /**
-     * The base of the window title
-     */
-    public static final String TITLE = "CleanSheets";
+	/**
+	 * The base of the window title
+	 */
+	public static final String TITLE = "CleanSheets";
 
-    /**
-     * The CleanSheets application
-     */
-    private CleanSheets app;
+	/**
+	 * The CleanSheets application
+	 */
+	private CleanSheets app;
 
-    /**
-     * Creates a new frame.
-     *
-     * @param app the CleanSheets application
-     */
-    public Frame(CleanSheets app) {
-        // Stores members and creates controllers
-        this.app = app;
-        UIController uiController = new UIController(app);
+	/**
+	 * Creates a new frame.
+	 *
+	 * @param app the CleanSheets application
+	 */
+	public Frame(CleanSheets app) {
+		// Stores members and creates controllers
+		this.app = app;
+		UIController uiController = new UIController(app);
 
-        // Creates action manager
-        FileChooser chooser = null;
-        try {
-            chooser = new FileChooser(this, app.getUserProperties());
-        } catch (java.security.AccessControlException ace) {
-        }
-        ActionManager actionManager = new ActionManager(app, uiController, chooser);
+		// Creates action manager
+		FileChooser chooser = null;
+		try {
+			chooser = new FileChooser(this, app.getUserProperties());
+		} catch (java.security.AccessControlException ace) {
+		}
+		ActionManager actionManager = new ActionManager(app, uiController, chooser);
 
 		// Registers file actions
 		actionManager.registerAction("new", new NewAction(app));
@@ -135,24 +136,29 @@ public class Frame extends JFrame implements SelectionListener {
 			registerAction("import", new ImportAction(app, uiController));
 		actionManager.
 			registerAction("export", new ExportAction(app, uiController));
-                actionManager.registerAction("exportas", new ExportAsAction(app, uiController));
+		actionManager.
+			registerAction("exportas", new ExportAsAction(app, uiController));
+		actionManager.
+			registerAction("importas", new ImportAsAction(app, uiController));
+
 		actionManager.
 			registerAction("link", new LinkImportExportAction(app, uiController));
 
-        // Registers edit actions
-        actionManager.registerAction("undo", new UndoAction());
-        actionManager.registerAction("redo", new RedoAction());
-        actionManager.registerAction("cut", new CutAction());
-        actionManager.registerAction("copy", new CopyAction());
-        actionManager.registerAction("paste", new PasteAction());
-        actionManager.registerAction("clear", new ClearAction());
-        actionManager.registerAction("selectall", new SelectAllAction());
-        actionManager.registerAction("sort", new SortAction());
-        actionManager.registerAction("search", new SearchAction(uiController));
-        actionManager.registerAction("prefs", new PreferencesAction());
+		// Registers edit actions
+		actionManager.registerAction("undo", new UndoAction());
+		actionManager.registerAction("redo", new RedoAction());
+		actionManager.registerAction("cut", new CutAction());
+		actionManager.registerAction("copy", new CopyAction());
+		actionManager.registerAction("paste", new PasteAction());
+		actionManager.registerAction("clear", new ClearAction());
+		actionManager.registerAction("selectall", new SelectAllAction());
+		actionManager.registerAction("sort", new SortAction());
+		actionManager.registerAction("search", new SearchAction(uiController));
+		actionManager.registerAction("prefs", new PreferencesAction());
 
-                actionManager.registerAction("chooseCurrencyExchangesFile", new ChooseCurrencyExchangeFileAction());
-                
+		actionManager.
+			registerAction("chooseCurrencyExchangesFile", new ChooseCurrencyExchangeFileAction());
+
 		// Registers spreadsheet actions
 		actionManager.
 			registerAction("addsheet", new AddSpreadsheetAction(uiController));
@@ -165,162 +171,163 @@ public class Frame extends JFrame implements SelectionListener {
 		actionManager.registerAction("insertrow", new InsertRowAction());
 		actionManager.registerAction("removerow", new RemoveRowAction());
 
-        // Registers help actions
-        actionManager.registerAction("help", new HelpAction());
-        actionManager.registerAction("license", new LicenseAction());
-        actionManager.registerAction("about", new AboutAction());
+		// Registers help actions
+		actionManager.registerAction("help", new HelpAction());
+		actionManager.registerAction("license", new LicenseAction());
+		actionManager.registerAction("about", new AboutAction());
 
-        //Registers functions actions
-        actionManager.registerAction("callfunction", new CallFunctionAction(uiController, 1));
+		//Registers functions actions
+		actionManager.
+			registerAction("callfunction", new CallFunctionAction(uiController, 1));
 
-        // Creates spreadsheet components
-        WorkbookPane workbookPane = new WorkbookPane(uiController, actionManager);
-        CellEditor cellEditor = new CellEditor(uiController);
-        AddressBox addressBox = new AddressBox(uiController);
-        JButton btnFunction = new JButton();
-        btnFunction.setAction(new CallFunctionAction(uiController, 0));
-        btnFunction.setVerticalTextPosition(AbstractButton.CENTER);
-        btnFunction.setHorizontalTextPosition(AbstractButton.CENTER);
-       
-        // Creates tool bars
-        JPanel toolBarPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        toolBarPanel.add(new StandardToolBar(actionManager));
-        for (UIExtension extension : uiController.getExtensions()) {
-            JToolBar extToolBar = extension.getToolBar();
-            if (extToolBar != null) {
-                toolBarPanel.add(extToolBar);
-            }
-        }
+		// Creates spreadsheet components
+		WorkbookPane workbookPane = new WorkbookPane(uiController, actionManager);
+		CellEditor cellEditor = new CellEditor(uiController);
+		AddressBox addressBox = new AddressBox(uiController);
+		JButton btnFunction = new JButton();
+		btnFunction.setAction(new CallFunctionAction(uiController, 0));
+		btnFunction.setVerticalTextPosition(AbstractButton.CENTER);
+		btnFunction.setHorizontalTextPosition(AbstractButton.CENTER);
 
-        // Creates and lays out top panel
-        JPanel cellPanel = new JPanel(new BorderLayout());
-        JPanel btnPanel = new JPanel(new BorderLayout());
-        btnPanel.add(addressBox, BorderLayout.WEST);
-        btnPanel.add(btnFunction, BorderLayout.CENTER);
-        cellPanel.add(btnPanel, BorderLayout.WEST);
-        cellPanel.add(cellEditor, BorderLayout.CENTER);
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.add(toolBarPanel, BorderLayout.NORTH);
-        topPanel.add(cellPanel, BorderLayout.SOUTH);
+		// Creates tool bars
+		JPanel toolBarPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
+		toolBarPanel.add(new StandardToolBar(actionManager));
+		for (UIExtension extension : uiController.getExtensions()) {
+			JToolBar extToolBar = extension.getToolBar();
+			if (extToolBar != null) {
+				toolBarPanel.add(extToolBar);
+			}
+		}
 
-        // Creates and lays out side bar components
-        JTabbedPane sideBar = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
-        sideBar.setPreferredSize(new Dimension(170, 480));
-        Font font = sideBar.getFont();
-        sideBar.
-                setFont(new Font(font.getFamily(), Font.PLAIN, font.getSize() - 1));
-        for (UIExtension extension : uiController.getExtensions()) {
-            JComponent extBar = extension.getSideBar();
-            if (extBar != null) {
-                sideBar.insertTab(extension.getExtension().getName(), extension.
-                        getIcon(),
-                        extBar, null, sideBar.getTabCount());
-            }
-        }
+		// Creates and lays out top panel
+		JPanel cellPanel = new JPanel(new BorderLayout());
+		JPanel btnPanel = new JPanel(new BorderLayout());
+		btnPanel.add(addressBox, BorderLayout.WEST);
+		btnPanel.add(btnFunction, BorderLayout.CENTER);
+		cellPanel.add(btnPanel, BorderLayout.WEST);
+		cellPanel.add(cellEditor, BorderLayout.CENTER);
+		JPanel topPanel = new JPanel(new BorderLayout());
+		topPanel.add(toolBarPanel, BorderLayout.NORTH);
+		topPanel.add(cellPanel, BorderLayout.SOUTH);
 
-        // Lays out split pane
-        workbookPane.setMinimumSize(new Dimension(300, 100));
-        sideBar.setMinimumSize(new Dimension(140, 100));
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                workbookPane, sideBar);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setResizeWeight(1.0);
+		// Creates and lays out side bar components
+		JTabbedPane sideBar = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+		sideBar.setPreferredSize(new Dimension(170, 480));
+		Font font = sideBar.getFont();
+		sideBar.
+			setFont(new Font(font.getFamily(), Font.PLAIN, font.getSize() - 1));
+		for (UIExtension extension : uiController.getExtensions()) {
+			JComponent extBar = extension.getSideBar();
+			if (extBar != null) {
+				sideBar.insertTab(extension.getExtension().getName(), extension.
+								  getIcon(),
+								  extBar, null, sideBar.getTabCount());
+			}
+		}
 
-        // Configures layout and adds panels
-        Container pane = getContentPane();
-        pane.setPreferredSize(new Dimension(640, 480));
-        pane.setLayout(new BorderLayout());
-        pane.add(topPanel, BorderLayout.NORTH);
-        pane.add(splitPane, BorderLayout.CENTER);
-        setJMenuBar(new MenuBar(app, actionManager, uiController));
+		// Lays out split pane
+		workbookPane.setMinimumSize(new Dimension(300, 100));
+		sideBar.setMinimumSize(new Dimension(140, 100));
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+											  workbookPane, sideBar);
+		splitPane.setOneTouchExpandable(true);
+		splitPane.setResizeWeight(1.0);
 
-        // Registers listeners
-        uiController.addSelectionListener(this);
-        addWindowListener(new WindowClosingHandler(this,
-                actionManager.
-                getAction("exit")));
+		// Configures layout and adds panels
+		Container pane = getContentPane();
+		pane.setPreferredSize(new Dimension(640, 480));
+		pane.setLayout(new BorderLayout());
+		pane.add(topPanel, BorderLayout.NORTH);
+		pane.add(splitPane, BorderLayout.CENTER);
+		setJMenuBar(new MenuBar(app, actionManager, uiController));
 
-        // Configures appearance
-        setTitle(TITLE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(
-                CleanSheets.class.getResource("res/img/sheet.gif")));
-        pack();
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setLocationRelativeTo(null);
-    }
+		// Registers listeners
+		uiController.addSelectionListener(this);
+		addWindowListener(new WindowClosingHandler(this,
+												   actionManager.
+												   getAction("exit")));
 
-    /**
-     * Updates the title of the window when a new active workbook is selected.
-     *
-     * @param event the selection event that was fired
-     */
-    public void selectionChanged(SelectionEvent event) {
-        Workbook workbook = event.getWorkbook();
-        if (workbook != null) {
-            setVisible(true);
-            if (app.isWorkbookStored(workbook)) {
-                setTitle(TITLE + " - " + app.getFile(workbook).getName());
-            } else {
-                setTitle(TITLE + " - Untitled");
-            }
-        } else {
-            setTitle(TITLE);
-        }
-    }
+		// Configures appearance
+		setTitle(TITLE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+			CleanSheets.class.getResource("res/img/sheet.gif")));
+		pack();
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setLocationRelativeTo(null);
+	}
 
-    /**
-     * A utility for creating a Frame on the AWT event dispatching thread.
-     *
-     * @author Einar Pehrson
-     */
-    public static class Creator implements Runnable {
+	/**
+	 * Updates the title of the window when a new active workbook is selected.
+	 *
+	 * @param event the selection event that was fired
+	 */
+	public void selectionChanged(SelectionEvent event) {
+		Workbook workbook = event.getWorkbook();
+		if (workbook != null) {
+			setVisible(true);
+			if (app.isWorkbookStored(workbook)) {
+				setTitle(TITLE + " - " + app.getFile(workbook).getName());
+			} else {
+				setTitle(TITLE + " - Untitled");
+			}
+		} else {
+			setTitle(TITLE);
+		}
+	}
 
-        /**
-         * The component that was created
-         */
-        private Frame frame;
+	/**
+	 * A utility for creating a Frame on the AWT event dispatching thread.
+	 *
+	 * @author Einar Pehrson
+	 */
+	public static class Creator implements Runnable {
 
-        /**
-         * The CleanSheets application
-         */
-        private CleanSheets app;
+		/**
+		 * The component that was created
+		 */
+		private Frame frame;
 
-        /**
-         * Creates a new frame creator.
-         *
-         * @param app the CleanSheets application
-         */
-        public Creator(CleanSheets app) {
-            this.app = app;
-        }
+		/**
+		 * The CleanSheets application
+		 */
+		private CleanSheets app;
 
-        /**
-         * Creates a component on the AWT event dispatching thread.
-         *
-         * @return the component that was created
-         */
-        public Frame createAndWait() {
-            try {
-                EventQueue.invokeAndWait(this);
-            } catch (InterruptedException e) {
-                return null;
-            } catch (java.lang.reflect.InvocationTargetException e) {
-                e.printStackTrace();
-                return null;
-            }
-            return frame;
-        }
+		/**
+		 * Creates a new frame creator.
+		 *
+		 * @param app the CleanSheets application
+		 */
+		public Creator(CleanSheets app) {
+			this.app = app;
+		}
 
-        /**
-         * Asks the event queue to create a component at a later time. (Included
-         * for conformity.)
-         */
-        public void createLater() {
-            EventQueue.invokeLater(this);
-        }
+		/**
+		 * Creates a component on the AWT event dispatching thread.
+		 *
+		 * @return the component that was created
+		 */
+		public Frame createAndWait() {
+			try {
+				EventQueue.invokeAndWait(this);
+			} catch (InterruptedException e) {
+				return null;
+			} catch (java.lang.reflect.InvocationTargetException e) {
+				e.printStackTrace();
+				return null;
+			}
+			return frame;
+		}
 
-        public void run() {
-            frame = new Frame(app);
-        }
-    }
+		/**
+		 * Asks the event queue to create a component at a later time. (Included
+		 * for conformity.)
+		 */
+		public void createLater() {
+			EventQueue.invokeLater(this);
+		}
+
+		public void run() {
+			frame = new Frame(app);
+		}
+	}
 }

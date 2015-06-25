@@ -75,9 +75,19 @@
  * <br/>
  * see: <code>//inserir classe de codigo</code><br/>
  * <h2>4. Design</h2>
- * A fazer
+  * To realize this user story we used Observer pattern for alert UI that Server
+ * receive a request for search one woorkbook by name or receive one reponse to
+ * that request. <code>csheets.ext.search_on_another_instance</code> we can find
+ * examples that illustrate how to implement these technical requirements.<br/>
+ * The following diagrams illustrate core aspects of the design of the solution
+ * for this use case.<br/> 
+ * <img src="doc-files/design_search_by_content.png"/>
  * <br/>
- * <h2>5. Final Remarks</h2>
+ * 
+ * <h2>5. Coding</h2>
+ * see:<br/>
+ * <br/>
+ * <h2>6. Final Remarks</h2>
  * We achieve the objectives and in our point of view all requirements have been
  * accomplished.<br/>
  * <br/>

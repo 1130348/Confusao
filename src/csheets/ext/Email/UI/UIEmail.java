@@ -7,6 +7,7 @@ package csheets.ext.Email.UI;
 
 import csheets.ext.Email.ExtensionEmail;
 import csheets.ext.Extension;
+import csheets.ext.sendEmail.UI.SendEmailMenu;
 import csheets.ui.ctrl.UIController;
 import csheets.ui.ext.CellDecorator;
 import csheets.ui.ext.TableDecorator;
@@ -18,10 +19,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 
-/**
- *
- * @author DMMCA
- */
 public class UIEmail extends UIExtension {
 
 	/**
@@ -30,6 +27,8 @@ public class UIEmail extends UIExtension {
 	private JComponent sideBar;
 
 	private ImageIcon icon;
+
+	private JMenu menu;
 
 	public UIEmail(Extension extension,
 				   UIController uiController) {
@@ -75,7 +74,10 @@ public class UIEmail extends UIExtension {
 	 * @return a JMenu component, or null if the extension does not provide one
 	 */
 	public JMenu getMenu() {
-		return null;
+		if (menu == null) {
+			menu = new SendEmailMenu(uiController);
+		}
+		return menu;
 	}
 
 	/**

@@ -1,0 +1,30 @@
+@startuml doc-files/macros07_01_analysis.png
+
+ actor User
+ participant "<<analysis>>\nFormsExtension" as FE
+ participant "<<analysis>>\nUIFormsExtension" as UIFE
+ participant "<<analysis>>\nFormEditorWindow" as NFW
+ participant "<<analysis>>\nForm" as MB
+ participant "<<analysis>>\nFormDisplay" as FD
+  
+
+ User -> FE: Create Form
+FE -> UIFE: Create Form
+ activate UIFE
+ UIFE -> NFW: create()
+ UIFE -> NFW: run()
+ activate NFW
+ MB<- NFW: createForm()
+ activate MB
+ loop
+ MB <- NFW: addLine()
+ deactivate MB
+ end
+ NFW -> FD: Preview()
+ activate FD
+ deactivate FD
+ deactivate NFW
+ deactivate UIFE
+ deactivate FE
+
+@enduml

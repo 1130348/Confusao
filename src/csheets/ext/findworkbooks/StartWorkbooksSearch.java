@@ -5,14 +5,11 @@
  */
 package csheets.ext.findworkbooks;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -21,35 +18,27 @@ import javax.swing.filechooser.FileSystemView;
 public class StartWorkbooksSearch extends Thread {
 
     private final ArrayList<Path> workBooksFoundList;
+    private String path;
 
-    public StartWorkbooksSearch() {
-        this.workBooksFoundList = new ArrayList<Path>();
+    public StartWorkbooksSearch(String path, ArrayList<Path> workBooksFoundList) {
+        this.workBooksFoundList = workBooksFoundList;
+        this.path=path;
+                this.start();
     }
 
-    public void startWorkbooksSearch() throws InterruptedException {
-        StartWorkbooksSearch thread = new StartWorkbooksSearch();
+    /*public void startWorkbooksSearch(String path) throws InterruptedException {
+        StartWorkbooksSearch thread = new StartWorkbooksSearch(path);
         thread.start();
-    }
+    }*/
 
     @Override
     public void run() {
-        File file = FileSystemView.getFileSystemView().getDefaultDirectory();
-        String os = System.getProperty("os.name");
-        String localDrive;
-        if (os.contains("Windows")) {
-            localDrive = "C:\\";
-        } else if (os.contains("OS")) {
-            localDrive = file.toString();
-        } else {
-            JOptionPane.showMessageDialog(
-                null,
-                "This functionality is not available on your operative system!\n",
-                "Error",
-                JOptionPane.ERROR_MESSAGE
-        );
-            return;
-        }
+                while(true)
+        {
 
+        String localDrive;
+
+        localDrive=path;
         Path startingDir = Paths.get(localDrive);
 
         FindWorkbooks pf = new FindWorkbooks(workBooksFoundList);
@@ -59,11 +48,7 @@ public class StartWorkbooksSearch extends Thread {
         } catch (IOException ex) {
             System.out.println("Error!");
         }
-        JOptionPane.showMessageDialog(
-                null,
-                "Workbook search completed!\n",
-                "Search Completed",
-                JOptionPane.INFORMATION_MESSAGE
-        );
+        }
+        
     }
 }

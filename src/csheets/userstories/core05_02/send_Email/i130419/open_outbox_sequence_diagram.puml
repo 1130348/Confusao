@@ -1,0 +1,10 @@
+@startuml doc-files/open_outbox_sequence_diagram.png
+participant User as usr
+participant "OutBoxPanel" as obp
+participant "ItemOutBox" as iob
+participant "SendEmailDialog" as sed
+usr -> obp : openActionPerformed()
+obp -> iob : openMessage()
+iob -> sed : create()
+iob -> sed : openItem(to, sub, message)
+@enduml

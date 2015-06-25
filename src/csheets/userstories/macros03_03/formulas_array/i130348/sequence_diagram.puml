@@ -1,0 +1,42 @@
+@startuml doc-files/sequence_diagram.png
+ actor User
+ participant "CellEditor" as UI
+ participant "CellImpl" as cell
+ participant "Formula" as formula
+ participant "FormulaCompiler" as formulaCompiler
+ participant "Expression" as expression
+ participant "ExpressionCompiler" as expressionCompiler
+ participant "ANTLRStringStream" as antlr
+ participant "FormulaLexer" as formulaLexer
+ participant "CommonTokenStream" as tokStream
+ participant "FormulaParser" as formulaParser
+ participant "CommonTree" as tree
+ participant "Function" as func
+
+User -> UI : actionPerformed()
+UI -> cell : setContent(string)
+cell -> cell : storeContent(string)
+cell -> formula : formula = create()
+cell -> formulaCompiler : formula = compile(this,string)
+formulaCompiler -> expression : expression = create()
+formulaCompiler -> expressionCompiler : expression = compile(cell, string)
+expressionCompiler -> antlr : input = create(string)
+expressionCompiler -> formulaLexer : lexer = create(input)
+expressionCompiler -> tokStream : tokens = create(lexer)
+expressionCompiler -> formulaParser : parser = create(tokens)
+expressionCompiler -> tree : tree = create()
+expressionCompiler -> formulaParser : tree = expression().getTree()
+expressionCompiler -> expressionCompiler : expression = convert(cell, tree)
+formulaCompiler <-- expressionCompiler : expression
+formulaCompiler --> cell : formula
+cell -> cell : updateDependencies()
+cell -> cell : fireContentChanged()
+cell -> cell : reevaluate()
+cell -> formula : evaluate()
+formula -> expression : evaluate()
+expression -> func : applyTo(args)
+func --> expression : Value
+expression --> formula : Value
+formula --> cell : Value
+cell -> cell : printMatrix()
+@enduml
