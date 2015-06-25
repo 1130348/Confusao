@@ -1,9 +1,9 @@
-@startuml doc-files/draft_send_email.png
+@startuml doc-files/sequence_diagram.png
 participant User as usr
 participant "SendEmailAction" as sea
 participant "SendEmailDialog" as sed
-participant "EmailController" as emc
-participant "Email" as em
+participant "SendEmailController" as emc
+participant "SendEmail" as em
 participant "msg : <<Javax.mail>>\nMimoMessage" as mm
 participant "<<Javax.mail>>\n<<Service>>\nTransport" as tra
 usr -> sea : actionPerformed()
@@ -18,7 +18,5 @@ em -> mm : setFrom(userMail)
 em -> mm : setRecipients(rec)
 em -> mm : setDate(date)
 em -> mm : setText(message)
-em -> tra : send(msg, userMial, userPassword)
-em -> em : saveEmail(msg)
-
+em -> tra : send(msg, userMail, userPassword)
 @enduml

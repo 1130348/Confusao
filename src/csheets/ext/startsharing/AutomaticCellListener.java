@@ -39,5 +39,10 @@ public class AutomaticCellListener implements CellListener{
     public void cellCopied(Cell cell, Cell source) {
      
     }
+
+    @Override
+    public void formulaChanged() {
+        
+    }
     
 }

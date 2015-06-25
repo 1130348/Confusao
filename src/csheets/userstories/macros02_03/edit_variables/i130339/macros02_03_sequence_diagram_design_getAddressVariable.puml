@@ -1,0 +1,38 @@
+@startuml doc-files/macros02_03_sequence_diagram_design_getAddressVariable.png
+
+    participant "EditVariablesController" as controller
+    participant "UIController" as uicontroller
+    participant "WorkBook" as workbook
+    participant "Spreadsheet" as spreadsheet
+    participant "Cell" as cell
+    participant "Formula" as formula
+    participant "SortedSet<Reference> references" as references
+    participant "Reference" as reference
+    participant "List<Variable> variables" as variables
+    
+    
+    controller -> uicontroller: getActiveSpreadsheet()
+    controller -> spreadsheet: getRowCount()
+    controller -> spreadsheet: getColumnCount()
+
+    loop
+        controller -> spreadsheet: getCell()
+        controller -> cell: getFormula()
+        controller -> formula: getReferences()
+
+        loop
+            controller -> references: get()
+            controller -> reference: getVariables()
+            
+            loop
+                controller -> variables: get()
+                alt if variable name equals variable name sent by parameter
+                    controller -> controller: list.add(var.getAddress())
+                end alt
+            end loop
+        end loop
+        
+    end loop
+
+
+@enduml

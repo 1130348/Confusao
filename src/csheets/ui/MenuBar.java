@@ -115,7 +115,8 @@ public class MenuBar extends JMenuBar {
 		fileMenu.add(actionManager.getAction("print"));
 		fileMenu.add(actionManager.getAction("import"));
 		fileMenu.add(actionManager.getAction("export"));
-                fileMenu.add(actionManager.getAction("exportas"));
+		fileMenu.add(actionManager.getAction("exportas"));
+		fileMenu.add(actionManager.getAction("importas"));
 		fileMenu.add(actionManager.getAction("link"));
 		fileMenu.addSeparator();
 		fileMenu.add(actionManager.getAction("close"));
@@ -270,11 +271,11 @@ public class MenuBar extends JMenuBar {
 			}
 
 		}
-                
-                JMenu functionsMenu = addMenu("Functions", KeyEvent.VK_0);
-                functionsMenu.add(actionManager.getAction("callfunction"));
-                JMenu money = addMenu("Money", KeyEvent.VK_M);
-                money.add(actionManager.getAction("chooseCurrencyExchangesFile"));
+
+		JMenu functionsMenu = addMenu("Functions", KeyEvent.VK_0);
+		functionsMenu.add(actionManager.getAction("callfunction"));
+		JMenu money = addMenu("Money", KeyEvent.VK_M);
+		money.add(actionManager.getAction("chooseCurrencyExchangesFile"));
 
 		// Creates the window menu
 		add(

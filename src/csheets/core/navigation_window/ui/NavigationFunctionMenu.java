@@ -18,5 +18,6 @@ public class NavigationFunctionMenu extends JMenu {
 		super("Navigation Window");
 
 		// Adds send action
+		add(new NavigationFunctionAction(uiController));
 	}
 }
