@@ -307,8 +307,14 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 				showMessageDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
 		} else if(arg instanceof ContentSearchEvent){
                         
-                        String message = ((String) arg);   
-                        InetAddress addressToSend = ((NotificationEvent) arg).getAddress();
+                        String message = ((ContentSearchEvent)arg).getWorkbookName();   
+                        InetAddress addressToSend = ((ContentSearchEvent) arg).getAddress();
+                        
+                        JOptionPane.
+				showMessageDialog(null, "You receive a search request for the content "
+								  + message + " by the user " + addressToSend.
+								  getHostName() + ".", "Notification", JOptionPane.INFORMATION_MESSAGE);
+                        
                         Workbook openWoorkbook = uiController.getActiveWorkbook();
                         
                         Iterator<Spreadsheet> iter = openWoorkbook.iterator();
@@ -323,11 +329,15 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
                                 for (int j = 0; j <= columnnr; j++) {
                                     if (spread.getCell(j, i).getValue().toString().matches(message)) {
                                    controller.sendWorkbook(addressToSend, openWoorkbook);
+                                   return;
                                                                                                      }
                                                                     }
                                                             }
                             
+                            
                                             }    
+                        openWoorkbook = null;
+                        controller.sendWorkbook(addressToSend, openWoorkbook);
                                                             }
 	}
 
