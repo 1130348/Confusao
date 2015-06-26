@@ -85,8 +85,13 @@ public class EditVariablesPanel extends JPanel{
               jlistAddress.removeAll();
                   Variable v = (Variable)jcombobox.getSelectedItem();
                   List<Address> listTmp = controller.getAddressVariable(v.getName());
-                  jtf2.setText(v.getValue().toString());
-
+                  String tmp = v.getValue().toString();
+                  if(tmp.length()==0)
+                  {
+                    jtf2.setText("            ");
+                  } else {
+                    jtf2.setText(tmp);
+                  }
 
                   jlistAddress.setListData(listTmp.toArray());
                   jlistAddress.setEnabled(true);

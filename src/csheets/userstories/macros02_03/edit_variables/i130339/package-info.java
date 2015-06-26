@@ -61,8 +61,17 @@
  * <br/><br/>
  * 
  * <h2>5. Coding</h2>
-
- * <h2>6. Final Remarks</h2>
+ * 
+ * The initial idea was to have buttons where u could refresh the list of variables and view the cells where
+ * the respective variable was used, but after analysing the code, i saw that i could do those actions 
+ * with listeners on the combobox and with a listener on the cell created by me that is trigger when a 
+ * formula is created on a cell, those listeners update the list of variables, the value of the variable choosed
+ * and the list of cells where she is used. </br>
+ * 
+ * To use my use case, first the user need to activate the extension "Edit Variables" on the extension menu, after that,
+ * every time someone declare a new variable or change it value, the sidebar from the extension will update itself, and show
+ * all the variables and give the option to choose one, after that easily the user can change the value of the variable and
+ * see the list of cells where she is used.</br>
  * 
  *
  * @author António Pinheiro <1130339@isep.ipp.pt>

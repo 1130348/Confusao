@@ -5,6 +5,7 @@
  */
 package csheets.ext.file_sharing.ui;
 
+import csheets.ext.auto_download.ui.DownloadFileUI;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -32,11 +33,12 @@ public class FileSharingUI extends JFrame {
 
     private JList filesList;
 
-    private DefaultListModel fileList, ConList,outlistS;
+    private DefaultListModel fileList, ConList, outlistS;
 
     private String selectedCon;
+    private String selectedFile;
 
-    private JButton myinbox = new JButton(), myoutbox = new JButton();
+    private JButton myinbox = new JButton(), myoutbox = new JButton(), download = new JButton();
 
     public FileSharingUI() {
 
@@ -45,13 +47,15 @@ public class FileSharingUI extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(0);
         setTitle("FileSharingUI");
+        download.setEnabled(true);
 
         JPanel jp = new JPanel();
 
         ConList = new DefaultListModel();
 
         JList InstancesList = new JList(ConList);
-        InstancesList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        InstancesList.
+            setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         InstancesList.setLayoutOrientation(JList.VERTICAL);
         InstancesList.setVisibleRowCount(-1);
         InstancesList.setOpaque(false);
@@ -68,7 +72,7 @@ public class FileSharingUI extends JFrame {
                         FileSharingController.StartCon();
                     } catch (IOException ex) {
                         Logger.getLogger(FileSharingUI.class.getName()).
-                                log(Level.SEVERE, null, ex);
+                            log(Level.SEVERE, null, ex);
                     }
                 } else if (evt.getClickCount() == 3) {
                     // Triple-click detected
@@ -84,9 +88,10 @@ public class FileSharingUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Desktop.getDesktop().open(new File(FileSharingController.getInBox()));
+                    Desktop.getDesktop().open(new File(FileSharingController.
+                        getInBox()));
                 } catch (IOException ex) {
-                    
+
                 }
             }
         });
@@ -98,13 +103,27 @@ public class FileSharingUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Desktop.getDesktop().open(new File(FileSharingController.getOutBox()));
+                    Desktop.getDesktop().open(new File(FileSharingController.
+                        getOutBox()));
                 } catch (IOException ex) {
-                    
+
                 }
             }
         });
         add(myoutbox);
+
+        download.setText("<html><center>Download</center></hmtl>");
+        download.setBounds(10, 300, 85, 20);
+        download.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DownloadFileUI down = new DownloadFileUI(selectedFile, FileSharingController.
+                    getInBox());
+                down.setVisible(true);
+            }
+        });
+        add(download);
 
         JScrollPane listScroller = new JScrollPane(InstancesList);
         listScroller.setBounds(10, 75, 180, 285);
@@ -117,6 +136,15 @@ public class FileSharingUI extends JFrame {
         filesList.setLayoutOrientation(JList.VERTICAL);
         filesList.setVisibleRowCount(-1);
         filesList.setOpaque(false);
+        filesList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                JList list = (JList) evt.getSource();
+                int index = list.locationToIndex(evt.getPoint());
+                selectedFile = fileList.get(index).toString();
+                download.setEnabled(true);
+            }
+        });
         JScrollPane FilelistScroller = new JScrollPane(filesList);
         FilelistScroller.setBounds(200, 10, 380, 350);
         FilelistScroller.setOpaque(false);
@@ -157,13 +185,12 @@ public class FileSharingUI extends JFrame {
 
     public void setMsg(String msg) {
         if (!msg.equals("")) {
-                String[] ar = msg.split(",");
-                for (int i = 0; i < ar.length; i++) {
-                    System.out.println(ar[i]);
-                    fileList.addElement(ar[i]);
-                }
+            String[] ar = msg.split(",");
+            for (int i = 0; i < ar.length; i++) {
+                System.out.println(ar[i]);
+                fileList.addElement(ar[i]);
+            }
         }
     }
-    
-    
+
 }

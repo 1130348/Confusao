@@ -40,42 +40,36 @@
  * <h2>3. Tests</h2>
  * Basically, from requirements and also analysis, we see that the core
  * functionality of this use case is to be able to communicate with other
- * instances of "CleanSheets" and share files.<br/>
+ * instances of "CleanSheets" and download files.<br/>
  * As usual, in a test driven development approach tests normally fail in the
  * beginning. The idea is that the tests will pass in the end.<br>
- * In the end this use case requires only Functional Tests:
- *  #Send Outbox folder;
- *  #See if files in folder reached its destination;
- *  #See if can receive the files from other CleanSheets;
- * 
- * <h2>4. Design</h2>
- * To realize this user story we will need to create a subclass of Extension. We
- * will also need to create a subclass of UIExtension. For the sidebar we need
- * to implement a JPanel. In the code of the extension
- * <code>csheets.ext.file_sharing</code> we can find examples that illustrate
- * how to implement these technical requirements.<br/>
- * The following diagrams illustrate core aspects of the design of the solution
- * for this use case.<br/>
- * 
- * <h3>Extension Setup</h3>
- * The following diagram shows the setup of the "File Sharing" extension when
- * cleansheets is run.<br/><br/>
- * <img src="doc-files/ipc08_01_design1.png">
- * <br/>
+ * In the end this use case requires only Functional Tests: #Send File to
+ * another Cleansheet instance; #Download File from another Cleansheet instance;
+ * #Check if the downloaded file is equal to the selected file;
  *
- * <h3>User Turn Service ON/OFF</h3>
- * The following diagram illustrates what happens when the user turns the File
- * Sharing service on or off. The idea is that when this happens the extension
- * must display a new Radio Button to start or stop the service, and if it
- * start's the service a new JFrame will appear and allow the user to see the
- * server files and client files.<br/>
+ * <h2>4. Design</h2>
+ * To realize this user story we will need to create an User Interface where the
+ * user can define the download settings. We will also need to create a
+ * FileEvent class, needed to save download file settings. Then we must create
+ * two new methods in Connection class, sendFile and downloadFile. Finally its
+ * needed two more classes to check if the downloaded file is being changed,
+ * FileWatcher and FileWatcherMonitor. <br/>
+ *
+ *
+ * The following diagram illustrates the download file use case. <br/>
  * <br/>
- * <img src="doc-files/ipc08_01_design2.png">
+ * <img src="doc-files/ipc08_01_design.png">
  * <br/>
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/ext/file_sharing/package-summary.html">csheets.ext.file_sharing</a><br/>
- * <a href="../../../../csheets/ext/file_sharing/ui/package-summary.html">csheets.ext.file_sharing.ui</a><br/>
+ * <a
+ * href="../../../../csheets/ext/file_sharing/package-summary.html">csheets.ext.file_sharing</a><br/>
+ * <a
+ * href="../../../../csheets/ext/file_sharing/ui/package-summary.html">csheets.ext.file_sharing.ui</a><br/>
+ * * <a
+ * href="../../../../csheets/ext/file_sharing/ui/package-summary.html">csheets.ext.auto_download</a><br/>
+ * * <a
+ * href="../../../../csheets/ext/file_sharing/ui/package-summary.html">csheets.ext.auto_download.ui</a><br/>
  * <br/>
  * <br/>
  * <br/>

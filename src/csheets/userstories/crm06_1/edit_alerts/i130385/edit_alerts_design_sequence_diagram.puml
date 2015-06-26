@@ -1,0 +1,40 @@
+@startuml doc-files/edit_alerts_design_sequence_diagram.png
+
+actor user
+
+participant "EditAlertsDialog" as editAlertsDialog
+participant "EditAlertsController" as editAlertsController
+participant "AlertsList" as alertsList
+participant "Alert" as alert
+
+user -> editAlertsDialog : create()
+activate editAlertsDialog
+editAlertsDialog -> editAlertsController : create()
+activate editAlertsController
+
+user -> editAlertsDialog : createAlertButtonActionPerformed()
+editAlertsDialog -> editAlertsController : addAlert(n, d, y, m, d, h, m, s)
+editAlertsController -> alertsList : create()
+editAlertsController -> alertsList : addAlert(n, d, y, m, d, h, m, s)
+alertsList -> alert : create()
+activate alert
+editAlertsDialog -> editAlertsDialog : refreshAlertsList()
+editAlertsDialog -> editAlertsController : retrieveAlertsList()
+editAlertsController -> alertsList : retrieveAlertsList()
+
+user -> editAlertsDialog : editAlertButtonActionPerformed()
+editAlertsDialog -> editAlertsController : editAlertName(i, n)
+editAlertsController -> alertsList : editAlertName(i, n)
+editAlertsDialog -> editAlertsController : editAlertDescription(i, n)
+editAlertsController -> alertsList : editAlertDescription(i, d)
+editAlertsDialog -> editAlertsController : editAlertTimestamp(i, t)
+editAlertsController -> alertsList : editAlertTimestamp(i, t)
+
+user -> editAlertsDialog : deleteAlertButtonActionPerformed()
+editAlertsDialog -> editAlertsController : removeAlert(i)
+editAlertsController -> alertsList : removeAlert(i)
+editAlertsDialog -> editAlertsDialog : refreshAlertsList()
+editAlertsDialog -> editAlertsController : retrieveAlertsList()
+editAlertsController -> alertsList : retrieveAlertsList()
+
+@enduml

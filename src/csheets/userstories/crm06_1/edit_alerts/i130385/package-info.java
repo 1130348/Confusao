@@ -44,7 +44,40 @@
  * responsible for storing all the created alerts. It will have an alert
  * container, most probably a list.
  * <br/>
+ * <h3>Analysis of The Core Technical Problem</h3>
+ * The core technical problem lies within the firing of the alerts. It will be
+ * necessary to implement a thread that checks whether or not the alert's
+ * timestamp corresponds to the system's timestamp.
+ * <br/>
+ * <h2>3. Tests</h2>
+ * Basically, from requirements and also analysis, we see that the core 
+ * functionality of this use case is to be able to create, edit and remove
+ * alerts.
+ * <br/>
+ * In regards to the unit tests of this use case we will be testing the class
+ * <code>EditAlertsList</code> which will hold all responsibilities that have to
+ * do with alerts. We will be primarily testing the method 
+ * <code>validadeCalendar</code> since the other methods in this class are
+ * very similar to getters and setters and thus require no testing.
+ * <br/>
+ * <h2>4. Design</h2>
+ * To realize this user story we will need to extend the class Extension since
+ * we want to create a new extension for CleanSheets. We will also need to 
+ * create a subclass of UIExtension. In the code of the extension 
+ * <code>csheets.ext.style</code> we can find examples that illustrate how to
+ * implement these technical requirements.
+ * <br/>
+ * The following diagrams illustrate core aspects of the design of the solution 
+ * for this use case.
+ * <br/>
+ * <h3>Alert creation, edition and removal</h3>
+ * The following diagram illustrates what happens when the user creates, edits
+ * or removes an alert.
+ * <br/>
+ * <br/>
+ * <img src="doc-files/edit_alerts_design_sequence_diagram.png"/>
  */
+
 
 package csheets.userstories.crm06_1.edit_alerts.i130385;
 

@@ -49,8 +49,8 @@
  * of this use case is to place a signal/icon on a cell that contains an image. 
  * It needs to show an image floating, when the cursor is on top of the cell, and 
  * later I need to export the image to a file. 
- * I have to perform tests to see if the the icon is being placed on the cell
- * when it has an image, I also need to test if the exportation is being done.
+ * I have to perform a unitary test to see if the exportation is being done. I have 
+ * functional tests to see the extension of the file to be exported. 
  * <br/>
  * <br/>
  * <h2>4. Design</h2>

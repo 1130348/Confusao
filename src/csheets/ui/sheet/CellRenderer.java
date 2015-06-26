@@ -23,6 +23,8 @@ package csheets.ui.sheet;
 import csheets.core.Cell;
 import csheets.core.IllegalValueTypeException;
 import csheets.core.Value;
+import csheets.ext.Insert_Image.InsertImageCell;
+import csheets.ext.Insert_Image.InsertImageExtension;
 import csheets.ext.comments.CommentableCell;
 import csheets.ext.comments.CommentsExtension;
 import csheets.ext.style.StylableCell;
@@ -33,8 +35,12 @@ import csheets.ui.ext.UIExtension;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.text.Format;
 import java.util.LinkedList;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -65,7 +71,6 @@ public class CellRenderer extends DefaultTableCellRenderer {
      * Whether the cell currently being rendered has the focus
      */
     private boolean hasFocus = false;
-    
 
     /**
      * Creates a new cell renderer.
@@ -83,11 +88,11 @@ public class CellRenderer extends DefaultTableCellRenderer {
     }
 
     public Component getTableCellRendererComponent(JTable table, Object o,
-                                                   boolean selected,
-                                                   boolean hasFocus, int row,
-                                                   int column) {
+            boolean selected,
+            boolean hasFocus, int row,
+            int column) {
         super.
-            getTableCellRendererComponent(table, o, selected, hasFocus, row, column);
+                getTableCellRendererComponent(table, o, selected, hasFocus, row, column);
 
         // Stores members
         this.cell = (Cell) o;
@@ -97,7 +102,7 @@ public class CellRenderer extends DefaultTableCellRenderer {
         if (cell != null) {
             // Fetches style
             StylableCell stylableCell = (StylableCell) cell.
-                getExtension(StyleExtension.NAME);
+                    getExtension(StyleExtension.NAME);
 
             // Applies format and updates text
             Value value = cell.getValue();
@@ -134,29 +139,41 @@ public class CellRenderer extends DefaultTableCellRenderer {
                 } catch (IllegalValueTypeException e) {
                 }
             }
-            
+
             CommentableCell commentableCell = (CommentableCell) cell.
-                getExtension(CommentsExtension.NAME);
-            
-            if( commentableCell.hasComment())
-            {    
-                
-            setToolTipText("<html>" +commentableCell.
-                        getAllComments() +"<br>"+ "Edited by: " + commentableCell.getUser()+ "</html>");
-            } else
-            {
+                    getExtension(CommentsExtension.NAME);
+
+            if (commentableCell.hasComment()) {
+
+                setToolTipText("<html>" + commentableCell.
+                        getAllComments() + "<br>" + "Edited by: " + commentableCell.getUser() + "</html>");
+            } else {
                 setToolTipText(null);
             }
-        }
-        return this;
-    }
-    
 
-    /**
-     * Overridden to delegate painting to decorators.
-     *
-     * @param g the Graphics object to protect
-     */
+            InsertImageCell imageCell = (InsertImageCell) cell.getExtension(InsertImageExtension.NAME);
+
+            if (!commentableCell.hasComment()) {
+
+                if (imageCell.hasImage()) {
+                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                } else {
+                    setToolTipText(null);
+                }
+            } else {
+                if (imageCell.hasImage()) {
+                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"><br>"
+                            + commentableCell.getAllComments() + "<br>" + "Edited by: " + commentableCell.getUser() + "</html>");
+                }
+            }
+        }
+            return this;
+    }
+        /**
+         * Overridden to delegate painting to decorators.
+         *
+         * @param g the Graphics object to protect
+         */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
