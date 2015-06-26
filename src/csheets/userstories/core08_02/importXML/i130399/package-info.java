@@ -11,10 +11,12 @@
  * <br/>
  * <b>Use Case "Import XML":</b>
  * The user selects the option to import as from the menu. That option lets him
- * choose what is the file type, in this case XML, after this user can choose
- * what sheet he wants to import the data or he can import the data to a new
- * sheet. Finally the user selects the xml file that he wants to import and the
- * data is imported with success.
+ * choose choose what sheet he wants to import the data or he can import the
+ * data to a new sheet. Finally the user selects the xml file that he wants to
+ * import and the data is imported with success. If the user selects a file with
+ * another extension which is not XML it will return a error message because
+ * this use case only supports XML for now, it will support other file types as
+ * long as we will evolve the project.
  * <br/>
  * <br/>
  *

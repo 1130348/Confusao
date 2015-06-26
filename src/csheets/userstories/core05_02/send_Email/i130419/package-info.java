@@ -85,14 +85,16 @@
  *
  * <h2>5. Coding</h2>
  * see:<br/>
- * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.core.formula.lang</a><br/>
+ * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.ext.sendEmail</a>
+ * <a href="../../../../csheets/core/formula/lang/package-summary.html">csheets.ext.sendEmail.UI</a><br/>
  * <br/>
  * <br/>
  *
  * <h2>6. Final Remarks</h2>
  * We achieve the objectives and in our point of view all requirements have been
- * accomplished. In addition we can do extra work implementing some features of
- * macros 03 03.<br/>
+ * accomplished. The design of the solution didn't turn out not to be the best
+ * because it was necessary to implement parts of the use case core05.01 and
+ * that put me slightly out of schedule.<br/>
  *
  * @author 1130419
  */

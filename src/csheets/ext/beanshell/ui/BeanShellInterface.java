@@ -44,6 +44,9 @@ public class BeanShellInterface extends JFrame {
             + "Using a loop: for (i=0; i<3; i++) print(i)\n"
             + "Creating objects: object=new Object();\n"
             + "Creating new workbook: uic.getApp().create(); \n or w=new Workbook(numberOfSpreedSheets); uic.setActiveWorkbook(w);\n"
+            + "Creating new macros: m=\"SUM(2;3)\\nEXPRS(n;n)\";\n"
+            + "Saving macros: macros.addMacro(MacroName,m);\n"
+            + "Running macros: out=macros.runMacro(m or macroName);print(out);\n"
             + "Note: all instructions should end with a semicolon ';'\n"
             + "Have fun! :)\n";
 
