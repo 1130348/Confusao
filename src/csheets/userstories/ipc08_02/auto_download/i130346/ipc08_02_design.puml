@@ -1,0 +1,39 @@
+@startuml doc-files/ipc08_02_design.png
+ actor User
+    participant "FileSharingUI" as uic
+    participant "DownloadFileUI" as downui
+    participant "ProgressBarUI" as pui
+    participant "FileSharingController" as ctrl
+    participant "Connection" as conn
+    participant "FileWatcherMonitor" as monitor
+    participant "FileWatcher" as watcher
+
+    User -> uic : Press Download Button
+    activate uic
+    uic -> downui : new(file, inbox)
+    deactivate uic
+    User -> downui : Press Download Button
+    activate downui
+    downui -> pui :  new(source, destination, options) 
+    downui -> pui : showProgressBar()
+    deactivate downui
+    activate pui
+    pui -> ctrl : download(source, destination, options)
+    deactivate pui
+    activate ctrl
+    ctrl -> conn : sendFile(source, destination, options)
+    ctrl -> conn : downloadFile()
+    deactivate ctrl
+    activate conn
+    loop
+  	alt Updatable Option ON
+            conn -> monitor : new(fileEvent)
+            conn -> monitor : run()
+            deactivate conn
+            activate monitor
+            monitor -> watcher : new(file)
+            monitor -> ctrl : download(source, destination, options)
+            deactivate monitor
+        end
+    end
+@enduml

@@ -136,8 +136,8 @@ public class FileSharingController {
         activeCon.createThreads();
     }
     
-    public static void download(String file_p, String out) throws IOException {
-        activeCon.sendFile(file_p, out);
+    public static void download(String file_p, String out, boolean update, boolean over) throws IOException {
+        activeCon.sendFile(file_p, out, update, over);
         activeCon.downloadFile();
     }
 

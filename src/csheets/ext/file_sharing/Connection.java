@@ -6,6 +6,7 @@
 package csheets.ext.file_sharing;
 
 import csheets.ext.auto_download.FileEvent;
+import csheets.ext.auto_download.FileWatcherMonitor;
 import csheets.ext.file_sharing.ui.FileSharingController;
 import csheets.ext.file_sharing.ui.FileSharingUI;
 import java.io.BufferedReader;
@@ -119,6 +120,12 @@ public class Connection {
             fileOutputStream.close();
             System.out.
                 println("Output file : " + outputFile + " is successfully saved ");
+            
+            if (fileEvent.getUpdatableOption()) {
+                FileWatcherMonitor monitor = new FileWatcherMonitor(fileEvent);
+                monitor.run();
+            }
+            
             Thread.sleep(3000);
             System.exit(0);
 
@@ -129,10 +136,13 @@ public class Connection {
 
     /**
      *   Sending FileEvent object.  
+     *
      * @param file_p
      * @param out
+     * @param update
+     * @param over
      */
-    public void sendFile(String file_p, String out) {
+    public void sendFile(String file_p, String out, boolean update, boolean over) {
         sourceFilePath = file_p;
         destinationPath = out;
         fileEvent = new FileEvent();
@@ -143,6 +153,8 @@ public class Connection {
         fileEvent.setDestinationDirectory(destinationPath);
         fileEvent.setFilename(fileName);
         fileEvent.setSourceDirectory(sourceFilePath);
+        fileEvent.setUpdatableOption(update);
+        fileEvent.setOverwriteOption(over);
         File file = new File(sourceFilePath);
         if (file.isFile()) {
             try {

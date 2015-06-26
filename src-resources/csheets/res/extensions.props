@@ -24,3 +24,4 @@ csheets.core.navigation_window.NavigationFunctionExtension
 csheets.ext.edit_variables.EditVariablesExtension
 csheets.ext.searchOnAnotherInstance.SearchByContentExtension
 csheets.ext.edit_alerts.EditAlertsExtension
+csheets.ext.Form_Editor.FormEditorExtension

@@ -47,7 +47,7 @@ public class FileSharingUI extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(0);
         setTitle("FileSharingUI");
-        download.setEnabled(false);
+        download.setEnabled(true);
 
         JPanel jp = new JPanel();
 
@@ -119,7 +119,7 @@ public class FileSharingUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DownloadFileUI down = new DownloadFileUI(selectedFile, FileSharingController.
-                    getOutBox());
+                    getInBox());
                 down.setVisible(true);
             }
         });

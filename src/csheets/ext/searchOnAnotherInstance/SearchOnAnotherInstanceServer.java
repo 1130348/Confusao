@@ -41,10 +41,18 @@ public class SearchOnAnotherInstanceServer extends Observable implements Runnabl
 				Object object = entrada.readObject();
 				if (object instanceof String) {
 					String workbookName = ((String) object);
+                                        
+                                        if (!(workbookName.endsWith(".cls"))) {
+                                            InetAddress requestClient = cliente.getInetAddress();
+                                            ContentSearchEvent event = new ContentSearchEvent(requestClient,workbookName);
+                                            setChanged();
+                                            notifyObservers(event);
+                                    }else{
+                                        
 					InetAddress requestClient = cliente.getInetAddress();
 					NotificationEvent event = new NotificationEvent(requestClient, workbookName);
 					setChanged();
-					notifyObservers(event);
+					notifyObservers(event);}
 				} else if (object instanceof Workbook || object == null) {
 					Workbook workbook = ((Workbook) object);
 					ReportEvent rep = new ReportEvent(workbook, cliente.

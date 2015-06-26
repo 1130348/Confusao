@@ -178,12 +178,17 @@ public class ImportAsDialog extends javax.swing.JDialog {
 		} else {
 			String fileExtension = file.getAbsolutePath().substring(file.
 				getAbsolutePath().lastIndexOf('.'));
-			importController.
-				importXML(file.getAbsolutePath(), fileExtension, sheet, uiController.
-						  getActiveWorkbook());
-			dispose();
-			JOptionPane.
-				showMessageDialog(null, "File imported with success!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			if (!fileExtension.equals(".xml")) {
+				JOptionPane.
+					showMessageDialog(null, "Only supports XML files, for now!", "Alert", JOptionPane.ERROR_MESSAGE);
+			} else {
+				importController.
+					importXML(file.getAbsolutePath(), fileExtension, sheet, uiController.
+							  getActiveWorkbook());
+				dispose();
+				JOptionPane.
+					showMessageDialog(null, "File imported with success!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
     }//GEN-LAST:event_importAsButtonActionPerformed
 

@@ -98,7 +98,8 @@ public class ProgressBarUI {
 
         public void run() {
             try {
-                FileSharingController.download(file_path, output_path);
+                FileSharingController.
+                    download(file_path, output_path, updatable, overwrite);
                 for (int i = 0; i <= 100; i += 10) {
                     final int progress = i;
                     SwingUtilities.invokeLater(new Runnable() {
