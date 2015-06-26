@@ -233,8 +233,18 @@ public class FormEditorUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                CTRL.addForm(tmp);
-                dispose();
+                try {
+                    if (tmp == null || tmp.getAllComponents().isEmpty()) {
+                        JOptionPane.showMessageDialog(((JButton) e.getSource()).
+                            getRootPane(), "Fill the form", "Error", JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        CTRL.addForm(tmp);
+                    dispose();
+                    }
+                    
+                } catch (Exception ed) {
+                }
+
             }
         });
         add(finish);

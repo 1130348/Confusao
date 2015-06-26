@@ -76,7 +76,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
     }
 
     public Expression compile(Cell cell, String source) throws FormulaCompilationException {
-        //CallFunctionUI.reset();
+        CallFunctionUI.reset();
         // Creates the lexer and parser
         ANTLRStringStream input = new ANTLRStringStream(source);
 
@@ -127,7 +127,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
         System.out.
                 println("Converting node '" + node.getText() + "' of tree '" + node.
                         toStringTree());
-        //CallFunctionUI.addElement(node.getText());
+        CallFunctionUI.addElement(node.getText());
         if (node.getChildCount() == 0) {
             try {
                 switch (node.getType()) {

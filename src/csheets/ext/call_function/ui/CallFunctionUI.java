@@ -82,22 +82,27 @@ public class CallFunctionUI extends javax.swing.JDialog {
         }
         return instance;
     }
-   
 
     public static void reset() {
-        root = new DefaultMutableTreeNode("Root");
-        model = new DefaultTreeModel(root);
-        jTree2.setModel(model);
-        i = 0;
+        try {
+            root = new DefaultMutableTreeNode("Root");
+            model = new DefaultTreeModel(root);
+            jTree2.setModel(model);
+            i = 0;
+        } catch (NullPointerException e) {
+        }
     }
 
     public static void addElement(String node) {
         DefaultMutableTreeNode Tnode = new DefaultMutableTreeNode(node);
-        if (i == 0) {
-            root.setUserObject(node);
-            i++;
-        } else {
-            root.add(Tnode);
+        try {
+            if (i == 0) {
+                root.setUserObject(node);
+                i++;
+            } else {
+                root.add(Tnode);
+            }
+        } catch (NullPointerException e) {
         }
     }
 
