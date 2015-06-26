@@ -9,11 +9,11 @@
  * of lines. In each line should be able to set two visual components .
  * Supported visual components are: button , edit box and static text box . In
  * the editing window form must be a "play" button to test the form. For now
- * only need support 1 form . The form is associated with a leaf. For it is no
+ * only need support 1 form . The form is associated with a SpreadSheet. For it is no
  * longer necessary to persist the form. It should be possible to invoke the
  * "display" of a form in the formulas and macros in through a function
  * "adequate" to which is passed the name of the form. The form should have an
- * option to "close ". When you close the form the function that invoked it
+ * option to "close". When you close the form the function that invoked it
  * ends.
  * <br/>
  * <br/>
