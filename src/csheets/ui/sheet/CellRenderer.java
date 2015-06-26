@@ -152,28 +152,38 @@ public class CellRenderer extends DefaultTableCellRenderer {
             }
 
             InsertImageCell imageCell = (InsertImageCell) cell.getExtension(InsertImageExtension.NAME);
-
+            
+            String OS = System.getProperty("os.name").toLowerCase();
+            
             if (!commentableCell.hasComment()) {
 
                 if (imageCell.hasImage()) {
-                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    if (OS.indexOf("win") > 0) { // verifies if it is windows
+                        setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    }else { // it is mac
+                        setToolTipText("<html><img src=\"file://" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    }
                 } else {
                     setToolTipText(null);
                 }
             } else {
                 if (imageCell.hasImage()) {
-                    setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"><br>"
-                            + commentableCell.getAllComments() + "<br>" + "Edited by: " + commentableCell.getUser() + "</html>");
+                    if (OS.indexOf("win") > 0) { // verifies if it is windows
+                        setToolTipText("<html><img src=\"file:\\" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    }else { // it is mac
+                        setToolTipText("<html><img src=\"file://" + imageCell.getImage() + "\"width=\"64\" height=\"64\"></html>");
+                    }
                 }
             }
         }
-            return this;
+        return this;
     }
-        /**
-         * Overridden to delegate painting to decorators.
-         *
-         * @param g the Graphics object to protect
-         */
+
+    /**
+     * Overridden to delegate painting to decorators.
+     *
+     * @param g the Graphics object to protect
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 

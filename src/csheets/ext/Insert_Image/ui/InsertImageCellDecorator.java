@@ -45,7 +45,7 @@ public class InsertImageCellDecorator extends CellDecorator {
                 Graphics2D g2 = (Graphics2D) g;
                 
                 g2.setColor(Color.BLUE);
-                g2.drawString("*", 4, 9);
+                g2.drawString("*", 4, 10);
             }
         }
     }

@@ -27,9 +27,9 @@ public class MacrosWindowController {
 
     private final Language language;
 
-    FunctionCaller functionCaller=new FunctionCaller();
-    
-    private static Map<String,String> macrosCreated=new HashMap<>();
+    FunctionCaller functionCaller = new FunctionCaller();
+
+    private static Map<String, String> macrosCreated = new HashMap<>();
 
     /**
      * The vector with the code of the macros
@@ -90,11 +90,11 @@ public class MacrosWindowController {
         String[] aux = text.split("\n");
         formulasList.addAll(Arrays.asList(aux));
         for (int i = 0; i < formulasList.size(); i++) {
-            String temp=formulasList.get(i);
-            if(macrosCreated.containsKey(temp)){
+            String temp = formulasList.get(i);
+            if (macrosCreated.containsKey(temp)) {
                 formulasList.remove(i);
-                formulasList.add(i, macrosCreated.get(temp));
-            }            
+                formulasList.addAll(i, Arrays.asList(macrosCreated.get(temp).split("\n")));
+            }
         }
         for (String formula : formulasList) {
             try {
@@ -122,12 +122,15 @@ public class MacrosWindowController {
                 break;
             }
         }
+        JOptionPane.showMessageDialog(null, value.toString(), "Result", JOptionPane.INFORMATION_MESSAGE);
         return value;
     }
-    
-    public void addMacro(String name,String text){
-        if(!macrosCreated.containsKey(name)){
-        macrosCreated.put(name, text);
-        }else System.out.println("already exists..");
+
+    public void addMacro(String name, String text) {
+        if (!macrosCreated.containsKey(name)) {
+            macrosCreated.put(name, text);
+        } else {
+            System.out.println("already exists..");
+        }
     }
 }

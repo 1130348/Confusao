@@ -113,8 +113,14 @@ public class InsertImageController {
      * @return
      */
     public File getFileName(File f) {
+        String OS = System.getProperty("os.name").toLowerCase();
         String path = f.getAbsolutePath();
-        int sep = path.lastIndexOf("/");
+        int sep;
+        if(OS.indexOf("win") > 0){ // verifies if it is windows
+            sep = path.lastIndexOf("\\");
+        }else {
+            sep = path.lastIndexOf("/"); //it is mac
+        }
         String pathWithoutName = path.substring(0, sep + 1);
         String name = f.getName();
         String newName;
