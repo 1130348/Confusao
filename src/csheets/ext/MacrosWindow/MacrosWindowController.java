@@ -122,6 +122,7 @@ public class MacrosWindowController {
                 break;
             }
         }
+        JOptionPane.showMessageDialog(null, value.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
         return value;
     }
     
