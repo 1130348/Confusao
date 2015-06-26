@@ -32,10 +32,10 @@ public class ImportXML implements ImportStrategy {
 				getFirstChild().getNodeName();
 			NodeList nList;
 
-			if (tagName.equals(iProcess.getCellTag())) {
-				nList = doc.getElementsByTagName(iProcess.getCellTag());
-			} else {
+			if (!tagName.equals(iProcess.getCellTag())) {
 				nList = doc.getElementsByTagName(tagName);
+			} else {
+				nList = doc.getElementsByTagName(iProcess.getCellTag());
 			}
 
 			for (int i = 0; i < nList.getLength(); i++) {
