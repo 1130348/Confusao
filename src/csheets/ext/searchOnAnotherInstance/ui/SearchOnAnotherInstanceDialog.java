@@ -5,7 +5,9 @@
  */
 package csheets.ext.searchOnAnotherInstance.ui;
 
+import csheets.core.Spreadsheet;
 import csheets.core.Workbook;
+import csheets.ext.searchOnAnotherInstance.ContentSearchEvent;
 import csheets.ext.searchOnAnotherInstance.NotificationEvent;
 import csheets.ext.searchOnAnotherInstance.SearchOnAnotherInstanceController;
 import csheets.ui.ctrl.UIController;
@@ -13,6 +15,7 @@ import csheets.ui.ext.UIExtension;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -302,7 +305,30 @@ public class SearchOnAnotherInstanceDialog extends javax.swing.JDialog implement
 			String message = ((String) arg);
 			JOptionPane.
 				showMessageDialog(null, message, "Result", JOptionPane.INFORMATION_MESSAGE);
-		}
+		} else if(arg instanceof ContentSearchEvent){
+                        
+                        String message = ((String) arg);   
+                        InetAddress addressToSend = ((NotificationEvent) arg).getAddress();
+                        Workbook openWoorkbook = uiController.getActiveWorkbook();
+                        
+                        Iterator<Spreadsheet> iter = openWoorkbook.iterator();
+                        while(iter.hasNext()){
+                            
+                            Spreadsheet spread = iter.next();
+                            
+                            int rownr = spread.getRowCount();
+                            int columnnr = spread.getColumnCount();
+                            
+                            for (int i = 0; i <= rownr; i++) {
+                                for (int j = 0; j <= columnnr; j++) {
+                                    if (spread.getCell(j, i).getValue().toString().matches(message)) {
+                                   controller.sendWorkbook(addressToSend, openWoorkbook);
+                                                                                                     }
+                                                                    }
+                                                            }
+                            
+                                            }    
+                                                            }
 	}
 
 	private void retrieveAvailableCleanSheetsInstances() {
