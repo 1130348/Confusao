@@ -46,6 +46,7 @@ import csheets.ext.call_function.ui.CallFunctionUI;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -75,7 +76,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
     }
 
     public Expression compile(Cell cell, String source) throws FormulaCompilationException {
-        CallFunctionUI.reset();
+        //CallFunctionUI.reset();
         // Creates the lexer and parser
         ANTLRStringStream input = new ANTLRStringStream(source);
 
@@ -126,7 +127,7 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
         System.out.
                 println("Converting node '" + node.getText() + "' of tree '" + node.
                         toStringTree());
-        CallFunctionUI.addElement(node.getText());
+        //CallFunctionUI.addElement(node.getText());
         if (node.getChildCount() == 0) {
             try {
                 switch (node.getType()) {
@@ -216,23 +217,27 @@ public class ExcelExpressionCompiler implements ExpressionCompiler {
 
         if (function != null || node.getText().equalsIgnoreCase("DoWhile") || node.
                 getText().equalsIgnoreCase("WhileDo")) {
-            List<Expression> args = new ArrayList<Expression>();
-            Tree child = node.getChild(0);
-            if (child != null) {
-                for (int nChild = 0; nChild < node.getChildCount(); ++nChild) {
-                    child = node.getChild(nChild);
-                    args.add(convert(cell, child));
+            if (!node.getText().equalsIgnoreCase("MINVERSE") && !node.getText().equalsIgnoreCase("MMULT")) {
+                List<Expression> args = new ArrayList<Expression>();
+                Tree child = node.getChild(0);
+                if (child != null) {
+                    for (int nChild = 0; nChild < node.getChildCount(); ++nChild) {
+                        child = node.getChild(nChild);
+                        args.add(convert(cell, child));
+                    }
                 }
-            }
-            Expression[] argArray = args.toArray(new Expression[args.size()]);
-            if (function != null) {
-                return new FunctionCall(function, argArray);
-            }
-            if (node.getText().equalsIgnoreCase("DoWhile")) {
-                return new DoWhile(argArray);
-            }
-            if (node.getText().equalsIgnoreCase("WhileDo")) {
-                return new WhileDo(argArray);
+                Expression[] argArray = args.toArray(new Expression[args.size()]);
+                if (function != null) {
+                    return new FunctionCall(function, argArray);
+                }
+                if (node.getText().equalsIgnoreCase("DoWhile")) {
+                    return new DoWhile(argArray);
+                }
+                if (node.getText().equalsIgnoreCase("WhileDo")) {
+                    return new WhileDo(argArray);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Wrong formula...(use Array Formula)!", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
