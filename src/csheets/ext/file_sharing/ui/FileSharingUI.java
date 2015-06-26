@@ -141,7 +141,11 @@ public class FileSharingUI extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList) evt.getSource();
                 int index = list.locationToIndex(evt.getPoint());
-                selectedFile = fileList.get(index).toString();
+                String temp = fileList.get(index).toString();
+                String path = FileSharingController.
+                    getOutBox();
+                temp = temp.substring(1, temp.indexOf(" "));
+                selectedFile = path + "\\" + temp; 
                 download.setEnabled(true);
             }
         });

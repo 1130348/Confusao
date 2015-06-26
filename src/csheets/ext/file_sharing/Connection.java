@@ -64,6 +64,7 @@ public class Connection {
     public Connection(int port) {
         try {
             this.serversocket = new ServerSocket(port);
+            //this.clientsocket = serversocket.accept();
             //inputStream = new ObjectInputStream(clientsocket.getInputStream());
         } catch (IOException ex) {
             System.out.println("Could not connect");
@@ -82,13 +83,11 @@ public class Connection {
         if (clientsocket == null) {
             try {
                 clientsocket = serversocket.accept();
-            } catch (IOException ex) {
+            } catch (IOException | NullPointerException ex){
             }
         }
         inStream = clientsocket.getInputStream();
         outStream = clientsocket.getOutputStream();
-        inputStream = new ObjectInputStream(clientsocket.getInputStream());
-        outputStream = new ObjectOutputStream(clientsocket.getOutputStream());
         receive = receive();
         receive.setPriority(Thread.MAX_PRIORITY);
         receive.start();
@@ -96,6 +95,9 @@ public class Connection {
         send = send();
         send.setPriority(Thread.MAX_PRIORITY);
         send.start();
+        
+//        outputStream = new ObjectOutputStream(outStream);
+//        inputStream = new ObjectInputStream(inStream);
     }
 
     /**
@@ -103,6 +105,7 @@ public class Connection {
      */
     public void downloadFile() {
         try {
+            inputStream = new ObjectInputStream(inStream);
             fileEvent = (FileEvent) inputStream.readObject();
             if (fileEvent.getStatus().equalsIgnoreCase("Error")) {
                 System.out.println("Error occurred ..So exiting");
@@ -181,6 +184,7 @@ public class Connection {
         }
         //Now writing the FileEvent object to socket
         try {
+            outputStream = new ObjectOutputStream(outStream);
             outputStream.writeObject(fileEvent);
             System.out.println("Done...Going to exit");
             Thread.sleep(3000);
